@@ -6,19 +6,32 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "py": "cd public/api && python app.py",
+    "prod": "cd out/api && python app.py"
   },
   "dependencies": {
-    "next": "13.3.1",
+    "@heroicons/react": "^1.0.6",
+    "@heroicons/react2": "file:.0.17",
+    "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
+    "next": "^12.3.4",
+    "pdfjs-dist": "^3.5.141",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-beautiful-dnd": "^13.1.1",
+    "react-bootstrap": "^2.7.4",
+    "react-dom": "18.2.0",
+    "react-draggable": "^4.4.5",
+    "react-dropzone": "^14.2.3",
+    "react-redux": "^8.0.5",
+    "react-tooltip": "^5.11.2",
+    "sass": "^1.62.1"
   },
   "devDependencies": {
     "@types/node": "18.16.2",
-    "@types/react": "18.2.0",
+    "@types/react": "^18.2.0",
+    "@types/react-beautiful-dnd": "^13.1.4",
     "@types/react-dom": "18.2.1",
-    "eslint": "8.39.0",
-    "eslint-config-next": "13.3.1",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "worker-loader": "^3.0.8"
   }
 }
