@@ -1,40 +1,59 @@
 import os
 import tempfile
-import subprocess
-from io import BytesIO
+from pdf2image import convert_from_path
+from pptx import Presentation
+from pptx.util import Inches
 
+def pdf_to_pptx(pdf_file):
+    # Save the PDF file to a temporary file
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_pdf_file:
+        temp_pdf_file.write(pdf_file.read())
 
-def pdf_to_ppt(pdf_file):
-    # Save uploaded PDF to temporary file
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf_file:
-        pdf_file.save(temp_pdf_file.name)
-        temp_pdf_file.close()
+    
+    # Get the path of the saved PDF file
+    pdf_file_path = os.path.abspath(temp_pdf_file.name)
 
-    # Create temporary PPTX file
-    temp_ppt_file = tempfile.NamedTemporaryFile(delete=False, suffix=".pptx")
-    temp_ppt_file.close()
+    # Convert the PDF file to images using pdf2image
+    images = convert_from_path(pdf_file_path)
 
-    # Convert PDF to PPTX using LibreOffice
-    libreoffice_path = 'soffice'
+    # Create a new PowerPoint presentation
+    prs = Presentation()
 
-    result = subprocess.run([libreoffice_path, '--headless', '--convert-to', 'pptx',
-                             temp_pdf_file.name, '--outdir', tempfile.gettempdir()],
-                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # Add each image as a new slide in the presentation
+    for image in images:
+        # Save the image to a temporary file
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.png') as temp_image_file:
+            image.save(temp_image_file.name, format='PNG')
 
-    if result.returncode != 0:
-        print("stdout:", result.stdout.decode('utf-8'))
-        print("stderr:", result.stderr.decode('utf-8'))
-        raise subprocess.CalledProcessError(result.returncode, result.args)
+        # Get the path of the saved image file
+        image_file_path = os.path.abspath(temp_image_file.name)
 
-    # Read PPTX file and return
-    pptx_filename = os.path.join(tempfile.gettempdir(), os.path.splitext(
-        os.path.basename(temp_pdf_file.name))[0] + '.pptx')
-    with open(pptx_filename, "rb") as f:
-        final_pptx = BytesIO(f.read())
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
 
-    # Delete temporary files
-    os.unlink(temp_ppt_file.name)
-    os.unlink(temp_pdf_file.name)
-    os.unlink(pptx_filename)
+        # Add the image to the slide
+        pic = slide.shapes.add_picture(image_file_path, 0, 0, prs.slide_width, prs.slide_height)
+        pic.crop_left = Inches(0)
+        pic.crop_right = Inches(0)
+        pic.crop_top = Inches(0)
+        pic.crop_bottom = Inches(0)
+        pic.width = prs.slide_width
+        pic.height = prs.slide_height
 
-    return final_pptx
+        # Delete the temporary image file
+        os.unlink(image_file_path)
+
+    # Save the PowerPoint presentation to a new file
+    pptx_file_path = os.path.splitext(pdf_file_path)[0] + '.pptx'
+    prs.save(pptx_file_path)
+
+    # Delete the temporary PDF file
+    os.unlink(pdf_file_path)
+
+    # Read the PPTX file content and return it
+    with open(pptx_file_path, 'rb') as pptx_file:
+        pptx_content = pptx_file.read()
+
+    # Delete the temporary PPTX file
+    os.unlink(pptx_file_path)
+
+    return pptx_content

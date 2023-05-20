@@ -1,4 +1,3 @@
-import React, { Dispatch, SetStateAction } from "react";
 import { DraggableProvided, DraggableStateSnapshot } from "react-beautiful-dnd";
 import { ActionDiv, ActionProps } from "./ActionDiv";
 import { Tooltip } from "react-tooltip";
@@ -13,7 +12,7 @@ type CardProps = ActionProps & {
   snapshot: DraggableStateSnapshot;
 };
 
-const Card: React.FC<CardProps> = ({
+const FileCard = ({
   index,
   imageUrl,
   imageUrls,
@@ -21,9 +20,10 @@ const Card: React.FC<CardProps> = ({
   toolTipSizes,
   isDraggable,
   provided,
-  snapshot,
+
+  extension,
   setImageUrls,
-}) => {
+}: CardProps) => {
   return (
     <div
       className="card item"
@@ -32,8 +32,11 @@ const Card: React.FC<CardProps> = ({
       data-tooltip-place="top"
       {...(isDraggable ? provided.dragHandleProps : {})}
     >
-      <Tooltip id={`item-tooltip-${index}`} />
+      <bdi>
+        <Tooltip id={`item-tooltip-${index}`} />
+      </bdi>
       <ActionDiv
+        extension={extension}
         imageUrls={imageUrls}
         setImageUrls={setImageUrls}
         index={index}
@@ -42,7 +45,7 @@ const Card: React.FC<CardProps> = ({
         <img
           className="img-fluid-custom object-fit-contain rounded item-img"
           src={imageUrl}
-          alt={`Selected file \${index}`}
+          alt={`Selected file ${index}`}
           draggable={false}
         />
         <p className="text-center">{file.name}</p>
@@ -51,4 +54,4 @@ const Card: React.FC<CardProps> = ({
   );
 };
 
-export default Card;
+export default FileCard;

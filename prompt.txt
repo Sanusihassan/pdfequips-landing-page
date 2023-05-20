@@ -343,4 +343,237 @@ also the pulse animation should be implemented using box-shadow here is a starti
 use the variable $pdf-color instead of these rgba colors
 
 ****************************************************************
+the function should also prevent attacks as mentioned here:
 
+Yes, there is a possibility that your website can get hacked through the uploaded HTML file. When you allow users to upload files to your website, you are opening up a potential attack vector for malicious actors to exploit. If the uploaded file contains malicious code, it can potentially compromise the security of your website and your users.
+
+To prevent such attacks, it is important to properly validate and sanitize the uploaded file before processing it. You can use a library like bleach or html5lib to sanitize the HTML code and remove any potentially malicious code or tags. Additionally, you can restrict the type and size of files that users can upload, and limit the permissions of the user account that is used to process the uploaded files.
+
+It is also recommended to run your application in a secure environment, such as a virtual private server (VPS) or a cloud hosting platform, and to keep your server and software up-to-date with the latest security patches. You can also consider implementing additional security measures, such as two-factor authentication, HTTPS encryption, and rate limiting to prevent brute-force attacks.
+
+In summary, while allowing users to upload files to your website can be a useful feature, it is important to take appropriate security measures to prevent potential security breaches.
+
+****************************************************************
+
+the function should not wait for the page to fully load, this could take a long time.
+
+and also right now it's returning empty corrupted pdf file
+
+****************************************************************
+
+i want to ssg my entire website using next.js and i want to create multiple instances fo it for each language i support, i'm building a multi-lingual website
+but the english is my default language, i.e going to any route without /lang/route will take to my english version.
+
+and other languages like arabic should be served like so: my-website.com/ar/route
+
+in my app public/locales directory i have en.json and ar.json files
+
+i want next.js to detect these files if added and generate new routes for it automatically without having me to create a new [file] for each language
+
+i want to use next.js only and not anyother library or framework
+
+
+****************************************************************
+depending on the tool object i want another object called edit_page_titles which contains keys same as the tool keys
+each with it's corresponding title which is the tool title + the word "options" or just the tool title if the text is long
+export const tool = {
+  Merge_PDF: {
+    title: "Merge PDF",
+    description: "Combine multiple PDF files into one document",
+    color: "var(--red)",
+    type: ".pdf",
+    to: "/merge-pdf",
+  },
+  Split_PDF: {
+    title: "Split PDF",
+    description: "Divide one PDF file into multiple documents",
+    color: "var(--orange)",
+    type: ".pdf",
+    to: "/split-pdf",
+  },
+  Compress_PDF: {
+    title: "Compress PDF",
+    description: "Reduce the file size of a PDF while maintaining quality",
+    color: "var(--green)",
+    type: ".pdf",
+    to: "/compress-pdf",
+  },
+  PDF_to_Powerpoint: {
+    title: "PDF to Powerpoint",
+    description: "Convert PDF files to editable Powerpoint presentations",
+    color: "#C13B1B",
+    type: ".pdf",
+    to: "/pdf-to-powerpoint",
+  },
+  JPG_to_PDF: {
+    title: "JPG to PDF",
+    description: "Convert JPG image files to PDF documents",
+    color: "#f1c40f",
+    type: ".jpg",
+    to: "/jpg-to-pdf",
+  },
+  WORD_to_PDF: {
+    title: "WORD to PDF",
+    description: "Convert Microsoft Word files to PDF documents",
+    color: "#1B5EBE",
+    type: ".docx",
+    to: "/word-to-pdf",
+  },
+  POWERPOINT_to_PDF: {
+    title: "POWERPOINT to PDF",
+    description: "Convert Microsoft Powerpoint files to PDF documents",
+    color: "#C13B1B",
+    type: ".pptx",
+    to: "/powerpoint-to-pdf",
+  },
+  EXCEL_to_PDF: {
+    title: "EXCEL to PDF",
+    description: "Convert Microsoft Excel files to PDF documents",
+    color: "#10793F",
+    type: ".xlsx",
+    to: "/excel-to-pdf",
+  },
+  HTML_to_PDF: {
+    title: "HTML to PDF",
+    description: "Convert HTML web pages to PDF documents",
+    color: "rgb(228, 77, 38)",
+    type: ".html",
+    to: "/html-to-pdf",
+  },
+  PDF_to_JPG: {
+    title: "PDF to JPG",
+    description: "Convert PDF files to JPG image files",
+    color: "#f1c40f",
+    type: ".pdf",
+    to: "/pdf-to-jpg",
+  },
+  PDF_to_WORD: {
+    title: "PDF to WORD",
+    description: "Convert PDF files to Microsoft Word documents",
+    color: "#1B5EBE",
+    type: ".pdf",
+    to: "/pdf-to-word",
+  },
+
+  PDF_to_EXCEL: {
+    title: "PDF to EXCEL",
+    description: "Convert PDF files to Microsoft Excel documents",
+    color: "#10793F",
+    type: ".pdf",
+    to: "/pdf-to-excel",
+  },
+
+  PDF_to_PDF_A: {
+    title: "PDF to PDF/A",
+    description: "Convert PDF files to PDF/A format for long-term archiving",
+    color: "#000000",
+    type: ".pdf",
+    to: "/pdf-to-pdf-a",
+  },
+};
+****************************************************************
+Create a separate object called action_buttons for example following this structure: {
+  [key: string]: string
+}
+which reprecent the submit buttons text.
+
+depending on the tool object
+
+which contains keys same as the tool keys
+each which are useful information about the button action like if the tool action is conversion
+let's say the title is jpg to pdf, the action button text should be somthing like Convert to PDF
+export const tool = {
+  Merge_PDF: {
+    title: "Merge PDF",
+    description: "Combine multiple PDF files into one document",
+    color: "var(--red)",
+    type: ".pdf",
+    to: "/merge-pdf",
+  },
+  Split_PDF: {
+    title: "Split PDF",
+    description: "Divide one PDF file into multiple documents",
+    color: "var(--orange)",
+    type: ".pdf",
+    to: "/split-pdf",
+  },
+  Compress_PDF: {
+    title: "Compress PDF",
+    description: "Reduce the file size of a PDF while maintaining quality",
+    color: "var(--green)",
+    type: ".pdf",
+    to: "/compress-pdf",
+  },
+  PDF_to_Powerpoint: {
+    title: "PDF to Powerpoint",
+    description: "Convert PDF files to editable Powerpoint presentations",
+    color: "#C13B1B",
+    type: ".pdf",
+    to: "/pdf-to-powerpoint",
+  },
+  JPG_to_PDF: {
+    title: "JPG to PDF",
+    description: "Convert JPG image files to PDF documents",
+    color: "#f1c40f",
+    type: ".jpg",
+    to: "/jpg-to-pdf",
+  },
+  WORD_to_PDF: {
+    title: "WORD to PDF",
+    description: "Convert Microsoft Word files to PDF documents",
+    color: "#1B5EBE",
+    type: ".docx",
+    to: "/word-to-pdf",
+  },
+  POWERPOINT_to_PDF: {
+    title: "POWERPOINT to PDF",
+    description: "Convert Microsoft Powerpoint files to PDF documents",
+    color: "#C13B1B",
+    type: ".pptx",
+    to: "/powerpoint-to-pdf",
+  },
+  EXCEL_to_PDF: {
+    title: "EXCEL to PDF",
+    description: "Convert Microsoft Excel files to PDF documents",
+    color: "#10793F",
+    type: ".xlsx",
+    to: "/excel-to-pdf",
+  },
+  HTML_to_PDF: {
+    title: "HTML to PDF",
+    description: "Convert HTML web pages to PDF documents",
+    color: "rgb(228, 77, 38)",
+    type: ".html",
+    to: "/html-to-pdf",
+  },
+  PDF_to_JPG: {
+    title: "PDF to JPG",
+    description: "Convert PDF files to JPG image files",
+    color: "#f1c40f",
+    type: ".pdf",
+    to: "/pdf-to-jpg",
+  },
+  PDF_to_WORD: {
+    title: "PDF to WORD",
+    description: "Convert PDF files to Microsoft Word documents",
+    color: "#1B5EBE",
+    type: ".pdf",
+    to: "/pdf-to-word",
+  },
+
+  PDF_to_EXCEL: {
+    title: "PDF to EXCEL",
+    description: "Convert PDF files to Microsoft Excel documents",
+    color: "#10793F",
+    type: ".pdf",
+    to: "/pdf-to-excel",
+  },
+
+  PDF_to_PDF_A: {
+    title: "PDF to PDF/A",
+    description: "Convert PDF files to PDF/A format for long-term archiving",
+    color: "#000000",
+    type: ".pdf",
+    to: "/pdf-to-pdf-a",
+  },
+};

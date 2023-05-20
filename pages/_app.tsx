@@ -1,4 +1,6 @@
-import type { AppProps } from "next/app";
+// this is my _app.tsx file
+import type { AppContext, AppProps } from "next/app";
+
 import "../index.scss";
 
 import { Provider } from "react-redux";
@@ -11,12 +13,27 @@ const store = configureStore({
   },
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, lang }: AppProps & { lang: string }) {
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
+      <Component {...pageProps} lang={lang} />
     </Provider>
   );
 }
+MyApp.getInitialProps = async ({
+  Component,
+  ctx,
+}: AppContext): Promise<{
+  pageProps: Record<string, unknown>;
+  lang: string;
+}> => {
+  const pageProps = Component.getInitialProps
+    ? await Component.getInitialProps(ctx)
+    : {};
+  const path = ctx.asPath || "";
+  const lang = path.split("/")[1] || ""; // default to English if language code cannot be extracted
+
+  return { pageProps, lang };
+};
 
 export default MyApp;

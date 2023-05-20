@@ -14,20 +14,23 @@
 } */
 
 
+
+
+$pdf-color: #FC271C;
 $color-map: (
-  'Merge-PDF': #dc3545,
-  'Split-PDF': #fd7e14,
-  'Compress-PDF': #28a745,
-  'PDF-to-Powerpoint': #C13B1B,
-  'JPG-to-PDF': #f1c40f,
-  'WORD-to-PDF': #1B5EBE,
-  'POWERPOINT-to-PDF': #C13B1B,
-  'EXCEL-to-PDF': #10793F,
-  'HTML-to-PDF': rgb(228, 77, 38),
-  'PDF-to-JPG': #f1c40f,
-  'PDF-to-WORD': #1B5EBE,
-  'PDF-to-EXCEL': #10793F,
-  'PDF-to-PDF-A': #000000,
+  'merge-pdf': $pdf-color,
+  'split-pdf': #fd7e14,
+  'compress-pdf': #28a745,
+  'pdf-to-powerpoint': #C13B1B,
+  'jpg-to-pdf': #f1c40f,
+  'word-to-pdf': #1B5EBE,
+  'powerpoint-to-pdf': #C13B1B,
+  'excel-to-pdf': #10793F,
+  'html-to-pdf': rgb(228, 77, 38),
+  'pdf-to-jpg': #f1c40f,
+  'pdf-to-word': #1B5EBE,
+  'pdf-to-excel': #10793F,
+  'pdf-to-pdf-a': #000000,
 );
 
 html,
@@ -43,7 +46,6 @@ body,
 //   height: 99%;
 // }
 
-$pdf-color: #FC271C;
 
 .h-5 {
   height: 1em;
@@ -66,6 +68,11 @@ $pdf-color: #FC271C;
 .img-fluid-custom {
   max-width: 100%;
   height: 100%;
+}
+
+.bdi,
+a.dropdown-item {
+  unicode-bidi: isolate;
 }
 
 .html {
@@ -124,9 +131,16 @@ $pdf-color: #FC271C;
 
   &:hover {
     background-color: #f2f2f2;
-    box-shadow: -.3px -.3px 3px .3px darken(rgb(255, 33, 22), 33.33%) !important;
     transform: scale(1.001);
+
+    @each $key,
+    $color in $color-map {
+      &.#{$key} {
+        box-shadow: -.3px -.3px 3px .3px darken($color, 20%) !important;
+      }
+    }
   }
+
 }
 
 .feature-icon {
@@ -198,3 +212,4 @@ $pdf-color: #FC271C;
 @import "./scss/toolspage";
 @import "./scss/editpage";
 @import "./scss/display-file";
+@import "./scss/navbar"

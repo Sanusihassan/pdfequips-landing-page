@@ -1,27 +1,28 @@
-// A non-serializable value was detected in an action, in the path: `payload.0`. Value:
-// File {name: 'maxresdefault.jpg', lastModified: 1682540096165, lastModifiedDate: Wed Apr 26 2023 22:14:56 GMT+0200 (Eastern European Standard Time), webkitRelativePath: '', size: 81458, …}
-
-// Take a look at the logic that dispatched this action:
-// {type: 'tool/setFiles', payload: Array(3)}
-// payload
-// :
-// (3) [File, File, File]
-// type
-// :
-// "tool/setFiles"
-// [[Prototype]]
-// :
-// Object
+/**
+ * i want to add an compress_pdf property to my store, which can be one of the following values:
+ * (
+ * - "Recommended",
+ * - "Less"
+ * - "Extreme"
+ * or it can be a custom number
+ * )
+ */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ToolState {
   showTool: boolean;
   files: File[];
+  errorMessage: string;
+  showErrorMessage: boolean;
+  compressPdf: string | number;
 }
 
 const initialState: ToolState = {
   showTool: true,
   files: [],
+  errorMessage: "",
+  showErrorMessage: false,
+  compressPdf: "recommended",
 };
 
 const toolSlice = createSlice({
@@ -38,10 +39,28 @@ const toolSlice = createSlice({
       const newFiles = action.payload;
       state.files = [...newFiles];
     },
+    setErrorMessage(state: ToolState, action: PayloadAction<string>) {
+      state.errorMessage = action.payload;
+      state.showErrorMessage = true; // set the showErrorMessage property to true when an error message is set
+    },
+    resetErrorMessage(state: ToolState) {
+      state.errorMessage = "";
+      state.showErrorMessage = false; // reset the showErrorMessage property to false when the error message is reset
+    },
+    setCompressPdf(state: ToolState, action: PayloadAction<string | number>) {
+      state.compressPdf = action.payload;
+    },
   },
 });
 
-export const { showTool, hideTool, setFiles } = toolSlice.actions;
+export const {
+  showTool,
+  hideTool,
+  setFiles,
+  setErrorMessage,
+  resetErrorMessage,
+  setCompressPdf,
+} = toolSlice.actions;
 
 export const setFilesFromList = (fileList: FileList) => {
   const files: File[] = Array.from(fileList);

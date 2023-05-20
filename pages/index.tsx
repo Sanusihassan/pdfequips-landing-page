@@ -4,12 +4,18 @@ import Head from "next/head";
 import LandingPage from "../components/LandingPage";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import {
+  footer,
+  landing_page,
+  nav_content,
+  tool,
+} from "../src/content/content";
 
-const Home: NextPage = () => {
+const Home = ({ lang }: { lang: string }) => {
   return (
     <div>
       <Head>
-        <title>PDFequips</title>
+        <title>PDFEquips</title>
         <meta name="description" content="The Complete PDF Solution" />
         <link rel="icon" href="/logo.png" />
         <link
@@ -20,9 +26,9 @@ const Home: NextPage = () => {
 
       {/* <main className={styles.main}>
       </main> */}
-      <NavBar />
-      <LandingPage />
-      <Footer />
+      <NavBar nav_content={nav_content} lang={lang} />
+      <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
+      <Footer footer={footer} />
     </div>
   );
 };

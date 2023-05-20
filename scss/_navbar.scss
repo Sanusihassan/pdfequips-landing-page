@@ -1,0 +1,22 @@
+.convert-dropdown {
+    * {
+        unicode-bidi: isolate;
+    }
+}
+
+.navbar {
+
+    .lang-dropdown {
+        $val: calc(100% - 60px);
+
+        [lang=ar] & {
+            margin-right: $val;
+        }
+
+        [lang=fr] {
+            $val: 33%;
+        }
+
+        margin-left: $val;
+    }
+}

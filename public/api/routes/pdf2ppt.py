@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from pdf2pptx_converter import pdf_to_ppt
+from pdf2pptx_converter import pdf_to_pptx
 
 
 def pdf_to_ppt_route(app):
@@ -8,4 +8,4 @@ def pdf_to_ppt_route(app):
         if 'files' not in request.files:
             return jsonify({"error": "No PDF file provided"}), 400
         pdf_files = request.files.getlist('files')
-        return pdf_to_ppt(pdf_files[0])
+        return pdf_to_pptx(pdf_files[0])

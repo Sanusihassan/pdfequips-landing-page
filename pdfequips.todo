@@ -1,0 +1,18 @@
+# provide locale for the following:
+2. Mandarin Chinese (over 1.3 billion) done.
+3. Hindi (over 600 million) done.
+4. Spanish (over 550 million) done.
+
+fix the h5 title in the editpage and add a text for each button depending on the or lang done.
+fix the button text for each page done.
+
+the lang dropdown items are not working (done). 
+
+fix language problem when clicking on the language link on the lang dropdown (done).
+
+word to pdf is not working.
+
+
+validation on the server side.
+
+handle server side errors on front end;

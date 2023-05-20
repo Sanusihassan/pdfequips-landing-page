@@ -1,32 +1,77 @@
+import { useRouter } from "next/router";
 import DisplayFile from "./DisplayFile";
+import { ToolState } from "../src/store";
+import { useSelector } from "react-redux";
+import { RefObject } from "react";
+
+import Options, { OptionsProps } from "./DisplayFile/Options";
+import type { edit_page } from "../content";
+import ErrorElement from "./ErrorElement";
+import type { errors as _ } from "../content";
 
 type editPageProps = {
-  title: string;
   extension: string;
+  submitBtn: RefObject<HTMLButtonElement>;
+  edit_page: edit_page;
+  pages: string;
+  page: string;
+  lang: string;
+  errors: _;
 };
-const EditPage = ({ title, extension }: editPageProps) => {
-  /**
-   * i want a bootstrap sidebar (always visible)
-   * with two sections: edit-area & options
-   * edit-area will take about 75% width, and options will take the rest
-   * the options area has a h5, it should be centered with a little bottom border
-   * the edit-page should look like a card or card body with padding,
-   * please use bootstrap classes if possible, otherwise use regular css
-   * the button should have a pulse animation
-   * this is my html and i'm using tsx by the way:
-   */
-  let k = title.replace(/[\s/]+/g, "-");
+const EditPage = ({
+  extension,
+  submitBtn,
+  edit_page,
+  pages,
+  page,
+  lang,
+  errors,
+}: editPageProps) => {
+  const state = useSelector((state: { tool: ToolState }) => state.tool);
+
+  const router = useRouter();
+  let k = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
+
   return (
-    <aside className="edit-page">
+    <aside className={`edit-page ${state.showTool ? "d-none" : ""}`}>
       <section className="edit-area">
-        <DisplayFile extension={extension} />
+        <DisplayFile
+          extension={extension}
+          pages={pages}
+          page={page}
+          lang={lang}
+          errors={errors}
+        />
+        {state.showErrorMessage ? <ErrorElement state={state} /> : null}
       </section>
       <section className="options">
-        <h5 className="text-uppercase">{title} options</h5>
+        <h5 className="text-uppercase">
+          <bdi>
+            {
+              edit_page.edit_page_titles[
+                k.replace(/-/g, "_") as keyof typeof edit_page.edit_page_titles
+              ]
+            }
+          </bdi>
+        </h5>
+        <Options layout={k as OptionsProps["layout"]} edit_page={edit_page} />
         <button
           className={`submit-btn btn btn-lg text-white position-relative overflow-hidden ${k}`}
+          onClick={() => {
+            submitBtn.current?.click();
+            if (submitBtn.current) {
+              submitBtn.current.click();
+            }
+          }}
+          disabled={state.showErrorMessage}
         >
-          Convert to {extension.replace(/\./, "")}
+          <bdi>
+            {
+              edit_page.action_buttons[
+                k.replace(/-/g, "_") as keyof typeof edit_page.action_buttons
+              ]
+            }
+          </bdi>
         </button>
       </section>
     </aside>

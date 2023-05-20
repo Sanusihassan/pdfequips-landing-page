@@ -1,69 +1,108 @@
+// this is my code:
 import { NextRouter } from "next/router";
+
 import { getDocument } from "pdfjs-dist";
 import { PDFDocumentProxy, PageViewport, RenderTask } from "pdfjs-dist";
 import { GlobalWorkerOptions } from "pdfjs-dist";
-
-/**
- * i get this error from this code:
- * 1 of 1 unhandled error
-
-Unhandled Runtime Error
-Error: Setting up fake worker failed: "Cannot load script at: http://localhost:3000/api.d.ts".
-
-Call Stack
-eval
-node_modules\pdfjs-dist\build\pdf.js (1902:0)
- */
+import { Dispatch, useEffect, useMemo, useState } from "react";
+import { setErrorMessage } from "./store";
+import { AnyAction } from "@reduxjs/toolkit";
+import type { errors as _ } from "../content";
 GlobalWorkerOptions.workerSrc = "/pdf.worker.js";
 
-export function rotateImage(imageUrl: string): string {
-  const canvas = document.createElement("canvas");
-  const img = new Image();
-  img.src = imageUrl;
-  canvas.width = img.height;
-  canvas.height = img.width;
-  const ctx = canvas.getContext("2d")!;
-  ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.rotate((90 * Math.PI) / 180);
-  ctx.drawImage(img, -img.width / 2, -img.height / 2);
-  return canvas.toDataURL();
+export function useLoadedImage(src: string): HTMLImageElement | null {
+  const [loadedImage, setLoadedImage] = useState<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => setLoadedImage(img);
+  }, [src]);
+
+  return loadedImage;
+}
+export function useRotatedImage(imageUrl: string): string | null {
+  const image = useLoadedImage(imageUrl);
+
+  return useMemo(() => {
+    if (!image) return null;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = image.height;
+    canvas.height = image.width;
+    const ctx = canvas.getContext("2d")!;
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate((90 * Math.PI) / 180);
+    ctx.drawImage(image, -image.width / 2, -image.height / 2);
+    return canvas.toDataURL();
+  }, [image]);
 }
 
-/**
- *
- * this function using jsPDF is not calculating the number of pages in the pdf file correctly.
- * it always returns 1 for anytype of pdf files no matter how many pages are there in the pdf file
- */
+const DEFAULT_PDF_IMAGE = "/images/pdf.png";
+function emptyPDFHandler(dispatch: Dispatch<AnyAction>, errors: _) {
+  dispatch(setErrorMessage(errors.EMPTY_FILE.message));
+  return DEFAULT_PDF_IMAGE;
+}
+
 
 export const getFileDetailsTooltipContent = async (
-  file: File
+  file: File,
+  pages: string,
+  page: string,
+  lang: string,
+  dispatch: Dispatch<AnyAction>,
+  errors: _
 ): Promise<string> => {
+  // here in this code instead of bite for the unit, use kb or mb instead depending on the size
   const sizeInBytes = file.size;
-  const sizeInKB = sizeInBytes / 1024;
-  const sizeInMB = sizeInKB / 1024;
-  const size =
-    sizeInMB > 1 ? sizeInMB.toFixed(2) + " MB" : sizeInKB.toFixed(2) + " KB";
+  // const sizeInKB = sizeInBytes / 1024;
+  // const sizeInMB = sizeInKB / 1024;
+
+  let size: string = "";
+  let isoCode = lang === "fr" ? "fr-FR" : lang == "" ? "en" : lang;
+  size = new Intl.NumberFormat(isoCode, {
+    notation: "compact",
+    style: "unit",
+    unit: "byte",
+    unitDisplay: "narrow",
+  }).format(sizeInBytes);
   let tooltipContent = size;
-
-  if (file.type === "image/jpeg" || file.type === "image/png") {
-    const image = new Image();
-    image.src = URL.createObjectURL(file);
-    await new Promise<void>((resolve) => {
-      image.onload = () => {
-        tooltipContent += ` - ${image.width} x ${image.height}`;
-        resolve();
-      };
-    });
-  } else if (file.type === "application/pdf") {
-    const url = URL.createObjectURL(file);
-
-    const pdf = await getDocument(url).promise;
-
-    const pageCount = pdf.numPages;
-
-    tooltipContent += ` - ${pageCount} ${pageCount > 1 ? "pages" : "page"}`;
-    URL.revokeObjectURL(url);
+  if(!file.size){
+    emptyPDFHandler(dispatch, errors);
+  } else {
+  
+    try {
+    if (file.type === "image/jpeg" || file.type === "image/png") {
+      const image = new Image();
+      image.src = URL.createObjectURL(file);
+      await new Promise<void>((resolve) => {
+        image.onload = () => {
+          tooltipContent += ` - ${image.width} x ${image.height}`;
+          resolve();
+        };
+      });
+    } else if (file.type === "application/pdf") {
+        const url = URL.createObjectURL(file);
+        const pdf = await getDocument(url).promise;
+    
+        const pageCount = pdf.numPages || 0;
+        tooltipContent += ` - ${
+          lang === "ar" && pageCount === 1 ? "" : pageCount + " "
+        }${pageCount > 1 ? pages : page}`;
+        URL.revokeObjectURL(url);
+      
+        console.log(e);
+        emptyPDFHandler(dispatch, errors);
+          
+        
+        
+    }
+  }catch(e) {
+    emptyPDFHandler(dispatch, errors);
+    
   }
+  }
+
 
   return tooltipContent;
 };
@@ -73,36 +112,52 @@ export const getFileDetailsTooltipContent = async (
  * but i want to display the pdf.png file while fetching the first page from the pdf
  */
 
-export async function getFirstPageAsImage(pdfUrl: string): Promise<string> {
-  const loadingTask = getDocument(pdfUrl);
-  const pdf: PDFDocumentProxy = await loadingTask.promise;
-  const page = await pdf.getPage(1); // Get the first page
+export async function getFirstPageAsImage(
+  file: File,
+  dispatch: Dispatch<AnyAction>,
+  errors: _
+): Promise<string> {
+  const fileUrl = URL.createObjectURL(file);
+  if(!file.size) {
+    return emptyPDFHandler(dispatch, errors);
+  } else {
+    try {
+      const loadingTask = getDocument(fileUrl);
+      const pdf: PDFDocumentProxy = await loadingTask.promise;
+      const page = await pdf.getPage(1); // Get the first page
 
-  const scale = 1.5;
-  const viewport: PageViewport = page.getViewport({ scale });
+      const scale = 1.5;
+      const viewport: PageViewport = page.getViewport({ scale });
 
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
-  if (!context) {
-    throw new Error("Canvas context not available.");
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      if (!context) {
+        throw new Error("Canvas context not available.");
+      }
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      const renderTask: RenderTask = page.render({
+        canvasContext: context,
+        viewport: viewport,
+      });
+
+      await renderTask.promise;
+
+      return canvas.toDataURL();
+    } catch (error) {
+    dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
+      return DEFAULT_IMAGE; // Return the placeholder image URL when an error occurs
+    }
   }
-  canvas.height = viewport.height;
-  canvas.width = viewport.width;
-
-  const renderTask: RenderTask = page.render({
-    canvasContext: context,
-    viewport: viewport,
-  });
-
-  await renderTask.promise;
-
-  return canvas.toDataURL();
 }
 
 export const getPlaceHoderImageUrl = (extension: string) => {
   switch (extension) {
     case ".docx":
       return "/images/word.png";
+    case ".html":
+      return "/images/html.png";
     case ".pptx":
       return "/images/powerpoint.png";
     case ".xlsx":
@@ -115,4 +170,128 @@ export const getPlaceHoderImageUrl = (extension: string) => {
 // a function to check if the extension is .jpg or .pdf:
 export const isDraggableExtension = (ext: string, router: NextRouter) => {
   return ext === ".jpg" || router.asPath.includes("merge-pdf");
+};
+
+export function isrtllang(asPath: string): boolean {
+  return asPath.startsWith("/ar");
+}
+
+// export const validateFiles = (
+//   _files: FileList | File[], 
+//   allowedMimeTypes: string[],
+//   extension: string,
+//   errors: typeof _,
+//   dispatch: Dispatch<AnyAction>,
+//   fileSizeLimit = 50 * 1024 * 1024 
+// ) => {
+//   for (let i = 0; i < _files.length; i++) {
+//     const file = _files[i] || null;
+//     extension = extension.replace(".", "").toUpperCase();
+//     let file_extension = file.name.split(".")[1].toUpperCase();
+//     // handle FILE_TOO_LARGE error
+    
+//     if (!file) {
+//       // handle FILE_CORRUPT error
+//       dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
+//       return;
+//     } else if (!file.name) {
+//       // handle FILE_CORRUPT error
+//       dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
+//       return;
+//     } else if (!file.type) {
+//       // handle NOT_SUPPORTED_TYPE error
+//       dispatch(setErrorMessage(errors.NOT_SUPPORTED_TYPE.message));
+//       return;
+//     } else if (
+//       !allowedMimeTypes.includes(file.type) ||
+//       file_extension !== extension
+//     ) {
+//       dispatch(
+//         setErrorMessage(
+//           errors.NOT_SUPPORTED_TYPE.types[
+//             extension as keyof typeof errors.NOT_SUPPORTED_TYPE.types
+//           ] || errors.NOT_SUPPORTED_TYPE.message
+//         )
+//       );
+//       return;
+//     } else if (file.size > fileSizeLimit) {
+//       dispatch(setErrorMessage(errors.FILE_TOO_LARGE.message));
+//       return;
+//     }
+//     else if (!file.size) {
+//       dispatch(setErrorMessage(errors.EMPTY_FILE.message));
+//       return;
+//     }
+//     // handle INVALID_IMAGE_DATA error
+//     else if (file.type.startsWith("image/") && !file) {
+//       dispatch(setErrorMessage(errors.INVALID_IMAGE_DATA.message));
+//       return;
+//     } else {
+//       dispatch(resetErrorMessage());
+//     }
+//   }
+// }
+
+export const validateFiles = (
+  _files: FileList | null,
+  extension: string,
+  errors: typeof _,
+  dispatch: Dispatch<AnyAction>
+) => {
+  let allowedMimeTypes = [
+    "application/pdf",
+    "text/html",
+    "image/jpeg",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  ];
+  const fileSizeLimit = 50 * 1024 * 1024; // 50 MB
+  for (let i = 0; i < _files?.length; i++) {
+    const file = _files[i] || null;
+    extension = extension.replace(".", "").toUpperCase();
+    let file_extension = file.name.split(".")[1]?.toUpperCase() || "";
+
+    if (!file || !file.name) {
+      // handle FILE_CORRUPT error
+      dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
+      return false;
+    } else if (!file.type) {
+      // handle NOT_SUPPORTED_TYPE error
+      dispatch(setErrorMessage(errors.NOT_SUPPORTED_TYPE.message));
+      return false;
+    } else if (
+      !allowedMimeTypes.includes(file.type) ||
+      file_extension !== extension
+    ) {
+      const errorMessage =
+        errors.NOT_SUPPORTED_TYPE.types[
+          extension as keyof typeof errors.NOT_SUPPORTED_TYPE.types
+        ] || errors.NOT_SUPPORTED_TYPE.message;
+      dispatch(setErrorMessage(errorMessage));
+      return false;
+    } else if (file.size > fileSizeLimit) {
+      // handle FILE_TOO_LARGE error
+      dispatch(setErrorMessage(errors.FILE_TOO_LARGE.message));
+      return false;
+    } else if (!file.size) {
+      // handle EMPTY_FILE error
+      dispatch(setErrorMessage(errors.EMPTY_FILE.message));
+      return false;
+    } else if (file.type.startsWith("image/")) {
+      // handle INVALID_IMAGE_DATA error
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const img = new Image();
+        img.src = reader.result as string;
+        img.onerror = () => {
+          dispatch(setErrorMessage(errors.INVALID_IMAGE_DATA.message));
+          return false;
+        };
+      };
+      return true;
+    }
+  }
+  return true;
 };

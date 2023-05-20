@@ -1,38 +1,22 @@
 import os
 import tempfile
-from PyPDF2 import PdfReader, PdfWriter
 
 
 def compress_pdf(pdf_file):
-    # Check if pdf_file exists
-    if not os.path.exists(pdf_file):
-        raise FileNotFoundError(f"No such file or directory: '{pdf_file}'")
+    # Create a temporary file to store the compressed PDF
+    compressed_pdf = tempfile.NamedTemporaryFile(delete=False)
 
-    # Create a temporary compressed PDF file
-    temp_compressed_pdf = tempfile.NamedTemporaryFile(
-        delete=False, suffix=".pdf")
-    temp_compressed_pdf.close()
+    # Command to run Ghostscript
+    command = f'gswin64 -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile={compressed_pdf.name} {pdf_file}'
 
-    # Open the original PDF file
-    pdf_reader = PdfReader(pdf_file)
+    # Run Ghostscript
+    os.system(command)
 
-    # Create a PDF writer object for the compressed PDF
-    pdf_writer = PdfWriter()
+    # Get the filename of the compressed PDF
+    compressed_pdf_filename = compressed_pdf.name
 
-    # Compress each page of the original PDF and add to the PDF writer
-    for page_num in range(len(pdf_reader.pages)):
+    # Close and delete the temporary file
+    compressed_pdf.close()
 
-        pdf_writer.add_page(pdf_reader.pages[page_num])
-
-    # Write the compressed PDF to the temporary file
-    with open(temp_compressed_pdf.name, "wb") as fout:
-        pdf_writer.write(fout)
-
-    # Read the compressed PDF file and return
-    with open(temp_compressed_pdf.name, "rb") as fin:
-        compressed_pdf = fin.read()
-
-    # Delete the temporary compressed PDF file
-    os.unlink(temp_compressed_pdf.name)
-
-    return compressed_pdf
+    # Return the compressed PDF file name
+    return compressed_pdf_filename
