@@ -1,6 +1,9 @@
 import { RefreshIcon, TrashIcon } from "@heroicons/react/solid";
-import { useRotatedImage } from "../../src/utils";
+import { useRotatedImage, validateFiles } from "../../src/utils";
 import { Dispatch, SetStateAction, useCallback } from "react";
+import { ToolState } from "../../src/store";
+import { useDispatch, useSelector } from "react-redux";
+import type {errors as _} from "../../content";
 
 export type ActionProps = {
   index: number;
@@ -17,6 +20,7 @@ export type ActionProps = {
     >
   >;
   extension: string;
+  errors: _
 };
 
 export const ActionDiv = ({
@@ -24,10 +28,13 @@ export const ActionDiv = ({
   imageUrls,
   setImageUrls,
   extension,
+  errors
 }: ActionProps) => {
   const item = imageUrls[index];
   const rotatedImageUrl = useRotatedImage(item.imageUrl);
-
+  // store and dispatch
+  const store = useSelector((state: { tool: ToolState }) => state.tool);
+  const dispatch = useDispatch();
   const handleRotateImage = useCallback(() => {
     if (rotatedImageUrl) {
       const newImageUrls = [...imageUrls];
@@ -47,7 +54,9 @@ export const ActionDiv = ({
         onClick={() => {
           const newImageUrls = [...imageUrls];
           newImageUrls.splice(index, 1);
+          validateFiles(store.files, extension, errors, dispatch);
           setImageUrls(newImageUrls);
+          console.log(store.files);
         }}
       >
         <TrashIcon className="icon hero-icon" />

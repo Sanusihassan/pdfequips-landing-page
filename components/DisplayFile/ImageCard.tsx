@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { ActionDiv } from "./ActionDiv";
 import { Tooltip } from "react-tooltip";
-
+import type {errors as _} from "../../content"
 interface ImageCardProps {
   imageUrls: any[];
   index: number;
@@ -9,6 +9,7 @@ interface ImageCardProps {
   provided: any;
   toolTipSizes: string[];
   extension: string;
+  errors: _
 }
 
 const ImageCard: React.FC<ImageCardProps> = ({
@@ -18,6 +19,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
   provided,
   toolTipSizes,
   extension,
+  errors
 }) => {
   return (
     <div
@@ -32,6 +34,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
         imageUrls={imageUrls}
         index={index}
         setImageUrls={setImageUrls}
+        errors={errors}
       />
       <bdi>
         <Tooltip id={`image_tooltip_${index}`} />

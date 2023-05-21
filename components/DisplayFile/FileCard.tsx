@@ -1,7 +1,7 @@
 import { DraggableProvided, DraggableStateSnapshot } from "react-beautiful-dnd";
 import { ActionDiv, ActionProps } from "./ActionDiv";
 import { Tooltip } from "react-tooltip";
-
+import type {errors as _} from "../../content";
 type CardProps = ActionProps & {
   index: number;
   imageUrl: string;
@@ -10,6 +10,7 @@ type CardProps = ActionProps & {
   isDraggable: boolean;
   provided: DraggableProvided;
   snapshot: DraggableStateSnapshot;
+  errors: _
 };
 
 const FileCard = ({
@@ -20,7 +21,7 @@ const FileCard = ({
   toolTipSizes,
   isDraggable,
   provided,
-
+  errors,
   extension,
   setImageUrls,
 }: CardProps) => {
@@ -40,6 +41,7 @@ const FileCard = ({
         imageUrls={imageUrls}
         setImageUrls={setImageUrls}
         index={index}
+        errors={errors}
       />
       <div className="card-body d-flex flex-column">
         <img

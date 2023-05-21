@@ -27,7 +27,7 @@ export const handleChange = (
   //   let file_extension = file.name.split(".")[1].toUpperCase();
   //   // handle FILE_TOO_LARGE error
   //   const fileSizeLimit = 50 * 1024 * 1024; // 50 MB
-    
+
   //   if (!file) {
   //     // handle FILE_CORRUPT error
   //     dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
@@ -73,9 +73,9 @@ export const handleChange = (
   // }
   const _files = (e.target?.files as FileList) || null;
   const isValid = validateFiles(_files, extension, errors, dispatch);
+  dispatch(setFilesFromList(_files));
+  dispatch(hideTool());
   if (isValid) {
-    dispatch(setFilesFromList(_files));
     dispatch(resetErrorMessage());
-    dispatch(hideTool());
   }
 };

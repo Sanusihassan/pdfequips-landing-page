@@ -1,6 +1,7 @@
 import os
 import zipfile
-from flask import Response, request
+from flask import Response, jsonify, request
+from utils.utils import validate_file
 from pdf_to_jpg_converter import pdf_to_jpg_converter
 from werkzeug.utils import secure_filename
 import shutil
@@ -15,8 +16,15 @@ def pdf_to_jpg_route(app):
             # Create the temp directory if it doesn't exist
             if not os.path.exists('temp'):
                 os.makedirs('temp')
-
-            pdf_files = request.files.getlist('files')
+            if 'files' not in request.files:
+                return jsonify({"error": "No PDF file provided"}), 400
+            files = request.files.getlist('files')
+            error = validate_file(files)
+            if error:
+                response = jsonify(error)
+                response.headers['Content-Type'] = 'application/json'
+                return jsonify({"error": response}), 400
+            pdf_files = files
             pdf_file_paths = []
 
             for pdf_file in pdf_files:

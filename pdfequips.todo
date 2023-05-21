@@ -12,7 +12,8 @@ fix language problem when clicking on the language link on the lang dropdown (do
 
 word to pdf is not working.
 
+validation on the server side (almost done!).
 
-validation on the server side.
+handle server side errors on front end (also validate while deleting files.);
 
-handle server side errors on front end;
+but first handle it in the backend(done).

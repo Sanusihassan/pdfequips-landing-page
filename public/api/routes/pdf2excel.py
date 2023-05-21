@@ -2,6 +2,7 @@ import os
 import tempfile
 from flask import jsonify, request, send_file
 from io import BytesIO
+from utils.utils import validate_file
 from pdf2excel_converter import pdf_to_excel
 
 
@@ -9,8 +10,13 @@ def pdf_to_excel_route(app):
     @app.route('/pdf-to-excel', methods=['POST'])
     def convert_pdf_to_excel():
         if 'files' not in request.files:
-            return jsonify({"error": "No PDF file found"}), 400
-
+            return jsonify({"error": "No PDF file provided"}), 400
+        files = request.files.getlist('files')
+        error = validate_file(files)
+        if error:
+            response = jsonify(error)
+            response.headers['Content-Type'] = 'application/json'
+            return jsonify({"error": response}), 400
         pdf_file = request.files['files']
 
         # Save the PDF file to a temporary location

@@ -174,6 +174,7 @@ const DisplayFile = ({ extension, pages, page, lang, errors }: propTypes) => {
                                 setImageUrls={setImageUrls}
                                 toolTipSizes={toolTipSizes}
                                 extension={extension}
+                                errors={errors}
                               />
                             );
                           })()
@@ -192,6 +193,7 @@ const DisplayFile = ({ extension, pages, page, lang, errors }: propTypes) => {
                             setImageUrls={setImageUrls}
                             snapshot={snapshot}
                             toolTipSizes={toolTipSizes}
+                            errors={errors}
                           />
                         )}
                       </div>

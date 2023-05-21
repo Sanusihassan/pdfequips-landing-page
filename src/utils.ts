@@ -10,6 +10,7 @@ import { AnyAction } from "@reduxjs/toolkit";
 import type { errors as _ } from "../content";
 GlobalWorkerOptions.workerSrc = "/pdf.worker.js";
 
+
 export function useLoadedImage(src: string): HTMLImageElement | null {
   const [loadedImage, setLoadedImage] = useState<HTMLImageElement | null>(null);
 
@@ -90,12 +91,8 @@ export const getFileDetailsTooltipContent = async (
           lang === "ar" && pageCount === 1 ? "" : pageCount + " "
         }${pageCount > 1 ? pages : page}`;
         URL.revokeObjectURL(url);
-      
-        console.log(e);
-        emptyPDFHandler(dispatch, errors);
-          
-        
-        
+
+      emptyPDFHandler(dispatch, errors);
     }
   }catch(e) {
     emptyPDFHandler(dispatch, errors);
@@ -147,7 +144,7 @@ export async function getFirstPageAsImage(
       return canvas.toDataURL();
     } catch (error) {
     dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
-      return DEFAULT_IMAGE; // Return the placeholder image URL when an error occurs
+      return DEFAULT_PDF_IMAGE; // Return the placeholder image URL when an error occurs
     }
   }
 }
@@ -233,9 +230,9 @@ export function isrtllang(asPath: string): boolean {
 // }
 
 export const validateFiles = (
-  _files: FileList | null,
+  _files: FileList | File[],
   extension: string,
-  errors: typeof _,
+  errors: _,
   dispatch: Dispatch<AnyAction>
 ) => {
   let allowedMimeTypes = [

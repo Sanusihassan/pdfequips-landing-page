@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, send_file
+from utils.utils import validate_file
 
 from word2pdfconverter import word_to_pdf
 
@@ -33,7 +34,12 @@ def word_to_pdf_route(app):
     @app.route('/word-to-pdf', methods=['POST'])
     def convert_word_to_pdf():
         if 'files' not in request.files:
-            return jsonify({"error": "No word_file found"}), 400
-
-        word_file = request.files['files']
+            return jsonify({"error": "No PDF file provided"}), 400
+        files = request.files['files']
+        error = validate_file(files)
+        if error:
+            response = jsonify(error)
+            response.headers['Content-Type'] = 'application/json'
+            return jsonify({"error": response}), 400
+        word_file = files
         return word_to_pdf(word_file)
