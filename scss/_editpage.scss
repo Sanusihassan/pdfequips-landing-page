@@ -61,10 +61,14 @@
         }
     }
     .options {
+        height: 100%;
+        height: 100vh;
         flex: 0 0 25%;
+
         transition: .3s;
         @media (max-width: 600px) {
             position: absolute;
+            width: 100%;
             [dir=rtl] &, [lang="ar"] & {
                 right: calc(-100% - 3.25rem);
                 &.expanded {

@@ -26,8 +26,9 @@
     }
   }
   //   please convert this to scss syntax
-  @media (max-width: 600px) {
+  @media (max-width: 992px) {
     .dropdown-menu {
+      border: none;
       display: block;
       max-height: 0;
       padding: 0;
@@ -36,14 +37,14 @@
         overflow: hidden;
       }
       height: 0;
-      transition: max-height 0.3s ease;
+      transition: max-height 0.4s ease;
     }
 
     .dropdown-wrapper.show .dropdown-menu {
-      max-height: 200px; /* set a value that's greater than the expected max height */
+      max-height: 100vh; /* set a value that's greater than the expected max height */
       padding: 0.5rem 0;
       height: auto;
-      transition: max-height 0.3s ease;
+      transition: max-height 0.4s ease;
     }
   }
 }
