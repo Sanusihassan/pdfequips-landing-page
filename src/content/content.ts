@@ -16,7 +16,7 @@ export const nav_content = {
   powerpoint_to_pdf: "POWERPOINT to PDF",
   excel_to_pdf: "EXCEL to PDF",
   html_to_pdf: "HTML to PDF",
-  convert_from_pdf: "convert from PDF",
+  convert_from_pdf: "Convert from PDF",
   pdf_to_jpg: "PDF to JPG",
   pdf_to_word: "PDF to WORD",
   pdf_to_powerpoint: "PDF to POWERPOINT",
@@ -148,6 +148,7 @@ export const edit_page = {
     pdf_to_excel: "PDF to EXCEL options",
     pdf_to_pdf_a: "PDF to PDF/A options",
   },
+  loader_text: "please wait...",
   // translate the values of this object to french.
   action_buttons: {
     merge_pdf: "Merge PDF",
@@ -211,6 +212,10 @@ export const footer = {
   privacy_policy: "privacy policy",
 };
 
+
+// please add an error message for "ERR_NETWORK" case with message for this errors object
+// please note that i just want the static object not a way to add it to the object.
+// just regenerate the object with the required fields.
 export const errors = {
   EMPTY_FILE: {
     message: "The file is empty. Please choose a valid file.",
@@ -242,7 +247,7 @@ export const errors = {
   },
   MISSING_FONTS: {
     message:
-      "The filecontains missing fonts. Please ensure all fonts are embedded in the PDF file.",
+      "The file contains missing fontsand cannot be processed. Please ensure all fonts are embedded in the PDF file.",
     code: "ERR_MISSING_FONTS",
   },
   INVALID_IMAGE_DATA: {
@@ -260,9 +265,19 @@ export const errors = {
       "You have exceeded the maximum number of files allowed. Please delete some files and try again.",
     code: "ERR_MAX_FILES_EXCEEDED",
   },
+  NO_FILES_SELECTED: {
+    message:
+      "No files selected. Please select at least one file.",
+    code: "ERR_NO_FILES_SELECTED",
+  },
   UNKNOWN_ERROR: {
     message:
       "An unknown error occurred. Please try again later or contact support.",
     code: "ERR_UNKNOWN",
   },
+  // please translate the content of the error message to arabic in this object and give me the result.
+  ERR_NETWORK: {
+    message: "A network error occurred. Please check your internet connection and try again.",
+    code: "ERR_NETWORK",
+  }
 };

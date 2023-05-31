@@ -145,6 +145,7 @@ export const edit_page = {
     pdf_to_excel: "خيارات تحويل ملف PDF إلى EXCEL",
     pdf_to_pdf_a: "خيارات تحويل ملف PDF إلى PDF/A",
   },
+  loader_text: "يرجى الانتظار...",
   action_buttons: {
     merge_pdf: "دمج PDF",
     split_pdf: "تقسيم PDF",
@@ -193,27 +194,32 @@ export const footer = {
 };
 
 export const errors = {
+  EMPTY_FILE: {
+    message: "الملف فارغ. يرجى اختيار ملف صالح.",
+    code: "ERR_EMPTY_FILE",
+  },
   FILE_TOO_LARGE: {
     message:
-      "الملف كبير جدًا. يرجى اختيار ملف أصغر أو استخدام أداة ضغط PDF لتقليل حجم الملف.",
+      "حجم الملف كبير جدًا. يرجى اختيار ملف أصغر، أو استخدام أداة ضغط PDF الخاصة بنا لتقليل حجم الملف.",
     code: "ERR_FILE_SIZE_LIMIT_EXCEEDED",
   },
   NOT_SUPPORTED_TYPE: {
-    message: "الملف ليس من الأنواع المدعومة.",
+    message: "الملف غير مدعوم.",
     types: {
       PDF: "يرجى اختيار ملف PDF صالح.",
       JPG: "يرجى اختيار ملف صورة JPEG صالح.",
       DOC: "يرجى اختيار ملف مستند Word صالح.",
       DOCX: "يرجى اختيار ملف مستند Word صالح.",
       XLS: "يرجى اختيار ملف جدول بيانات Excel صالح.",
-      XLSX: "يرجى اختيار ملف جدول بيانات Excel صالح.",
+      XLSX: "يرجى اختيارملف جدول بيانات Excel صالح.",
       PPT: "يرجى اختيار ملف عرض تقديمي PowerPoint صالح.",
       PPTX: "يرجى اختيار ملف عرض تقديمي PowerPoint صالح.",
     },
     code: "ERR_INVALID_FILE_TYPE",
   },
   FILE_CORRUPT: {
-    message: "الملف تالف ولا يمكن معالجته. يرجى اختيار ملف صالح.",
+    message:
+      "الملف تالف ولا يمكن معالجته. يرجى اختيار ملف صالح.",
     code: "ERR_FILE_CORRUPT",
   },
   MISSING_FONTS: {
@@ -223,7 +229,7 @@ export const errors = {
   },
   INVALID_IMAGE_DATA: {
     message:
-      "الملف يحتوي على بيانات صور غير صالحة. يرجى التأكد من تنسيق جميع الصور بشكل صحيح.",
+      "الملف يحتوي على بيانات صورة غير صالحة. يرجى التأكد من تنسيق جميع الصور بشكل صحيح.",
     code: "ERR_INVALID_IMAGE_DATA",
   },
   SECURITY_RISK: {
@@ -231,9 +237,23 @@ export const errors = {
       "الملف يحتوي على مخاطر أمان ولا يمكن معالجته. يرجى اختيار ملف صالح.",
     code: "ERR_SECURITY_RISK",
   },
+  MAX_FILES_EXCEEDED: {
+    message:
+      "لقد تجاوزت الحد الأقصى لعدد الملفات المسموح به. يرجى حذف بعض الملفات والمحاولة مرة أخرى.",
+    code: "ERR_MAX_FILES_EXCEEDED",
+  },
+  NO_FILES_SELECTED: {
+    message:
+      "لم يتم اختيار أي ملفات. يرجى اختيار ملف واحد على الأقل.",
+    code: "ERR_NO_FILES_SELECTED",
+  },
   UNKNOWN_ERROR: {
     message:
       "حدث خطأ غير معروف. يرجى المحاولة مرة أخرى لاحقًا أو الاتصال بالدعم.",
     code: "ERR_UNKNOWN",
+  },
+  ERR_NETWORK: {
+    message: "حدث خطأ في الشبكة. يرجى التحقق من اتصالك بالإنترنت وحاول مرة أخرى.",
+    code: "ERR_NETWORK",
   },
 };

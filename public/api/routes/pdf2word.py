@@ -1,7 +1,7 @@
 from flask import jsonify, request
-from out.api.utils.utils import validate_file
+from utils.utils import validate_file
+from pdf2wordconverter import pdf_to_word_converter, pdf_to_word_converter_multiple
 
-from pdf2wordconverter import pdf_to_word
 
 
 def pdf_to_word_route(app):
@@ -16,5 +16,9 @@ def pdf_to_word_route(app):
             response = jsonify(error)
             response.headers['Content-Type'] = 'application/json'
             return jsonify({"error": response}), 400
-        pdf_file = files
-        return pdf_to_word(pdf_file)
+        if len(files) == 1:
+            pdf_file = files
+            return pdf_to_word_converter(pdf_file[0])
+        else:
+            # this is not tested.
+            return pdf_to_word_converter_multiple(files)

@@ -1,63 +1,85 @@
-from flask import jsonify
-from pdf2image import convert_from_path
 import os
+import tempfile
+import subprocess
 import zipfile
-import PyPDF2
+from flask import send_file
 
-# check if the input file is a valid PDF
+"""
+    i want another function called pdf_to_jpg_converter_multiple which takes multiple pdf files
+    and convert jpg files using the same approach but put the converted files for each pdf file in a
+    seperate folder with the original pdf file name, and then return the folders in a zip for download.
+"""
 
+def pdf_to_jpg_converter(pdf_files):
+    for pdf_file in pdf_files:
+        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as temp:
+            pdf_file.seek(0)
+            temp.write(pdf_file.read())
+            temp_path = temp.name
 
-import pikepdf
+        output_dir = tempfile.gettempdir()
+        pdf_file.seek(0)
+        temp_path = tempfile.NamedTemporaryFile(suffix=".pdf", delete=False)
+        temp_path.write(pdf_file.read())
+        temp_path.flush()
 
+        output_file = os.path.join(output_dir, os.path.basename(temp_path.name).replace(".pdf", ".jpg"))
 
-def is_valid_pdf(pdf_file):
-    try:
-        with pikepdf.open(pdf_file) as pdf:
-            pass
-        return True
-    except pikepdf.PdfError:
-        return False
+        subprocess.run(["soffice", "--headless", "--convert-to", "jpg", temp_path.name, "--outdir", output_dir])
 
+        jpg_files = [os.path.join(output_dir, f) for f in os.listdir(output_dir) if f.endswith(".jpg")]
 
-# def pdf_to_jpg_converter(pdf_files, output_folder, dpi=300):
-#     if not os.path.exists(output_folder):
-#         os.makedirs(output_folder)
+        if len(jpg_files) == 1:
+            output_file = jpg_files[0]
+        else:
+            with zipfile.ZipFile(os.path.join(output_dir, "output.zip"), mode="w") as archive:
+                for jpg_file in jpg_files:
+                    archive.write(jpg_file, os.path.basename(jpg_file))
 
-#     for pdf_file in pdf_files:
-#         if is_valid_pdf(pdf_file):
-#             pages = convert_from_path(pdf_file, dpi)
+            output_file = os.path.join(output_dir, "output.zip")
 
-#             for count, page in enumerate(pages):
-#                 output_filename = os.path.join(
-#                     output_folder, f'{os.path.basename(pdf_file)}_page{count}.jpg')
-#                 page.save(output_filename, 'JPEG')
-#         else:
-#             return jsonify({"error": "Invalid PDF file"}), 400
-
-#     zip_filename = os.path.join(output_folder, 'output.zip')
-#     with zipfile.ZipFile(zip_filename, 'w') as zipf:
-#         for root, _, files in os.walk(output_folder):
-#             for file in files:
-#                 if file.endswith('.jpg'):
-#                     zipf.write(os.path.join(root, file), os.path.relpath(
-#                         os.path.join(root, file), output_folder))
-
-#     return zip_filename
+        response = send_file(output_file, as_attachment=True, mimetype='application/zip' if len(jpg_files) > 1 else 'image/jpeg')
+        os.remove(output_file)
+        return response
 
 
-def pdf_to_jpg_converter(pdf_files, output_folder, dpi=300):
-    for idx, pdf_file in enumerate(pdf_files):
-        if not is_valid_pdf(pdf_file):
-            return jsonify({"error": "Invalid PDF file"}), 400
-        pages = convert_from_path(pdf_file, dpi)
 
-        # Extract the base file name without the extension
-        base_file_name = os.path.splitext(os.path.basename(pdf_file))[0]
 
-        # Use the base file name as the folder name
-        pdf_output_folder = os.path.join(output_folder, base_file_name)
 
-        os.makedirs(pdf_output_folder, exist_ok=True)
-        for count, page in enumerate(pages):
-            page.save(os.path.join(pdf_output_folder,
-                      f'out{count}.jpg'), 'JPEG')
+
+
+
+def pdf_to_jpg_converter_multiple(pdf_files, filenames):
+    output_folders = []
+    # "object*" is not iterable
+    # "__iter__" method not definedPylancereportGeneralTypeIssues
+    # (variable) pdf_file: Unknown
+    for pdf_file, filename in zip(pdf_files, filenames):
+        pdf_file.seek(0)
+        temp_path = tempfile.NamedTemporaryFile(suffix=".pdf", delete=False)
+        temp_path.write(pdf_file.read())
+        temp_path.flush()
+
+        output_dir = tempfile.mkdtemp()
+        output_folders.append(output_dir)
+
+        # Convert the entire PDF to a single multi-page TIFF file
+        tiff_path = os.path.join(output_dir, f"{filename}.tiff")
+        subprocess.run(["soffice", "--headless", "--convert-to", "tiff", "--outdir", output_dir, temp_path.name])
+
+        # Split the multi-page TIFF file into individual JPG files
+        subprocess.run(["convert", tiff_path, "-quality", "100", f"{output_dir}/{filename}-%d.jpg"])
+
+    zip_path = os.path.join(tempfile.gettempdir(), 'output.zip')
+    
+    with zipfile.ZipFile(zip_path, mode="w") as archive:
+        for folder in output_folders:
+            for root, _, files in os.walk(folder):
+                for file in files:
+                    if file.endswith(".jpg"):
+                        archive.write(os.path.join(root, file), os.path.relpath(os.path.join(root, file), tempfile.gettempdir()))
+
+    response = send_file(zip_path, as_attachment=True, mimetype='application/zip')
+    os.remove(zip_path)
+    
+    return response

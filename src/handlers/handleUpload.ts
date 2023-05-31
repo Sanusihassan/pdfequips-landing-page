@@ -1,10 +1,16 @@
 import axios from "axios";
-import { Dispatch, RefObject, SetStateAction } from "react";
+import { Dispatch, RefObject } from "react";
 import type { ToolData, errorType } from "../../components/Tool";
 import { downloadConvertedFile } from "../downloadFile";
-import { ToolState, setErrorMessage } from "../store";
+import {
+  ToolState,
+  setErrorMessage,
+  setErrorCode,
+  resetErrorMessage,
+  setIsSubmitted,
+} from "../store";
 import { AnyAction } from "@reduxjs/toolkit";
-
+import type { errors as _ } from "../../content";
 export const handleUpload = async (
   e: React.FormEvent<HTMLFormElement>,
   fileInput: RefObject<HTMLInputElement>,
@@ -12,10 +18,11 @@ export const handleUpload = async (
   data: ToolData,
   downloadBtn: RefObject<HTMLAnchorElement>,
   dispatch: Dispatch<AnyAction>,
-  state: ToolState
+  state: ToolState,
+  errors: _
 ) => {
   e.preventDefault();
-
+  dispatch(setIsSubmitted(true));
   const files = (fileInput.current as HTMLInputElement).files;
   if (!files) return;
 
@@ -32,7 +39,6 @@ export const handleUpload = async (
   if (state.errorMessage) {
     return;
   }
-  console.log(state.compressPdf);
   formData.append("compress_amount", String(state.compressPdf));
   try {
     const response = await axios.post(url, formData, {
@@ -40,51 +46,70 @@ export const handleUpload = async (
     });
 
     const originalFileName = files[0]?.name?.split(".").slice(0, -1).join(".");
-
-    if (
-      data.type == ".jpg" ||
-      data.type == ".docx" ||
-      data.type == ".html" ||
-      data.type == ".xlsx"
+    let outputFileName: string = "";
+    let outputFileMimeType: string = response.data.type || "";
+    if (response.data.type == "application/zip") {
+      outputFileMimeType = "application/zip";
+      outputFileName = "PDFEquips.zip";
+    } else if (response.data.type == "application/pdf") {
+      outputFileMimeType = "application/pdf";
+      outputFileName = `${originalFileName}.pdf`;
+    } else if (
+      response.data.type == "application/msword" ||
+      response.data.type ==
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     ) {
-      downloadConvertedFile(
-        response,
-        "application/pdf",
-        `${originalFileName}.pdf`,
-        downloadBtn
-      );
-    } else if (data.type === ".pdf") {
-      let output;
-      if (data.title == "PDF to WORD") {
-        output = `${originalFileName}.docx`;
-      } else if (data.title == "PDF to EXCEL") {
-        output = `${originalFileName}.xlsx`;
-      } else if (data.title == "EXCEL to PDF") {
-        output = `${originalFileName}_output.pdf`;
-      } else if (data.title == "PDF to Powerpoint") {
-        output = `${originalFileName}_output.pptx`;
-      } else {
-        output = `${originalFileName}_output.pdf`;
-      }
-      downloadConvertedFile(response, "application/pdf", output, downloadBtn);
-    } else if (data.type == ".pptx") {
-      downloadConvertedFile(
-        response,
-        "application/pdf",
-        `${originalFileName}_output.pdf`,
-        downloadBtn
-      );
+      outputFileMimeType = response.data.type;
+      outputFileName = `${originalFileName}.docx`;
+    } else if (
+      response.data.type == "application/vnd.ms-excel" ||
+      response.data.type ==
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    ) {
+      outputFileMimeType = response.data.type;
+      outputFileName = `${originalFileName}.xlsx`;
+    } else if (
+      response.data.type == "application/vnd.ms-powerpoint" ||
+      response.data.type ==
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    ) {
+      outputFileMimeType = response.data.type;
+      outputFileName = `${originalFileName}.pptx`;
     }
+    
+    downloadConvertedFile(
+      response,
+      outputFileMimeType,
+      outputFileName,
+      downloadBtn
+    );
 
     if (response.status !== 200) {
       throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      dispatch(resetErrorMessage());
+      dispatch(setIsSubmitted(false));
     }
   } catch (error) {
-    error.response.data.text().then(function(text) {
+    console.log(error);
+    if((error as {code: string}).code === "ERR_NETWORK") {
+      dispatch(setErrorMessage(errors.ERR_NETWORK.message));
+      return;
+    }
+    (error as errorType).response?.data.text().then(function (text) {
       const json = JSON.parse(text);
       console.error(json);
+      const errorObj = errors[json.error as keyof _];
+      const errorMessage = errorObj
+        ? errorObj.message
+        : errors.UNKNOWN_ERROR.message;
+      dispatch(setErrorMessage(errorMessage)); // dispatch the error message to the ToolState
+      dispatch(setErrorCode(json.error)); // dispatch the error code to the ToolState
+      dispatch(setIsSubmitted(false));
     });
-    console.log(error);
-    // dispatch(setErrorMessage((error as errorType)?.response?.data.error));
+
+    dispatch(setIsSubmitted(false));
+  } finally {
+    dispatch(setIsSubmitted(false));
   }
 };

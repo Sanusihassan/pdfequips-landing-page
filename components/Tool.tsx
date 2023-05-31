@@ -1,11 +1,18 @@
 // i think this file is very crowded, i want to extract logics, and components to other files
 // what should i extract from it...
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 import EditPage from "./EditPage";
 import { useDispatch, useSelector } from "react-redux";
-import { ToolState, hideTool, setFiles } from "../src/store";
+import {
+  ToolState,
+  hideTool,
+  resetErrorMessage,
+  setErrorMessage,
+  setFiles,
+  setErrorCode
+} from "../src/store";
 import { useRouter } from "next/router";
 import type { edit_page, tools } from "../content";
 import { useEndPoint } from "../src/handlers/useEndpoint";
@@ -49,13 +56,17 @@ const Tool: React.FC<ToolProps> = ({
   pages,
   page,
 }) => {
+  
+  const state = useSelector((state: { tool: ToolState }) => state.tool);
+  const dispatch = useDispatch();
+  const [userClickedOnFileUploader, setUserClickedOnFileUploader] =
+    useState(false);
+
   const fileInput = useRef<HTMLInputElement>(null);
   const submitBtn = useRef<HTMLButtonElement>(null);
   const downloadBtn = useRef<HTMLAnchorElement>(null);
-
-  const state = useSelector((state: { tool: ToolState }) => state.tool);
   const router = useRouter();
-  const dispatch = useDispatch();
+  let _files: FileList | null = null;
 
   const handleHideTool = () => {
     dispatch(hideTool());
@@ -64,7 +75,7 @@ const Tool: React.FC<ToolProps> = ({
 
   // endpoint
   const [endpoint, setEndpoint] = useState("");
-  useEndPoint(endpoint, setEndpoint, path);
+  useEndPoint(endpoint, setEndpoint, path, state, errors);
 
   // drag and drop input handling
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -74,7 +85,38 @@ const Tool: React.FC<ToolProps> = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   // file input change handler
-  let showTool = state.showTool && state.errorMessage.length > 0;
+  let showTool = state.showTool && state.errorMessage?.length > 0;
+  // accepted file types
+  const acceptedFileTypes = {
+    ".pdf": ".pdf, .PDF",
+    ".pptx": ".pptx, .ppt",
+    ".docx": ".docx, .DOCX",
+    ".xlsx": ".xlsx, .xls",
+    ".jpg": ".jpg, .jpeg",
+    ".html": ".html, .htm",
+  };
+  let t: NodeJS.Timeout;
+  useEffect(() => {
+    window.onfocus = function () {
+      if (userClickedOnFileUploader) {
+        if (state.files.length === 0 || (_files && _files?.length === 0)) {
+          t = setTimeout(() => {
+            dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
+            dispatch(setErrorCode("ERR_EMPTY_FILE"));
+          }, 2000);
+        } else {
+          dispatch(resetErrorMessage());
+        }
+      }
+    };
+
+    if(state.errorCode == "ERR_EMPTY_FILE" && state.files.length > 0) {
+      dispatch(resetErrorMessage());
+    }
+    return () => {
+      clearTimeout(t);
+    }
+  }, [userClickedOnFileUploader, state.files]);
   return (
     <>
       <div
@@ -110,10 +152,11 @@ const Tool: React.FC<ToolProps> = ({
                 data,
                 downloadBtn,
                 dispatch,
-                state
+                state,
+                errors
               )
             }
-            // method="POST"
+            method="POST"
             encType="multipart/form-data"
           >
             <div
@@ -121,7 +164,6 @@ const Tool: React.FC<ToolProps> = ({
               onClick={(e) => {
                 e.stopPropagation();
               }}
-              // type="button"
               role="button"
             >
               {lang == "ar" ? (
@@ -143,15 +185,23 @@ const Tool: React.FC<ToolProps> = ({
               <input
                 type="file"
                 name="files"
-                accept={data.type}
+                accept={
+                  acceptedFileTypes[data.type as keyof typeof acceptedFileTypes]
+                }
                 multiple
                 ref={fileInput}
                 className="position-absolute file-input"
                 onClick={(e) => {
                   e.stopPropagation();
+                  setUserClickedOnFileUploader(true);
                 }}
-                onChange={(e) => handleChange(e, dispatch, data.type, errors)}
-                // onFocusout={checkIfPDF}
+                onChange={(e) => {
+                  handleChange(e, dispatch, data.type, errors);
+                  _files = e.target?.files;
+                  if (_files && _files.length > 0 || state.files.length > 0) {
+                    dispatch(resetErrorMessage());
+                  }
+                }}
               />
             </div>
             <a
@@ -167,7 +217,9 @@ const Tool: React.FC<ToolProps> = ({
             </button>
           </form>
           <p>{tools.or_drop}</p>
-          {state.showErrorMessage ? <ErrorElement state={state} /> : null}
+          {state.showErrorMessage && userClickedOnFileUploader ? (
+            <ErrorElement state={state} />
+          ) : null}
         </div>
         {/* ) : ( */}
         <EditPage

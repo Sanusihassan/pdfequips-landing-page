@@ -1,6 +1,6 @@
 import tempfile
 from flask import jsonify, request
-from out.api.utils.utils import validate_file
+from utils.utils import validate_file
 from tools.merge_pdf_tool import merge_pdfs
 
 

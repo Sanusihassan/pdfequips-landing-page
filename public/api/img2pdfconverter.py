@@ -14,9 +14,9 @@ def is_valid_jpeg(image_file):
 
 
 """
-    i want a function similar to this but to convert from pdf files to pdf/a files
+    i want a function similar to the below function to convert excel to pdf using soffice
+    declaration of the function should be somthing like this: def excel_to_pdf(excel_file):
 """
-
 
 def image_to_pdf(images):
     merger = PdfMerger()

@@ -1,16 +1,20 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { ToolState } from "../store";
+import { Dispatch, SetStateAction, useEffect} from "react";
+import { ToolState, setErrorMessage } from "../store";
+import { useDispatch } from "react-redux";
+import type { errors as _ } from "../../content";
 
 export const useEndPoint = (
   endpoint: string,
   setEndpoint: Dispatch<SetStateAction<string>>,
-  path: string
+  path: string,
+  state: ToolState,
+  errors: _,
 ) => {
   // endpoint
   //   const [endpoint, setEndpoint] = useState("");
+  const dispatch = useDispatch();
   useEffect(() => {
     setEndpoint(path);
-
     const preventDefault = (event: DragEvent) => {
       event.preventDefault();
     };

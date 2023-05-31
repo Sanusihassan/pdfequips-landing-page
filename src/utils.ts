@@ -5,11 +5,10 @@ import { getDocument } from "pdfjs-dist";
 import { PDFDocumentProxy, PageViewport, RenderTask } from "pdfjs-dist";
 import { GlobalWorkerOptions } from "pdfjs-dist";
 import { Dispatch, useEffect, useMemo, useState } from "react";
-import { setErrorMessage } from "./store";
+import { setErrorMessage, setErrorCode } from "./store";
 import { AnyAction } from "@reduxjs/toolkit";
 import type { errors as _ } from "../content";
 GlobalWorkerOptions.workerSrc = "/pdf.worker.js";
-
 
 export function useLoadedImage(src: string): HTMLImageElement | null {
   const [loadedImage, setLoadedImage] = useState<HTMLImageElement | null>(null);
@@ -39,12 +38,12 @@ export function useRotatedImage(imageUrl: string): string | null {
   }, [image]);
 }
 
-const DEFAULT_PDF_IMAGE = "/images/pdf.png";
+const DEFAULT_PDF_IMAGE = "/images/corrupted.png";
 function emptyPDFHandler(dispatch: Dispatch<AnyAction>, errors: _) {
   dispatch(setErrorMessage(errors.EMPTY_FILE.message));
+  dispatch(setErrorCode("ERR_EMPTY_FILE"));
   return DEFAULT_PDF_IMAGE;
 }
-
 
 export const getFileDetailsTooltipContent = async (
   file: File,
@@ -68,38 +67,46 @@ export const getFileDetailsTooltipContent = async (
     unitDisplay: "narrow",
   }).format(sizeInBytes);
   let tooltipContent = size;
-  if(!file.size){
+  if (!file.size) {
     emptyPDFHandler(dispatch, errors);
   } else {
-  
+    // i'm getting this errors:
+    //   6:39:22.589	           
+    // Error {
+    //   stack: 'Error: Setting up fake worker failed: "Cannot read properties of undefined (reading \'WorkerMessageHandler\')".\n' +
+    //     '    at eval (webpack-internal:///./node_modules/pdfjs-dist/build/pdf.js:1899:36)',
+    //   message: 'Setting up fake worker failed: "Cannot read properties of undefined (reading \'WorkerMessageHandler\')".'
+    // }
     try {
-    if (file.type === "image/jpeg" || file.type === "image/png") {
-      const image = new Image();
-      image.src = URL.createObjectURL(file);
-      await new Promise<void>((resolve) => {
-        image.onload = () => {
-          tooltipContent += ` - ${image.width} x ${image.height}`;
-          resolve();
-        };
-      });
-    } else if (file.type === "application/pdf") {
+      if (file.type === "image/jpeg" || file.type === "image/png") {
+        const image = new Image();
+        image.src = URL.createObjectURL(file);
+        await new Promise<void>((resolve) => {
+          image.onload = () => {
+            tooltipContent += ` - ${image.width} x ${image.height}`;
+            resolve();
+          };
+        });
+      } else if (file.type === "application/pdf") {
         const url = URL.createObjectURL(file);
         const pdf = await getDocument(url).promise;
-    
+
         const pageCount = pdf.numPages || 0;
         tooltipContent += ` - ${
           lang === "ar" && pageCount === 1 ? "" : pageCount + " "
         }${pageCount > 1 ? pages : page}`;
         URL.revokeObjectURL(url);
-
-      emptyPDFHandler(dispatch, errors);
+        if (!file.size) {
+          emptyPDFHandler(dispatch, errors);
+        }
+      }
+    } catch (e) {
+      
+      if (!file.size) {
+        emptyPDFHandler(dispatch, errors);
+      }
     }
-  }catch(e) {
-    emptyPDFHandler(dispatch, errors);
-    
   }
-  }
-
 
   return tooltipContent;
 };
@@ -115,7 +122,7 @@ export async function getFirstPageAsImage(
   errors: _
 ): Promise<string> {
   const fileUrl = URL.createObjectURL(file);
-  if(!file.size) {
+  if (!file.size) {
     return emptyPDFHandler(dispatch, errors);
   } else {
     try {
@@ -143,7 +150,7 @@ export async function getFirstPageAsImage(
 
       return canvas.toDataURL();
     } catch (error) {
-    dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
+      dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
       return DEFAULT_PDF_IMAGE; // Return the placeholder image URL when an error occurs
     }
   }
@@ -173,68 +180,14 @@ export function isrtllang(asPath: string): boolean {
   return asPath.startsWith("/ar");
 }
 
-// export const validateFiles = (
-//   _files: FileList | File[], 
-//   allowedMimeTypes: string[],
-//   extension: string,
-//   errors: typeof _,
-//   dispatch: Dispatch<AnyAction>,
-//   fileSizeLimit = 50 * 1024 * 1024 
-// ) => {
-//   for (let i = 0; i < _files.length; i++) {
-//     const file = _files[i] || null;
-//     extension = extension.replace(".", "").toUpperCase();
-//     let file_extension = file.name.split(".")[1].toUpperCase();
-//     // handle FILE_TOO_LARGE error
-    
-//     if (!file) {
-//       // handle FILE_CORRUPT error
-//       dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
-//       return;
-//     } else if (!file.name) {
-//       // handle FILE_CORRUPT error
-//       dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
-//       return;
-//     } else if (!file.type) {
-//       // handle NOT_SUPPORTED_TYPE error
-//       dispatch(setErrorMessage(errors.NOT_SUPPORTED_TYPE.message));
-//       return;
-//     } else if (
-//       !allowedMimeTypes.includes(file.type) ||
-//       file_extension !== extension
-//     ) {
-//       dispatch(
-//         setErrorMessage(
-//           errors.NOT_SUPPORTED_TYPE.types[
-//             extension as keyof typeof errors.NOT_SUPPORTED_TYPE.types
-//           ] || errors.NOT_SUPPORTED_TYPE.message
-//         )
-//       );
-//       return;
-//     } else if (file.size > fileSizeLimit) {
-//       dispatch(setErrorMessage(errors.FILE_TOO_LARGE.message));
-//       return;
-//     }
-//     else if (!file.size) {
-//       dispatch(setErrorMessage(errors.EMPTY_FILE.message));
-//       return;
-//     }
-//     // handle INVALID_IMAGE_DATA error
-//     else if (file.type.startsWith("image/") && !file) {
-//       dispatch(setErrorMessage(errors.INVALID_IMAGE_DATA.message));
-//       return;
-//     } else {
-//       dispatch(resetErrorMessage());
-//     }
-//   }
-// }
-
 export const validateFiles = (
   _files: FileList | File[],
   extension: string,
   errors: _,
   dispatch: Dispatch<AnyAction>
 ) => {
+  const files = Array.from(_files); // convert FileList to File[] array
+
   let allowedMimeTypes = [
     "application/pdf",
     "text/html",
@@ -242,12 +195,27 @@ export const validateFiles = (
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "application/vnd.ms-powerpoint",
+    "application/vnd.ms-excel",
   ];
   const fileSizeLimit = 50 * 1024 * 1024; // 50 MB
-  for (let i = 0; i < _files?.length; i++) {
-    const file = _files[i] || null;
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i] || null;
     extension = extension.replace(".", "").toUpperCase();
     let file_extension = file.name.split(".")[1]?.toUpperCase() || "";
+    // this contains all types and some special types that might potentially be of than one extension
+    const types = [
+      "ppt",
+      "pptx",
+      "doc",
+      "docx",
+      "xls",
+      "xlsx",
+      "html",
+      "htm",
+      "jpg",
+      "pdf",
+    ];
 
     if (!file || !file.name) {
       // handle FILE_CORRUPT error
@@ -255,12 +223,19 @@ export const validateFiles = (
       return false;
     } else if (!file.type) {
       // handle NOT_SUPPORTED_TYPE error
+      console.log(file);
       dispatch(setErrorMessage(errors.NOT_SUPPORTED_TYPE.message));
       return false;
     } else if (
       !allowedMimeTypes.includes(file.type) ||
-      file_extension !== extension
+      !types.includes(file_extension.toLowerCase())
     ) {
+      console.log(
+        "file => ",
+        types,
+        file_extension.toLowerCase(),
+        types.includes(file_extension.toLowerCase())
+      );
       const errorMessage =
         errors.NOT_SUPPORTED_TYPE.types[
           extension as keyof typeof errors.NOT_SUPPORTED_TYPE.types
@@ -273,7 +248,9 @@ export const validateFiles = (
       return false;
     } else if (!file.size) {
       // handle EMPTY_FILE error
+      console.log("file.size", file.size);
       dispatch(setErrorMessage(errors.EMPTY_FILE.message));
+      dispatch(setErrorCode("ERR_EMPTY_FILE"));
       return false;
     } else if (file.type.startsWith("image/")) {
       // handle INVALID_IMAGE_DATA error

@@ -1,20 +1,14 @@
-/**
- * i want to add an compress_pdf property to my store, which can be one of the following values:
- * (
- * - "Recommended",
- * - "Less"
- * - "Extreme"
- * or it can be a custom number
- * )
- */
+// but this is my current store.
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ToolState {
   showTool: boolean;
+  isSubmitted: boolean;
   files: File[];
   errorMessage: string;
   showErrorMessage: boolean;
   compressPdf: string | number;
+  errorCode: string | null;
 }
 
 const initialState: ToolState = {
@@ -22,7 +16,9 @@ const initialState: ToolState = {
   files: [],
   errorMessage: "",
   showErrorMessage: false,
+  isSubmitted: false,
   compressPdf: "recommended",
+  errorCode: null
 };
 
 const toolSlice = createSlice({
@@ -46,10 +42,18 @@ const toolSlice = createSlice({
     resetErrorMessage(state: ToolState) {
       state.errorMessage = "";
       state.showErrorMessage = false; // reset the showErrorMessage property to false when the error message is reset
+      state.errorCode = null;
+      state.isSubmitted = false;
     },
     setCompressPdf(state: ToolState, action: PayloadAction<string | number>) {
       state.compressPdf = action.payload;
     },
+    setErrorCode(state: ToolState, action: PayloadAction<string | null>) {
+      state.errorCode = action.payload;
+    },
+    setIsSubmitted(state: ToolState, action: PayloadAction<boolean>) {
+      state.isSubmitted = action.payload;
+    }
   },
 });
 
@@ -60,6 +64,8 @@ export const {
   setErrorMessage,
   resetErrorMessage,
   setCompressPdf,
+  setErrorCode,
+  setIsSubmitted
 } = toolSlice.actions;
 
 export const setFilesFromList = (fileList: FileList) => {

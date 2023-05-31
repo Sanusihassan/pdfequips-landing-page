@@ -1,22 +1,49 @@
 .convert-dropdown {
-    * {
-        unicode-bidi: isolate;
-    }
+  * {
+    unicode-bidi: isolate;
+  }
 }
 
 .navbar {
+  .lang-dropdown {
+    $val: calc(100% - 60px);
 
-    .lang-dropdown {
-        $val: calc(100% - 60px);
-
-        [lang=ar] & {
-            margin-right: $val;
-        }
-
-        [lang=fr] {
-            $val: 33%;
-        }
-
-        margin-left: $val;
+    [lang="ar"] & {
+      margin-right: $val;
     }
+
+    [lang="fr"] {
+      $val: 33%;
+    }
+    @media (max-width: 600px) {
+      margin: 0;
+    }
+    margin-left: $val;
+  }
+  .dropdown-wrapper {
+    > {
+      overflow: hidden;
+    }
+  }
+  //   please convert this to scss syntax
+  @media (max-width: 600px) {
+    .dropdown-menu {
+      display: block;
+      max-height: 0;
+      padding: 0;
+      &,
+      > {
+        overflow: hidden;
+      }
+      height: 0;
+      transition: max-height 0.3s ease;
+    }
+
+    .dropdown-wrapper.show .dropdown-menu {
+      max-height: 200px; /* set a value that's greater than the expected max height */
+      padding: 0.5rem 0;
+      height: auto;
+      transition: max-height 0.3s ease;
+    }
+  }
 }

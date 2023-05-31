@@ -1,48 +1,58 @@
 import os
 import tempfile
 import subprocess
-from io import BytesIO
-from flask import send_file
+from flask import send_file, jsonify
+import zipfile
+
 
 """
-    this function is converting from pptx to pdf
-    i want another one to merge multiple pdf files
-    using soffice or any possible solution
-    please provide a working implementation of the function
+    i want another funciton similar to the blow one, called pdf_to_excel that uses similar approach to convert
+    from pdf to excel it's beign called like on my flask app this:
+    files = request.files.getlist("files")
+        return pdf_to_excel(files)
 """
+def ppt_to_pdf(ppt_files):
+    for ppt_file in ppt_files:
+        with tempfile.NamedTemporaryFile(suffix=".ppt", delete=False) as temp:
+            ppt_file.seek(0)  # Move the file pointer to the beginning
+            temp.write(ppt_file.read())
+            temp_path = temp.name
+
+        output_dir = tempfile.gettempdir()
+        pdf_file = os.path.join(output_dir, os.path.basename(temp_path).replace(".ppt", ".pdf"))
+
+        subprocess.run(["soffice", "--headless", "--convert-to", "pdf", temp_path, "--outdir", output_dir])
+        os.remove(temp_path)
+
+        if not os.path.exists(pdf_file):
+            return jsonify({"error": "Failed to convert PowerPoint file to PDF"}), 500
+
+        response = send_file(pdf_file, as_attachment=True, mimetype='application/pdf')
+        os.remove(pdf_file)
+        return response
 
 
-def ppt_to_pdf(ppt_file):
-    # Save uploaded PPTX to temporary file
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".pptx") as temp_ppt_file:
-        ppt_file.save(temp_ppt_file.name)
-        temp_ppt_file.close()
 
-    # Create temporary PDF file
-    temp_pdf_file = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
-    temp_pdf_file.close()
+def ppt_to_pdf_multiple(ppt_files):
+    # Create a temporary directory for the zip file
+    with tempfile.TemporaryDirectory() as tempdir:
+        zip_path = os.path.join(tempdir, "converted_files.zip")
+        with zipfile.ZipFile(zip_path, "w") as zipf:
+            for ppt_file in ppt_files:
+                with tempfile.NamedTemporaryFile(suffix=".ppt", delete=False) as temp:
+                    ppt_file.seek(0)  # Move the file pointer to the beginning
+                    temp.write(ppt_file.read())
+                    temp_path = temp.name
 
-    # Convert PPTX to PDF using LibreOffice
-    libreoffice_path = 'soffice.exe'
+                output_dir = tempfile.gettempdir()
+                pdf_file = os.path.join(output_dir, os.path.basename(temp_path).replace(".ppt", ".pdf"))
 
-    result = subprocess.run([libreoffice_path, '--headless', '--convert-to', 'pdf',
-                             temp_ppt_file.name, '--outdir', tempfile.gettempdir()],
-                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                subprocess.run(["soffice", "--headless", "--convert-to", "pdf", temp_path, "--outdir", output_dir])
+                os.remove(temp_path)
 
-    if result.returncode != 0:
-        print("stdout:", result.stdout.decode('utf-8'))
-        print("stderr:", result.stderr.decode('utf-8'))
-        raise subprocess.CalledProcessError(result.returncode, result.args)
+                # Write the PDF file to the zip file
+                zipf.write(pdf_file, os.path.relpath(pdf_file, output_dir))
+                os.remove(pdf_file)  # Remove the temporary PDF file
 
-    # Read PDF file and return
-    pdf_filename = os.path.join(tempfile.gettempdir(), os.path.splitext(
-        os.path.basename(temp_ppt_file.name))[0] + '.pdf')
-    with open(pdf_filename, "rb") as f:
-        final_pdf = BytesIO(f.read())
-
-    # Delete temporary files
-    os.unlink(temp_ppt_file.name)
-    os.unlink(temp_pdf_file.name)
-    os.unlink(pdf_filename)
-
-    return final_pdf
+        # Return the zip file
+        return send_file(zip_path, as_attachment=True, mimetype='application/zip', download_name="converted_files.zip")

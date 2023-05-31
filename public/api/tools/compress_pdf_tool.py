@@ -7,7 +7,7 @@ def compress_pdf(pdf_file):
     compressed_pdf = tempfile.NamedTemporaryFile(delete=False)
 
     # Command to run Ghostscript
-    command = f'gswin64 -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile={compressed_pdf.name} {pdf_file}'
+    command = f'gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile={compressed_pdf.name} {pdf_file}'
 
     # Run Ghostscript
     os.system(command)

@@ -39,18 +39,15 @@ logging.basicConfig(filename='app.log', level=logging.DEBUG)
 app = Flask(__name__)
 
 # cors
-CORS(app, methods=['GET', 'POST'], headers=[
-     'Content-Type', 'X-PINGOTHER'], allow_credentials=True)
+CORS(app, methods=['GET', 'POST'], CORS_ALLOW_HEADERS=[
+    'Content-Type', 'X-PINGOTHER'], supports_credentials=True)
+
 
 # setting templates directory for get routes
 # app.wsgi_app = ProxyFix(app.wsgi_app)
 # app.jinja_loader = FileSystemLoader('/out') 
 # setting uploads folder
 
-UPLOAD_FOLDER = '\\uploads'
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # converter routes
 jpg_to_pdf_route(app)

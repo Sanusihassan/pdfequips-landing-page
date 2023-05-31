@@ -10,10 +10,24 @@ the lang dropdown items are not working (done).
 
 fix language problem when clicking on the language link on the lang dropdown (done).
 
-word to pdf is not working.
-
 validation on the server side (almost done!).
 
-handle server side errors on front end (also validate while deleting files.);
+handle server side errors on front end (also validate while deleting files.) (done but fix the perfomance issue.);
 
 but first handle it in the backend(done).
+
+localize the loading component (done);
+also add a loading state to the submit button and onserver-response hide it (done).
+
+word to pdf is not working (pending...) (
+    it's working but the file is corrupted.
+) done.
+
+handle multiple file types for excel and so on (done).
+also handle when the user deletes all the files tell him that he should select at least one file.
+
+next -> handle multiple file upload.
+
+file not found error (fixed).
+
+make the options section a fixed side bar.

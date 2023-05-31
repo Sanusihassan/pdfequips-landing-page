@@ -21,6 +21,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
   extension,
   errors
 }) => {
+  
   return (
     <div
       className="drag-element-img"

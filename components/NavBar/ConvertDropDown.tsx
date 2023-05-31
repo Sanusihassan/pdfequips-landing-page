@@ -27,7 +27,7 @@ const ConvertPDFDropdown = ({
       <NavDropdown
         title={nav_content.convert_pdf}
         id="basic-nav-dropdown"
-        className="w-100 convert-dropdown"
+        className="w-100 convert-dropdown dropdown-wrapper"
       >
         <div className="d-flex flex-row w-100 flex-wrap drop-down-container">
           <div className="col-12 col-md-6">

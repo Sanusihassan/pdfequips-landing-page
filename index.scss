@@ -209,7 +209,25 @@ a.dropdown-item {
   }
 }
 
+.react-tooltip {
+  z-index: 100;
+}
+
+// error element styles
+.error-element {
+  .hide-on-rtl {
+    [dir=rtl] &, [lang="ar"] & {
+      display: none;
+    }
+  }
+  .hide-on-rtl {
+    [dir=ltr] &, :not([lang="ar"]) & {
+      display: none;
+    }
+  }
+}
 @import "./scss/toolspage";
 @import "./scss/editpage";
 @import "./scss/display-file";
 @import "./scss/navbar"
+

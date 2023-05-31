@@ -138,6 +138,7 @@ export const edit_page = {
     pdf_to_excel: "PDF转EXCEL选项",
     pdf_to_pdf_a: "PDF转PDF/A选项",
   },
+  loader_text: "请稍等...",
   action_buttons: {
     merge_pdf: "合并PDF",
     split_pdf: "拆分PDF",
@@ -191,43 +192,66 @@ export const footer = {
 };
 
 export const errors = {
+  EMPTY_FILE: {
+    message: "文件为空，请选择一个有效的文件。",
+    code: "ERR_EMPTY_FILE",
+  },
   FILE_TOO_LARGE: {
     message:
-      "文件太大。请选择较小的文件,或使用我们的compress-pdf工具减小文件大小。",
+      "文件太大。请选择一个更小的文件，或使用我们的压缩PDF工具来减小文件大小。",
     code: "ERR_FILE_SIZE_LIMIT_EXCEEDED",
   },
   NOT_SUPPORTED_TYPE: {
-    message: "该文件不是支持的类型。",
+    message: "文件不是受支持的类型。",
     types: {
-      PDF: "请选择有效的PDF文件。",
-      JPG: "请选择有效的JPEG图像文件。",
-      DOC: "请选择有效的Word文档文件。",
-      DOCX: "请选择有效的Word文档文件。",
-      XLS: "请选择有效的Excel电子表格文件。",
-      XLSX: "请选择有效的Excel电子表格文件。",
-      PPT: "请选择有效的PowerPoint演示文件。",
-      PPTX: "请选择有效的PowerPoint演示文件。",
+      PDF: "请选择一个有效的PDF文件。",
+      JPG: "请选择一个有效的JPEG图片文件。",
+      DOC: "请选择一个有效的Word文档文件。",
+      DOCX: "请选择一个有效的Word文档文件。",
+      XLS: "请选择一个有效的Excel电子表格文件。",
+      XLSX: "请选择一个有效的Excel电子表格文件。",
+      PPT: "请选择一个有效的PowerPoint演示文稿文件。",
+      PPTX: "请选择一个有效的PowerPoint演示文稿文件。",
     },
     code: "ERR_INVALID_FILE_TYPE",
   },
   FILE_CORRUPT: {
-    message: "该文件损坏,无法处理。请选择有效文件。",
+    message:
+      "文件已损坏，无法处理。请选择一个有效的文件。",
     code: "ERR_FILE_CORRUPT",
   },
   MISSING_FONTS: {
-    message: "文件中缺少字体。请确保所有字体都嵌入在PDF文件中。",
+    message:
+      "文件缺少字体。请确保所有字体都嵌入在PDF文件中。",
     code: "ERR_MISSING_FONTS",
   },
   INVALID_IMAGE_DATA: {
-    message: "文件包含无效的图像数据。请确保所有图像格式正确。",
+    message:
+      "文件包含无效的图像数据。请确保所有图像格式正确。",
     code: "ERR_INVALID_IMAGE_DATA",
   },
   SECURITY_RISK: {
-    message: "文件包含安全风险,无法处理。请选择有效文件。",
+    message:
+      "文件存在安全风险，无法处理。请选择一个有效的文件。",
     code: "ERR_SECURITY_RISK",
   },
+  MAX_FILES_EXCEEDED: {
+    message:
+      "您已超出允许的最大文件数。请删除一些文件并重试。",
+    code: "ERR_MAX_FILES_EXCEEDED",
+  },
+  NO_FILES_SELECTED: {
+    message:
+      "未选择任何文件。请选择至少一个文件。",
+    code: "ERR_NO_FILES_SELECTED",
+  },
   UNKNOWN_ERROR: {
-    message: "发生未知错误。请稍后再试或联系支持。",
+    message:
+      "发生未知错误。请稍后重试或联系支持人员。",
     code: "ERR_UNKNOWN",
+  },
+  ERR_NETWORK: {
+    message: "网络错误，请检查您的互联网连接并重试。",
+    code: "ERR_NETWORK",
   },
 };

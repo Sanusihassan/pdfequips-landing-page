@@ -1,7 +1,7 @@
 import { RefreshIcon, TrashIcon } from "@heroicons/react/solid";
 import { useRotatedImage, validateFiles } from "../../src/utils";
 import { Dispatch, SetStateAction, useCallback } from "react";
-import { ToolState } from "../../src/store";
+import { ToolState, resetErrorMessage, setFiles } from "../../src/store";
 import { useDispatch, useSelector } from "react-redux";
 import type {errors as _} from "../../content";
 
@@ -42,7 +42,7 @@ export const ActionDiv = ({
       setImageUrls(newImageUrls);
     }
   }, [index, imageUrls, setImageUrls, rotatedImageUrl]);
-
+  
   return (
     <div
       className={`action-div d-flex ${
@@ -51,10 +51,26 @@ export const ActionDiv = ({
     >
       <button
         className="btn btn-light"
+        // onClick={() => {
+        //   const newImageUrls = [...imageUrls];
+        //   newImageUrls.splice(index, 1);
+        //   const isValid = validateFiles(store.files, extension, errors, dispatch);
+        //   if(isValid) {
+        //     dispatch(resetErrorMessage());
+        //   }
+        //   setImageUrls(newImageUrls);
+        // }}
+
+        /** THIS WOULD BE ON VERSION 2.0 INSHALLAH! */
         onClick={() => {
           const newImageUrls = [...imageUrls];
           newImageUrls.splice(index, 1);
-          validateFiles(store.files, extension, errors, dispatch);
+          const newFiles = store.files.filter((file) => file.name !== item.file.name);
+          dispatch(setFiles(newFiles));
+          const isValid = validateFiles(store.files, extension, errors, dispatch);
+          if(isValid) {
+            dispatch(resetErrorMessage());
+          }
           setImageUrls(newImageUrls);
           console.log(store.files);
         }}
@@ -62,11 +78,11 @@ export const ActionDiv = ({
         <TrashIcon className="icon hero-icon" />
       </button>
 
-      {extension != ".html" ? (
+      {/* {extension != ".html" ? (
         <button className="btn btn-light" onClick={handleRotateImage}>
           <RefreshIcon className="hero-icon" />
         </button>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

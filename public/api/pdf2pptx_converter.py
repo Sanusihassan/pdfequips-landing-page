@@ -1,59 +1,75 @@
 import os
 import tempfile
-from pdf2image import convert_from_path
-from pptx import Presentation
-from pptx.util import Inches
+from flask import send_file
+from werkzeug.datastructures import FileStorage
+from pdf2docx import Converter
+import zipfile
+from io import BytesIO
+import shutil
 
-def pdf_to_pptx(pdf_file):
-    # Save the PDF file to a temporary file
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_pdf_file:
-        temp_pdf_file.write(pdf_file.read())
+"""
+    i want another function like this called pdf_to_pptx_multiple which takes a list of files
+    which are: request.files.getlist('files')
+    then convert them all using the same approach, after converting them all, i want the function
+    to return a zip folder for download which contains the converted files.
+"""
+def pdf_to_pptx(file_storage: FileStorage):
+    # Create a temporary file and save the uploaded file
+    with tempfile.NamedTemporaryFile(delete=False) as temp_pdf:
+        file_storage.save(temp_pdf.name)
+        temp_pdf_path = temp_pdf.name
 
-    
-    # Get the path of the saved PDF file
-    pdf_file_path = os.path.abspath(temp_pdf_file.name)
+    # Create a temporary file for the output pptx
+    with tempfile.NamedTemporaryFile(suffix=".pptx", delete=False) as temp_pptx:
+        temp_pptx_path = temp_pptx.name
 
-    # Convert the PDF file to images using pdf2image
-    images = convert_from_path(pdf_file_path)
-
-    # Create a new PowerPoint presentation
-    prs = Presentation()
-
-    # Add each image as a new slide in the presentation
-    for image in images:
-        # Save the image to a temporary file
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.png') as temp_image_file:
-            image.save(temp_image_file.name, format='PNG')
-
-        # Get the path of the saved image file
-        image_file_path = os.path.abspath(temp_image_file.name)
-
-        slide = prs.slides.add_slide(prs.slide_layouts[6])
-
-        # Add the image to the slide
-        pic = slide.shapes.add_picture(image_file_path, 0, 0, prs.slide_width, prs.slide_height)
-        pic.crop_left = Inches(0)
-        pic.crop_right = Inches(0)
-        pic.crop_top = Inches(0)
-        pic.crop_bottom = Inches(0)
-        pic.width = prs.slide_width
-        pic.height = prs.slide_height
-
-        # Delete the temporary image file
-        os.unlink(image_file_path)
-
-    # Save the PowerPoint presentation to a new file
-    pptx_file_path = os.path.splitext(pdf_file_path)[0] + '.pptx'
-    prs.save(pptx_file_path)
+    # Convert the PDF to PPTX using the pdf2pptx library
+    converter = Converter(temp_pdf_path)
+    converter.convert(temp_pptx_path)
+    converter.close()
 
     # Delete the temporary PDF file
-    os.unlink(pdf_file_path)
+    os.remove(temp_pdf_path)
 
-    # Read the PPTX file content and return it
-    with open(pptx_file_path, 'rb') as pptx_file:
-        pptx_content = pptx_file.read()
+    # Return the converted PPTX file using Flask's send_file
+    return send_file(temp_pptx_path, as_attachment=True, download_name='converted.pptx', mimetype='application/vnd.openxmlformats-officedocument.presentationml.presentation')
 
-    # Delete the temporary PPTX file
-    os.unlink(pptx_file_path)
 
-    return pptx_content
+
+
+def pdf_to_pptx_multiple(files):
+    # Create a temporary folder to store the converted PPTX files
+    with tempfile.TemporaryDirectory() as temp_dir:
+        # Iterate through the list of files and convert them to PPTX
+        for file_storage in files:
+            # Create a temporary file and save the uploaded file
+            with tempfile.NamedTemporaryFile(delete=False) as temp_pdf:
+                file_storage.save(temp_pdf.name)
+                temp_pdf_path = temp_pdf.name
+
+            # Create a temporary file for the output PPTX
+            with tempfile.NamedTemporaryFile(suffix=".pptx", delete=False) as temp_pptx:
+                temp_pptx_path = temp_pptx.name
+
+            # Convert the PDF to PPTX using the pdf2docx library
+            converter = Converter(temp_pdf_path)
+            converter.convert(temp_pptx_path, pptx=True)
+            converter.close()
+
+            # Delete the temporary PDF file
+            os.remove(temp_pdf_path)
+
+            # Move the converted PPTX file to the temporary folder
+            shutil.move(temp_pptx_path, os.path.join(temp_dir, f'{file_storage.filename}.pptx'))
+
+        # Create a zip file containing the converted PPTX files
+        zip_buffer = BytesIO()
+        with zipfile.ZipFile(zip_buffer, 'w') as zipf:
+            for file_name in os.listdir(temp_dir):
+                zipf.write(os.path.join(temp_dir, file_name), file_name)
+
+        # Set the buffer's file pointer to the beginning of the file
+        zip_buffer.seek(0)
+
+        # Return the zip file for download
+        return send_file(zip_buffer, as_attachment=True, download_name='converted_files.zip', mimetype='application/zip')

@@ -23,7 +23,7 @@
 .edit-page {
     display: flex;
     min-height: calc(100% - 77px);
-
+    overflow: hidden;
 
     %border {
         border: 1px solid #dee2e6;
@@ -31,6 +31,9 @@
 
     .edit-area {
         flex: 0 0 75%;
+        @media (max-width: 600px) {
+            flex: 0 0 100%;
+        }
         padding: 1rem;
         @extend %border;
         border-radius: 0.25rem;
@@ -40,14 +43,42 @@
             position: absolute;
             width: 100%;
             height: 100%;
-
             top: 0;
             left: 0;
         }
+        .gear-button {
+            position: absolute;
+            top: 2%;
+            z-index: 15;
+            display: none;
+            @media (max-width: 600px) {
+                display: inline-block;
+            }
+            .gear-icon {
+                width: 1.6em;
+                height: 1.6em;
+            }
+        }
     }
-
     .options {
         flex: 0 0 25%;
+        transition: .3s;
+        @media (max-width: 600px) {
+            position: absolute;
+            [dir=rtl] &, [lang="ar"] & {
+                right: calc(-100% - 3.25rem);
+                &.expanded {
+                    right: 0;
+                }
+            }
+            // left to right languages like (en)
+            [dir=ltr] &, :not([lang="ar"]) & {
+                left: calc(-100% - 3.25rem);
+                &.expanded {
+                    left: 0;
+                }
+            }
+        }
         @extend %border;
         border-bottom: 0;
         display: flex;

@@ -23,33 +23,36 @@ function LanguageDropdown() {
 
   let route = path.length > 0 ? `/${path}` : "";
   return (
-    <Dropdown className="lang-dropdown">
-      <Dropdown.Toggle variant="default" id="language-dropdown">
-        <LanguageIcon />
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-        <Link href={`/${path}`}>
-          <a className="dropdown-item">English</a>
-        </Link>
-        <Link href={`/ar${route}`}>
-          <a className="dropdown-item">العربية</a>
-        </Link>
+    
+    <li className="dropdown-item">
+      <Dropdown className="lang-dropdown dropdown-wrapper">
+        <Dropdown.Toggle variant="default" id="language-dropdown">
+          <LanguageIcon />
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Link href={`/${path}`}>
+            <a className="dropdown-item">English</a>
+          </Link>
+          <Link href={`/ar${route}`}>
+            <a className="dropdown-item">العربية</a>
+          </Link>
 
-        <Link href={`/fr${route}`}>
-          <a className="dropdown-item">française</a>
-        </Link>
+          <Link href={`/fr${route}`}>
+            <a className="dropdown-item">française</a>
+          </Link>
 
-        <Link href={`/zh${route}`}>
-          <a className="dropdown-item">普通话</a>
-        </Link>
-        <Link href={`/hi${route}`}>
-          <a className="dropdown-item">हिन्दी</a>
-        </Link>
-        <Link href={`/es${route}`}>
-          <a className="dropdown-item">español</a>
-        </Link>
-      </Dropdown.Menu>
-    </Dropdown>
+          <Link href={`/zh${route}`}>
+            <a className="dropdown-item">普通话</a>
+          </Link>
+          <Link href={`/hi${route}`}>
+            <a className="dropdown-item">हिन्दी</a>
+          </Link>
+          <Link href={`/es${route}`}>
+            <a className="dropdown-item">español</a>
+          </Link>
+        </Dropdown.Menu>
+      </Dropdown>
+    </li>
   );
 }
 

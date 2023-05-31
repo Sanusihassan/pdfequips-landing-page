@@ -143,6 +143,7 @@ export const edit_page = {
     pdf_to_excel: "Options de conversion de PDF en EXCEL",
     pdf_to_pdf_a: "Options de conversion de PDF en PDF/A",
   },
+  loader_text: "Veuillez patienter...",
   action_buttons: {
     merge_pdf: "Fusionner PDF",
     split_pdf: "Diviser PDF",
@@ -188,7 +189,12 @@ export const footer = {
   conditions: "conditions d'utilisation",
   privacy_policy: "politique de confidentialité",
 };
+
 export const errors = {
+  EMPTY_FILE: {
+    message: "Le fichier est vide. Veuillez choisir un fichier valide.",
+    code: "ERR_EMPTY_FILE",
+  },
   FILE_TOO_LARGE: {
     message:
       "Le fichier est trop volumineux. Veuillez choisir un fichier plus petit ou utiliser notre outil de compression PDF pour réduire la taille du fichier.",
@@ -220,7 +226,7 @@ export const errors = {
   },
   INVALID_IMAGE_DATA: {
     message:
-      "Le fichier contient des données d'image invalides. Veuillez vous assurer que toutes les images sont correctement formatées.",
+      "Le fichier contient des données d'image non valides. Veuillez vous assurer que toutes les images sont correctement formatées.",
     code: "ERR_INVALID_IMAGE_DATA",
   },
   SECURITY_RISK: {
@@ -228,9 +234,23 @@ export const errors = {
       "Le fichier contient un risque de sécurité et ne peut pas être traité. Veuillez choisir un fichier valide.",
     code: "ERR_SECURITY_RISK",
   },
+  MAX_FILES_EXCEEDED: {
+    message:
+      "Vous avez dépassé le nombre maximal de fichiers autorisés. Veuillez supprimer certains fichiers et réessayer.",
+    code: "ERR_MAX_FILES_EXCEEDED",
+  },
+  NO_FILES_SELECTED: {
+    message:
+      "Aucun fichier sélectionné. Veuillez sélectionner au moins un fichier.",
+    code: "ERR_NO_FILES_SELECTED",
+  },
   UNKNOWN_ERROR: {
     message:
-      "Une erreur inconnue s'est produite. Veuillez réessayer ultérieurement ou contacter le support.",
+      "Une erreur inconnue s'est produite. Veuillez réessayer plus tard ou contacter le support.",
     code: "ERR_UNKNOWN",
   },
+  ERR_NETWORK: {
+    message: "Une erreur de réseau s'est produite. Veuillez vérifier votre connexion Internet et réessayer.",
+    code: "ERR_NETWORK",
+  }
 };

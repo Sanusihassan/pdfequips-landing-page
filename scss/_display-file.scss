@@ -1,7 +1,10 @@
 /// i want to modify this so that one row should have only 4 elements max
 .display-file {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(27%, 1fr));
+    @media (max-width: 600px) {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
     gap: 10px;
     justify-content: center;
     min-height: 300px;
