@@ -2,15 +2,13 @@ import { Navbar, Nav } from "react-bootstrap";
 
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { ToolState, resetErrorMessage, showTool } from "../src/store";
-
-import LanguageIcon from "./icons/LanguageIcon";
-import { Dropdown } from "react-bootstrap";
+import { ToolState, resetErrorMessage, showTool, setEndpoint } from "../src/store";
 
 import type { nav_content } from "../content";
 import { useRouter } from "next/router";
 import ConvertPDFDropdown from "./NavBar/ConvertDropDown";
 import LanguageDropdown from "./NavBar/LanguageDropDown";
+import { useEffect } from "react";
 /**
  * this code works fine for the all pages but the home page where there are no sub routes but the /lang route
  * and it's setting the path variable to undefined
@@ -25,11 +23,22 @@ const NavBar = ({
 }) => {
   const state = useSelector((state: { tool: ToolState }) => state.tool);
   const dispatch = useDispatch();
-
+  const router = useRouter();
+  let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
+  // defining files;
+  let files: File[] = [];
+  // the problem 
+  useEffect(() => {
+    let fileInputElement = document.querySelector(".tools-page form input.position-absolute.file-input");
+    if(fileInputElement) {
+      files = (Array.from((fileInputElement as HTMLInputElement).files as unknown as FileList));
+    }
+  }, []);
   function handleClick(
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ): void {
-    if (state.files.length > 0) {
+    dispatch(setEndpoint(path));
+    if (files.length > 0) {
       dispatch(showTool());
     }
     dispatch(resetErrorMessage());

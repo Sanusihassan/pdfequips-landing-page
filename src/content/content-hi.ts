@@ -180,7 +180,7 @@ export const edit_page = {
 
 export const tools = {
   select: "चुनें",
-  or_drop: "या यहाँ पीडीएफ फ़ाइलें छोड़ें",
+  or_drop: "या फ़ाइलें यहां छोड़ें",
   files: "फाइलें",
   drop_files: "फ़ाइलें यहाँ खींचें",
 };

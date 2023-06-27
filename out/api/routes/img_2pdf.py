@@ -15,10 +15,10 @@ def jpg_to_pdf_route(app):
             return jsonify({"error": "No PDF file provided"}), 400
         files = request.files.getlist("files")
         error = validate_file(files)
-        if error:
-            response = jsonify(error)
-            response.headers['Content-Type'] = 'application/json'
-            return jsonify({"error": response}), 400
+        # if error:
+        #     response = jsonify(error)
+        #     response.headers['Content-Type'] = 'application/json'
+        #     return jsonify({"error": response}), 400
         images = files
         return image_to_pdf(images)
 

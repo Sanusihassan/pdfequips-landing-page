@@ -14,7 +14,6 @@ import type { errors as _ } from "../../content";
 export const handleUpload = async (
   e: React.FormEvent<HTMLFormElement>,
   fileInput: RefObject<HTMLInputElement>,
-  endpoint: string,
   data: ToolData,
   downloadBtn: RefObject<HTMLAnchorElement>,
   dispatch: Dispatch<AnyAction>,
@@ -32,58 +31,68 @@ export const handleUpload = async (
   }
   let url;
   if (process.env.NODE_ENV === "development") {
-    url = `http://127.0.0.1:5000/${endpoint}`;
-  } else {
-    url = `/${endpoint}`;
+    url = `http://127.0.0.1:5000/${state.endpoint}`;
+  } 
+  else {
+    url = `/${state.endpoint}`;
   }
+  console.log("endpoint is => ", state.endpoint);
   if (state.errorMessage) {
     return;
   }
   formData.append("compress_amount", String(state.compressPdf));
+  const originalFileName = files[0]?.name?.split(".").slice(0, -1).join(".");
+  
+  const mimeTypeLookupTable: {[key: string]: {outputFileMimeType: string, outputFileName: string}} = {
+    "application/zip": {
+      outputFileMimeType: "application/zip",
+      outputFileName: "PDFEquips.zip",
+    },
+    "application/pdf": {
+      outputFileMimeType: "application/pdf",
+      outputFileName: `${originalFileName}.pdf`,
+    },
+    "application/msword": {
+      outputFileMimeType: "application/msword",
+      outputFileName: `${originalFileName}.docx`,
+    },
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
+      outputFileMimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      outputFileName: `${originalFileName}.docx`,
+    },
+    "application/vnd.ms-excel": {
+      outputFileMimeType: "application/vnd.ms-excel",
+      outputFileName: `${originalFileName}.xlsx`,
+    },
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+      outputFileMimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      outputFileName: `${originalFileName}.xlsx`,
+    },
+    "application/vnd.ms-powerpoint": {
+      outputFileMimeType: "application/vnd.ms-powerpoint",
+      outputFileName: `${originalFileName}.pptx`,
+    },
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation": {
+      outputFileMimeType: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      outputFileName: `${originalFileName}.pptx`,
+    },
+  };
+  
   try {
-    const response = await axios.post(url, formData, {
-      responseType: "blob",
-    });
-
-    const originalFileName = files[0]?.name?.split(".").slice(0, -1).join(".");
-    let outputFileName: string = "";
-    let outputFileMimeType: string = response.data.type || "";
-    if (response.data.type == "application/zip") {
-      outputFileMimeType = "application/zip";
-      outputFileName = "PDFEquips.zip";
-    } else if (response.data.type == "application/pdf") {
-      outputFileMimeType = "application/pdf";
-      outputFileName = `${originalFileName}.pdf`;
-    } else if (
-      response.data.type == "application/msword" ||
-      response.data.type ==
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    ) {
-      outputFileMimeType = response.data.type;
-      outputFileName = `${originalFileName}.docx`;
-    } else if (
-      response.data.type == "application/vnd.ms-excel" ||
-      response.data.type ==
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    ) {
-      outputFileMimeType = response.data.type;
-      outputFileName = `${originalFileName}.xlsx`;
-    } else if (
-      response.data.type == "application/vnd.ms-powerpoint" ||
-      response.data.type ==
-        "application/vnd.openxmlformats-officedocument.presentationml.presentation"
-    ) {
-      outputFileMimeType = response.data.type;
-      outputFileName = `${originalFileName}.pptx`;
-    }
-    
+    const response = await axios.post(url, formData);
+    // const originalFileName = files[0]?.name?.split(".").slice(0, -1).join(".");
+    const mimeType = response.data.type || response.headers["content-type"];
+    const mimeTypeData = mimeTypeLookupTable[mimeType] || {outputFileMimeType: mimeType, outputFileName: ""};
+    const {outputFileMimeType, outputFileName} = mimeTypeData;
+    console.log("response type => ", mimeType);
+    console.log("response => ", response);
     downloadConvertedFile(
       response,
       outputFileMimeType,
       outputFileName,
       downloadBtn
     );
-
+  
     if (response.status !== 200) {
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {

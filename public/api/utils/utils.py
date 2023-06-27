@@ -1,6 +1,9 @@
 from werkzeug.datastructures import FileStorage
 import mimetypes
-
+"""
+    i want another function similar to this called is_jpg which checks if the file is jpg or not
+    using the same approach
+"""
 def is_pdf(file):
     mime_type, _ = mimetypes.guess_type(file.filename)
     file.seek(0)  # Reset file pointer to the beginning
@@ -8,11 +11,9 @@ def is_pdf(file):
 
 
 def is_jpg(file):
-    header = file.read(3)
-    file.seek(0)
-    return header == b'\xFF\xD8\xFF'
-
-
+    mime_type, _ = mimetypes.guess_type(file.filename)
+    file.seek(0)  # Reset file pointer to the beginning
+    return mime_type == 'image/jpeg'
 
 
 def is_valid_word(file) -> bool:

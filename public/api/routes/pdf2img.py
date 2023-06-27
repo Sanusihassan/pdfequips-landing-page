@@ -20,4 +20,4 @@ def pdf_to_jpg_route(app):
             if len(files) == 1:
                 return pdf_to_jpg_converter(files)
             else:
-                return pdf_to_jpg_converter_multiple(files, filenames=[file.filename for file in files])
+                return pdf_to_jpg_converter_multiple(files)

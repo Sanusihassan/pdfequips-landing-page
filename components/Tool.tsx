@@ -10,12 +10,12 @@ import {
   hideTool,
   resetErrorMessage,
   setErrorMessage,
-  setFiles,
-  setErrorCode
+  setErrorCode,
+  setEndpoint,
+  setRerender
 } from "../src/store";
 import { useRouter } from "next/router";
 import type { edit_page, tools } from "../content";
-import { useEndPoint } from "../src/handlers/useEndpoint";
 import { handleUpload } from "../src/handlers/handleUpload";
 import { handleChange } from "../src/handlers/handleChange";
 import type { errors as _ } from "../content";
@@ -74,12 +74,9 @@ const Tool: React.FC<ToolProps> = ({
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
 
   // endpoint
-  const [endpoint, setEndpoint] = useState("");
-  useEndPoint(endpoint, setEndpoint, path, state, errors);
-
+  // const [endpoint, setEndpoint] = useState("");
   // drag and drop input handling
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    dispatch(setFiles(Array.from(acceptedFiles)));
     handleHideTool();
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -90,33 +87,48 @@ const Tool: React.FC<ToolProps> = ({
   const acceptedFileTypes = {
     ".pdf": ".pdf, .PDF",
     ".pptx": ".pptx, .ppt",
-    ".docx": ".docx, .DOCX",
+    ".docx": ".docx, .doc",
     ".xlsx": ".xlsx, .xls",
     ".jpg": ".jpg, .jpeg",
     ".html": ".html, .htm",
   };
   let t: NodeJS.Timeout;
+  // actual files;
+  const [files, setFiles] = useState<File[]>([]);
+  const fileInputElement = fileInput.current;
   useEffect(() => {
+    // the problem with this code is that the files array is never set
+    if(fileInputElement) {
+      setFiles(Array.from(fileInputElement.files as unknown as FileList));
+    }
+    const preventDefault = (event: DragEvent) => {
+      event.preventDefault();
+    };
+    dispatch(setEndpoint(path));
+    document.addEventListener("dragover", preventDefault);
+    document.addEventListener("click", (e) => e.preventDefault());
     window.onfocus = function () {
       if (userClickedOnFileUploader) {
-        if (state.files.length === 0 || (_files && _files?.length === 0)) {
-          t = setTimeout(() => {
+        setTimeout(() => {
+          if (files.length === 0) {
             dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
             dispatch(setErrorCode("ERR_EMPTY_FILE"));
-          }, 2000);
-        } else {
-          dispatch(resetErrorMessage());
-        }
+          } else {
+            dispatch(resetErrorMessage());
+          }
+        }, 2000);
       }
     };
 
-    if(state.errorCode == "ERR_EMPTY_FILE" && state.files.length > 0) {
+    if(state.errorCode == "ERR_EMPTY_FILE" && files.length > 0) {
       dispatch(resetErrorMessage());
     }
     return () => {
       clearTimeout(t);
+      document.removeEventListener("dragover", preventDefault);
     }
-  }, [userClickedOnFileUploader, state.files]);
+  }, [userClickedOnFileUploader, state.rerender]);
+  
   return (
     <>
       <div
@@ -148,7 +160,6 @@ const Tool: React.FC<ToolProps> = ({
               handleUpload(
                 e,
                 fileInput,
-                endpoint,
                 data,
                 downloadBtn,
                 dispatch,
@@ -197,8 +208,9 @@ const Tool: React.FC<ToolProps> = ({
                 }}
                 onChange={(e) => {
                   handleChange(e, dispatch, data.type, errors);
+                  dispatch(setRerender());
                   _files = e.target?.files;
-                  if (_files && _files.length > 0 || state.files.length > 0) {
+                  if (_files && _files.length > 0 || files.length > 0) {
                     dispatch(resetErrorMessage());
                   }
                 }}
@@ -230,6 +242,7 @@ const Tool: React.FC<ToolProps> = ({
           page={page}
           lang={lang}
           errors={errors}
+          fileInput={fileInput}
         />
         {/* )} */}
       </div>

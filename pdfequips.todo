@@ -30,4 +30,6 @@ next -> handle multiple file upload.
 
 file not found error (fixed).
 
-make the options section a fixed side bar.
+make the options section a fixed side bar onmobile (done).
+
+add pdf language tools section with (translate pdf) for now.

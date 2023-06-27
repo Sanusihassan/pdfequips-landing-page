@@ -125,7 +125,7 @@ export const tool = {
 
 export const tools = {
   select: "اختر",
-  or_drop: "أو قم بإسقاط ملفات PDF هنا",
+  or_drop: "أو قم بإسقاط الملفات هنا",
   files: "ملفات",
   drop_files: "قم بوضع الملفات هنا",
 };

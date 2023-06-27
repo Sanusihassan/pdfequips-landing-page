@@ -123,7 +123,7 @@ export const tool = {
 };
 export const tools = {
   select: "Sélectionner",
-  or_drop: "ou glisser-déposer des PDF ici",
+  or_drop: "ou déposer des fichiers ici",
   files: "fichiers",
   drop_files: "Déposez les fichiers ici",
 };

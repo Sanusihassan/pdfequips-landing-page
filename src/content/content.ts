@@ -196,7 +196,7 @@ export const edit_page = {
 
 export const tools = {
   select: "Select",
-  or_drop: "or drop PDFs here",
+  or_drop: "or drop files here",
   files: "files",
   drop_files: "Drag files here",
 };

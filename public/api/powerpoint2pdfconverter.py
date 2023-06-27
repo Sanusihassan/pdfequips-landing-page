@@ -32,7 +32,6 @@ def ppt_to_pdf(ppt_files):
         return response
 
 
-
 def ppt_to_pdf_multiple(ppt_files):
     # Create a temporary directory for the zip file
     with tempfile.TemporaryDirectory() as tempdir:
@@ -50,8 +49,13 @@ def ppt_to_pdf_multiple(ppt_files):
                 subprocess.run(["soffice", "--headless", "--convert-to", "pdf", temp_path, "--outdir", output_dir])
                 os.remove(temp_path)
 
-                # Write the PDF file to the zip file
-                zipf.write(pdf_file, os.path.relpath(pdf_file, output_dir))
+                # Get the original file name without the extension
+                original_file_name = os.path.splitext(os.path.basename(ppt_file.filename))[0]
+
+                # Write the PDF file to the zip file with the original file name
+                pdf_filename = original_file_name + ".pdf"
+                zipf.write(pdf_file, pdf_filename)
+
                 os.remove(pdf_file)  # Remove the temporary PDF file
 
         # Return the zip file

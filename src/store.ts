@@ -1,24 +1,25 @@
-// but this is my current store.
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ToolState {
   showTool: boolean;
   isSubmitted: boolean;
-  files: File[];
+  rerender: boolean;
   errorMessage: string;
   showErrorMessage: boolean;
   compressPdf: string | number;
   errorCode: string | null;
+  endpoint: string;
 }
 
 const initialState: ToolState = {
   showTool: true,
-  files: [],
   errorMessage: "",
   showErrorMessage: false,
   isSubmitted: false,
   compressPdf: "recommended",
-  errorCode: null
+  errorCode: null,
+  endpoint: "",
+  rerender: false
 };
 
 const toolSlice = createSlice({
@@ -28,12 +29,14 @@ const toolSlice = createSlice({
     showTool(state: ToolState) {
       state.showTool = true;
     },
+    setRerender(state: ToolState) {
+      state.rerender = !state.rerender;
+    },
     hideTool(state: ToolState) {
       state.showTool = false;
     },
-    setFiles(state: ToolState, action: PayloadAction<File[]>) {
-      const newFiles = action.payload;
-      state.files = [...newFiles];
+    setEndpoint(state: ToolState, action: PayloadAction<string>) {
+      state.endpoint = action.payload;
     },
     setErrorMessage(state: ToolState, action: PayloadAction<string>) {
       state.errorMessage = action.payload;
@@ -60,17 +63,13 @@ const toolSlice = createSlice({
 export const {
   showTool,
   hideTool,
-  setFiles,
   setErrorMessage,
   resetErrorMessage,
   setCompressPdf,
   setErrorCode,
-  setIsSubmitted
+  setIsSubmitted,
+  setEndpoint,
+  setRerender
 } = toolSlice.actions;
-
-export const setFilesFromList = (fileList: FileList) => {
-  const files: File[] = Array.from(fileList);
-  return setFiles(files);
-};
 
 export default toolSlice.reducer;

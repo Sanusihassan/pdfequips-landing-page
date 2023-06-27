@@ -7,12 +7,7 @@ import zipfile
 from io import BytesIO
 import shutil
 
-"""
-    i want another function like this called pdf_to_pptx_multiple which takes a list of files
-    which are: request.files.getlist('files')
-    then convert them all using the same approach, after converting them all, i want the function
-    to return a zip folder for download which contains the converted files.
-"""
+
 def pdf_to_pptx(file_storage: FileStorage):
     # Create a temporary file and save the uploaded file
     with tempfile.NamedTemporaryFile(delete=False) as temp_pdf:

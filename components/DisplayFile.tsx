@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, RefObject } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ToolState, setFiles, resetErrorMessage } from "../src/store";
+import { ToolState, resetErrorMessage } from "../src/store";
 import { setErrorMessage } from "../src/store";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "react-tooltip/dist/react-tooltip.css";
 
 import {
@@ -14,8 +13,6 @@ import {
 
 import { useRouter } from "next/router";
 
-import ImageCard from "./DisplayFile/ImageCard";
-import FileCard from "./DisplayFile/FileCard";
 import { Spinner } from "react-bootstrap";
 import { validateFiles } from "../src/utils";
 
@@ -27,7 +24,8 @@ type propTypes = {
   page: string;
   lang: string;
   errors: _;
-  edit_page: edit_page
+  edit_page: edit_page;
+  fileInput: RefObject<HTMLInputElement>
 };
 
 const Loader = ({ loader_text }: { loader_text: string; }) => (
@@ -37,32 +35,39 @@ const Loader = ({ loader_text }: { loader_text: string; }) => (
   </div>
 );
 
-const DisplayFile = ({ extension, pages, page, lang, errors, edit_page }: propTypes) => {
+const DisplayFile = ({ extension, pages, page, lang, errors, edit_page, fileInput }: propTypes) => {
   const dispatch = useDispatch();
-
   const [imageUrls, setImageUrls] = useState<
     { file: File; imageUrl: string }[]
   >([]);
   const [showSpinner, setShowSpinner] = useState(true);
   const [toolTipSizes, setToolTipSizes] = useState<string[]>([]);
-
+  // actual files
+  let files: File[] = [];
   const store = useSelector((state: { tool: ToolState }) => state.tool);
   // router
   const router = useRouter();
-  /**
-   * this
-   */
+  let fileInputElement = fileInput.current;
+  if(fileInputElement) {
+    files = (Array.from(fileInputElement.files as unknown as FileList));
+  }
   useEffect(() => {
-    const isValid = validateFiles(store.files, extension, errors, dispatch);
-    if (isValid) {
+    if(files.length == 0) {
+      if(fileInputElement) {
+        files = (Array.from(fileInputElement.files as unknown as FileList));
+      }
+    }
+    const isValid = validateFiles(files, extension, errors, dispatch);
+    
+    if (isValid || (files.length > 0)) {
       dispatch(resetErrorMessage());
     }
     const max_files = 2;
-    if (store.files.length > max_files) {
+    if (files.length > max_files) {
       dispatch(setErrorMessage(errors.MAX_FILES_EXCEEDED.message));
     }
     let isSubscribed = true;
-    const tooltipSizes = store.files.map((file) =>
+    const tooltipSizes = files.map((file: File) =>
       getFileDetailsTooltipContent(file, pages, page, lang, dispatch, errors)
     );
     Promise.all(tooltipSizes).then((sizes) => {
@@ -75,7 +80,7 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page }: propTy
 
         if (extension && extension === ".pdf") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
-          const pdfPromises = store.files.map(async (file: File) => {
+          const pdfPromises = files.map(async (file: File) => {
             const imageUrl = await getFirstPageAsImage(
               file,
               dispatch,
@@ -90,7 +95,7 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page }: propTy
           }
         } else if (extension && extension !== ".jpg") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
-          store.files.forEach((file: File) => {
+          files.forEach((file: File) => {
 
             let imageUrl = (!file.size) ? "/images/corrupted.png" : getPlaceHoderImageUrl(extension);
             newImageUrls.push({ file, imageUrl });
@@ -101,7 +106,7 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page }: propTy
           }
         } else if (extension && extension === ".jpg") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
-          store.files.forEach((file: File) => {
+          files.forEach((file: File) => {
             const reader = new FileReader();
             reader.onload = function (event: ProgressEvent<FileReader>) {
               const imageUrl = (event.target as FileReader).result as string;
@@ -126,7 +131,7 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page }: propTy
     return () => {
       isSubscribed = false;
     };
-  }, [extension, store.files]);
+  }, [extension, store.rerender]);
   const handleDragEnd = (result: any) => {
     if (!result.destination) {
       return;
@@ -134,7 +139,7 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page }: propTy
     // Argument of type 'Blob[]' is not assignable to parameter of type 'File[]'.
     // Type 'Blob' is missing the following properties from type 'File': lastModified, webkitRelativePathts(2345)
     if (isDraggableExtension(extension, router)) {
-      dispatch(setFiles(store.files));
+      
     }
   };
 

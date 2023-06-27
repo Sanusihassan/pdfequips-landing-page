@@ -183,7 +183,7 @@ export const edit_page = {
 
 export const tools = {
   select: "Seleccionar",
-  or_drop: "o arrastra los PDF aquí",
+  or_drop: "o soltar archivos aquí",
   files: "archivos",
   drop_files: "Arrastra los archivos aquí",
 };

@@ -1,6 +1,6 @@
 # Making sure we have the necessary imports:
 
-# from flask_cors import CORS
+from flask_cors import CORS
 from flask import Flask, request, send_file
 from flask import Flask, request, send_from_directory, jsonify
 import os
@@ -39,8 +39,8 @@ logging.basicConfig(filename='app.log', level=logging.DEBUG)
 app = Flask(__name__)
 
 # cors
-# CORS(app, methods=['GET', 'POST'], CORS_ALLOW_HEADERS=[
-#     'Content-Type', 'X-PINGOTHER'], supports_credentials=True)
+CORS(app, methods=['GET', 'POST'], CORS_ALLOW_HEADERS=[
+    'Content-Type', 'X-PINGOTHER'], supports_credentials=True)
 
 
 # setting templates directory for get routes

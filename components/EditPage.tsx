@@ -11,8 +11,6 @@ import type { errors as _ } from "../content";
 import { Spinner } from "react-bootstrap";
 import { CogIcon } from '@heroicons/react/outline';
 
-
-
 type editPageProps = {
   extension: string;
   submitBtn: RefObject<HTMLButtonElement>;
@@ -21,6 +19,7 @@ type editPageProps = {
   page: string;
   lang: string;
   errors: _;
+  fileInput: RefObject<HTMLInputElement>
 };
 const EditPage = ({
   extension,
@@ -30,17 +29,24 @@ const EditPage = ({
   page,
   lang,
   errors,
+  fileInput
 }: editPageProps) => {
   const [isOnline, setIsOnline] = useState(true)
   const handleOnlineStatus = () => setIsOnline(true)
   const handleOfflineStatus = () => setIsOnline(false)
   const [showOptions, setShowOptions] = useState(false);
   const state = useSelector((state: { tool: ToolState }) => state.tool);
+  // actual files;
+  const [files, setFiles] = useState<File[]>([]);
   useEffect(() => {
+    const fileInputElement = fileInput.current;
+    if(fileInputElement) {
+      setFiles(Array.from(fileInputElement.files as unknown as FileList));
+    }
     if(isOnline) {
       dispatch(resetErrorMessage());
     }
-    if(state.errorCode == "ERR_EMPTY_FILE" && state.files.length > 0) {
+    if(files.length > 0) {
       dispatch(resetErrorMessage());
     }
     window.addEventListener('online', handleOnlineStatus)
@@ -50,7 +56,7 @@ const EditPage = ({
       window.removeEventListener('online', handleOnlineStatus)
       window.removeEventListener('offline', handleOfflineStatus)
     }
-  }, [state.files])
+  }, [])
   const dispatch = useDispatch();
   function SubmitBtn({ k }: { k: string; }): JSX.Element {
     return (<button
@@ -88,6 +94,7 @@ const EditPage = ({
           lang={lang}
           errors={errors}
           edit_page={edit_page}
+          fileInput={fileInput}
         />
         {state.showErrorMessage ? <ErrorElement state={state} /> : null}
         {/* when clicking on this  */}

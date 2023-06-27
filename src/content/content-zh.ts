@@ -179,7 +179,7 @@ export const edit_page = {
 };
 export const tools = {
   select: "选择",
-  or_drop: "或在此处放置PDF",
+  or_drop: "或将文件拖放到此处",
   files: "文件",
   drop_files: "在此处拖放文件",
 };
