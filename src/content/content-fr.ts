@@ -10,6 +10,7 @@ export const nav_content:nav_content_type  = {
   jpg_to_pdf: "jpg en pdf",
   word_to_pdf: "word en pdf",
   web_to_pdf: "Web vers PDF",
+  markdown_to_pdf: "Markdown en PDF",
   powerpoint_to_pdf: "powerpoint en pdf",
   excel_to_pdf: "excel en pdf",
   html_to_pdf: "html en pdf",
@@ -20,7 +21,6 @@ export const nav_content:nav_content_type  = {
   pdf_to_excel: "pdf en excel",
   pdf_to_pdf_a: "pdf en pdf/A",
   pdf_to_text: "PDF en texte"
-
 };
 
 export const landing_page = {

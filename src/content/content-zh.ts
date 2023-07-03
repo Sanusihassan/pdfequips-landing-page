@@ -7,6 +7,7 @@ export const nav_content = {
   convert_to_pdf: "转换为PDF",
   jpg_to_pdf: "JPG转PDF",
   word_to_pdf: "Word转PDF",
+  markdown_to_pdf: "降价到 PDF",
   powerpoint_to_pdf: "PowerPoint转PDF",
   excel_to_pdf: "Excel转PDF",
   html_to_pdf: "HTML转PDF",

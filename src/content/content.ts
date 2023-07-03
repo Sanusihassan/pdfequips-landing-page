@@ -17,6 +17,7 @@ export const nav_content = {
   excel_to_pdf: "EXCEL to PDF",
   html_to_pdf: "HTML to PDF",
   web_to_pdf: "Web to PDF",
+  markdown_to_pdf: "Markdown to PDF",
   convert_from_pdf: "Convert from PDF",
   pdf_to_jpg: "PDF to JPG",
   pdf_to_word: "PDF to WORD",

@@ -11,6 +11,7 @@ export const nav_content:nav_content_type = {
   word_to_pdf: "word a pdf",
   powerpoint_to_pdf: "powerpoint a pdf",
   web_to_pdf: "Web a PDF",
+  markdown_to_pdf: "Markdown a PDF",
   excel_to_pdf: "excel a pdf",
   html_to_pdf: "html a pdf",
   convert_from_pdf: "convertir desde pdf",

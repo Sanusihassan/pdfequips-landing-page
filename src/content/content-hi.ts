@@ -10,6 +10,7 @@ export const nav_content: nav_content_type = {
   convert_to_pdf: "पीडीएफ में परिवर्तित करें",
   jpg_to_pdf: "जेपीजी से पीडीएफ",
   word_to_pdf: "शब्द से पीडीएफ",
+  markdown_to_pdf: "पीडीएफ में मार्कडाउन करें",
   powerpoint_to_pdf: "पावरपॉइंट से पीडीएफ",
   excel_to_pdf: "एक्सेल से पीडीएफ",
   html_to_pdf: "एचटीएमएल से पीडीएफ",

@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import { NavDropdown } from "react-bootstrap";
 import type { nav_content } from "../../content";
+import MarkdownIcon from "../icons/Markdown";
 
 const ConvertPDFDropdown = ({
   langPath,
@@ -96,6 +97,12 @@ const ConvertPDFDropdown = ({
               <a onClick={handleClick} className="dropdown-item">
                 <GlobeIcon className="h-5 w-5 inline-block mr-2 web" />{" "}
                 <bdi>{nav_content.web_to_pdf}</bdi>{" "}
+              </a>
+            </Link>
+            <Link className="dropdown-item" href={`${langPath}markdown-to-pdf`}>
+              <a onClick={handleClick} className="dropdown-item">
+                <MarkdownIcon className="h-5 w-5 inline-block mr-2 web" />{" "}
+                <bdi>{nav_content.markdown_to_pdf}</bdi>{" "}
               </a>
             </Link>
             

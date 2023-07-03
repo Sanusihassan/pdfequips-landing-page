@@ -13,6 +13,7 @@ export const nav_content: nav_content_type = {
   powerpoint_to_pdf: "PowerPoint إلى PDF",
   excel_to_pdf: "Excel إلى PDF",
   html_to_pdf: "HTML إلى PDF",
+  markdown_to_pdf: "Markdown إلى PDF",
   convert_from_pdf: "تحويل من PDF",
   web_to_pdf: "من الويب إلى PDF",
   pdf_to_jpg: "PDF إلى JPG",
