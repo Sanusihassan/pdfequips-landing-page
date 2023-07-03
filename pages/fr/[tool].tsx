@@ -11,6 +11,7 @@ import {
   nav_content,
   tool,
   tools,
+  web2pdftool,
 } from "../../src/content/content-fr";
 import { useEffect } from "react";
 import { errors } from "../../src/content/content-fr";
@@ -84,6 +85,7 @@ export default ({ item, lang }: { item: data_type; lang: string }) => {
           edit_page={edit_page}
           pages={edit_page.pages}
           page={edit_page.page}
+          web2pdftool={web2pdftool}
         />
       )}
     </>
@@ -105,4 +107,6 @@ export const routes = {
   "/pdf-to-word": { item: tool["PDF_to_WORD"] },
   "/pdf-to-excel": { item: tool["PDF_to_EXCEL"] },
   "/pdf-to-pdf-a": { item: tool["PDF_to_PDF_A"] },
+  "/web-to-pdf": { item: tool["Web_to_PDF"] },
+  "/pdf-to-text": { item: tool["PDF_to_Text"] },
 };

@@ -16,12 +16,14 @@ export const nav_content = {
   powerpoint_to_pdf: "POWERPOINT to PDF",
   excel_to_pdf: "EXCEL to PDF",
   html_to_pdf: "HTML to PDF",
+  web_to_pdf: "Web to PDF",
   convert_from_pdf: "Convert from PDF",
   pdf_to_jpg: "PDF to JPG",
   pdf_to_word: "PDF to WORD",
   pdf_to_powerpoint: "PDF to POWERPOINT",
   pdf_to_excel: "PDF to EXCEL",
   pdf_to_pdf_a: "PDF to PDF/A",
+  pdf_to_text: "PDF to text"
 };
 export const landing_page = {
   hero: {
@@ -126,6 +128,28 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-pdf-a",
   },
+  // give me the arabic version of these two objects:
+  Web_to_PDF: {
+    title: "Web to PDF",
+    description: "Convert web pages to PDF documents",
+    color: "#0984e3",
+    type: ".pdf",
+    to: "/web-to-pdf",
+  },
+
+  PDF_to_Text: {
+    title: "PDF to Text",
+    description: "Convert PDF files to plain text documents",
+    color: "#4493e1",
+    type: ".pdf",
+    to: "/pdf-to-text",
+  },
+
+};
+// translate the values of this object to french
+export const web2pdftool = {
+  placeholder: "Example: https://pdfequips.com",
+  submit_btn: "Convert"
 };
 /**
  * provide translation Spanish translation for each object of the following:

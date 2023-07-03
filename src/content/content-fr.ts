@@ -1,4 +1,6 @@
-export const nav_content = {
+import type { nav_content as nav_content_type } from "../../content";
+
+export const nav_content:nav_content_type  = {
   brand: "Equips",
   merge_pdf: "fusionner des pdf",
   split_pdf: "diviser des pdf",
@@ -7,6 +9,7 @@ export const nav_content = {
   convert_to_pdf: "convertir en pdf",
   jpg_to_pdf: "jpg en pdf",
   word_to_pdf: "word en pdf",
+  web_to_pdf: "Web vers PDF",
   powerpoint_to_pdf: "powerpoint en pdf",
   excel_to_pdf: "excel en pdf",
   html_to_pdf: "html en pdf",
@@ -16,6 +19,8 @@ export const nav_content = {
   pdf_to_powerpoint: "pdf en powerpoint",
   pdf_to_excel: "pdf en excel",
   pdf_to_pdf_a: "pdf en pdf/A",
+  pdf_to_text: "PDF en texte"
+
 };
 
 export const landing_page = {
@@ -120,7 +125,28 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-pdf-a",
   },
+  Web_to_PDF: {
+    title: "Web vers PDF",
+    description: "Convertir des pages Web en documents PDF",
+    color: "#0984e3",
+    type: ".pdf",
+    to: "/web-to-pdf",
+  },
+  
+  PDF_to_Text: {
+    title: "PDF vers texte",
+    description: "Convertir des fichiers PDF en documents texte",
+    color: "#4493e1",
+    type: ".pdf",
+    to: "/pdf-to-text",
+  },
 };
+
+export const web2pdftool = {
+  placeholder: "Exemple: https://pdfequips.com",
+  submit_btn: "Convertir"
+};
+
 export const tools = {
   select: "Sélectionner",
   or_drop: "ou déposer des fichiers ici",

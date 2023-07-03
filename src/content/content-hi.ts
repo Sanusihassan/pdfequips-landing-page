@@ -1,4 +1,6 @@
-export const nav_content = {
+import type { nav_content as nav_content_type } from "../../content";
+
+export const nav_content: nav_content_type = {
   // इसे अनदेखा करें
   brand: "Equips",
   merge_pdf: "पीडीएफ विलय करें",
@@ -11,12 +13,14 @@ export const nav_content = {
   powerpoint_to_pdf: "पावरपॉइंट से पीडीएफ",
   excel_to_pdf: "एक्सेल से पीडीएफ",
   html_to_pdf: "एचटीएमएल से पीडीएफ",
+  web_to_pdf: "वेब से पीडीएफ",
   convert_from_pdf: "पीडीएफ से परिवर्तित करें",
   pdf_to_jpg: "पीडीएफ से जेपीजी",
   pdf_to_word: "पीडीएफ से शब्द",
   pdf_to_powerpoint: "पीडीएफ से पावरपॉइंट",
   pdf_to_excel: "पीडीएफ से एक्सेल",
   pdf_to_pdf_a: "पीडीएफ से पीडीएफ/ए",
+  pdf_to_text: "पाठ के लिए पीडीएफ"
 };
 export const landing_page = {
   hero: {
@@ -120,6 +124,22 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-pdf-a",
   },
+
+  Web_to_PDF: {
+    title: "वेब से पीडीएफ",
+    description: "वेब पेज को पीडीएफ दस्तावेज में रूपांतरित करें",
+    color: "#0984e3",
+    type: ".pdf",
+    to: "/web-to-pdf",
+  },
+  
+  PDF_to_Text: {
+    title: "पीडीएफ से टेक्स्ट",
+    description: "पीडीएफ फाइल को सामान्य टेक्स्ट दस्तावेज में रूपांतरित करें",
+    color: "#4493e1",
+    type: ".pdf",
+    to: "/pdf-to-text",
+  },
 };
 export const edit_page = {
   edit_page_titles: {
@@ -176,6 +196,11 @@ export const edit_page = {
   ],
   merge_pdf:
     "मिलाने के लिए पीडीएफ फ़ाइलों के क्रम बदलने के लिए ड्रैग एंड ड्रॉप का उपयोग करें। एक फ़ाइल पर क्लिक और   होल्ड करें, इसे इच्छित स्थान पर ले जाएँ और माउस बटन को छोड़ दें।   पीडीएफ फ़ाइलें ऊपर से नीचे तक मिलाई जाती हैं। फ़ाइल को हटाने के लिए, फ़ाइल के ऊपर हटाने वाले आइकन पर क्लिक करें। पृष्ठ को घुमाने के लिए, पृष्ठ थंबनेल के ऊपर घुमाने वाले आइकन पर क्लिक करें   और चयनित घुमाने का कोण चुनें। एक बार जब फाइल इच्छित क्रम और अभिविन्यास में हो जाती हैं, तो उन्हें एक सिंगल पीडीएफ फ़ाइल में जोड़ने के लिए 'मर्ज' बटन पर क्लिक करें।",
+};
+
+export const web2pdftool = {
+  placeholder: "उदाहरण: https://pdfequips.com",
+  submit_btn: "रूपांतरित करें"
 };
 
 export const tools = {

@@ -10,12 +10,14 @@ export const nav_content = {
   powerpoint_to_pdf: "PowerPoint转PDF",
   excel_to_pdf: "Excel转PDF",
   html_to_pdf: "HTML转PDF",
+  web_to_pdf: "网页转 PDF",
   convert_from_pdf: "从PDF转换",
   pdf_to_jpg: "PDF转JPG",
   pdf_to_word: "PDF转Word",
   pdf_to_powerpoint: "PDF转PowerPoint",
   pdf_to_excel: "PDF转Excel",
   pdf_to_pdf_a: "PDF转PDF/A",
+  pdf_to_text: "PDF 转文本"
 };
 
 export const landing_page = {
@@ -120,6 +122,22 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-pdf-a",
   },
+  
+  Web_to_PDF: {
+    title: "网页转PDF",
+    description: "将网页转换为PDF文档",
+    color: "#0984e3",
+    type: ".pdf",
+    to: "/web-to-pdf",
+  },
+  
+  PDF_to_Text: {
+    title: "PDF转文本",
+    description: "将PDF文件转换为纯文本文档",
+    color: "#4493e1",
+    type: ".pdf",
+    to: "/pdf-to-text",
+  },
 };
 
 export const edit_page = {
@@ -177,6 +195,12 @@ export const edit_page = {
   merge_pdf:
     "使用拖放改变PDF文件合并的顺序。单击并   按住一个文件,将其移动到所需位置,然后释放鼠标按钮。   PDF文件从上到下合并。要删除文件,请单击文件顶部的删除   图标。要旋转页面,请单击页面缩略图顶部的旋转图标,然后选择所需的旋转角度。文件处于   所需的顺序和方向,单击“合并”按钮将它们合并为一个PDF文件。",
 };
+
+export const web2pdftool = {
+  placeholder: "例如：https://pdfequips.com",
+  submit_btn: "转换"
+};
+
 export const tools = {
   select: "选择",
   or_drop: "或将文件拖放到此处",

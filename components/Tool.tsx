@@ -15,11 +15,12 @@ import {
   setRerender
 } from "../src/store";
 import { useRouter } from "next/router";
-import type { edit_page, tools } from "../content";
+import type { edit_page, tools, web2pdftool } from "../content";
 import { handleUpload } from "../src/handlers/handleUpload";
 import { handleChange } from "../src/handlers/handleChange";
 import type { errors as _ } from "../content";
 import ErrorElement from "./ErrorElement";
+import Web2PDF from "./Web2PDF";
 
 export type errorType = {
   response: {
@@ -45,6 +46,7 @@ type ToolProps = {
   edit_page: edit_page;
   pages: string;
   page: string;
+  web2pdftool: web2pdftool
 };
 
 const Tool: React.FC<ToolProps> = ({
@@ -55,6 +57,7 @@ const Tool: React.FC<ToolProps> = ({
   edit_page,
   pages,
   page,
+  web2pdftool
 }) => {
   
   const state = useSelector((state: { tool: ToolState }) => state.tool);
@@ -98,6 +101,7 @@ const Tool: React.FC<ToolProps> = ({
   const fileInputElement = fileInput.current;
   useEffect(() => {
     // the problem with this code is that the files array is never set
+    console.log(path);
     if(fileInputElement) {
       setFiles(Array.from(fileInputElement.files as unknown as FileList));
     }
@@ -131,6 +135,8 @@ const Tool: React.FC<ToolProps> = ({
   
   return (
     <>
+    { path === "web-to-pdf"?
+      <Web2PDF content={data} web2pdftool={web2pdftool} /> :
       <div
         className="tools-page container-fluid position-relative"
         {...(state.showTool && getRootProps())}
@@ -246,6 +252,7 @@ const Tool: React.FC<ToolProps> = ({
         />
         {/* )} */}
       </div>
+    }
     </>
   );
 };

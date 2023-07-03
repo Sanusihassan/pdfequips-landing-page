@@ -1,5 +1,7 @@
+import type { nav_content as nav_content_type } from "../../content";
+
 //
-export const nav_content = {
+export const nav_content: nav_content_type = {
   brand: "Equips",
   merge_pdf: "دمج PDF",
   split_pdf: "تقسيم PDF",
@@ -12,11 +14,13 @@ export const nav_content = {
   excel_to_pdf: "Excel إلى PDF",
   html_to_pdf: "HTML إلى PDF",
   convert_from_pdf: "تحويل من PDF",
+  web_to_pdf: "من الويب إلى PDF",
   pdf_to_jpg: "PDF إلى JPG",
   pdf_to_word: "PDF إلى Word",
   pdf_to_powerpoint: "PDF إلى PowerPoint",
   pdf_to_excel: "PDF إلى Excel",
   pdf_to_pdf_a: "PDF إلى PDF/A",
+  pdf_to_text: "تحويل PDF إلى نص", 
 };
 
 export const landing_page = {
@@ -121,6 +125,25 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-pdf-a",
   },
+  Web_to_PDF: {
+    title: "تحويل الويب إلى PDF",
+    description: "تحويل صفحات الويب إلى مستندات PDF",
+    color: "#0984e3",
+    type: ".pdf",
+    to: "/web-to-pdf",
+  },
+  PDF_to_Text: {
+    title: "تحويل PDF إلى نص",
+    description: "تحويل ملفات PDF إلى مستندات نصية عادية",
+    color: "#4493e1",
+    type: ".pdf",
+    to: "/pdf-to-text",
+  },
+};
+
+export const web2pdftool = {
+  placeholder: "مثال: https://pdfequips.com",
+  submit_btn: "تحويل"
 };
 
 export const tools = {

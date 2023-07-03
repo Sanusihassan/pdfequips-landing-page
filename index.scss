@@ -26,6 +26,8 @@ $color-map: (
   'word-to-pdf': #1B5EBE,
   'powerpoint-to-pdf': #C13B1B,
   'excel-to-pdf': #10793F,
+  "web-to-pdf": #0984e3,
+  "pdf-to-text": #4493e1,
   'html-to-pdf': rgb(228, 77, 38),
   'pdf-to-jpg': #f1c40f,
   'pdf-to-word': #1B5EBE,
@@ -85,6 +87,13 @@ a.dropdown-item {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
   color: rgb(228, 77, 38);
+}
+.web {
+  color: #0984e3
+}
+
+.text {
+  color: lighten(#2e86de, 5%)
 }
 
 #basic-nav-dropdown {

@@ -8,6 +8,8 @@ import {
   TableIcon,
   CodeIcon,
   DocumentAddIcon,
+  GlobeIcon,
+  DocumentTextIcon
 } from "@heroicons/react/outline";
 import Link from "next/link";
 import { NavDropdown } from "react-bootstrap";
@@ -89,7 +91,14 @@ const ConvertPDFDropdown = ({
                 <CodeIcon className="h-5 w-5 inline-block mr-2 html" />{" "}
                 <bdi>{nav_content.html_to_pdf}</bdi>{" "}
               </a>
+            </Link> 
+            <Link className="dropdown-item" href={`${langPath}web-to-pdf`}>
+              <a onClick={handleClick} className="dropdown-item">
+                <GlobeIcon className="h-5 w-5 inline-block mr-2 web" />{" "}
+                <bdi>{nav_content.web_to_pdf}</bdi>{" "}
+              </a>
             </Link>
+            
           </div>
           <div className="col-12 col-md-6">
             <h6 className="pl-2">
@@ -152,6 +161,13 @@ const ConvertPDFDropdown = ({
                 {" "}
                 <bdi>{nav_content.pdf_to_pdf_a}</bdi>{" "}
                 <DocumentAddIcon className="h-5 w-5 inline-block mr-2" />
+              </a>
+            </Link>
+            <Link href={`${langPath}pdf-to-text`}>
+              <a onClick={handleClick} className="dropdown-item">
+                {" "}
+                <bdi>{nav_content.pdf_to_text}</bdi>{" "}
+                <DocumentTextIcon className="h-5 w-5 inline-block mr-2 text" />
               </a>
             </Link>
           </div>
