@@ -58,8 +58,10 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page, fileInpu
       }
     }
     const isValid = validateFiles(files, extension, errors, dispatch);
-    
-    if (isValid || (files.length > 0)) {
+    // if(store.errorCode == "ERR_EMPTY_FILE" && files.length > 0) {
+    //   dispatch(resetErrorMessage());
+    // }
+    if (isValid || (files.length > 0 && store.errorCode == "ERR_EMPTY_FILE")) {
       dispatch(resetErrorMessage());
     }
     const max_files = 2;

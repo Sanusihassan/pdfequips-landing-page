@@ -95,10 +95,22 @@ const Tool: React.FC<ToolProps> = ({
     ".jpg": ".jpg, .jpeg",
     ".html": ".html, .htm",
   };
-  let t: NodeJS.Timeout;
+  let t: NodeJS.Timer;
   // actual files;
   const [files, setFiles] = useState<File[]>([]);
   const fileInputElement = fileInput.current;
+  function focusHandler () {
+    t = setInterval(() => {
+      if (files.length === 0) {
+        dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
+        dispatch(setErrorCode("ERR_EMPTY_FILE"));
+      } else {
+        clearInterval(t);
+        dispatch(resetErrorMessage());
+        window.removeEventListener("focus", focusHandler);
+      }
+    }, 3000);
+  };
   useEffect(() => {
     // the problem with this code is that the files array is never set
     console.log(path);
@@ -111,25 +123,16 @@ const Tool: React.FC<ToolProps> = ({
     dispatch(setEndpoint(path));
     document.addEventListener("dragover", preventDefault);
     document.addEventListener("click", (e) => e.preventDefault());
-    window.onfocus = function () {
-      if (userClickedOnFileUploader) {
-        setTimeout(() => {
-          if (files.length === 0) {
-            dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
-            dispatch(setErrorCode("ERR_EMPTY_FILE"));
-          } else {
-            dispatch(resetErrorMessage());
-          }
-        }, 2000);
-      }
-    };
-
+    if (userClickedOnFileUploader) {
+      window.addEventListener("focus", focusHandler);
+    }
     if(state.errorCode == "ERR_EMPTY_FILE" && files.length > 0) {
       dispatch(resetErrorMessage());
     }
     return () => {
-      clearTimeout(t);
+      clearInterval(t);
       document.removeEventListener("dragover", preventDefault);
+      window.removeEventListener("focus", focusHandler);
     }
   }, [userClickedOnFileUploader, state.rerender]);
   

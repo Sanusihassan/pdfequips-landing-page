@@ -46,7 +46,7 @@ const EditPage = ({
     if(isOnline) {
       dispatch(resetErrorMessage());
     }
-    if(files.length > 0) {
+    if(state.errorCode == "ERR_EMPTY_FILE" && files.length > 0) {
       dispatch(resetErrorMessage());
     }
     window.addEventListener('online', handleOnlineStatus)
