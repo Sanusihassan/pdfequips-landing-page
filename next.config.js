@@ -21,6 +21,7 @@ const nextConfig = {
   distDir: "./out/templates",
 };
 
+
 // module.exports = nextConfig;
 
 // module.exports = {

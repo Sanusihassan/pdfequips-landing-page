@@ -15,6 +15,6 @@ def pdf_to_ppt_route(app):
             response.headers['Content-Type'] = 'application/json'
             return jsonify({"error": response}), 400
         if len(files) == 1:
-            return pdf_to_pptx(files[0])
+            return pdf_to_pptx(files[0]) # type: ignore
         else:
             return pdf_to_pptx_multiple(files)

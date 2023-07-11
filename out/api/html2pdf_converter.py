@@ -31,6 +31,10 @@ def html_to_pdf_multiple(html_files):
         return send_file(zip_path, as_attachment=True, mimetype='application/zip', download_name="converted_files.zip")
 
 
+"""
+    html to pdf should be web to pdf i.e url to pdf!
+"""
+
 def html_to_pdf(html_file):
     with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as temp:
         html_file.seek(0)  # Move the file pointer to the beginning

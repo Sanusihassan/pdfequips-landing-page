@@ -1,10 +1,9 @@
 import os
-import shutil
 import tempfile
 import subprocess
 from flask import send_file
 import zipfile
-import subprocess
+import shutil
 
 """
     i want another function called pdf_to_pptx which takes a pdf file.
@@ -28,6 +27,7 @@ def pdf_to_word_converter(pdf_file):
 
     response = send_file(output_file, as_attachment=True, mimetype='application/msword')
     os.remove(output_file)
+    os.remove(temp_path)
     return response
 
 
@@ -36,7 +36,6 @@ def pdf_to_word_converter(pdf_file):
 
 
 from werkzeug.datastructures import FileStorage
-
 def pdf_to_word(file_storage: FileStorage):
     with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as temp:
         file_storage.save(temp.name)
@@ -54,7 +53,11 @@ def pdf_to_word(file_storage: FileStorage):
 
 
 import io
-
+"""
+    please update this funciton, and make it change the stored word file names to be the same as
+    the original uploaded pdf files.
+    not just random names generated.
+"""
 def pdf_to_word_converter_multiple(pdf_files):
     # Convert PDF files to Word files
     word_files = [pdf_to_word(pdf_file) for pdf_file in pdf_files]

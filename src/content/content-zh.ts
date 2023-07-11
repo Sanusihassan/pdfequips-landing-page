@@ -18,7 +18,7 @@ export const nav_content = {
   pdf_to_powerpoint: "PDF转PowerPoint",
   pdf_to_excel: "PDF转Excel",
   pdf_to_pdf_a: "PDF转PDF/A",
-  pdf_to_text: "PDF 转文本"
+  pdf_to_text: "PDF 转文本",
 };
 
 export const landing_page = {
@@ -93,6 +93,13 @@ export const tool = {
     type: ".html",
     to: "/html-to-pdf",
   },
+  Markdown_to_PDF: {
+    title: "Markdown 转 PDF",
+    description: "将 Markdown 转换为 PDF",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/markdown-to-pdf",
+  },
   PDF_to_JPG: {
     title: "PDF转JPG",
     description: "将PDF文件转换为JPG图像文件",
@@ -123,7 +130,7 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-pdf-a",
   },
-  
+
   Web_to_PDF: {
     title: "网页转PDF",
     description: "将网页转换为PDF文档",
@@ -131,7 +138,7 @@ export const tool = {
     type: ".pdf",
     to: "/web-to-pdf",
   },
-  
+
   PDF_to_Text: {
     title: "PDF转文本",
     description: "将PDF文件转换为纯文本文档",
@@ -199,7 +206,7 @@ export const edit_page = {
 
 export const web2pdftool = {
   placeholder: "例如：https://pdfequips.com",
-  submit_btn: "转换"
+  submit_btn: "转换",
 };
 
 export const tools = {
@@ -241,38 +248,31 @@ export const errors = {
     code: "ERR_INVALID_FILE_TYPE",
   },
   FILE_CORRUPT: {
-    message:
-      "文件已损坏，无法处理。请选择一个有效的文件。",
+    message: "文件已损坏，无法处理。请选择一个有效的文件。",
     code: "ERR_FILE_CORRUPT",
   },
   MISSING_FONTS: {
-    message:
-      "文件缺少字体。请确保所有字体都嵌入在PDF文件中。",
+    message: "文件缺少字体。请确保所有字体都嵌入在PDF文件中。",
     code: "ERR_MISSING_FONTS",
   },
   INVALID_IMAGE_DATA: {
-    message:
-      "文件包含无效的图像数据。请确保所有图像格式正确。",
+    message: "文件包含无效的图像数据。请确保所有图像格式正确。",
     code: "ERR_INVALID_IMAGE_DATA",
   },
   SECURITY_RISK: {
-    message:
-      "文件存在安全风险，无法处理。请选择一个有效的文件。",
+    message: "文件存在安全风险，无法处理。请选择一个有效的文件。",
     code: "ERR_SECURITY_RISK",
   },
   MAX_FILES_EXCEEDED: {
-    message:
-      "您已超出允许的最大文件数。请删除一些文件并重试。",
+    message: "您已超出允许的最大文件数。请删除一些文件并重试。",
     code: "ERR_MAX_FILES_EXCEEDED",
   },
   NO_FILES_SELECTED: {
-    message:
-      "未选择任何文件。请选择至少一个文件。",
+    message: "未选择任何文件。请选择至少一个文件。",
     code: "ERR_NO_FILES_SELECTED",
   },
   UNKNOWN_ERROR: {
-    message:
-      "发生未知错误。请稍后重试或联系支持人员。",
+    message: "发生未知错误。请稍后重试或联系支持人员。",
     code: "ERR_UNKNOWN",
   },
   ERR_NETWORK: {

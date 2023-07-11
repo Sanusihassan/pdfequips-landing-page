@@ -1,6 +1,6 @@
 import type { nav_content as nav_content_type } from "../../content";
 
-export const nav_content:nav_content_type = {
+export const nav_content: nav_content_type = {
   brand: "Equips",
   merge_pdf: "combinar pdf",
   split_pdf: "dividir pdf",
@@ -20,7 +20,7 @@ export const nav_content:nav_content_type = {
   pdf_to_powerpoint: "pdf a powerpoint",
   pdf_to_excel: "pdf a excel",
   pdf_to_pdf_a: "pdf a pdf/A",
-  pdf_to_text: "PDF a texto"
+  pdf_to_text: "PDF a texto",
 };
 
 export const landing_page = {
@@ -96,6 +96,15 @@ export const tool = {
     type: ".html",
     to: "/html-to-pdf",
   },
+
+  Markdown_to_PDF: {
+    title: "Markdown a PDF",
+    description: "Convertir Markdown a PDF",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/markdown-to-pdf",
+  },
+
   PDF_to_JPG: {
     title: "PDF a JPG",
     description: "Convierte archivos PDF a archivos de imagen JPG",
@@ -147,7 +156,7 @@ export const tool = {
 
 export const web2pdftool = {
   placeholder: "Ejemplo: https://pdfequips.com",
-  submit_btn: "Convertir"
+  submit_btn: "Convertir",
 };
 
 export const edit_page = {
@@ -281,7 +290,8 @@ export const errors = {
     code: "ERR_UNKNOWN",
   },
   ERR_NETWORK: {
-    message: "Ha ocurrido un error en la red. Por favor, comprueba tu conexión a internet e inténtalo de nuevo.",
+    message:
+      "Ha ocurrido un error en la red. Por favor, comprueba tu conexión a internet e inténtalo de nuevo.",
     code: "ERR_NETWORK",
-  }
+  },
 };

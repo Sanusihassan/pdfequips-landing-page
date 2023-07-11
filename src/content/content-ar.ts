@@ -21,7 +21,7 @@ export const nav_content: nav_content_type = {
   pdf_to_powerpoint: "PDF إلى PowerPoint",
   pdf_to_excel: "PDF إلى Excel",
   pdf_to_pdf_a: "PDF إلى PDF/A",
-  pdf_to_text: "تحويل PDF إلى نص", 
+  pdf_to_text: "تحويل PDF إلى نص",
 };
 
 export const landing_page = {
@@ -89,6 +89,15 @@ export const tool = {
     type: ".xlsx",
     to: "/excel-to-pdf",
   },
+
+  Markdown_to_PDF: {
+    title: "تحويل النص بتنسيق ماركداون إلى ملف PDF",
+    description: "تحويل النص بتنسيق ماركداون إلى ملف PDF",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/markdown-to-pdf",
+  },
+
   HTML_to_PDF: {
     title: "HTML إلى PDF",
     description: "تحويل صفحات الويب HTML إلى مستندات PDF",
@@ -144,7 +153,7 @@ export const tool = {
 
 export const web2pdftool = {
   placeholder: "مثال: https://pdfequips.com",
-  submit_btn: "تحويل"
+  submit_btn: "تحويل",
 };
 
 export const tools = {
@@ -242,8 +251,7 @@ export const errors = {
     code: "ERR_INVALID_FILE_TYPE",
   },
   FILE_CORRUPT: {
-    message:
-      "الملف تالف ولا يمكن معالجته. يرجى اختيار ملف صالح.",
+    message: "الملف تالف ولا يمكن معالجته. يرجى اختيار ملف صالح.",
     code: "ERR_FILE_CORRUPT",
   },
   MISSING_FONTS: {
@@ -267,8 +275,7 @@ export const errors = {
     code: "ERR_MAX_FILES_EXCEEDED",
   },
   NO_FILES_SELECTED: {
-    message:
-      "لم يتم اختيار أي ملفات. يرجى اختيار ملف واحد على الأقل.",
+    message: "لم يتم اختيار أي ملفات. يرجى اختيار ملف واحد على الأقل.",
     code: "ERR_NO_FILES_SELECTED",
   },
   UNKNOWN_ERROR: {
@@ -277,7 +284,8 @@ export const errors = {
     code: "ERR_UNKNOWN",
   },
   ERR_NETWORK: {
-    message: "حدث خطأ في الشبكة. يرجى التحقق من اتصالك بالإنترنت وحاول مرة أخرى.",
+    message:
+      "حدث خطأ في الشبكة. يرجى التحقق من اتصالك بالإنترنت وحاول مرة أخرى.",
     code: "ERR_NETWORK",
   },
 };

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { ToolState, setErrorMessage, setFiles } from "../../src/store";
+import { ToolState, setErrorMessage } from "../../src/store";
 import type { errors as _ } from "../../content";
 import ImageCard from "./ImageCard";
 import FileCard from "./FileCard";
@@ -27,7 +27,7 @@ const Files = ({ store, errors, extension, imageUrls, setImageUrls, toolTipSizes
         // Argument of type 'Blob[]' is not assignable to parameter of type 'File[]'.
         // Type 'Blob' is missing the following properties from type 'File': lastModified, webkitRelativePathts(2345)
         if (isDraggableExtension(extension, router)) {
-            dispatch(setFiles(store.files));
+            // dispatch(setFiles(store.files));
         }
     };
     

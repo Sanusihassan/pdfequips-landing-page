@@ -45,7 +45,7 @@ const NavBar = ({
   }
   let langPath = lang.length > 0 ? `/${lang}/` : "/";
   return (
-    <Navbar bg="light" expand="lg" className="shadow">
+    <Navbar bg="light" expand="lg" className={`${path !== "/markdown-to-pdf"? "shadow": ""}`}>
       <Link href={`/${lang}`}>
         <a
           onClick={handleClick}

@@ -22,7 +22,7 @@ def compress_pdf_route(app):
             response = jsonify(error)
             response.headers['Content-Type'] = 'application/json'
             return jsonify({"error": response}), 400
-        temp_file = tempfile.NamedTemporaryFile(delete=False)
+        temp_file = tempfile.NamedTemporaryFile()
         file.save(temp_file.name)
         try:
             compressed_file = compress_pdf(temp_file.name)

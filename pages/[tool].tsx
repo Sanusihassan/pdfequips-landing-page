@@ -1,3 +1,4 @@
+"use client";
 import Head from "next/head";
 import NavBar from "../components/NavBar";
 import Tool from "../components/Tool";
@@ -105,4 +106,5 @@ export const routes = {
   "/pdf-to-pdf-a": { item: tool["PDF_to_PDF_A"] },
   "/web-to-pdf": { item: tool["Web_to_PDF"] },
   "/pdf-to-text": { item: tool["PDF_to_Text"] },
+  "/markdown-to-pdf": { item: tool["Markdown_to_PDF"] },
 };

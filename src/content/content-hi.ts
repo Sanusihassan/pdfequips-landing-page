@@ -21,7 +21,7 @@ export const nav_content: nav_content_type = {
   pdf_to_powerpoint: "पीडीएफ से पावरपॉइंट",
   pdf_to_excel: "पीडीएफ से एक्सेल",
   pdf_to_pdf_a: "पीडीएफ से पीडीएफ/ए",
-  pdf_to_text: "पाठ के लिए पीडीएफ"
+  pdf_to_text: "पाठ के लिए पीडीएफ",
 };
 export const landing_page = {
   hero: {
@@ -94,6 +94,15 @@ export const tool = {
     type: ".html",
     to: "/html-to-pdf",
   },
+
+  Markdown_to_PDF: {
+    title: "Markdown से पीडीएफ में रूपांतरण",
+    description: "Markdown से पीडीएफ में रूपांतरण",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/markdown-to-pdf",
+  },
+
   PDF_to_JPG: {
     title: "PDF से JPG में",
     description: "PDF फ़ाइलों को JPG छवि फ़ाइलों में बदलें",
@@ -133,7 +142,7 @@ export const tool = {
     type: ".pdf",
     to: "/web-to-pdf",
   },
-  
+
   PDF_to_Text: {
     title: "पीडीएफ से टेक्स्ट",
     description: "पीडीएफ फाइल को सामान्य टेक्स्ट दस्तावेज में रूपांतरित करें",
@@ -201,7 +210,7 @@ export const edit_page = {
 
 export const web2pdftool = {
   placeholder: "उदाहरण: https://pdfequips.com",
-  submit_btn: "रूपांतरित करें"
+  submit_btn: "रूपांतरित करें",
 };
 
 export const tools = {
@@ -268,8 +277,7 @@ export const errors = {
     code: "ERR_MAX_FILES_EXCEEDED",
   },
   NO_FILES_SELECTED: {
-    message:
-      "कोई फ़ाइल चयनित नहीं की गई है। कृपया कम से कम एक फ़ाइल चुनें।",
+    message: "कोई फ़ाइल चयनित नहीं की गई है। कृपया कम से कम एक फ़ाइल चुनें।",
     code: "ERR_NO_FILES_SELECTED",
   },
   UNKNOWN_ERROR: {
@@ -278,7 +286,8 @@ export const errors = {
     code: "ERR_UNKNOWN",
   },
   ERR_NETWORK: {
-    message: "नेटवर्क में त्रुटि हो गई है। कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।",
+    message:
+      "नेटवर्क में त्रुटि हो गई है। कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।",
     code: "ERR_NETWORK",
-  }
+  },
 };

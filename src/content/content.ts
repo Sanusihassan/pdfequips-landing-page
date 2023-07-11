@@ -129,13 +129,21 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-pdf-a",
   },
-  // give me the arabic version of these two objects:
+  // give me another object like this but for markdown to pdf
   Web_to_PDF: {
     title: "Web to PDF",
     description: "Convert web pages to PDF documents",
     color: "#0984e3",
     type: ".pdf",
     to: "/web-to-pdf",
+  },
+
+  Markdown_to_PDF: {
+    title: "Markdown to PDF",
+    description: "Convert Markdown to PDF",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/markdown-to-pdf",
   },
 
   PDF_to_Text: {

@@ -1,7 +1,7 @@
 import { RefreshIcon, TrashIcon } from "@heroicons/react/solid";
 import { useRotatedImage, validateFiles } from "../../src/utils";
-import { Dispatch, SetStateAction, useCallback } from "react";
-import { ToolState, resetErrorMessage, setFiles } from "../../src/store";
+import { Dispatch, SetStateAction, useCallback, useState, useEffect } from "react";
+import { ToolState, resetErrorMessage } from "../../src/store";
 import { useDispatch, useSelector } from "react-redux";
 import type {errors as _} from "../../content";
 
@@ -35,6 +35,7 @@ export const ActionDiv = ({
   // store and dispatch
   const store = useSelector((state: { tool: ToolState }) => state.tool);
   const dispatch = useDispatch();
+  const [files, setFiles] = useState<File[]>([]);
   const handleRotateImage = useCallback(() => {
     if (rotatedImageUrl) {
       const newImageUrls = [...imageUrls];
@@ -43,6 +44,13 @@ export const ActionDiv = ({
     }
   }, [index, imageUrls, setImageUrls, rotatedImageUrl]);
   
+  useEffect(() => {
+    const fileInputElement = document.querySelector(".upload-btn input");
+    if(fileInputElement) {
+      setFiles(Array.from((fileInputElement as HTMLInputElement).files as unknown as FileList));
+    }
+  }, [])
+
   return (
     <div
       className={`action-div d-flex ${
@@ -54,7 +62,7 @@ export const ActionDiv = ({
         // onClick={() => {
         //   const newImageUrls = [...imageUrls];
         //   newImageUrls.splice(index, 1);
-        //   const isValid = validateFiles(store.files, extension, errors, dispatch);
+        //   const isValid = validateFiles(files, extension, errors, dispatch);
         //   if(isValid) {
         //     dispatch(resetErrorMessage());
         //   }
@@ -65,14 +73,14 @@ export const ActionDiv = ({
         onClick={() => {
           const newImageUrls = [...imageUrls];
           newImageUrls.splice(index, 1);
-          const newFiles = store.files.filter((file) => file.name !== item.file.name);
-          dispatch(setFiles(newFiles));
-          const isValid = validateFiles(store.files, extension, errors, dispatch);
+          const newFiles = files.filter((file) => file.name !== item.file.name);
+          // dispatch(setFiles(newFiles));
+          const isValid = validateFiles(files, extension, errors, dispatch);
           if(isValid) {
             dispatch(resetErrorMessage());
           }
           setImageUrls(newImageUrls);
-          console.log(store.files);
+          console.log(files);
         }}
       >
         <TrashIcon className="icon hero-icon" />

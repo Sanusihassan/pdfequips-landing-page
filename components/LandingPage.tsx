@@ -29,7 +29,7 @@ const HeroSection = ({
   );
 };
 
-import { tool } from "../content";
+import type { tool } from "../content";
 // import { useTranslation } from "react-i18next";
 
 import { FeaturesSection } from "./LandingPage/FeaturesSection";

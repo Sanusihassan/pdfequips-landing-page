@@ -39,8 +39,7 @@ logging.basicConfig(filename='app.log', level=logging.DEBUG)
 app = Flask(__name__)
 
 # cors
-CORS(app, methods=['GET', 'POST'], CORS_ALLOW_HEADERS=[
-    'Content-Type', 'X-PINGOTHER'], supports_credentials=True)
+CORS(app)
 
 
 # setting templates directory for get routes

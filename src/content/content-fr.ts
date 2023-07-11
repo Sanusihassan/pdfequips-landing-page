@@ -1,6 +1,6 @@
 import type { nav_content as nav_content_type } from "../../content";
 
-export const nav_content:nav_content_type  = {
+export const nav_content: nav_content_type = {
   brand: "Equips",
   merge_pdf: "fusionner des pdf",
   split_pdf: "diviser des pdf",
@@ -20,7 +20,7 @@ export const nav_content:nav_content_type  = {
   pdf_to_powerpoint: "pdf en powerpoint",
   pdf_to_excel: "pdf en excel",
   pdf_to_pdf_a: "pdf en pdf/A",
-  pdf_to_text: "PDF en texte"
+  pdf_to_text: "PDF en texte",
 };
 
 export const landing_page = {
@@ -95,6 +95,14 @@ export const tool = {
     type: ".html",
     to: "/html-to-pdf",
   },
+  Markdown_to_PDF: {
+    title: "Markdown vers PDF",
+    description: "Convertir Markdown en PDF",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/markdown-to-pdf",
+  },
+
   PDF_to_JPG: {
     title: "PDF en JPG",
     description: "Convert PDF files to JPG image files",
@@ -132,7 +140,7 @@ export const tool = {
     type: ".pdf",
     to: "/web-to-pdf",
   },
-  
+
   PDF_to_Text: {
     title: "PDF vers texte",
     description: "Convertir des fichiers PDF en documents texte",
@@ -144,7 +152,7 @@ export const tool = {
 
 export const web2pdftool = {
   placeholder: "Exemple: https://pdfequips.com",
-  submit_btn: "Convertir"
+  submit_btn: "Convertir",
 };
 
 export const tools = {
@@ -276,7 +284,8 @@ export const errors = {
     code: "ERR_UNKNOWN",
   },
   ERR_NETWORK: {
-    message: "Une erreur de réseau s'est produite. Veuillez vérifier votre connexion Internet et réessayer.",
+    message:
+      "Une erreur de réseau s'est produite. Veuillez vérifier votre connexion Internet et réessayer.",
     code: "ERR_NETWORK",
-  }
+  },
 };
