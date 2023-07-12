@@ -31,7 +31,8 @@ export const handleUpload = async (
   }
   let url;
   if (process.env.NODE_ENV === "development") {
-    url = `http://127.0.0.1:5000/${state.endpoint}`;
+    // url = `http://127.0.0.1:5000/${state.endpoint}`;
+    url = `https://5000-sanusihassan-pdfequips-3e8arm49ns0.ws-eu101.gitpod.io/${state.endpoint}`;
   } 
   else {
     url = `/${state.endpoint}`;

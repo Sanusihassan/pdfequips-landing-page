@@ -12,11 +12,15 @@
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@heroicons/react2": "file:.0.17",
+    "@monaco-editor/react": "^4.5.1",
     "@reduxjs/toolkit": "^1.9.5",
     "ace-builds": "^1.23.3",
     "axios": "^1.4.0",
+    "dynamic-import-polyfill": "^0.1.1",
+    "monaco-editor": "^0.38.0",
     "next": "^12.3.4",
     "next-translate": "^2.0.5",
+    "next-transpile-modules": "^10.0.0",
     "pdfjs-dist": "^3.5.141",
     "react": "18.2.0",
     "react-ace": "^10.1.0",
@@ -27,8 +31,10 @@
     "react-dropzone": "^14.2.3",
     "react-icons": "^4.8.0",
     "react-markdown": "^8.0.7",
+    "react-monaco-editor": "^0.53.0",
     "react-redux": "^8.0.5",
     "react-select": "^5.7.3",
+    "react-syntax-highlighter": "^15.5.0",
     "react-tooltip": "^5.11.2",
     "redux-thunk": "^2.4.2",
     "sass": "^1.62.1"
@@ -40,6 +46,10 @@
     "@types/react": "^18.2.0",
     "@types/react-beautiful-dnd": "^13.1.4",
     "@types/react-dom": "18.2.1",
+    "@types/react-monaco-editor": "^0.16.0",
+    "@types/react-syntax-highlighter": "^15.5.7",
+    "@zeit/next-css": "^1.0.1",
+    "monaco-editor-webpack-plugin": "^7.1.0",
     "typescript": "5.0.4"
   }
 }
