@@ -1,11 +1,9 @@
-// i want to show a spinner when this component is not loaded in particular the monacoeditor
-// i have react-bootstrap installed by the way
-
 import dynamic from "next/dynamic";
 import ReactMarkdown from "react-markdown";
 import { useState } from "react";
 import { Spinner } from "react-bootstrap";
-
+// @ts-ignore
+import md from "./defaultcontent.md";
 const Loader = () => (
   <div className="editor-loader">
     <Spinner animation="grow" />
@@ -19,7 +17,7 @@ const MonacoEditor = dynamic(() => import("react-monaco-editor"), {
 });
 
 const Markdown2PDF: React.FC = () => {
-  const [markdown, setMarkdown] = useState<string>("# hello world");
+  const [markdown, setMarkdown] = useState<string>(md);
 
   const handleEditorChange = (value: string) => {
     setMarkdown(value);
@@ -30,7 +28,7 @@ const Markdown2PDF: React.FC = () => {
       <div className="editor">
         <MonacoEditor
           language="markdown"
-          theme="vs-dark"
+          theme="vs-light"
           value={markdown}
           onChange={handleEditorChange}
           options={{ selectOnLineNumbers: true }}

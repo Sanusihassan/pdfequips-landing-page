@@ -21,6 +21,7 @@ export const nav_content: nav_content_type = {
   pdf_to_excel: "pdf en excel",
   pdf_to_pdf_a: "pdf en pdf/A",
   pdf_to_text: "PDF en texte",
+  pdf_to_html: "PDF vers HTML"
 };
 
 export const landing_page = {
@@ -148,6 +149,14 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-text",
   },
+  
+  PDF_to_HTML: {
+    title: "PDF vers HTML",
+    description: "Convertir des fichiers PDF en documents HTML",
+    color: "rgb(228, 77, 38)",
+    type: ".pdf",
+    to: "/pdf-to-html",
+    },
 };
 
 export const web2pdftool = {

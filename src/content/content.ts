@@ -24,7 +24,8 @@ export const nav_content = {
   pdf_to_powerpoint: "PDF to POWERPOINT",
   pdf_to_excel: "PDF to EXCEL",
   pdf_to_pdf_a: "PDF to PDF/A",
-  pdf_to_text: "PDF to text"
+  pdf_to_text: "PDF to text",
+  pdf_to_html: "PDF to HTML",
 };
 export const landing_page = {
   hero: {
@@ -154,11 +155,18 @@ export const tool = {
     to: "/pdf-to-text",
   },
 
+  PDF_to_HTML: {
+    title: "PDF to HTML",
+    description: "Convert PDF files to HTML documents",
+    color: "rgb(228, 77, 38)",
+    type: ".pdf",
+    to: "/pdf-to-html",
+  },
 };
 // translate the values of this object to french
 export const web2pdftool = {
   placeholder: "Example: https://pdfequips.com",
-  submit_btn: "Convert"
+  submit_btn: "Convert",
 };
 /**
  * provide translation Spanish translation for each object of the following:
@@ -245,7 +253,6 @@ export const footer = {
   privacy_policy: "privacy policy",
 };
 
-
 // please add an error message for "ERR_NETWORK" case with message for this errors object
 // please note that i just want the static object not a way to add it to the object.
 // just regenerate the object with the required fields.
@@ -299,8 +306,7 @@ export const errors = {
     code: "ERR_MAX_FILES_EXCEEDED",
   },
   NO_FILES_SELECTED: {
-    message:
-      "No files selected. Please select at least one file.",
+    message: "No files selected. Please select at least one file.",
     code: "ERR_NO_FILES_SELECTED",
   },
   UNKNOWN_ERROR: {
@@ -310,7 +316,8 @@ export const errors = {
   },
   // please translate the content of the error message to arabic in this object and give me the result.
   ERR_NETWORK: {
-    message: "A network error occurred. Please check your internet connection and try again.",
+    message:
+      "A network error occurred. Please check your internet connection and try again.",
     code: "ERR_NETWORK",
-  }
+  },
 };

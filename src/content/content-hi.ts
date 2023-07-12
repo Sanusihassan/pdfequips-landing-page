@@ -22,6 +22,7 @@ export const nav_content: nav_content_type = {
   pdf_to_excel: "पीडीएफ से एक्सेल",
   pdf_to_pdf_a: "पीडीएफ से पीडीएफ/ए",
   pdf_to_text: "पाठ के लिए पीडीएफ",
+  pdf_to_html: "पीडीएफ से एचटीएमएल",
 };
 export const landing_page = {
   hero: {
@@ -149,6 +150,14 @@ export const tool = {
     color: "#4493e1",
     type: ".pdf",
     to: "/pdf-to-text",
+  },
+
+  PDF_to_HTML: {
+    title: "पीडीएफ से एचटीएमएल में",
+    description: "पीडीएफ फ़ाइलों को एचटीएमएल दस्तावेज़ों में बदलें",
+    color: "rgb(228, 77, 38)",
+    type: ".pdf",
+    to: "/pdf-to-html",
   },
 };
 export const edit_page = {

@@ -9,7 +9,7 @@ import {
   CodeIcon,
   DocumentAddIcon,
   GlobeIcon,
-  DocumentTextIcon
+  DocumentTextIcon,
 } from "@heroicons/react/outline";
 import Link from "next/link";
 import { NavDropdown } from "react-bootstrap";
@@ -51,15 +51,13 @@ const ConvertPDFDropdown = ({
             </Link>
             <Link href={`${langPath}word-to-pdf`}>
               <a onClick={handleClick} className="dropdown-item">
-                <bdi>
-                  <DocumentIcon
-                    style={{
-                      color: "#1B5EBE",
-                    }}
-                    className="h-5 w-5 inline-block mr-2"
-                  />{" "}
-                  {nav_content.word_to_pdf}
-                </bdi>{" "}
+                <DocumentIcon
+                  style={{
+                    color: "#1B5EBE",
+                  }}
+                  className="h-5 w-5 inline-block mr-2"
+                />{" "}
+                <bdi>{nav_content.word_to_pdf}</bdi>{" "}
               </a>
             </Link>
             <Link
@@ -92,7 +90,7 @@ const ConvertPDFDropdown = ({
                 <CodeIcon className="h-5 w-5 inline-block mr-2 html" />{" "}
                 <bdi>{nav_content.html_to_pdf}</bdi>{" "}
               </a>
-            </Link> 
+            </Link>
             <Link className="dropdown-item" href={`${langPath}web-to-pdf`}>
               <a onClick={handleClick} className="dropdown-item">
                 <GlobeIcon className="h-5 w-5 inline-block mr-2 web" />{" "}
@@ -105,7 +103,6 @@ const ConvertPDFDropdown = ({
                 <bdi>{nav_content.markdown_to_pdf}</bdi>{" "}
               </a>
             </Link>
-            
           </div>
           <div className="col-12 col-md-6">
             <h6 className="pl-2">
@@ -175,6 +172,13 @@ const ConvertPDFDropdown = ({
                 {" "}
                 <bdi>{nav_content.pdf_to_text}</bdi>{" "}
                 <DocumentTextIcon className="h-5 w-5 inline-block mr-2 text" />
+              </a>
+            </Link>
+            <Link href={`${langPath}pdf-to-html`}>
+              <a onClick={handleClick} className="dropdown-item">
+                {" "}
+                <bdi>{nav_content.pdf_to_html}</bdi>{" "}
+                <CodeIcon className="h-5 w-5 inline-block mr-2 html" />
               </a>
             </Link>
           </div>

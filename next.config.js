@@ -79,6 +79,11 @@ module.exports = withTM({
         /[\\/]node_modules[\\/]monaco-editor[\\/]/
       ];
     }
+     // Add support for markdown files
+     config.module.rules.push({
+      test: /\.md$/,
+      use: "raw-loader",
+    });
 
     config.plugins.push(
       new MonacoWebpackPlugin({

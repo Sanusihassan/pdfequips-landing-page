@@ -21,7 +21,8 @@ export const nav_content: nav_content_type = {
   pdf_to_powerpoint: "PDF إلى PowerPoint",
   pdf_to_excel: "PDF إلى Excel",
   pdf_to_pdf_a: "PDF إلى PDF/A",
-  pdf_to_text: "تحويل PDF إلى نص",
+  pdf_to_text: "PDF إلى نص",
+  pdf_to_html: "PDF إلى HTML",
 };
 
 export const landing_page = {
@@ -148,6 +149,14 @@ export const tool = {
     color: "#4493e1",
     type: ".pdf",
     to: "/pdf-to-text",
+  },
+
+  PDF_to_HTML: {
+    title: "PDF إلى HTML",
+    description: "تحويل ملفات PDF إلى مستندات HTML",
+    color: "rgb(228, 77, 38)",
+    type: ".pdf",
+    to: "/pdf-to-html",
   },
 };
 

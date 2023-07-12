@@ -21,6 +21,7 @@ export const nav_content: nav_content_type = {
   pdf_to_excel: "pdf a excel",
   pdf_to_pdf_a: "pdf a pdf/A",
   pdf_to_text: "PDF a texto",
+  pdf_to_html: "PDF a HTML",
 };
 
 export const landing_page = {
@@ -151,6 +152,14 @@ export const tool = {
     color: "#4493e1",
     type: ".pdf",
     to: "/pdf-to-text",
+  },
+
+  PDF_to_HTML: {
+    title: "PDF a HTML",
+    description: "Convierte archivos PDF a documentos HTML",
+    color: "rgb(228, 77, 38)",
+    type: ".pdf",
+    to: "/pdf-to-html",
   },
 };
 

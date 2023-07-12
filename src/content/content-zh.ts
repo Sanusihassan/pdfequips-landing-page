@@ -19,6 +19,7 @@ export const nav_content = {
   pdf_to_excel: "PDF转Excel",
   pdf_to_pdf_a: "PDF转PDF/A",
   pdf_to_text: "PDF 转文本",
+  pdf_to_html: "PDF 到 HTML",
 };
 
 export const landing_page = {
@@ -145,6 +146,14 @@ export const tool = {
     color: "#4493e1",
     type: ".pdf",
     to: "/pdf-to-text",
+  },
+
+  PDF_to_HTML: {
+    title: "PDF 转 HTML",
+    description: "将 PDF 文件转换为 HTML 文档",
+    color: "rgb(228, 77, 38)",
+    type: ".pdf",
+    to: "/pdf-to-html",
   },
 };
 

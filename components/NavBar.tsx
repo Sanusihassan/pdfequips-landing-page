@@ -2,7 +2,12 @@ import { Navbar, Nav } from "react-bootstrap";
 
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { ToolState, resetErrorMessage, showTool, setEndpoint } from "../src/store";
+import {
+  ToolState,
+  resetErrorMessage,
+  showTool,
+  setEndpoint,
+} from "../src/store";
 
 import type { nav_content } from "../content";
 import { useRouter } from "next/router";
@@ -27,11 +32,15 @@ const NavBar = ({
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
   // defining files;
   let files: File[] = [];
-  // the problem 
+  // the problem
   useEffect(() => {
-    let fileInputElement = document.querySelector(".tools-page form input.position-absolute.file-input");
-    if(fileInputElement) {
-      files = (Array.from((fileInputElement as HTMLInputElement).files as unknown as FileList));
+    let fileInputElement = document.querySelector(
+      ".tools-page form input.position-absolute.file-input"
+    );
+    if (fileInputElement) {
+      files = Array.from(
+        (fileInputElement as HTMLInputElement).files as unknown as FileList
+      );
     }
   }, []);
   function handleClick(
@@ -45,7 +54,11 @@ const NavBar = ({
   }
   let langPath = lang.length > 0 ? `/${lang}/` : "/";
   return (
-    <Navbar bg="light" expand="lg" className={`${path !== "/markdown-to-pdf"? "shadow": ""}`}>
+    <Navbar
+      bg="light"
+      expand="lg"
+      className={`${path !== "markdown-to-pdf" ? "shadow" : ""}`}
+    >
       <Link href={`/${lang}`}>
         <a
           onClick={handleClick}

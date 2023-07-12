@@ -106,4 +106,5 @@ export const routes = {
   "/pdf-to-pdf-a": { item: tool["PDF_to_PDF_A"] },
   "/web-to-pdf": { item: tool["Web_to_PDF"] },
   "/pdf-to-text": { item: tool["PDF_to_Text"] },
+  "/pdf-to-html": { item: tool["PDF_to_HTML"] },
 };
