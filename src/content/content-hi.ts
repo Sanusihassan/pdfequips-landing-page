@@ -1,4 +1,12 @@
-import type { nav_content as nav_content_type } from "../../content";
+import type {
+  nav_content as nav_content_type,
+  tool as _tool,
+  web2pdftool as _web2pdftool,
+  tools as _tools,
+  edit_page as _edit_page,
+  footer as _footer,
+  errors as _errors,
+} from "../../content";
 
 export const nav_content: nav_content_type = {
   // इसे अनदेखा करें
@@ -23,6 +31,7 @@ export const nav_content: nav_content_type = {
   pdf_to_pdf_a: "पीडीएफ से पीडीएफ/ए",
   pdf_to_text: "पाठ के लिए पीडीएफ",
   pdf_to_html: "पीडीएफ से एचटीएमएल",
+  pdf_to_markdown: "PDF से मार्कडाउन तक",
 };
 export const landing_page = {
   hero: {
@@ -31,7 +40,7 @@ export const landing_page = {
       "अपने पीडीएफ़ वर्कफ़्लो को अगले स्तर पर ले जाएँ - PDFEquips एक ही स्थान पर सभी आवश्यक टूल प्रदान करता है।",
   },
 };
-export const tool = {
+export const tool: _tool = {
   Merge_PDF: {
     title: "पीडीएफ विलय",
     description: "एक दस्तावेज में कई पीडीएफ फ़ाइलों को जोड़ें",
@@ -158,6 +167,14 @@ export const tool = {
     color: "rgb(228, 77, 38)",
     type: ".pdf",
     to: "/pdf-to-html",
+  },
+
+  PDF_to_Markdown: {
+    title: "PDF से मार्कडाउन तक",
+    description: "PDF फ़ाइलों को मार्कडाउन प्रारूप में रूपांतरित करें",
+    color: "#FF4136",
+    type: ".pdf",
+    to: "/pdf-to-markdown",
   },
 };
 export const edit_page = {

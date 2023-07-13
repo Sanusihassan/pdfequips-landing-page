@@ -1,10 +1,22 @@
-.convert-dropdown {
-  * {
-    unicode-bidi: isolate;
-  }
-}
 
 .navbar {
+  .convert-dropdown {
+    * {
+      unicode-bidi: isolate;
+    }
+    [aria-labelledby="basic-nav-dropdown"] {
+      .converter-title {
+        [lang=ar] & {
+          padding-right: 1.5rem;
+        }
+        :not([lang=ar]) & {
+          padding-left: 1.5rem;
+        }
+      }
+      
+    }
+  }
+  
   .lang-dropdown {
     $val: calc(100% - 60px);
 

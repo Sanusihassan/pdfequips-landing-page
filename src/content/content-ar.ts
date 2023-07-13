@@ -1,4 +1,12 @@
-import type { nav_content as nav_content_type } from "../../content";
+import type {
+  nav_content as nav_content_type,
+  tool as _tool,
+  web2pdftool as _web2pdftool,
+  tools as _tools,
+  edit_page as _edit_page,
+  footer as _footer,
+  errors as _errors,
+} from "../../content";
 
 //
 export const nav_content: nav_content_type = {
@@ -23,6 +31,7 @@ export const nav_content: nav_content_type = {
   pdf_to_pdf_a: "PDF إلى PDF/A",
   pdf_to_text: "PDF إلى نص",
   pdf_to_html: "PDF إلى HTML",
+  pdf_to_markdown: "PDF إلى Markdown",
 };
 
 export const landing_page = {
@@ -33,7 +42,7 @@ export const landing_page = {
   },
 };
 
-export const tool = {
+export const tool: _tool = {
   Merge_PDF: {
     title: "دمج PDF",
     description: "دمج ملفات PDF متعددة في مستند واحد",
@@ -158,20 +167,28 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-html",
   },
+
+  PDF_to_Markdown: {
+    title: "PDF إلى Markdown",
+    description: "تحويل ملفات PDF إلى تنسيق Markdown",
+    color: "#FF4136",
+    type: ".pdf",
+    to: "/pdf-to-markdown",
+  },
 };
 
-export const web2pdftool = {
+export const web2pdftool: _web2pdftool = {
   placeholder: "مثال: https://pdfequips.com",
   submit_btn: "تحويل",
 };
 
-export const tools = {
+export const tools: _tools = {
   select: "اختر",
   or_drop: "أو قم بإسقاط الملفات هنا",
   files: "ملفات",
   drop_files: "قم بوضع الملفات هنا",
 };
-export const edit_page = {
+export const edit_page: _edit_page = {
   edit_page_titles: {
     merge_pdf: "خيارات دمج ملف PDF",
     split_pdf: "خيارات تقسيم ملف PDF",
@@ -228,14 +245,14 @@ export const edit_page = {
   `,
 };
 
-export const footer = {
+export const footer: _footer = {
   brand: "PDFEquips",
   terms: "الشروط",
   conditions: "والأحكام",
   privacy_policy: "سياسة الخصوصية",
 };
 
-export const errors = {
+export const errors: _errors = {
   EMPTY_FILE: {
     message: "الملف فارغ. يرجى اختيار ملف صالح.",
     code: "ERR_EMPTY_FILE",

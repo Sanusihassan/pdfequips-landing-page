@@ -4,7 +4,7 @@
       background-color: $color;
 
       &:hover {
-        @if $key == "PDF-to-PDF-A" {
+        @if $key == "PDF-to-PDF-A" or $key == "pdf-to-markdown" {
           background-color: lighten($color, 14%);
         } @else {
           background-color: darken($color, 13%);

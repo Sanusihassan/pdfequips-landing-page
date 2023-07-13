@@ -1,4 +1,13 @@
-export const nav_content = {
+import type {
+  nav_content as _nav_content,
+  tool as _tool,
+  web2pdftool as _web2pdftool,
+  tools as _tools,
+  edit_page as _edit_page,
+  footer as _footer,
+  errors as _errors,
+} from "../../content";
+export const nav_content: _nav_content = {
   brand: "Equips",
   merge_pdf: "合并PDF",
   split_pdf: "拆分PDF",
@@ -20,6 +29,7 @@ export const nav_content = {
   pdf_to_pdf_a: "PDF转PDF/A",
   pdf_to_text: "PDF 转文本",
   pdf_to_html: "PDF 到 HTML",
+  pdf_to_markdown: "PDF 到 Markdown",
 };
 
 export const landing_page = {
@@ -30,7 +40,7 @@ export const landing_page = {
   },
 };
 
-export const tool = {
+export const tool: _tool = {
   Merge_PDF: {
     title: "合并PDF",
     description: "将多个PDF文件合并成一个文档",
@@ -154,6 +164,14 @@ export const tool = {
     color: "rgb(228, 77, 38)",
     type: ".pdf",
     to: "/pdf-to-html",
+  },
+
+  PDF_to_Markdown: {
+    title: "PDF 转 Markdown",
+    description: "将 PDF 文件转换为 Markdown 格式",
+    color: "#FF4136",
+    type: ".pdf",
+    to: "/pdf-to-markdown",
   },
 };
 

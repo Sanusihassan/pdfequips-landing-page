@@ -34,7 +34,7 @@ const ConvertPDFDropdown = ({
       >
         <div className="d-flex flex-row w-100 flex-wrap drop-down-container">
           <div className="col-12 col-md-6">
-            <h6 className="pl-2">
+            <h6 className="converter-title">
               {" "}
               <bdi>{nav_content.convert_to_pdf}</bdi>{" "}
             </h6>
@@ -105,7 +105,7 @@ const ConvertPDFDropdown = ({
             </Link>
           </div>
           <div className="col-12 col-md-6">
-            <h6 className="pl-2">
+            <h6 className="converter-title">
               {" "}
               <bdi>{nav_content.convert_from_pdf}</bdi>{" "}
             </h6>
@@ -179,6 +179,13 @@ const ConvertPDFDropdown = ({
                 {" "}
                 <bdi>{nav_content.pdf_to_html}</bdi>{" "}
                 <CodeIcon className="h-5 w-5 inline-block mr-2 html" />
+              </a>
+            </Link>
+            <Link href={`${langPath}pdf-to-markdown`}>
+              <a onClick={handleClick} className="dropdown-item">
+                {" "}
+                <bdi>{nav_content.pdf_to_markdown}</bdi>{" "}
+                <MarkdownIcon className="h-5 w-5 inline-block mr-2 web" />{" "}
               </a>
             </Link>
           </div>

@@ -1,4 +1,12 @@
-import type { nav_content as nav_content_type } from "../../content";
+import type {
+  nav_content as nav_content_type,
+  tool as _tool,
+  web2pdftool as _web2pdftool,
+  tools as _tools,
+  edit_page as _edit_page,
+  footer as _footer,
+  errors as _errors,
+} from "../../content";
 
 export const nav_content: nav_content_type = {
   brand: "Equips",
@@ -21,7 +29,8 @@ export const nav_content: nav_content_type = {
   pdf_to_excel: "pdf en excel",
   pdf_to_pdf_a: "pdf en pdf/A",
   pdf_to_text: "PDF en texte",
-  pdf_to_html: "PDF vers HTML"
+  pdf_to_html: "PDF vers HTML",
+  pdf_to_markdown: "PDF à Markdown",
 };
 
 export const landing_page = {
@@ -32,7 +41,7 @@ export const landing_page = {
   },
 };
 
-export const tool = {
+export const tool: _tool = {
   Merge_PDF: {
     title: "Fusionner PDF",
     description: "Combine multiple PDF files into one document",
@@ -149,14 +158,22 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-text",
   },
-  
+
   PDF_to_HTML: {
     title: "PDF vers HTML",
     description: "Convertir des fichiers PDF en documents HTML",
     color: "rgb(228, 77, 38)",
     type: ".pdf",
     to: "/pdf-to-html",
-    },
+  },
+
+  PDF_to_Markdown: {
+    title: "PDF vers Markdown",
+    description: "Convertir des fichiers PDF au format Markdown",
+    color: "#FF4136",
+    type: ".pdf",
+    to: "/pdf-to-markdown",
+  },
 };
 
 export const web2pdftool = {

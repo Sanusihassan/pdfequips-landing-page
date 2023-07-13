@@ -26,6 +26,7 @@ export const nav_content = {
   pdf_to_pdf_a: "PDF to PDF/A",
   pdf_to_text: "PDF to text",
   pdf_to_html: "PDF to HTML",
+  pdf_to_markdown: "PDF to Markdown",
 };
 export const landing_page = {
   hero: {
@@ -161,6 +162,14 @@ export const tool = {
     color: "rgb(228, 77, 38)",
     type: ".pdf",
     to: "/pdf-to-html",
+  },
+
+  PDF_to_Markdown: {
+    title: "PDF to Markdown",
+    description: "Convert PDF files to Markdown format",
+    color: "#FF4136",
+    type: ".pdf",
+    to: "/pdf-to-markdown",
   },
 };
 // translate the values of this object to french
