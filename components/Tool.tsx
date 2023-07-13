@@ -110,7 +110,7 @@ const Tool: React.FC<ToolProps> = ({
         } else {
           clearInterval(t);
           dispatch(resetErrorMessage());
-          if(typeof window !== "undefined") {
+          if (typeof window !== "undefined") {
             // window.removeEventListener("focus", focusHandler);
           }
         }
@@ -138,7 +138,7 @@ const Tool: React.FC<ToolProps> = ({
     return () => {
       clearInterval(t);
       document.removeEventListener("dragover", preventDefault);
-      if(typeof window !== "undefined") {
+      if (typeof window !== "undefined") {
         // window.removeEventListener("focus", focusHandler);
       }
     };
@@ -148,9 +148,9 @@ const Tool: React.FC<ToolProps> = ({
     <>
       {path === "web-to-pdf" ? (
         <Web2PDF content={data} web2pdftool={web2pdftool} />
-      ) : path === 'markdown-to-pdf' ? (
-        <Markdown2PDF />
-        
+      ) : path === "markdown-to-pdf" ? (
+        // <Markdown2PDF />
+        <div>soon...</div>
       ) : (
         <div
           className="tools-page container-fluid position-relative"

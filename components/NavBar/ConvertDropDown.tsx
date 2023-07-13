@@ -91,18 +91,18 @@ const ConvertPDFDropdown = ({
                 <bdi>{nav_content.html_to_pdf}</bdi>{" "}
               </a>
             </Link>
-            <Link className="dropdown-item" href={`${langPath}web-to-pdf`}>
+            {/* <Link className="dropdown-item" href={`${langPath}web-to-pdf`}>
               <a onClick={handleClick} className="dropdown-item">
                 <GlobeIcon className="h-5 w-5 inline-block mr-2 web" />{" "}
                 <bdi>{nav_content.web_to_pdf}</bdi>{" "}
               </a>
-            </Link>
-            <Link className="dropdown-item" href={`${langPath}markdown-to-pdf`}>
+            </Link> */}
+            {/* <Link className="dropdown-item" href={`${langPath}markdown-to-pdf`}>
               <a onClick={handleClick} className="dropdown-item">
                 <MarkdownIcon className="h-5 w-5 inline-block mr-2 web" />{" "}
                 <bdi>{nav_content.markdown_to_pdf}</bdi>{" "}
               </a>
-            </Link>
+            </Link> */}
           </div>
           <div className="col-12 col-md-6">
             <h6 className="converter-title">
@@ -167,7 +167,7 @@ const ConvertPDFDropdown = ({
                 <DocumentAddIcon className="h-5 w-5 inline-block mr-2" />
               </a>
             </Link>
-            <Link href={`${langPath}pdf-to-text`}>
+            {/* <Link href={`${langPath}pdf-to-text`}>
               <a onClick={handleClick} className="dropdown-item">
                 {" "}
                 <bdi>{nav_content.pdf_to_text}</bdi>{" "}
@@ -187,7 +187,7 @@ const ConvertPDFDropdown = ({
                 <bdi>{nav_content.pdf_to_markdown}</bdi>{" "}
                 <MarkdownIcon className="h-5 w-5 inline-block mr-2 web" />{" "}
               </a>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </NavDropdown>
