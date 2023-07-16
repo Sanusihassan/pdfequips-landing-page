@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
 import DisplayFile from "./DisplayFile";
-import { ToolState, setIsSubmitted, resetErrorMessage } from "../src/store";
-import { useDispatch, useSelector } from "react-redux";
-import { RefObject, useEffect, useState } from "react";
+import { RefObject, useContext, useEffect, useState } from "react";
 
 import Options, { OptionsProps } from "./DisplayFile/Options";
 import type { edit_page } from "../content";
@@ -10,6 +8,7 @@ import ErrorElement from "./ErrorElement";
 import type { errors as _ } from "../content";
 import { Spinner } from "react-bootstrap";
 import { CogIcon } from "@heroicons/react/outline";
+import { ToolStoreContext } from "../src/ToolStoreContext";
 
 type editPageProps = {
   extension: string;
@@ -35,23 +34,24 @@ const EditPage = ({
   const handleOnlineStatus = () => setIsOnline(true);
   const handleOfflineStatus = () => setIsOnline(false);
   const [showOptions, setShowOptions] = useState(false);
-  const state = useSelector((state: { tool: ToolState }) => state.tool);
+  const state = useContext(ToolStoreContext);
   // actual files;
   const [files, setFiles] = useState<File[]>([]);
   useEffect(() => {
     const fileInputElement = fileInput.current;
+    console.log("ENDPOINT IS => ", state?.endpoint);
     if (fileInputElement) {
       setFiles(Array.from(fileInputElement.files as unknown as FileList));
     }
     if (isOnline && !(k == "merge-pdf" && files.length == 1)) {
-      dispatch(resetErrorMessage());
+      state?.resetErrorMessage();
     }
     if (
-      state.errorCode == "ERR_EMPTY_FILE" &&
+      state?.errorCode == "ERR_EMPTY_FILE" &&
       files.length > 0 &&
       !(k == "merge-pdf" && files.length == 1)
     ) {
-      dispatch(resetErrorMessage());
+      state?.resetErrorMessage();
     }
     window.addEventListener("online", handleOnlineStatus);
     window.addEventListener("offline", handleOfflineStatus);
@@ -61,19 +61,18 @@ const EditPage = ({
       window.removeEventListener("offline", handleOfflineStatus);
     };
   }, []);
-  const dispatch = useDispatch();
   function SubmitBtn({ k }: { k: string }): JSX.Element {
     return (
       <button
         className={`submit-btn btn btn-lg text-white position-relative overflow-hidden ${k}`}
         onClick={() => {
-          dispatch(setIsSubmitted(true));
+          state?.setIsSubmitted(true);
           setShowOptions(false);
           if (submitBtn.current) {
             submitBtn.current.click();
           }
         }}
-        disabled={state.errorMessage.length > 0}
+        disabled={state!.errorMessage.length > 0}
       >
         <bdi>
           {
@@ -82,7 +81,7 @@ const EditPage = ({
             ]
           }
         </bdi>{" "}
-        {state.isSubmitted ? (
+        {state?.isSubmitted ? (
           <Spinner
             as="span"
             animation="grow"
@@ -97,7 +96,7 @@ const EditPage = ({
   const router = useRouter();
   let k = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
   return (
-    <aside className={`edit-page ${state.showTool ? "d-none" : ""}`}>
+    <aside className={`edit-page ${state?.showTool ? "d-none" : ""}`}>
       <section className="edit-area">
         <DisplayFile
           extension={extension}
@@ -108,7 +107,7 @@ const EditPage = ({
           edit_page={edit_page}
           fileInput={fileInput}
         />
-        {state.showErrorMessage ? <ErrorElement state={state} /> : null}
+        {state?.showErrorMessage ? <ErrorElement state={state} /> : null}
         {/* when clicking on this  */}
         <button
           className="gear-button btn btn-light"

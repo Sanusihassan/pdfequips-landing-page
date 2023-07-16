@@ -1,4 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+// @ts-ignore
+// i think that this store contains h
+import { observable, action, makeObservable } from "mobx";
+import type { errors } from "./content/content";
+type ErrorCode = keyof typeof errors;
+
 
 export interface ToolState {
   showTool: boolean;
@@ -19,57 +24,78 @@ const initialState: ToolState = {
   compressPdf: "recommended",
   errorCode: null,
   endpoint: "",
-  rerender: false
+  rerender: false,
 };
 
-const toolSlice = createSlice({
-  name: "tool",
-  initialState,
-  reducers: {
-    showTool(state: ToolState) {
-      state.showTool = true;
-    },
-    setRerender(state: ToolState) {
-      state.rerender = !state.rerender;
-    },
-    hideTool(state: ToolState) {
-      state.showTool = false;
-    },
-    setEndpoint(state: ToolState, action: PayloadAction<string>) {
-      state.endpoint = action.payload;
-    },
-    setErrorMessage(state: ToolState, action: PayloadAction<string>) {
-      state.errorMessage = action.payload;
-      state.showErrorMessage = true; // set the showErrorMessage property to true when an error message is set
-    },
-    resetErrorMessage(state: ToolState) {
-      state.errorMessage = "";
-      state.showErrorMessage = false; // reset the showErrorMessage property to false when the error message is reset
-      state.errorCode = null;
-      state.isSubmitted = false;
-    },
-    setCompressPdf(state: ToolState, action: PayloadAction<string | number>) {
-      state.compressPdf = action.payload;
-    },
-    setErrorCode(state: ToolState, action: PayloadAction<string | null>) {
-      state.errorCode = action.payload;
-    },
-    setIsSubmitted(state: ToolState, action: PayloadAction<boolean>) {
-      state.isSubmitted = action.payload;
-    }
-  },
-});
+export class ToolStore {
+  //   Property 'showTool' has no initializer and is not definitely assigned in the constructor.ts(2564)
+  // (property) ToolStore.showTool: boolean
+  showTool: boolean = false;
+  isSubmitted: boolean = false;
+  rerender: boolean = false;
+  errorMessage: string = "";
+  showErrorMessage: boolean = false;
+  compressPdf: string | number = 0;
+  errorCode: string | null = null;
+  endpoint: string = "";
 
-export const {
-  showTool,
-  hideTool,
-  setErrorMessage,
-  resetErrorMessage,
-  setCompressPdf,
-  setErrorCode,
-  setIsSubmitted,
-  setEndpoint,
-  setRerender
-} = toolSlice.actions;
+  constructor() {
+    makeObservable(this, {
+      showTool: observable,
+      isSubmitted: observable,
+      rerender: observable,
+      errorMessage: observable,
+      showErrorMessage: observable,
+      compressPdf: observable,
+      errorCode: observable,
+      endpoint: observable,
+      setShowTool: action,
+      setRerender: action,
+      setEndpoint: action,
+      setErrorMessage: action,
+      resetErrorMessage: action,
+      setCompressPdf: action,
+      setErrorCode: action,
+      setIsSubmitted: action,
+    });
+    Object.assign(this, initialState);
+  }
+  setShowTool(show: boolean) {
+    this.showTool = show;
+  }
 
-export default toolSlice.reducer;
+  setRerender = () => {
+    this.rerender = !this.rerender;
+  };
+
+  setEndpoint = (endpoint: string) => {
+    this.endpoint = endpoint;
+  };
+
+  setErrorMessage = (errorMessage: string) => {
+    this.errorMessage = errorMessage;
+    this.showErrorMessage = true;
+  };
+
+  resetErrorMessage = () => {
+    this.errorMessage = "";
+    this.showErrorMessage = false;
+    this.errorCode = null;
+    this.isSubmitted = false;
+  };
+
+  setCompressPdf = (compressPdf: string | number) => {
+    this.compressPdf = compressPdf;
+  };
+
+  setErrorCode = (errorCode: ErrorCode) => {
+    this.errorCode = errorCode;
+  };
+
+  setIsSubmitted = (isSubmitted: boolean) => {
+    this.isSubmitted = isSubmitted;
+  };
+}
+
+const toolStore = new ToolStore();
+export default toolStore;

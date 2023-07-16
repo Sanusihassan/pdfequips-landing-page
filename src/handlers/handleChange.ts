@@ -1,21 +1,17 @@
-// extract the logic of the files validation into a function, because i want to use it in multiple places
-import { Dispatch } from "react";
-import { hideTool, resetErrorMessage } from "../store";
-
 import type { errors as _ } from "../content/content"; // import the errors constant
-import { AnyAction } from "@reduxjs/toolkit";
+import type { ToolStore } from "../store";
 import { validateFiles } from "../utils"
 export const handleChange = (
   e: React.ChangeEvent<HTMLInputElement>,
-  dispatch: Dispatch<AnyAction>,
+  state: ToolStore | undefined,
   extension: string,
   errors: typeof _
 ) => {
 
   const _files = (e.target?.files as FileList) || null;
-  const isValid = validateFiles(_files, extension, errors, dispatch);
-  dispatch(hideTool());
+  const isValid = validateFiles(_files, extension, errors, state);
+  state?.setShowTool(false);
   if (isValid) {
-    dispatch(resetErrorMessage());
+    state?.resetErrorMessage();
   }
 };

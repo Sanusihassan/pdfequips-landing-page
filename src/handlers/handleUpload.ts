@@ -2,27 +2,18 @@ import axios from "axios";
 import { Dispatch, RefObject } from "react";
 import type { ToolData, errorType } from "../../components/Tool";
 import { downloadConvertedFile } from "../downloadFile";
-import {
-  ToolState,
-  setErrorMessage,
-  setErrorCode,
-  resetErrorMessage,
-  setIsSubmitted,
-} from "../store";
-import { AnyAction } from "@reduxjs/toolkit";
 import type { errors as _ } from "../../content";
+import { ToolStore } from "../store";
 // this is the handleUpload function that is calling the download function maybe the issue is here
 export const handleUpload = async (
   e: React.FormEvent<HTMLFormElement>,
   fileInput: RefObject<HTMLInputElement>,
-  data: ToolData,
   downloadBtn: RefObject<HTMLAnchorElement>,
-  dispatch: Dispatch<AnyAction>,
-  state: ToolState,
+  state: ToolStore | undefined,
   errors: _
 ) => {
   e.preventDefault();
-  dispatch(setIsSubmitted(true));
+  state?.setIsSubmitted(true);
   const files = (fileInput.current as HTMLInputElement).files;
   if (!files) return;
 
@@ -31,17 +22,18 @@ export const handleUpload = async (
     formData.append("files", files[i]);
   }
   let url;
+  // @ts-ignore
   if (process.env.NODE_ENV === "development") {
     // url = `http://127.0.0.1:5000/${state.endpoint}`;
-    url = `https://5000-planetcreat-pdfequipsap-6i47x1zgnkc.ws-eu101.gitpod.io/${state.endpoint}`;
+    url = `https://5000-planetcreat-pdfequipsap-6i47x1zgnkc.ws-eu101.gitpod.io/${state?.endpoint}`;
   } else {
-    url = `/${state.endpoint}`;
+    url = `/${state?.endpoint}`;
   }
-  console.log("endpoint is => ", state.endpoint);
-  if (state.errorMessage) {
+  console.log("endpoint is => ", state?.endpoint);
+  if (state?.errorMessage) {
     return;
   }
-  formData.append("compress_amount", String(state.compressPdf));
+  formData.append("compress_amount", String(state?.compressPdf));
   const originalFileName = files[0]?.name?.split(".").slice(0, -1).join(".");
 
   const mimeTypeLookupTable: {
@@ -108,12 +100,12 @@ export const handleUpload = async (
     if (response.status !== 200) {
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
-      dispatch(resetErrorMessage());
-      dispatch(setIsSubmitted(false));
+      state?.resetErrorMessage();
+      state?.setIsSubmitted(false);
     }
   } catch (error) {
     if ((error as { code: string }).code === "ERR_NETWORK") {
-      dispatch(setErrorMessage(errors.ERR_NETWORK.message));
+      state?.setErrorMessage(errors.ERR_NETWORK.message);
       return;
     }
 
@@ -129,8 +121,8 @@ export const handleUpload = async (
     //   dispatch(setIsSubmitted(false));
     // });
 
-    dispatch(setIsSubmitted(false));
+    state?.setIsSubmitted(false);
   } finally {
-    dispatch(setIsSubmitted(false));
+    state?.setIsSubmitted(false);
   }
 };

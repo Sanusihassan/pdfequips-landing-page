@@ -1,19 +1,10 @@
 // i think this file is very crowded, i want to extract logics, and components to other files
 // what should i extract from it...
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useContext } from "react";
 import { useDropzone } from "react-dropzone";
 
 import EditPage from "./EditPage";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  ToolState,
-  hideTool,
-  resetErrorMessage,
-  setErrorMessage,
-  setErrorCode,
-  setEndpoint,
-  setRerender,
-} from "../src/store";
+import { ToolStoreContext } from "../src/ToolStoreContext";
 import { useRouter } from "next/router";
 import type { edit_page, tools, web2pdftool } from "../content";
 import { handleUpload } from "../src/handlers/handleUpload";
@@ -60,8 +51,9 @@ const Tool: React.FC<ToolProps> = ({
   page,
   web2pdftool,
 }) => {
-  const state = useSelector((state: { tool: ToolState }) => state.tool);
-  const dispatch = useDispatch();
+  const state = useContext(ToolStoreContext);
+
+  // const dispatch = useDispatch();
   const [userClickedOnFileUploader, setUserClickedOnFileUploader] =
     useState(false);
 
@@ -70,9 +62,9 @@ const Tool: React.FC<ToolProps> = ({
   const downloadBtn = useRef<HTMLAnchorElement>(null);
   const router = useRouter();
   let _files: FileList | null = null;
-
+  // i want mobx version of this
   const handleHideTool = () => {
-    dispatch(hideTool());
+    state?.setShowTool(false);
   };
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
 
@@ -85,7 +77,7 @@ const Tool: React.FC<ToolProps> = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   // file input change handler
-  let showTool = state.showTool && state.errorMessage?.length > 0;
+  let showTool = state?.showTool && state?.errorMessage?.length > 0;
   // accepted file types
   const acceptedFileTypes = {
     ".pdf": ".pdf, .PDF",
@@ -95,6 +87,7 @@ const Tool: React.FC<ToolProps> = ({
     ".jpg": ".jpg, .jpeg",
     ".html": ".html, .htm",
   };
+  // @ts-ignore
   let t: NodeJS.Timer;
   // actual files;
   const [files, setFiles] = useState<File[]>([]);
@@ -104,16 +97,18 @@ const Tool: React.FC<ToolProps> = ({
       let a: File[] = [];
       if (fileInputElement) {
         a = Array.from(fileInputElement.files as unknown as FileList);
+        // change these to mobx syntax
         if (a.length === 0) {
-          dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
-          dispatch(setErrorCode("ERR_EMPTY_FILE"));
+          state?.setErrorMessage(errors.NO_FILES_SELECTED.message);
+
+          state?.setErrorCode("EMPTY_FILE");
         } else if (
-          state.errorCode == "ERR_EMPTY_FILE" &&
+          state?.errorCode == "EMPTY_FILE" &&
           a.length > 0 &&
           path != "merge-pdf"
         ) {
           clearInterval(t);
-          dispatch(resetErrorMessage());
+          state?.resetErrorMessage();
           if (typeof window !== "undefined") {
             window.removeEventListener("focus", focusHandler);
           }
@@ -128,18 +123,18 @@ const Tool: React.FC<ToolProps> = ({
     const preventDefault = (event: DragEvent) => {
       event.preventDefault();
     };
-    dispatch(setEndpoint(path));
+    state?.setEndpoint(path);
     document.addEventListener("dragover", preventDefault);
     document.addEventListener("click", (e) => e.preventDefault());
     if (userClickedOnFileUploader && typeof window !== "undefined") {
       window.addEventListener("focus", focusHandler);
     }
     if (
-      state.errorCode == "ERR_EMPTY_FILE" &&
+      state?.errorCode == "ERR_EMPTY_FILE" &&
       files.length > 0 &&
       path != "merge-pdf"
     ) {
-      dispatch(resetErrorMessage());
+      state?.resetErrorMessage();
     }
     return () => {
       clearInterval(t);
@@ -148,7 +143,7 @@ const Tool: React.FC<ToolProps> = ({
         window.removeEventListener("focus", focusHandler);
       }
     };
-  }, [userClickedOnFileUploader, state.rerender]);
+  }, [userClickedOnFileUploader, state?.rerender]);
 
   return (
     <>
@@ -160,7 +155,7 @@ const Tool: React.FC<ToolProps> = ({
       ) : (
         <div
           className="tools-page container-fluid position-relative"
-          {...(state.showTool && getRootProps())}
+          {...(state?.showTool && getRootProps())}
           onClick={(e) => {
             e.preventDefault();
           }}
@@ -171,7 +166,7 @@ const Tool: React.FC<ToolProps> = ({
           <div
             className={`text-center ${
               !showTool ? "" : "d-flex"
-            } flex-column tools ${state.showTool ? "" : "d-none"}`}
+            } flex-column tools ${state?.showTool ? "" : "d-none"}`}
           >
             <h2 className="display-3">
               <bdi>{data.title}</bdi>
@@ -187,9 +182,7 @@ const Tool: React.FC<ToolProps> = ({
                 handleUpload(
                   e,
                   fileInput,
-                  data,
                   downloadBtn,
-                  dispatch,
                   state,
                   errors
                 )
@@ -236,21 +229,21 @@ const Tool: React.FC<ToolProps> = ({
                     setUserClickedOnFileUploader(true);
                   }}
                   onChange={(e) => {
-                    handleChange(e, dispatch, data.type, errors);
-                    dispatch(setRerender());
+                    handleChange(e, state, data.type, errors);
+                    state?.setRerender();
                     _files = e.target?.files;
                     if (path == "merge-pdf" && _files?.length == 1) {
-                      dispatch(
+                      state?.
                         setErrorMessage(errors.ERR_UPLOAD_COUNT.message)
-                      );
-                      dispatch(setErrorCode("ERR_UPLOAD_COUNT"));
+                      
+                        state?.setErrorCode("ERR_UPLOAD_COUNT")
                     } else if (
                       (_files && _files.length > 0) ||
                       (files.length > 0 && path != "merge-pdf")
                     ) {
-                      dispatch(resetErrorMessage());
+                      state?.resetErrorMessage();
                     }
-                    console.log(state.showErrorMessage);
+                    console.log(state?.showErrorMessage);
                   }}
                 />
               </div>
@@ -267,7 +260,7 @@ const Tool: React.FC<ToolProps> = ({
               </button>
             </form>
             <p>{tools.or_drop}</p>
-            {state.showErrorMessage && userClickedOnFileUploader ? (
+            {state?.showErrorMessage && userClickedOnFileUploader ? (
               <ErrorElement state={state} />
             ) : null}
           </div>

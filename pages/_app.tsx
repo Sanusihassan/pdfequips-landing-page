@@ -2,22 +2,20 @@
 import type { AppContext, AppProps } from "next/app";
 
 import "../index.scss";
+// @ts-ignore
+import { Provider } from "mobx-react-lite";
+import { ToolStoreContext } from "../src/ToolStoreContext";
 
-import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import toolReducer from "../src/store";
+// import { ToolStore } from '../stores/ToolStore';
 
-const store = configureStore({
-  reducer: {
-    tool: toolReducer,
-  },
-});
+import { ToolStore } from "../src/store";
 
 function MyApp({ Component, pageProps, lang }: AppProps & { lang: string }) {
+  const toolStore = new ToolStore();
   return (
-    <Provider store={store}>
+    <ToolStoreContext.Provider value={toolStore}>
       <Component {...pageProps} lang={lang} />
-    </Provider>
+    </ToolStoreContext.Provider>
   );
 }
 MyApp.getInitialProps = async ({

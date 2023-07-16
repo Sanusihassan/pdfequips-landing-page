@@ -1,7 +1,4 @@
-import { useEffect, useState, RefObject } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { ToolState, resetErrorMessage } from "../src/store";
-import { setErrorMessage } from "../src/store";
+import { useEffect, useState, RefObject, useContext } from "react";
 import "react-tooltip/dist/react-tooltip.css";
 
 import {
@@ -18,6 +15,7 @@ import { validateFiles } from "../src/utils";
 
 import type { errors as _, edit_page } from "../content";
 import Files from "./DisplayFile/Files";
+import { ToolStoreContext } from "../src/ToolStoreContext";
 type propTypes = {
   extension: string;
   pages: string;
@@ -44,7 +42,6 @@ const DisplayFile = ({
   edit_page,
   fileInput,
 }: propTypes) => {
-  const dispatch = useDispatch();
   const [imageUrls, setImageUrls] = useState<
     { file: File; imageUrl: string }[]
   >([]);
@@ -52,7 +49,7 @@ const DisplayFile = ({
   const [toolTipSizes, setToolTipSizes] = useState<string[]>([]);
   // actual files
   let files: File[] = [];
-  const store = useSelector((state: { tool: ToolState }) => state.tool);
+  const state = useContext(ToolStoreContext);
   // router
   const router = useRouter();
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
@@ -66,26 +63,26 @@ const DisplayFile = ({
         files = Array.from(fileInputElement.files as unknown as FileList);
       }
     }
-    const isValid = validateFiles(files, extension, errors, dispatch);
+    const isValid = validateFiles(files, extension, errors, state);
     if (!(path == "merge-pdf" && files.length == 1)) {
-      if (store.errorCode == "ERR_EMPTY_FILE" && files.length > 0) {
-        dispatch(resetErrorMessage());
+      if (state?.errorCode == "ERR_EMPTY_FILE" && files.length > 0) {
+        state?.resetErrorMessage();
       }
       if (
         isValid ||
-        (files.length > 0 && store.errorCode == "ERR_EMPTY_FILE")
+        (files.length > 0 && state?.errorCode == "ERR_EMPTY_FILE")
       ) {
         // the cause of the problem
-        dispatch(resetErrorMessage());
+        state?.resetErrorMessage();
       }
     }
     const max_files = 2;
     if (files.length > max_files) {
-      dispatch(setErrorMessage(errors.MAX_FILES_EXCEEDED.message));
+      state?.setErrorMessage(errors.MAX_FILES_EXCEEDED.message);
     }
     let isSubscribed = true;
     const tooltipSizes = files.map((file: File) =>
-      getFileDetailsTooltipContent(file, pages, page, lang, dispatch, errors)
+      getFileDetailsTooltipContent(file, pages, page, lang, state, errors)
     );
     Promise.all(tooltipSizes).then((sizes) => {
       setToolTipSizes(sizes);
@@ -98,7 +95,7 @@ const DisplayFile = ({
         if (extension && extension === ".pdf") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
           const pdfPromises = files.map(async (file: File) => {
-            const imageUrl = await getFirstPageAsImage(file, dispatch, errors);
+            const imageUrl = await getFirstPageAsImage(file, state, errors);
             newImageUrls.push({ file, imageUrl });
           });
 
@@ -144,7 +141,7 @@ const DisplayFile = ({
     return () => {
       isSubscribed = false;
     };
-  }, [extension, store.rerender]);
+  }, [extension, state?.rerender]);
   const handleDragEnd = (result: any) => {
     if (!result.destination) {
       return;
@@ -233,7 +230,7 @@ const DisplayFile = ({
         <Files
           errors={errors}
           extension={extension}
-          store={store}
+          store={state}
           imageUrls={imageUrls}
           setImageUrls={setImageUrls}
           setToolTipSizes={setToolTipSizes}
