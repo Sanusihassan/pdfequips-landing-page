@@ -73,7 +73,7 @@ const EditPage = ({
             submitBtn.current.click();
           }
         }}
-        disabled={state.errorMessage.length > 0}
+        // disabled={state.errorMessage.length > 0}
       >
         <bdi>
           {
