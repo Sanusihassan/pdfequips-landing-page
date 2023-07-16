@@ -1,8 +1,10 @@
 // this is my code:
 import { NextRouter } from "next/router";
-
+// @ts-ignore
 import { getDocument } from "pdfjs-dist";
+// @ts-ignore
 import { PDFDocumentProxy, PageViewport, RenderTask } from "pdfjs-dist";
+// @ts-ignore
 import { GlobalWorkerOptions } from "pdfjs-dist";
 import { Dispatch, useEffect, useMemo, useState } from "react";
 import { setErrorMessage, setErrorCode } from "./store";
@@ -71,7 +73,7 @@ export const getFileDetailsTooltipContent = async (
     emptyPDFHandler(dispatch, errors);
   } else {
     // i'm getting this errors:
-    //   6:39:22.589	           
+    //   6:39:22.589
     // Error {
     //   stack: 'Error: Setting up fake worker failed: "Cannot read properties of undefined (reading \'WorkerMessageHandler\')".\n' +
     //     '    at eval (webpack-internal:///./node_modules/pdfjs-dist/build/pdf.js:1899:36)',
@@ -101,7 +103,6 @@ export const getFileDetailsTooltipContent = async (
         }
       }
     } catch (e) {
-      
       if (!file.size) {
         emptyPDFHandler(dispatch, errors);
       }
@@ -151,6 +152,7 @@ export async function getFirstPageAsImage(
       return canvas.toDataURL();
     } catch (error) {
       dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
+      console.log(error);
       return DEFAULT_PDF_IMAGE; // Return the placeholder image URL when an error occurs
     }
   }

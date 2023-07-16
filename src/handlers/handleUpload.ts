@@ -11,6 +11,7 @@ import {
 } from "../store";
 import { AnyAction } from "@reduxjs/toolkit";
 import type { errors as _ } from "../../content";
+// this is the handleUpload function that is calling the download function maybe the issue is here
 export const handleUpload = async (
   e: React.FormEvent<HTMLFormElement>,
   fileInput: RefObject<HTMLInputElement>,
@@ -32,7 +33,7 @@ export const handleUpload = async (
   let url;
   if (process.env.NODE_ENV === "development") {
     // url = `http://127.0.0.1:5000/${state.endpoint}`;
-    url = `https://5000-sanusihassan-pdfequips-3e8arm49ns0.ws-eu101.gitpod.io/${state.endpoint}`;
+    url = `https://5000-planetcreat-pdfequipsap-6i47x1zgnkc.ws-eu101.gitpod.io/${state.endpoint}`;
   } else {
     url = `/${state.endpoint}`;
   }
@@ -85,7 +86,9 @@ export const handleUpload = async (
   };
 
   try {
-    const response = await axios.post(url, formData);
+    const response = await axios.post(url, formData, {
+      responseType: "arraybuffer",
+    });
     // const originalFileName = files[0]?.name?.split(".").slice(0, -1).join(".");
     const mimeType = response.data.type || response.headers["content-type"];
     const mimeTypeData = mimeTypeLookupTable[mimeType] || {
@@ -94,7 +97,7 @@ export const handleUpload = async (
     };
     const { outputFileMimeType, outputFileName } = mimeTypeData;
     console.log("response type => ", mimeType);
-    console.log("response => ", response);
+    console.log(JSON.stringify(response));
     downloadConvertedFile(
       response,
       outputFileMimeType,
@@ -109,7 +112,6 @@ export const handleUpload = async (
       dispatch(setIsSubmitted(false));
     }
   } catch (error) {
-    
     if ((error as { code: string }).code === "ERR_NETWORK") {
       dispatch(setErrorMessage(errors.ERR_NETWORK.message));
       return;
