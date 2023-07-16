@@ -250,7 +250,7 @@ export const footer = {
   privacy_policy: "隐私政策",
 };
 
-export const errors = {
+export const errors: _errors = {
   EMPTY_FILE: {
     message: "文件为空，请选择一个有效的文件。",
     code: "ERR_EMPTY_FILE",
@@ -305,5 +305,9 @@ export const errors = {
   ERR_NETWORK: {
     message: "网络错误，请检查您的互联网连接并重试。",
     code: "ERR_NETWORK",
+  },
+  ERR_UPLOAD_COUNT: {
+    message: "请至少上传两个文件以合并。",
+    code: "ERR_UPLOAD_COUNT",
   },
 };

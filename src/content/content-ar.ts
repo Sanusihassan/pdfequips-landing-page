@@ -314,4 +314,8 @@ export const errors: _errors = {
       "حدث خطأ في الشبكة. يرجى التحقق من اتصالك بالإنترنت وحاول مرة أخرى.",
     code: "ERR_NETWORK",
   },
+  ERR_UPLOAD_COUNT: {
+    message: "يرجى رفع ملفين على الأقل للدمج.",
+    code: "ERR_UPLOAD_COUNT",
+  },
 };

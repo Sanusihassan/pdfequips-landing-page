@@ -323,10 +323,14 @@ export const errors = {
       "An unknown error occurred. Please try again later or contact support.",
     code: "ERR_UNKNOWN",
   },
-  // please translate the content of the error message to arabic in this object and give me the result.
+  // i want another error like this but when only one file is uploaded
   ERR_NETWORK: {
     message:
       "A network error occurred. Please check your internet connection and try again.",
     code: "ERR_NETWORK",
+  },
+  ERR_UPLOAD_COUNT: {
+    message: "Please upload at least two files to merge.",
+    code: "ERR_UPLOAD_COUNT",
   },
 };

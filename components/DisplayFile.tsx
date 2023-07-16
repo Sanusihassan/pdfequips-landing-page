@@ -25,17 +25,25 @@ type propTypes = {
   lang: string;
   errors: _;
   edit_page: edit_page;
-  fileInput: RefObject<HTMLInputElement>
+  fileInput: RefObject<HTMLInputElement>;
 };
 
-const Loader = ({ loader_text }: { loader_text: string; }) => (
+const Loader = ({ loader_text }: { loader_text: string }) => (
   <div className="loader d-flex justify-content-center align-items-center">
     <Spinner as="span" animation="grow" role="status" aria-hidden="true" />{" "}
     {loader_text}
   </div>
 );
 
-const DisplayFile = ({ extension, pages, page, lang, errors, edit_page, fileInput }: propTypes) => {
+const DisplayFile = ({
+  extension,
+  pages,
+  page,
+  lang,
+  errors,
+  edit_page,
+  fileInput,
+}: propTypes) => {
   const dispatch = useDispatch();
   const [imageUrls, setImageUrls] = useState<
     { file: File; imageUrl: string }[]
@@ -47,22 +55,29 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page, fileInpu
   const store = useSelector((state: { tool: ToolState }) => state.tool);
   // router
   const router = useRouter();
+  let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
   let fileInputElement = fileInput.current;
-  if(fileInputElement) {
-    files = (Array.from(fileInputElement.files as unknown as FileList));
+  if (fileInputElement) {
+    files = Array.from(fileInputElement.files as unknown as FileList);
   }
   useEffect(() => {
-    if(files.length == 0) {
-      if(fileInputElement) {
-        files = (Array.from(fileInputElement.files as unknown as FileList));
+    if (files.length == 0) {
+      if (fileInputElement) {
+        files = Array.from(fileInputElement.files as unknown as FileList);
       }
     }
     const isValid = validateFiles(files, extension, errors, dispatch);
-    if(store.errorCode == "ERR_EMPTY_FILE" && files.length > 0) {
-      dispatch(resetErrorMessage());
-    }
-    if (isValid || (files.length > 0 && store.errorCode == "ERR_EMPTY_FILE")) {
-      dispatch(resetErrorMessage());
+    if (!(path == "merge-pdf" && files.length == 1)) {
+      if (store.errorCode == "ERR_EMPTY_FILE" && files.length > 0) {
+        dispatch(resetErrorMessage());
+      }
+      if (
+        isValid ||
+        (files.length > 0 && store.errorCode == "ERR_EMPTY_FILE")
+      ) {
+        // the cause of the problem
+        dispatch(resetErrorMessage());
+      }
     }
     const max_files = 2;
     if (files.length > max_files) {
@@ -83,11 +98,7 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page, fileInpu
         if (extension && extension === ".pdf") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
           const pdfPromises = files.map(async (file: File) => {
-            const imageUrl = await getFirstPageAsImage(
-              file,
-              dispatch,
-              errors
-            );
+            const imageUrl = await getFirstPageAsImage(file, dispatch, errors);
             newImageUrls.push({ file, imageUrl });
           });
 
@@ -98,8 +109,9 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page, fileInpu
         } else if (extension && extension !== ".jpg") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
           files.forEach((file: File) => {
-
-            let imageUrl = (!file.size) ? "/images/corrupted.png" : getPlaceHoderImageUrl(extension);
+            let imageUrl = !file.size
+              ? "/images/corrupted.png"
+              : getPlaceHoderImageUrl(extension);
             newImageUrls.push({ file, imageUrl });
           });
 
@@ -121,7 +133,6 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page, fileInpu
           });
         }
       } catch (error) {
-
         console.error("Error processing files:", error);
       } finally {
         setShowSpinner(false);
@@ -141,7 +152,6 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page, fileInpu
     // Argument of type 'Blob[]' is not assignable to parameter of type 'File[]'.
     // Type 'Blob' is missing the following properties from type 'File': lastModified, webkitRelativePathts(2345)
     if (isDraggableExtension(extension, router)) {
-      
     }
   };
 
@@ -220,7 +230,15 @@ const DisplayFile = ({ extension, pages, page, lang, errors, edit_page, fileInpu
         //     )}
         //   </Droppable>
         // </DragDropContext>
-        <Files errors={errors} extension={extension} store={store} imageUrls={imageUrls} setImageUrls={setImageUrls} setToolTipSizes={setToolTipSizes} toolTipSizes={toolTipSizes} />
+        <Files
+          errors={errors}
+          extension={extension}
+          store={store}
+          imageUrls={imageUrls}
+          setImageUrls={setImageUrls}
+          setToolTipSizes={setToolTipSizes}
+          toolTipSizes={toolTipSizes}
+        />
       )}
     </>
   );

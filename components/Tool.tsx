@@ -107,19 +107,21 @@ const Tool: React.FC<ToolProps> = ({
         if (a.length === 0) {
           dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
           dispatch(setErrorCode("ERR_EMPTY_FILE"));
-        } else {
+        } else if (
+          state.errorCode == "ERR_EMPTY_FILE" &&
+          a.length > 0 &&
+          path != "merge-pdf"
+        ) {
           clearInterval(t);
           dispatch(resetErrorMessage());
           if (typeof window !== "undefined") {
-            // window.removeEventListener("focus", focusHandler);
+            window.removeEventListener("focus", focusHandler);
           }
         }
       }
     }, 3000);
   }
   useEffect(() => {
-    // the problem with this code is that the files array is never set
-    console.log(path);
     if (fileInputElement) {
       setFiles(Array.from(fileInputElement.files as unknown as FileList));
     }
@@ -130,16 +132,20 @@ const Tool: React.FC<ToolProps> = ({
     document.addEventListener("dragover", preventDefault);
     document.addEventListener("click", (e) => e.preventDefault());
     if (userClickedOnFileUploader && typeof window !== "undefined") {
-      // window.addEventListener("focus", focusHandler);
+      window.addEventListener("focus", focusHandler);
     }
-    if (state.errorCode == "ERR_EMPTY_FILE" && files.length > 0) {
+    if (
+      state.errorCode == "ERR_EMPTY_FILE" &&
+      files.length > 0 &&
+      path != "merge-pdf"
+    ) {
       dispatch(resetErrorMessage());
     }
     return () => {
       clearInterval(t);
       document.removeEventListener("dragover", preventDefault);
       if (typeof window !== "undefined") {
-        // window.removeEventListener("focus", focusHandler);
+        window.removeEventListener("focus", focusHandler);
       }
     };
   }, [userClickedOnFileUploader, state.rerender]);
@@ -233,9 +239,18 @@ const Tool: React.FC<ToolProps> = ({
                     handleChange(e, dispatch, data.type, errors);
                     dispatch(setRerender());
                     _files = e.target?.files;
-                    if ((_files && _files.length > 0) || files.length > 0) {
+                    if (path == "merge-pdf" && _files?.length == 1) {
+                      dispatch(
+                        setErrorMessage(errors.ERR_UPLOAD_COUNT.message)
+                      );
+                      dispatch(setErrorCode("ERR_UPLOAD_COUNT"));
+                    } else if (
+                      (_files && _files.length > 0) ||
+                      (files.length > 0 && path != "merge-pdf")
+                    ) {
                       dispatch(resetErrorMessage());
                     }
+                    console.log(state.showErrorMessage);
                   }}
                 />
               </div>

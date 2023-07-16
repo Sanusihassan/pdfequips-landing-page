@@ -255,7 +255,7 @@ export const footer = {
   privacy_policy: "política de privacidad",
 };
 
-export const errors = {
+export const errors: _errors = {
   EMPTY_FILE: {
     message: "El archivo está vacío. Por favor, elija un archivo válido.",
     code: "ERR_EMPTY_FILE",
@@ -318,5 +318,9 @@ export const errors = {
     message:
       "Ha ocurrido un error en la red. Por favor, comprueba tu conexión a internet e inténtalo de nuevo.",
     code: "ERR_NETWORK",
+  },
+  ERR_UPLOAD_COUNT: {
+    message: "Por favor, suba al menos dos archivos para fusionar.",
+    code: "ERR_UPLOAD_COUNT",
   },
 };

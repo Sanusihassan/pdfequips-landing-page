@@ -33,3 +33,5 @@ file not found error (fixed).
 make the options section a fixed side bar onmobile (done).
 
 add pdf language tools section with (translate pdf) for now.
+
+merge pdf must not allow one file upload, throw error if only 1 file is uploaded (done).

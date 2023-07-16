@@ -250,7 +250,7 @@ export const footer = {
   privacy_policy: "politique de confidentialité",
 };
 
-export const errors = {
+export const errors: _errors = {
   EMPTY_FILE: {
     message: "Le fichier est vide. Veuillez choisir un fichier valide.",
     code: "ERR_EMPTY_FILE",
@@ -313,5 +313,9 @@ export const errors = {
     message:
       "Une erreur de réseau s'est produite. Veuillez vérifier votre connexion Internet et réessayer.",
     code: "ERR_NETWORK",
+  },
+  ERR_UPLOAD_COUNT: {
+    message: "Veuillez télécharger au moins deux fichiers à fusionner.",
+    code: "ERR_UPLOAD_COUNT",
   },
 };
