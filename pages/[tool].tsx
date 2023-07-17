@@ -51,8 +51,6 @@ export default ({ item }: { item: data_type }) => {
   };
 
   return (
-    // Type '{ state: ToolState; dispatch: Dispatch<ToolAction>; }' is not assignable to type 'ToolState'.
-
     <>
       <Head>
         <title>PDFEquips | {item.title}</title>
@@ -60,31 +58,16 @@ export default ({ item }: { item: data_type }) => {
         <link rel="icon" href="/logo.png" />
       </Head>
       <NavBar nav_content={nav_content} lang="" />
-      {path == "/split-pdf" ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center",
-            height: "100%",
-          }}
-        >
-          <h2 className="display-4 text-center">{appology_message.title}</h2>
-          <p className="text-center">{appology_message.reason}</p>
-        </div>
-      ) : (
-        <Tool
-          tools={tools}
-          data={item}
-          lang=""
-          errors={errors}
-          edit_page={edit_page}
-          pages={edit_page.pages}
-          page={edit_page.page}
-          web2pdftool={web2pdftool}
-        />
-      )}
+      <Tool
+        tools={tools}
+        data={item}
+        lang=""
+        errors={errors}
+        edit_page={edit_page}
+        pages={edit_page.pages}
+        page={edit_page.page}
+        web2pdftool={web2pdftool}
+      />
     </>
   );
 };
@@ -107,6 +90,6 @@ export const routes = {
   "/web-to-pdf": { item: tool["Web_to_PDF"] },
   "/pdf-to-text": { item: tool["PDF_to_Text"] },
   "/markdown-to-pdf": { item: tool["Markdown_to_PDF"] },
-  "/pdf-to-html": {item: tool["PDF_to_HTML"]},
-  "/pdf-to-markdown": {item: tool["PDF_to_Markdown"]},
+  "/pdf-to-html": { item: tool["PDF_to_HTML"] },
+  "/pdf-to-markdown": { item: tool["PDF_to_Markdown"] },
 };

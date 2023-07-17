@@ -1,4 +1,3 @@
-// this is my _app.tsx file
 import type { AppContext, AppProps } from "next/app";
 
 import "../index.scss";

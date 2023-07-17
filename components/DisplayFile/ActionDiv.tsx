@@ -1,16 +1,43 @@
 import { RefreshIcon, TrashIcon } from "@heroicons/react/solid";
 import { useRotatedImage, validateFiles } from "../../src/utils";
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useState,
-  useEffect,
-  useContext,
-} from "react";
+import { Dispatch, SetStateAction, useCallback, useContext } from "react";
 
+// this is my actiondiv.tsx i'm able to change the state here
+// and if the user clicks on the delete button it deletes a file from the files array on my store
+// and i'm setting the error message when the user deletes all the files or left one file on merge-pdf route
+// this is all working fine, but the changes are not reflected on the ErrorElement.tsx component:
+/**
+ * const ErrorElement = () => {
+  const state = useContext(ToolStoreContext);
+  useEffect(() => {
+    console.log("showErrorMessage", state?.showErrorMessage);
+  }, []);
+  return (
+    <>
+      <div
+        className="error-element alert alert-danger text-center mt-3"
+        role="alert"
+        style={{ display: state?.showErrorMessage ? "block" : "none" }}
+      >
+        <ExclamationCircleIcon
+          className="w-5 h-5 hide-on-ltr"
+          viewBox="0 0 22 22"
+        />{" "}
+        <bdi className="d-inline-flex">{state?.errorMessage}</bdi>{" "}
+        <ExclamationCircleIcon
+          className="w-5 h-5 hide-on-rtl"
+          viewBox="0 0 22 22"
+        />
+      </div>
+    </>
+  );
+};
+
+ */
 import type { errors as _ } from "../../content";
 import { ToolStoreContext } from "../../src/ToolStoreContext";
+import { useRouter } from "next/router";
+import { ToolStore } from "../../src/store";
 
 export type ActionProps = {
   index: number;
@@ -30,6 +57,11 @@ export type ActionProps = {
   errors: _;
 };
 
+/**
+ * it's working fine, but the changes from this actiondiv component is not reflected ouside of it
+ * it's a next.js app, the updates are not available on other components
+ */
+
 export const ActionDiv = ({
   index,
   imageUrls,
@@ -37,11 +69,35 @@ export const ActionDiv = ({
   extension,
   errors,
 }: ActionProps) => {
+  const handleClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    state: ToolStore | undefined
+  ) => {
+    if (state!.files.length <= 1) {
+      state?.setErrorMessage(errors.NO_FILES_SELECTED.message);
+      state?.setErrorCode("NO_FILES_SELECTED");
+    } else if (state!.files.length <= 2 && path === "merge-pdf") {
+      state?.setErrorMessage(errors.ERR_UPLOAD_COUNT.message);
+      state?.setErrorCode("ERR_UPLOAD_COUNT");
+    }
+    console.log(state?.showErrorMessage, state?.errorMessage);
+    const newImageUrls = [...imageUrls];
+    newImageUrls.splice(index, 1);
+    //  const newFiles = store.files.filter((file) => file.name !== item.file.name);
+    const newFiles = state!.files.filter(
+      (file) => file.name !== item.file.name
+    );
+    state?.setFiles(newFiles);
+    console.log(state?.files.length);
+    setImageUrls(newImageUrls);
+  };
   const item = imageUrls[index];
   const rotatedImageUrl = useRotatedImage(item.imageUrl);
-  // store and dispatch
+  // store
   const state = useContext(ToolStoreContext);
-  const [files, setFiles] = useState<File[]>([]);
+  // router and tool path
+  const router = useRouter();
+  let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
   const handleRotateImage = useCallback(() => {
     if (rotatedImageUrl) {
       const newImageUrls = [...imageUrls];
@@ -49,17 +105,6 @@ export const ActionDiv = ({
       setImageUrls(newImageUrls);
     }
   }, [index, imageUrls, setImageUrls, rotatedImageUrl]);
-
-  useEffect(() => {
-    const fileInputElement = document.querySelector(".upload-btn input");
-    if (fileInputElement) {
-      setFiles(
-        Array.from(
-          (fileInputElement as HTMLInputElement).files as unknown as FileList
-        )
-      );
-    }
-  }, []);
 
   return (
     <div
@@ -78,20 +123,11 @@ export const ActionDiv = ({
         //   }
         //   setImageUrls(newImageUrls);
         // }}
-
-        /** THIS WOULD BE ON VERSION 2.0 INSHALLAH! */
-        onClick={() => {
-          const newImageUrls = [...imageUrls];
-          newImageUrls.splice(index, 1);
-          const newFiles = files.filter((file) => file.name !== item.file.name);
-          // dispatch(setFiles(newFiles));
-          const isValid = validateFiles(files, extension, errors, state);
-          if (isValid) {
-            state?.resetErrorMessage();
-          }
-          setImageUrls(newImageUrls);
-          console.log(files);
-        }}
+        // i think the problem might be with this onclick handler
+        // which might not set the files correctly
+        // this is a handler for deletion each file has a delete button
+        // the files array on my mobx store should be updated and it should be reflected on all of my application.
+        onClick={(e) => handleClick(e, state)}
       >
         <TrashIcon className="icon hero-icon" />
       </button>

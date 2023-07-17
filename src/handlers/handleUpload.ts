@@ -14,12 +14,12 @@ export const handleUpload = async (
 ) => {
   e.preventDefault();
   state?.setIsSubmitted(true);
-  const files = (fileInput.current as HTMLInputElement).files;
-  if (!files) return;
+
+  if (!state!.files) return;
 
   const formData = new FormData();
-  for (let i = 0; i < files.length; i++) {
-    formData.append("files", files[i]);
+  for (let i = 0; i < state!.files.length; i++) {
+    formData.append("files", state!.files[i]);
   }
   let url;
   // @ts-ignore
@@ -34,7 +34,10 @@ export const handleUpload = async (
     return;
   }
   formData.append("compress_amount", String(state?.compressPdf));
-  const originalFileName = files[0]?.name?.split(".").slice(0, -1).join(".");
+  const originalFileName = state?.files[0]?.name
+    ?.split(".")
+    .slice(0, -1)
+    .join(".");
 
   const mimeTypeLookupTable: {
     [key: string]: { outputFileMimeType: string; outputFileName: string };

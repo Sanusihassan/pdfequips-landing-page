@@ -1,9 +1,7 @@
-// @ts-ignore
-// i think that this store contains h
+// this is my store:
 import { observable, action, makeObservable } from "mobx";
 import type { errors } from "./content/content";
 type ErrorCode = keyof typeof errors;
-
 
 export interface ToolState {
   showTool: boolean;
@@ -14,6 +12,7 @@ export interface ToolState {
   compressPdf: string | number;
   errorCode: string | null;
   endpoint: string;
+  files: File[];
 }
 
 const initialState: ToolState = {
@@ -25,11 +24,10 @@ const initialState: ToolState = {
   errorCode: null,
   endpoint: "",
   rerender: false,
+  files: [],
 };
 
 export class ToolStore {
-  //   Property 'showTool' has no initializer and is not definitely assigned in the constructor.ts(2564)
-  // (property) ToolStore.showTool: boolean
   showTool: boolean = false;
   isSubmitted: boolean = false;
   rerender: boolean = false;
@@ -38,6 +36,7 @@ export class ToolStore {
   compressPdf: string | number = 0;
   errorCode: string | null = null;
   endpoint: string = "";
+  files: File[] = [];
 
   constructor() {
     makeObservable(this, {
@@ -49,6 +48,7 @@ export class ToolStore {
       compressPdf: observable,
       errorCode: observable,
       endpoint: observable,
+      files: observable,
       setShowTool: action,
       setRerender: action,
       setEndpoint: action,
@@ -57,9 +57,11 @@ export class ToolStore {
       setCompressPdf: action,
       setErrorCode: action,
       setIsSubmitted: action,
+      setFiles: action,
     });
     Object.assign(this, initialState);
   }
+
   setShowTool(show: boolean) {
     this.showTool = show;
   }
@@ -94,6 +96,13 @@ export class ToolStore {
 
   setIsSubmitted = (isSubmitted: boolean) => {
     this.isSubmitted = isSubmitted;
+  };
+  setFiles = (files: FileList | File[]) => {
+    if (files instanceof FileList) {
+      this.files = Array.from(files);
+    } else {
+      this.files = files;
+    }
   };
 }
 

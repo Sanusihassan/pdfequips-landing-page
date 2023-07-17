@@ -18,8 +18,8 @@ type editPageProps = {
   page: string;
   lang: string;
   errors: _;
-  fileInput: RefObject<HTMLInputElement>;
 };
+// the error message is inside the editPage component
 const EditPage = ({
   extension,
   submitBtn,
@@ -28,7 +28,6 @@ const EditPage = ({
   page,
   lang,
   errors,
-  fileInput,
 }: editPageProps) => {
   const [isOnline, setIsOnline] = useState(true);
   const handleOnlineStatus = () => setIsOnline(true);
@@ -36,23 +35,18 @@ const EditPage = ({
   const [showOptions, setShowOptions] = useState(false);
   const state = useContext(ToolStoreContext);
   // actual files;
-  const [files, setFiles] = useState<File[]>([]);
   useEffect(() => {
-    const fileInputElement = fileInput.current;
-    console.log("ENDPOINT IS => ", state?.endpoint);
-    if (fileInputElement) {
-      setFiles(Array.from(fileInputElement.files as unknown as FileList));
-    }
-    if (isOnline && !(k == "merge-pdf" && files.length == 1)) {
+    if (isOnline && !(k == "merge-pdf" && state?.files.length == 1)) {
       state?.resetErrorMessage();
     }
     if (
       state?.errorCode == "ERR_EMPTY_FILE" &&
-      files.length > 0 &&
-      !(k == "merge-pdf" && files.length == 1)
+      state?.files.length > 0 &&
+      !(k == "merge-pdf" && state?.files.length == 1)
     ) {
       state?.resetErrorMessage();
     }
+    
     window.addEventListener("online", handleOnlineStatus);
     window.addEventListener("offline", handleOfflineStatus);
 
@@ -60,7 +54,7 @@ const EditPage = ({
       window.removeEventListener("online", handleOnlineStatus);
       window.removeEventListener("offline", handleOfflineStatus);
     };
-  }, []);
+  }, [state]);
   function SubmitBtn({ k }: { k: string }): JSX.Element {
     return (
       <button
@@ -105,9 +99,9 @@ const EditPage = ({
           lang={lang}
           errors={errors}
           edit_page={edit_page}
-          fileInput={fileInput}
         />
-        {state?.showErrorMessage ? <ErrorElement state={state} /> : null}
+        {/* {state?.showErrorMessage ? <ErrorElement state={state} /> : null} */}
+        <ErrorElement />
         {/* when clicking on this  */}
         <button
           className="gear-button btn btn-light"

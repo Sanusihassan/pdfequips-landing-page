@@ -15,20 +15,20 @@ const MergePdf = ({ merge_pdf }: { merge_pdf: string }) => (
     <bdi>{merge_pdf}</bdi>
   </div>
 );
-const JpgToPDF = () => {
-  // needs implementation
-};
-const HTMLToPDF = () => {
-  // NEEDS implementation
-};
+// const JpgToPDF = () => {
+//   // needs implementation
+// };
+// const HTMLToPDF = () => {
+//   // NEEDS implementation
+// };
 
-const PDFToPDFA = () => {
-  // needs implementation
-};
-// NEEDS implementation only on premium
-const PDFToWORD = () => {};
-// NEEDS implementation only on premium
-const PDFToEXCEL = () => {};
+// const PDFToPDFA = () => {
+//   // needs implementation
+// };
+// // NEEDS implementation only on premium
+// const PDFToWORD = () => {};
+// // NEEDS implementation only on premium
+// const PDFToEXCEL = () => {};
 
 const Options = ({ layout, edit_page }: OptionsProps) => {
   let componentToRender: JSX.Element | null;

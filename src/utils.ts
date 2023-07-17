@@ -182,13 +182,11 @@ export function isrtllang(asPath: string): boolean {
 }
 
 export const validateFiles = (
-  _files: FileList | File[],
+  files: File[] | undefined,
   extension: string,
   errors: _,
   state: ToolStore | undefined
 ) => {
-  const files = Array.from(_files); // convert FileList to File[] array
-
   let allowedMimeTypes = [
     "application/pdf",
     "text/html",
@@ -200,8 +198,8 @@ export const validateFiles = (
     "application/vnd.ms-excel",
   ];
   const fileSizeLimit = 50 * 1024 * 1024; // 50 MB
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i] || null;
+  for (let i = 0; i < files!.length; i++) {
+    const file = files![i] || null;
     extension = extension.replace(".", "").toUpperCase();
     let file_extension = file.name.split(".")[1]?.toUpperCase() || "";
     // this contains all types and some special types that might potentially be of than one extension

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import type { edit_page } from "../../../content";
-import { ToolState, setCompressPdf } from "../../../src/store";
 import { useDispatch, useSelector } from "react-redux";
+import { ToolStoreContext } from "../../../src/ToolStoreContext";
 
 export const CompressPDF = ({
   c,
@@ -14,7 +14,7 @@ export const CompressPDF = ({
   const dispatch = useDispatch();
   const [v, setV] = useState(".1");
   let _optoins = ["recommended", "less", "extreme"];
-  const state = useSelector((state: { tool: ToolState }) => state.tool);
+  const state = useContext(ToolStoreContext);
   return (
     <ul className="list-group list-group-flush mb-3">
       {options.map((option, index) => (
@@ -27,9 +27,9 @@ export const CompressPDF = ({
             setSelectedIndex(index);
 
             if (index != 3) {
-              dispatch(setCompressPdf(_optoins[index]));
+              state?.setCompressPdf(_optoins[index]);
             } else {
-              dispatch(setCompressPdf("recommended"));
+              state?.setCompressPdf("recommended");
             }
           }}
         >
@@ -50,7 +50,7 @@ export const CompressPDF = ({
                   setV(e.target.value);
                 }}
                 onKeyUp={() => {
-                  dispatch(setCompressPdf(v));
+                  state?.setCompressPdf(v);
                 }}
               />{" "}
             </div>

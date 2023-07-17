@@ -34,6 +34,9 @@ const Files = ({
   setImageUrls,
   toolTipSizes,
 }: FileProps) => {
+  useEffect(() => {
+    
+  }, [store?.errorMessage]);
   const router = useRouter();
   const handleDragEnd = (result: any) => {
     if (!result.destination) {

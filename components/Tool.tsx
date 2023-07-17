@@ -40,7 +40,7 @@ type ToolProps = {
   page: string;
   web2pdftool: web2pdftool;
 };
-
+// the editpage is inside this tool component
 const Tool: React.FC<ToolProps> = ({
   data,
   tools,
@@ -61,10 +61,9 @@ const Tool: React.FC<ToolProps> = ({
   const submitBtn = useRef<HTMLButtonElement>(null);
   const downloadBtn = useRef<HTMLAnchorElement>(null);
   const router = useRouter();
-  let _files: FileList | null = null;
   // i want mobx version of this
   const handleHideTool = () => {
-    state?.setShowTool(false);
+    state!.setShowTool(false);
   };
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
 
@@ -72,12 +71,13 @@ const Tool: React.FC<ToolProps> = ({
   // const [endpoint, setEndpoint] = useState("");
   // drag and drop input handling
   const onDrop = useCallback((acceptedFiles: File[]) => {
+    state!.setFiles(acceptedFiles);
     handleHideTool();
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   // file input change handler
-  let showTool = state?.showTool && state?.errorMessage?.length > 0;
+  let showTool = state!.showTool && state!.errorMessage?.length > 0;
   // accepted file types
   const acceptedFileTypes = {
     ".pdf": ".pdf, .PDF",
@@ -90,51 +90,46 @@ const Tool: React.FC<ToolProps> = ({
   // @ts-ignore
   let t: NodeJS.Timer;
   // actual files;
-  const [files, setFiles] = useState<File[]>([]);
-  const fileInputElement = fileInput.current;
+
+  // const fileInputElement = fileInput.current;
   function focusHandler() {
     t = setInterval(() => {
-      let a: File[] = [];
-      if (fileInputElement) {
-        a = Array.from(fileInputElement.files as unknown as FileList);
-        // change these to mobx syntax
-        if (a.length === 0) {
-          state?.setErrorMessage(errors.NO_FILES_SELECTED.message);
+      // let a: File[] = [];
 
-          state?.setErrorCode("EMPTY_FILE");
-        } else if (
-          state?.errorCode == "EMPTY_FILE" &&
-          a.length > 0 &&
-          path != "merge-pdf"
-        ) {
-          clearInterval(t);
-          state?.resetErrorMessage();
-          if (typeof window !== "undefined") {
-            window.removeEventListener("focus", focusHandler);
-          }
+      // a = Array.from(fileInputElement.files as unknown as FileList);
+      // change these to mobx syntax
+      if (state!.files.length === 0) {
+        state!.setErrorMessage(errors.NO_FILES_SELECTED.message);
+        state!.setErrorCode("NO_FILES_SELECTED");
+      } else if (
+        state!.errorCode == "EMPTY_FILE" &&
+        state!.files.length > 0 &&
+        path != "merge-pdf"
+      ) {
+        clearInterval(t);
+        state!.resetErrorMessage();
+        if (typeof window !== "undefined") {
+          window.removeEventListener("focus", focusHandler);
         }
       }
     }, 3000);
   }
   useEffect(() => {
-    if (fileInputElement) {
-      setFiles(Array.from(fileInputElement.files as unknown as FileList));
-    }
     const preventDefault = (event: DragEvent) => {
       event.preventDefault();
     };
-    state?.setEndpoint(path);
+    state!.setEndpoint(path);
     document.addEventListener("dragover", preventDefault);
     document.addEventListener("click", (e) => e.preventDefault());
     if (userClickedOnFileUploader && typeof window !== "undefined") {
       window.addEventListener("focus", focusHandler);
     }
     if (
-      state?.errorCode == "ERR_EMPTY_FILE" &&
-      files.length > 0 &&
+      state!.errorCode == "ERR_EMPTY_FILE" &&
+      state!.files.length > 0 &&
       path != "merge-pdf"
     ) {
-      state?.resetErrorMessage();
+      state!.resetErrorMessage();
     }
     return () => {
       clearInterval(t);
@@ -143,7 +138,7 @@ const Tool: React.FC<ToolProps> = ({
         window.removeEventListener("focus", focusHandler);
       }
     };
-  }, [userClickedOnFileUploader, state?.rerender]);
+  }, [userClickedOnFileUploader, state!.rerender]);
 
   return (
     <>
@@ -155,7 +150,7 @@ const Tool: React.FC<ToolProps> = ({
       ) : (
         <div
           className="tools-page container-fluid position-relative"
-          {...(state?.showTool && getRootProps())}
+          {...(state!.showTool && getRootProps())}
           onClick={(e) => {
             e.preventDefault();
           }}
@@ -166,7 +161,7 @@ const Tool: React.FC<ToolProps> = ({
           <div
             className={`text-center ${
               !showTool ? "" : "d-flex"
-            } flex-column tools ${state?.showTool ? "" : "d-none"}`}
+            } flex-column tools ${state!.showTool ? "" : "d-none"}`}
           >
             <h2 className="display-3">
               <bdi>{data.title}</bdi>
@@ -179,13 +174,7 @@ const Tool: React.FC<ToolProps> = ({
                 e.stopPropagation();
               }}
               onSubmit={(e) =>
-                handleUpload(
-                  e,
-                  fileInput,
-                  downloadBtn,
-                  state,
-                  errors
-                )
+                handleUpload(e, fileInput, downloadBtn, state, errors)
               }
               method="POST"
               encType="multipart/form-data"
@@ -221,7 +210,7 @@ const Tool: React.FC<ToolProps> = ({
                       data.type as keyof typeof acceptedFileTypes
                     ]
                   }
-                  multiple
+                  multiple={path !== "split-pdf"}
                   ref={fileInput}
                   className="position-absolute file-input"
                   onClick={(e) => {
@@ -230,20 +219,18 @@ const Tool: React.FC<ToolProps> = ({
                   }}
                   onChange={(e) => {
                     handleChange(e, state, data.type, errors);
-                    state?.setRerender();
-                    _files = e.target?.files;
-                    if (path == "merge-pdf" && _files?.length == 1) {
-                      state?.
-                        setErrorMessage(errors.ERR_UPLOAD_COUNT.message)
-                      
-                        state?.setErrorCode("ERR_UPLOAD_COUNT")
+                    state!.setRerender();
+
+                    if (path == "merge-pdf" && state!.files.length == 1) {
+                      state!.setErrorMessage(errors.ERR_UPLOAD_COUNT.message);
+                      state!.setErrorCode("ERR_UPLOAD_COUNT");
                     } else if (
-                      (_files && _files.length > 0) ||
-                      (files.length > 0 && path != "merge-pdf")
+                      (state!.files && state!.files.length > 0) ||
+                      (state && state.files.length > 0 && path != "merge-pdf")
                     ) {
-                      state?.resetErrorMessage();
+                      state!.resetErrorMessage();
                     }
-                    console.log(state?.showErrorMessage);
+                    console.log(state!.showErrorMessage);
                   }}
                 />
               </div>
@@ -260,9 +247,7 @@ const Tool: React.FC<ToolProps> = ({
               </button>
             </form>
             <p>{tools.or_drop}</p>
-            {state?.showErrorMessage && userClickedOnFileUploader ? (
-              <ErrorElement state={state} />
-            ) : null}
+            <ErrorElement />
           </div>
           {/* ) : ( */}
           <EditPage
@@ -273,7 +258,6 @@ const Tool: React.FC<ToolProps> = ({
             page={page}
             lang={lang}
             errors={errors}
-            fileInput={fileInput}
           />
           {/* )} */}
         </div>

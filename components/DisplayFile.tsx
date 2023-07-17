@@ -23,7 +23,6 @@ type propTypes = {
   lang: string;
   errors: _;
   edit_page: edit_page;
-  fileInput: RefObject<HTMLInputElement>;
 };
 
 const Loader = ({ loader_text }: { loader_text: string }) => (
@@ -40,7 +39,6 @@ const DisplayFile = ({
   lang,
   errors,
   edit_page,
-  fileInput,
 }: propTypes) => {
   const [imageUrls, setImageUrls] = useState<
     { file: File; imageUrl: string }[]
@@ -48,42 +46,48 @@ const DisplayFile = ({
   const [showSpinner, setShowSpinner] = useState(true);
   const [toolTipSizes, setToolTipSizes] = useState<string[]>([]);
   // actual files
-  let files: File[] = [];
+
   const state = useContext(ToolStoreContext);
   // router
   const router = useRouter();
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
-  let fileInputElement = fileInput.current;
-  if (fileInputElement) {
-    files = Array.from(fileInputElement.files as unknown as FileList);
-  }
+
   useEffect(() => {
-    if (files.length == 0) {
-      if (fileInputElement) {
-        files = Array.from(fileInputElement.files as unknown as FileList);
-      }
-    }
-    const isValid = validateFiles(files, extension, errors, state);
-    if (!(path == "merge-pdf" && files.length == 1)) {
-      if (state?.errorCode == "ERR_EMPTY_FILE" && files.length > 0) {
+    // Argument of type 'File[] | undefined' is not assignable to parameter of type 'File[] | FileList'.
+    // Type 'undefined' is not assignable to type 'File[] | FileList'.
+    const isValid = validateFiles(state?.files, extension, errors, state);
+    if (!(path == "merge-pdf" && state?.files.length == 1)) {
+      if (state?.errorCode == "ERR_EMPTY_FILE" && state?.files.length > 0) {
         state?.resetErrorMessage();
       }
       if (
         isValid ||
-        (files.length > 0 && state?.errorCode == "ERR_EMPTY_FILE")
+        (state &&
+          state?.files.length > 0 &&
+          state?.errorCode == "ERR_EMPTY_FILE")
       ) {
         // the cause of the problem
         state?.resetErrorMessage();
       }
     }
-    const max_files = 2;
-    if (files.length > max_files) {
-      state?.setErrorMessage(errors.MAX_FILES_EXCEEDED.message);
-    }
+    // const max_files = 2;
+    // if (state && state?.files.length > max_files) {
+    //   state?.setErrorMessage(errors.MAX_FILES_EXCEEDED.message);
+    // }
     let isSubscribed = true;
-    const tooltipSizes = files.map((file: File) =>
+    const tooltipSizes = state!.files.map((file: File) =>
       getFileDetailsTooltipContent(file, pages, page, lang, state, errors)
     );
+    /**
+     * No overload matches this call.
+  Overload 1 of 2, '(values: readonly unknown[] | []): Promise<[] | unknown[]>', gave the following error.
+    Argument of type 'Promise<string>[] | undefined' is not assignable to parameter of type 'readonly unknown[] | []'.
+      Type 'undefined' is not assignable to type 'readonly unknown[] | []'.
+  Overload 2 of 2, '(values: Iterable<string | PromiseLike<string>>): Promise<string[]>', gave the following error.
+    Argument of type 'Promise<string>[] | undefined' is not assignable to parameter of type 'Iterable<string | PromiseLike<string>>'.
+      Type 'undefined' is not assignable to type 'Iterable<string | PromiseLike<string>>'.ts(2769)
+const tooltipSizes: Promise<string>[] | undefined
+     */
     Promise.all(tooltipSizes).then((sizes) => {
       setToolTipSizes(sizes);
     });
@@ -94,7 +98,7 @@ const DisplayFile = ({
 
         if (extension && extension === ".pdf") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
-          const pdfPromises = files.map(async (file: File) => {
+          const pdfPromises = state!.files.map(async (file: File) => {
             const imageUrl = await getFirstPageAsImage(file, state, errors);
             newImageUrls.push({ file, imageUrl });
           });
@@ -105,7 +109,7 @@ const DisplayFile = ({
           }
         } else if (extension && extension !== ".jpg") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
-          files.forEach((file: File) => {
+          state?.files.forEach((file: File) => {
             let imageUrl = !file.size
               ? "/images/corrupted.png"
               : getPlaceHoderImageUrl(extension);
@@ -117,7 +121,7 @@ const DisplayFile = ({
           }
         } else if (extension && extension === ".jpg") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
-          files.forEach((file: File) => {
+          state?.files.forEach((file: File) => {
             const reader = new FileReader();
             reader.onload = function (event: ProgressEvent<FileReader>) {
               const imageUrl = (event.target as FileReader).result as string;
