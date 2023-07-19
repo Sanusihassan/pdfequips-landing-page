@@ -2,15 +2,15 @@ import type { AppContext, AppProps } from "next/app";
 
 import "../index.scss";
 // @ts-ignore
-import { Provider } from "mobx-react-lite";
+
 import { ToolStoreContext } from "../src/ToolStoreContext";
 
 // import { ToolStore } from '../stores/ToolStore';
 
 import { ToolStore } from "../src/store";
 
+const toolStore = new ToolStore();
 function MyApp({ Component, pageProps, lang }: AppProps & { lang: string }) {
-  const toolStore = new ToolStore();
   return (
     <ToolStoreContext.Provider value={toolStore}>
       <Component {...pageProps} lang={lang} />

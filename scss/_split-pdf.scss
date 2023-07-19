@@ -1,0 +1,85 @@
+.split-pdf {
+  width: 100%;
+  height: 100%;
+
+  .option-row {
+    // outline: 1px solid;
+    width: 100%;
+    justify-content: space-between;
+    @extend %list-group;
+    flex-direction: row;
+    // @extend %list-group-flush;
+    [class*="col-"] {
+      @include extend("p-0");
+    }
+    .option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+
+      @include extend("list-group-item list-group-item-action py-0");
+      &:hover {
+        background-color: unset;
+        color: var(--bs-list-group-color);
+      }
+      &.active,
+      &.active:hover {
+        @extend %active-list-item;
+        color: var(--bs-list-group-color);
+      }
+
+      .option-icon {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 4px;
+      }
+
+      // .option-title {
+      // }
+    }
+  }
+  .split-category {
+    outline: 1px solid;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+    .header {
+      grid-area: header;
+      grid-column: 1 / -1;
+    }
+    .btn-row {
+      @include extend("py-4 row flex-nowrap justify-content-around");
+      outline: 1px solid;
+      .btn {
+        // @include extend("col");
+        width: unset;
+        box-shadow: 0 0 0 0.1rem #6c757d;
+        &.active,
+        &:focus {
+          box-shadow: 0 0 0 0.2rem map-get($color-map, "split-pdf");
+        }
+      }
+    }
+    .body {
+      grid-area: body;
+      grid-area: footer;
+      grid-column: 1 / -1;
+    }
+
+    .split-category-title {
+      @include extend("text-uppercase my-3");
+      color: map-get($color-map, "split-pdf");
+      font-weight: 500;
+    }
+    // &.extract-split {
+
+    // }
+    &.range-split {
+      .range-input {
+        @include extend("py-3");
+      }
+    }
+  }
+}

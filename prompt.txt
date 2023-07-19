@@ -619,3 +619,15 @@ i also have sub routes for 5 supported languages, and they are
 
 same rules should be applied to the sub routes, i.e i have /ar, /fr, /zh, /es and /hi directories in my /out directory.
 and any request coming from these routes should be handled accordingly.
+
+
+********************************************************
+
+SplitPDF tsx component with a h6.option-title 
+and ul.list-group.list-group-flush
+li.list-group-item (options) X 2
+1. split by range
+2. extract pages
+
+
+the options should be in a row and each option should be a flex column that contains an icon that represents the option and a description

@@ -32,7 +32,7 @@ const PDFToJPG = ({ c }: { c: string }) => {
   ];
 
   return (
-    <ul className="list-group list-group-flush mb-3 image-options">
+    <ul className="list-group list-group-flush mb-3 image-options grid-body">
       <li className="list-group-item">
         <div
           className={`d-flex justify-content-between align-items-center ${c}`}

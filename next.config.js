@@ -108,8 +108,14 @@ const nextConfig = {
 
 
 
+const path = require('path');
+
 module.exports = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'node_modules')],
+  },
   webpack: (config, { isServer }) => {
+    // Disable chunk splitting for non-server bundles
     if (!isServer) {
       config.optimization.splitChunks = {
         cacheGroups: {
@@ -117,6 +123,9 @@ module.exports = {
         },
       };
     }
+
+    // Add your additional webpack configuration here if needed
+
     return config;
   },
 };

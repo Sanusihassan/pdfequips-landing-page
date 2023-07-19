@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import type { edit_page } from "../../../content";
-import { useDispatch, useSelector } from "react-redux";
 import { ToolStoreContext } from "../../../src/ToolStoreContext";
 
 export const CompressPDF = ({
@@ -11,12 +10,12 @@ export const CompressPDF = ({
   options: edit_page["compress_pdf"];
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const dispatch = useDispatch();
+
   const [v, setV] = useState(".1");
   let _optoins = ["recommended", "less", "extreme"];
   const state = useContext(ToolStoreContext);
   return (
-    <ul className="list-group list-group-flush mb-3">
+    <ul className="list-group list-group-flush grid-body">
       {options.map((option, index) => (
         <li
           key={index}

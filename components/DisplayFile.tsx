@@ -78,16 +78,6 @@ const DisplayFile = ({
     const tooltipSizes = state!.files.map((file: File) =>
       getFileDetailsTooltipContent(file, pages, page, lang, state, errors)
     );
-    /**
-     * No overload matches this call.
-  Overload 1 of 2, '(values: readonly unknown[] | []): Promise<[] | unknown[]>', gave the following error.
-    Argument of type 'Promise<string>[] | undefined' is not assignable to parameter of type 'readonly unknown[] | []'.
-      Type 'undefined' is not assignable to type 'readonly unknown[] | []'.
-  Overload 2 of 2, '(values: Iterable<string | PromiseLike<string>>): Promise<string[]>', gave the following error.
-    Argument of type 'Promise<string>[] | undefined' is not assignable to parameter of type 'Iterable<string | PromiseLike<string>>'.
-      Type 'undefined' is not assignable to type 'Iterable<string | PromiseLike<string>>'.ts(2769)
-const tooltipSizes: Promise<string>[] | undefined
-     */
     Promise.all(tooltipSizes).then((sizes) => {
       setToolTipSizes(sizes);
     });

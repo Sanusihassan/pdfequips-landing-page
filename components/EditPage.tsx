@@ -46,7 +46,7 @@ const EditPage = ({
     ) {
       state?.resetErrorMessage();
     }
-    
+
     window.addEventListener("online", handleOnlineStatus);
     window.addEventListener("offline", handleOfflineStatus);
 
@@ -54,11 +54,11 @@ const EditPage = ({
       window.removeEventListener("online", handleOnlineStatus);
       window.removeEventListener("offline", handleOfflineStatus);
     };
-  }, [state]);
+  }, []);
   function SubmitBtn({ k }: { k: string }): JSX.Element {
     return (
       <button
-        className={`submit-btn btn btn-lg text-white position-relative overflow-hidden ${k}`}
+        className={`submit-btn btn btn-lg text-white position-relative overflow-hidden ${k} grid-footer`}
         onClick={() => {
           state?.setIsSubmitted(true);
           setShowOptions(false);
@@ -113,7 +113,7 @@ const EditPage = ({
         </button>
       </section>
       <section className={`options${showOptions ? " expanded" : ""}`}>
-        <h5 className="text-uppercase">
+        <h5 className="text-uppercase grid-header">
           <bdi>
             {
               edit_page.edit_page_titles[
@@ -122,7 +122,7 @@ const EditPage = ({
             }
           </bdi>
         </h5>
-        {/* <Options layout={k as OptionsProps["layout"]} edit_page={edit_page} /> */}
+        <Options layout={k as OptionsProps["layout"]} edit_page={edit_page} />
         <SubmitBtn k={k} />
       </section>
     </aside>

@@ -1,61 +1,84 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+@import "~cssmolecule";
+@import "~custom-bs";
+// @include reboot;
+// @include type;
+@include images;
+@include containers;
+@include grid;
+@include tables;
+@include forms;
+@include buttons;
+@include transitions;
+@include dropdown;
+@include button-group;
+@include nav;
+@include navbar;
+@include card;
+@include accordion;
+@include breadcrumb;
+@include pagination;
+@include badge;
+@include alert;
+@include progress;
+@include list-group;
+@include close;
+@include toasts;
+@include modal;
+@include tooltip;
+@include popover;
+@include carousel;
+@include spinners;
+@include offcanvas;
+@include placeholders;
 
-/* .landing-page {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-}
-
-.navbar,
-.landing-page {
-  grid-column: 1 / -1;
-} */
+// Helpers
+@include helpers;
 
 
 
+@import "./scss/placeholders";
+@include list-group;
+@include api;
 
-$pdf-color: #FC271C;
+$pdf-color: #fc271c;
 $color-map: (
-  'merge-pdf': $pdf-color,
-  'split-pdf': #fd7e14,
-  'compress-pdf': #28a745,
-  'pdf-to-powerpoint': #C13B1B,
-  'jpg-to-pdf': #f1c40f,
-  'word-to-pdf': #1B5EBE,
-  'powerpoint-to-pdf': #C13B1B,
-  'excel-to-pdf': #10793F,
-  'web-to-pdf': #0984e3,
+  "merge-pdf": $pdf-color,
+  "split-pdf": #fd7e14,
+  "compress-pdf": #28a745,
+  "pdf-to-powerpoint": #c13b1b,
+  "jpg-to-pdf": #f1c40f,
+  "word-to-pdf": #1b5ebe,
+  "powerpoint-to-pdf": #c13b1b,
+  "excel-to-pdf": #10793f,
+  "web-to-pdf": #0984e3,
   "pdf-to-text": #4493e1,
-  'html-to-pdf': rgb(228, 77, 38),
-  'pdf-to-jpg': #f1c40f,
-  'pdf-to-word': #1B5EBE,
-  'pdf-to-excel': #10793F,
-  'pdf-to-pdf-a': #000000,
-  'pdf-to-html': rgb(228, 77, 38),
-  'pdf-to-markdown': #000000
+  "html-to-pdf": rgb(228, 77, 38),
+  "pdf-to-jpg": #f1c40f,
+  "pdf-to-word": #1b5ebe,
+  "pdf-to-excel": #10793f,
+  "pdf-to-pdf-a": #000000,
+  "pdf-to-html": rgb(228, 77, 38),
+  "pdf-to-markdown": #000000,
 );
 
-html,
-body,
-#__next,
-.tools-page {
-  height: 100%;
-}
-
+// html,
+// body,
 // #__next,
 // .tools-page {
-//   min-height: 90%;
-//   height: 99%;
+//   height: 100%;
 // }
 
+.tools-page {
+  min-height: fit-content;
+}
 
-.h-5 {
+.h-5,
+.icon {
   height: 1em;
 }
 
-.w-5 {
+.w-5,
+.icon {
   width: 1em;
 }
 
@@ -91,11 +114,11 @@ a.dropdown-item {
   color: rgb(228, 77, 38);
 }
 .web {
-  color: #0984e3
+  color: #0984e3;
 }
 
 .text {
-  color: lighten(#2e86de, 5%)
+  color: lighten(#2e86de, 5%);
 }
 
 #basic-nav-dropdown {
@@ -162,14 +185,12 @@ a.dropdown-item {
     background-color: #f2f2f2;
     transform: scale(1.001);
 
-    @each $key,
-    $color in $color-map {
+    @each $key, $color in $color-map {
       &.#{$key} {
-        box-shadow: -.3px -.3px 3px .3px darken($color, 20%) !important;
+        box-shadow: -0.3px -0.3px 3px 0.3px darken($color, 20%) !important;
       }
     }
   }
-
 }
 
 .feature-icon {
@@ -211,7 +232,6 @@ a.dropdown-item {
 }
 
 .column {
-
   &:first-child,
   &:nth-child(5) {
     margin-bottom: 15px;
@@ -231,7 +251,6 @@ a.dropdown-item {
 }
 
 .dropdown-item {
-
   &.active,
   &:active {
     background-color: initial !important;
@@ -246,12 +265,14 @@ a.dropdown-item {
 // error element styles
 .error-element {
   .hide-on-rtl {
-    [dir=rtl] &, [lang="ar"] & {
+    [dir="rtl"] &,
+    [lang="ar"] & {
       display: none;
     }
   }
   .hide-on-rtl {
-    [dir=ltr] &, :not([lang="ar"]) & {
+    [dir="ltr"] &,
+    :not([lang="ar"]) & {
       display: none;
     }
   }
@@ -259,5 +280,4 @@ a.dropdown-item {
 @import "./scss/toolspage";
 @import "./scss/editpage";
 @import "./scss/display-file";
-@import "./scss/navbar"
-
+@import "./scss/navbar";
