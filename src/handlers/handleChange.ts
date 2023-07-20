@@ -1,18 +1,22 @@
+import { Dispatch } from "react";
+// @ts-ignore
+import { AnyAction } from "@reduxjs/toolkit";
 import type { errors as _ } from "../content/content"; // import the errors constant
-import type { ToolStore } from "../store";
+
 import { validateFiles } from "../utils";
+import { hideTool, resetErrorMessage, setFiles } from "../store";
 export const handleChange = (
   e: React.ChangeEvent<HTMLInputElement>,
-  state: ToolStore | undefined,
+  dispatch: Dispatch<AnyAction>,
   extension: string,
   errors: typeof _
 ) => {
   const _files = (e.target?.files as FileList) || null;
-  state?.setFiles(_files);
-  const isValid = validateFiles(state?.files, extension, errors, state);
-  state?.setShowTool(false);
+  dispatch(setFiles(_files));
+  const isValid = validateFiles(_files, extension, errors, dispatch);
+  dispatch(hideTool());
   if (isValid) {
-    state?.resetErrorMessage();
+    dispatch(resetErrorMessage());
   }
   document.documentElement.click();
 };

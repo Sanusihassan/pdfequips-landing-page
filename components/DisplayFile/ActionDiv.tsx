@@ -37,7 +37,9 @@ import { Dispatch, SetStateAction, useCallback, useContext } from "react";
 import type { errors as _ } from "../../content";
 import { ToolStoreContext } from "../../src/ToolStoreContext";
 import { useRouter } from "next/router";
-import { ToolStore } from "../../src/store";
+import { useSelector, useDispatch } from "react-redux";
+import { ToolState, setErrorCode, setErrorMessage, setFiles } from "../../src/store";
+
 
 export type ActionProps = {
   index: number;
@@ -69,16 +71,17 @@ export const ActionDiv = ({
   extension,
   errors,
 }: ActionProps) => {
+  const state = useSelector((state: { tool: ToolState }) => state.tool);
+  const dispatch = useDispatch();
   const handleClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    state: ToolStore | undefined
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     if (state!.files.length <= 1) {
-      state?.setErrorMessage(errors.NO_FILES_SELECTED.message);
-      state?.setErrorCode("NO_FILES_SELECTED");
+      dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
+      dispatch(setErrorCode("NO_FILES_SELECTED"));
     } else if (state!.files.length <= 2 && path === "merge-pdf") {
-      state?.setErrorMessage(errors.ERR_UPLOAD_COUNT.message);
-      state?.setErrorCode("ERR_UPLOAD_COUNT");
+      dispatch(setErrorMessage(errors.ERR_UPLOAD_COUNT.message));
+      dispatch(setErrorCode("ERR_UPLOAD_COUNT"));
     }
     console.log(state?.showErrorMessage, state?.errorMessage);
     const newImageUrls = [...imageUrls];
@@ -87,14 +90,12 @@ export const ActionDiv = ({
     const newFiles = state!.files.filter(
       (file) => file.name !== item.file.name
     );
-    state?.setFiles(newFiles);
+    dispatch(setFiles(newFiles));
     console.log(state?.files.length);
     setImageUrls(newImageUrls);
   };
   const item = imageUrls[index];
   const rotatedImageUrl = useRotatedImage(item.imageUrl);
-  // store
-  const state = useContext(ToolStoreContext);
   // router and tool path
   const router = useRouter();
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
@@ -127,7 +128,7 @@ export const ActionDiv = ({
         // which might not set the files correctly
         // this is a handler for deletion each file has a delete button
         // the files array on my mobx store should be updated and it should be reflected on all of my application.
-        onClick={(e) => handleClick(e, state)}
+        onClick={(e) => handleClick(e)}
       >
         <TrashIcon className="icon hero-icon" />
       </button>

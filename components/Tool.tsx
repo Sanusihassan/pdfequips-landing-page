@@ -4,7 +4,17 @@ import { useCallback, useEffect, useRef, useState, useContext } from "react";
 import { useDropzone } from "react-dropzone";
 
 import EditPage from "./EditPage";
-import { ToolStoreContext } from "../src/ToolStoreContext";
+import store, {
+  ToolState,
+  hideTool,
+  resetErrorMessage,
+  setErrorMessage,
+  setErrorCode,
+  setEndpoint,
+  setRerender,
+} from "../src/store";
+
+
 import { useRouter } from "next/router";
 import type { edit_page, tools, web2pdftool } from "../content";
 import { handleUpload } from "../src/handlers/handleUpload";
@@ -13,6 +23,8 @@ import type { errors as _ } from "../content";
 import ErrorElement from "./ErrorElement";
 import Web2PDF from "./Web2PDF";
 import Markdown2PDF from "./Markdown2PDF";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export type errorType = {
   response: {
@@ -51,8 +63,8 @@ const Tool: React.FC<ToolProps> = ({
   page,
   web2pdftool,
 }) => {
-  const state = useContext(ToolStoreContext);
-
+  const state = useSelector((state: { tool: ToolState }) => state.tool);
+  const dispatch = useDispatch();
   // const dispatch = useDispatch();
   const [userClickedOnFileUploader, setUserClickedOnFileUploader] =
     useState(false);
@@ -63,7 +75,7 @@ const Tool: React.FC<ToolProps> = ({
   const router = useRouter();
   // i want mobx version of this
   const handleHideTool = () => {
-    state!.setShowTool(false);
+    dispatch(dispatch(hideTool()));
   };
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
 
@@ -71,7 +83,7 @@ const Tool: React.FC<ToolProps> = ({
   // const [endpoint, setEndpoint] = useState("");
   // drag and drop input handling
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    state!.setFiles(acceptedFiles);
+    // dispatch(setFiles(acceptedFiles));
     handleHideTool();
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -99,15 +111,15 @@ const Tool: React.FC<ToolProps> = ({
       // a = Array.from(fileInputElement.files as unknown as FileList);
       // change these to mobx syntax
       if (state!.files.length === 0) {
-        state!.setErrorMessage(errors.NO_FILES_SELECTED.message);
-        state!.setErrorCode("NO_FILES_SELECTED");
+        dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
+        dispatch(setErrorCode("NO_FILES_SELECTED"));
       } else if (
         state!.errorCode == "EMPTY_FILE" &&
         state!.files.length > 0 &&
         path != "merge-pdf"
       ) {
         clearInterval(t);
-        state!.resetErrorMessage();
+        dispatch(resetErrorMessage());
         if (typeof window !== "undefined") {
           window.removeEventListener("focus", focusHandler);
         }
@@ -118,7 +130,8 @@ const Tool: React.FC<ToolProps> = ({
     const preventDefault = (event: DragEvent) => {
       event.preventDefault();
     };
-    state!.setEndpoint(path);
+    console.log(state.files)
+    dispatch(setEndpoint(path));
     document.addEventListener("dragover", preventDefault);
     document.addEventListener("click", (e) => e.preventDefault());
     if (userClickedOnFileUploader && typeof window !== "undefined") {
@@ -129,7 +142,7 @@ const Tool: React.FC<ToolProps> = ({
       state!.files.length > 0 &&
       path != "merge-pdf"
     ) {
-      state!.resetErrorMessage();
+      dispatch(resetErrorMessage());
     }
     return () => {
       clearInterval(t);
@@ -218,17 +231,17 @@ const Tool: React.FC<ToolProps> = ({
                     setUserClickedOnFileUploader(true);
                   }}
                   onChange={(e) => {
-                    handleChange(e, state, data.type, errors);
-                    state!.setRerender();
+                    handleChange(e, dispatch, data.type, errors);
+                    dispatch(setRerender());
 
                     if (path == "merge-pdf" && state!.files.length == 1) {
-                      state!.setErrorMessage(errors.ERR_UPLOAD_COUNT.message);
-                      state!.setErrorCode("ERR_UPLOAD_COUNT");
+                      dispatch(setErrorMessage(errors.ERR_UPLOAD_COUNT.message))
+                      dispatch(setErrorCode("ERR_UPLOAD_COUNT"));
                     } else if (
                       (state!.files && state!.files.length > 0) ||
                       (state && state.files.length > 0 && path != "merge-pdf")
                     ) {
-                      state!.resetErrorMessage();
+                      dispatch(resetErrorMessage());
                     }
                     console.log(state!.showErrorMessage);
                   }}

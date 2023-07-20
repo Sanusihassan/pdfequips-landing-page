@@ -5,16 +5,24 @@ import "../index.scss";
 
 import { ToolStoreContext } from "../src/ToolStoreContext";
 
-// import { ToolStore } from '../stores/ToolStore';
 
-import { ToolStore } from "../src/store";
+import { Provider } from "react-redux";
+// @ts-ignore
+import { configureStore } from "@reduxjs/toolkit";
+import toolReducer from "../src/store";
 
-const toolStore = new ToolStore();
+const store = configureStore({
+  reducer: {
+    tool: toolReducer,
+  },
+});
+
+
 function MyApp({ Component, pageProps, lang }: AppProps & { lang: string }) {
   return (
-    <ToolStoreContext.Provider value={toolStore}>
+    <Provider store={store}>
       <Component {...pageProps} lang={lang} />
-    </ToolStoreContext.Provider>
+    </Provider>
   );
 }
 MyApp.getInitialProps = async ({

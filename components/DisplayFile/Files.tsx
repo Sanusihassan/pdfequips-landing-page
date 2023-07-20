@@ -5,10 +5,11 @@ import FileCard from "./FileCard";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { isDraggableExtension } from "../../src/utils";
 import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+import store, { ToolState } from "../../src/store";
 
-import { ToolStore } from "../../src/store";
+
 type FileProps = {
-  store: ToolStore | undefined;
   errors: _;
   extension: string;
   imageUrls: {
@@ -27,13 +28,14 @@ type FileProps = {
   setToolTipSizes: Dispatch<SetStateAction<string[]>>;
 };
 const Files = ({
-  store,
   errors,
   extension,
   imageUrls,
   setImageUrls,
   toolTipSizes,
 }: FileProps) => {
+  const store = useSelector((state: { tool: ToolState }) => state.tool);
+  const dispatch = useDispatch();
   useEffect(() => {
     
   }, [store?.errorMessage]);

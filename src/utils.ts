@@ -7,8 +7,10 @@ import { PDFDocumentProxy, PageViewport, RenderTask } from "pdfjs-dist";
 // @ts-ignore
 import { GlobalWorkerOptions } from "pdfjs-dist";
 import { Dispatch, useEffect, useMemo, useState } from "react";
-import type { ToolStore } from "./store";
+// @ts-ignore
+import { AnyAction } from "@reduxjs/toolkit";
 import type { errors as _ } from "../content";
+import { setErrorCode, setErrorMessage } from "./store";
 GlobalWorkerOptions.workerSrc = "/pdf.worker.js";
 
 export function useLoadedImage(src: string): HTMLImageElement | null {
@@ -40,9 +42,9 @@ export function useRotatedImage(imageUrl: string): string | null {
 }
 
 const DEFAULT_PDF_IMAGE = "/images/corrupted.png";
-function emptyPDFHandler(state: ToolStore | undefined, errors: _) {
-  state?.setErrorMessage(errors.EMPTY_FILE.message);
-  state?.setErrorCode("EMPTY_FILE");
+function emptyPDFHandler(dispatch: Dispatch<AnyAction>, errors: _) {
+  dispatch(setErrorMessage(errors.EMPTY_FILE.message));
+  dispatch(setErrorCode("ERR_EMPTY_FILE"));
   return DEFAULT_PDF_IMAGE;
 }
 
@@ -51,7 +53,7 @@ export const getFileDetailsTooltipContent = async (
   pages: string,
   page: string,
   lang: string,
-  state: ToolStore | undefined,
+  dispatch: Dispatch<AnyAction>,
   errors: _
 ): Promise<string> => {
   // here in this code instead of bite for the unit, use kb or mb instead depending on the size
@@ -69,7 +71,7 @@ export const getFileDetailsTooltipContent = async (
   }).format(sizeInBytes);
   let tooltipContent = size;
   if (!file.size) {
-    emptyPDFHandler(state, errors);
+    emptyPDFHandler(dispatch, errors);
   } else {
     // i'm getting this errors:
     //   6:39:22.589
@@ -98,12 +100,12 @@ export const getFileDetailsTooltipContent = async (
         }${pageCount > 1 ? pages : page}`;
         URL.revokeObjectURL(url);
         if (!file.size) {
-          emptyPDFHandler(state, errors);
+          emptyPDFHandler(dispatch, errors);
         }
       }
     } catch (e) {
       if (!file.size) {
-        emptyPDFHandler(state, errors);
+        emptyPDFHandler(dispatch, errors);
       }
     }
   }
@@ -118,12 +120,12 @@ export const getFileDetailsTooltipContent = async (
 
 export async function getFirstPageAsImage(
   file: File,
-  state: ToolStore | undefined,
+  dispatch: Dispatch<AnyAction>,
   errors: _
 ): Promise<string> {
   const fileUrl = URL.createObjectURL(file);
   if (!file.size) {
-    return emptyPDFHandler(state, errors);
+    return emptyPDFHandler(dispatch, errors);
   } else {
     try {
       const loadingTask = getDocument(fileUrl);
@@ -150,7 +152,7 @@ export async function getFirstPageAsImage(
 
       return canvas.toDataURL();
     } catch (error) {
-      state?.setErrorMessage(errors.FILE_CORRUPT.message);
+      dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
       console.log(error);
       return DEFAULT_PDF_IMAGE; // Return the placeholder image URL when an error occurs
     }
@@ -182,11 +184,13 @@ export function isrtllang(asPath: string): boolean {
 }
 
 export const validateFiles = (
-  files: File[] | undefined,
+  _files: FileList | File[],
   extension: string,
   errors: _,
-  state: ToolStore | undefined
+  dispatch: Dispatch<AnyAction>
 ) => {
+  const files = Array.from(_files); // convert FileList to File[] array
+
   let allowedMimeTypes = [
     "application/pdf",
     "text/html",
@@ -198,8 +202,8 @@ export const validateFiles = (
     "application/vnd.ms-excel",
   ];
   const fileSizeLimit = 50 * 1024 * 1024; // 50 MB
-  for (let i = 0; i < files!.length; i++) {
-    const file = files![i] || null;
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i] || null;
     extension = extension.replace(".", "").toUpperCase();
     let file_extension = file.name.split(".")[1]?.toUpperCase() || "";
     // this contains all types and some special types that might potentially be of than one extension
@@ -218,12 +222,12 @@ export const validateFiles = (
 
     if (!file || !file.name) {
       // handle FILE_CORRUPT error
-      state?.setErrorMessage(errors.FILE_CORRUPT.message);
+      dispatch(setErrorMessage(errors.FILE_CORRUPT.message));
       return false;
     } else if (!file.type) {
       // handle NOT_SUPPORTED_TYPE error
       console.log(file);
-      state?.setErrorMessage(errors.NOT_SUPPORTED_TYPE.message);
+      dispatch(setErrorMessage(errors.NOT_SUPPORTED_TYPE.message));
       return false;
     } else if (
       !allowedMimeTypes.includes(file.type) ||
@@ -239,17 +243,17 @@ export const validateFiles = (
         errors.NOT_SUPPORTED_TYPE.types[
           extension as keyof typeof errors.NOT_SUPPORTED_TYPE.types
         ] || errors.NOT_SUPPORTED_TYPE.message;
-      state?.setErrorMessage(errorMessage);
+      dispatch(setErrorMessage(errorMessage));
       return false;
     } else if (file.size > fileSizeLimit) {
       // handle FILE_TOO_LARGE error
-      state?.setErrorMessage(errors.FILE_TOO_LARGE.message);
+      dispatch(setErrorMessage(errors.FILE_TOO_LARGE.message));
       return false;
     } else if (!file.size) {
       // handle EMPTY_FILE error
       console.log("file.size", file.size);
-      state?.setErrorMessage(errors.EMPTY_FILE.message);
-      state?.setErrorCode("EMPTY_FILE");
+      dispatch(setErrorMessage(errors.EMPTY_FILE.message));
+      dispatch(setErrorCode("ERR_EMPTY_FILE"));
       return false;
     } else if (file.type.startsWith("image/")) {
       // handle INVALID_IMAGE_DATA error
@@ -259,7 +263,7 @@ export const validateFiles = (
         const img = new Image();
         img.src = reader.result as string;
         img.onerror = () => {
-          state?.setErrorMessage(errors.INVALID_IMAGE_DATA.message);
+          dispatch(setErrorMessage(errors.INVALID_IMAGE_DATA.message));
           return false;
         };
       };
@@ -268,8 +272,6 @@ export const validateFiles = (
   }
   return true;
 };
-
-
 
 interface PDFFile extends Blob {
   name: string;

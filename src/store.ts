@@ -1,7 +1,7 @@
-// this is my store:
-import { observable, action, makeObservable } from "mobx";
-import type { errors } from "./content/content";
-type ErrorCode = keyof typeof errors;
+
+// npm install statement for all dependencies for this code:
+// @ts-ignore
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ToolState {
   showTool: boolean;
@@ -12,7 +12,7 @@ export interface ToolState {
   compressPdf: string | number;
   errorCode: string | null;
   endpoint: string;
-  files: File[];
+  files: File[]
 }
 
 const initialState: ToolState = {
@@ -24,87 +24,65 @@ const initialState: ToolState = {
   errorCode: null,
   endpoint: "",
   rerender: false,
-  files: [],
+  files: []
 };
 
-export class ToolStore {
-  showTool: boolean = false;
-  isSubmitted: boolean = false;
-  rerender: boolean = false;
-  errorMessage: string = "";
-  showErrorMessage: boolean = false;
-  compressPdf: string | number = 0;
-  errorCode: string | null = null;
-  endpoint: string = "";
-  files: File[] = [];
-
-  constructor() {
-    makeObservable(this, {
-      showTool: observable,
-      isSubmitted: observable,
-      rerender: observable,
-      errorMessage: observable,
-      showErrorMessage: observable,
-      compressPdf: observable,
-      errorCode: observable,
-      endpoint: observable,
-      files: observable,
-      setShowTool: action,
-      setRerender: action,
-      setEndpoint: action,
-      setErrorMessage: action,
-      resetErrorMessage: action,
-      setCompressPdf: action,
-      setErrorCode: action,
-      setIsSubmitted: action,
-      setFiles: action,
-    });
-    Object.assign(this, initialState);
-  }
-
-  setShowTool(show: boolean) {
-    this.showTool = show;
-  }
-
-  setRerender = () => {
-    this.rerender = !this.rerender;
-  };
-
-  setEndpoint = (endpoint: string) => {
-    this.endpoint = endpoint;
-  };
-
-  setErrorMessage = (errorMessage: string) => {
-    this.errorMessage = errorMessage;
-    this.showErrorMessage = true;
-  };
-
-  resetErrorMessage = () => {
-    this.errorMessage = "";
-    this.showErrorMessage = false;
-    this.errorCode = null;
-    this.isSubmitted = false;
-  };
-
-  setCompressPdf = (compressPdf: string | number) => {
-    this.compressPdf = compressPdf;
-  };
-
-  setErrorCode = (errorCode: ErrorCode) => {
-    this.errorCode = errorCode;
-  };
-
-  setIsSubmitted = (isSubmitted: boolean) => {
-    this.isSubmitted = isSubmitted;
-  };
-  setFiles = (files: FileList | File[]) => {
-    if (files instanceof FileList) {
-      this.files = Array.from(files);
-    } else {
-      this.files = files;
+const toolSlice = createSlice({
+  name: "tool",
+  initialState,
+  reducers: {
+    showTool(state: ToolState) {
+      state.showTool = true;
+    },
+    setRerender(state: ToolState) {
+      state.rerender = !state.rerender;
+    },
+    hideTool(state: ToolState) {
+      state.showTool = false;
+    },
+    setEndpoint(state: ToolState, action: PayloadAction<string>) {
+      state.endpoint = action.payload;
+    },
+    setErrorMessage(state: ToolState, action: PayloadAction<string>) {
+      state.errorMessage = action.payload;
+      state.showErrorMessage = true; // set the showErrorMessage property to true when an error message is set
+    },
+    resetErrorMessage(state: ToolState) {
+      state.errorMessage = "";
+      state.showErrorMessage = false; // reset the showErrorMessage property to false when the error message is reset
+      state.errorCode = null;
+      state.isSubmitted = false;
+    },
+    setCompressPdf(state: ToolState, action: PayloadAction<string | number>) {
+      state.compressPdf = action.payload;
+    },
+    setErrorCode(state: ToolState, action: PayloadAction<string | null>) {
+      state.errorCode = action.payload;
+    },
+    setIsSubmitted(state: ToolState, action: PayloadAction<boolean>) {
+      state.isSubmitted = action.payload;
+    },
+    setFiles(state: ToolState, action: PayloadAction< FileList | File[]>) {
+      if (state.files instanceof FileList) {
+        state.files = Array.from(state.files);
+      } else {
+        state.files = state.files;
+      }
     }
-  };
-}
+  },
+});
 
-const toolStore = new ToolStore();
-export default toolStore;
+export const {
+  showTool,
+  hideTool,
+  setErrorMessage,
+  resetErrorMessage,
+  setCompressPdf,
+  setErrorCode,
+  setIsSubmitted,
+  setEndpoint,
+  setRerender,
+  setFiles
+} = toolSlice.actions;
+
+export default toolSlice.reducer;

@@ -9,6 +9,8 @@ import type { errors as _ } from "../content";
 import { Spinner } from "react-bootstrap";
 import { CogIcon } from "@heroicons/react/outline";
 import { ToolStoreContext } from "../src/ToolStoreContext";
+import { useDispatch, useSelector } from "react-redux";
+import { ToolState, resetErrorMessage, setIsSubmitted } from "../src/store";
 
 type editPageProps = {
   extension: string;
@@ -33,18 +35,19 @@ const EditPage = ({
   const handleOnlineStatus = () => setIsOnline(true);
   const handleOfflineStatus = () => setIsOnline(false);
   const [showOptions, setShowOptions] = useState(false);
-  const state = useContext(ToolStoreContext);
+  const state = useSelector((state: { tool: ToolState }) => state.tool);
+  const dispatch = useDispatch();
   // actual files;
   useEffect(() => {
     if (isOnline && !(k == "merge-pdf" && state?.files.length == 1)) {
-      state?.resetErrorMessage();
+      dispatch(resetErrorMessage());
     }
     if (
       state?.errorCode == "ERR_EMPTY_FILE" &&
       state?.files.length > 0 &&
       !(k == "merge-pdf" && state?.files.length == 1)
     ) {
-      state?.resetErrorMessage();
+      dispatch(resetErrorMessage());
     }
 
     window.addEventListener("online", handleOnlineStatus);
@@ -61,7 +64,7 @@ const EditPage = ({
         className={`submit-btn btn btn-lg text-white position-relative overflow-hidden ${k} grid-footer`}
         onClick={() => {
           console.log("clicked");
-          state?.setIsSubmitted(true);
+          dispatch(setIsSubmitted(true));
           setShowOptions(false);
           if (submitBtn.current) {
             submitBtn.current.click();
@@ -123,7 +126,7 @@ const EditPage = ({
             }
           </bdi>
         </h5>
-        <Options layout={k as OptionsProps["layout"]} edit_page={edit_page} />
+        {/* <Options layout={k as OptionsProps["layout"]} edit_page={edit_page} /> */}
         <SubmitBtn k={k} />
       </section>
     </aside>

@@ -16,6 +16,8 @@ import { validateFiles } from "../src/utils";
 import type { errors as _, edit_page } from "../content";
 import Files from "./DisplayFile/Files";
 import { ToolStoreContext } from "../src/ToolStoreContext";
+import { useSelector, useDispatch } from "react-redux";
+import { ToolState, resetErrorMessage } from "../src/store";
 type propTypes = {
   extension: string;
   pages: string;
@@ -47,7 +49,8 @@ const DisplayFile = ({
   const [toolTipSizes, setToolTipSizes] = useState<string[]>([]);
   // actual files
 
-  const state = useContext(ToolStoreContext);
+  const state = useSelector((state: { tool: ToolState }) => state.tool);
+  const dispatch = useDispatch();
   // router
   const router = useRouter();
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
@@ -55,10 +58,10 @@ const DisplayFile = ({
   useEffect(() => {
     // Argument of type 'File[] | undefined' is not assignable to parameter of type 'File[] | FileList'.
     // Type 'undefined' is not assignable to type 'File[] | FileList'.
-    const isValid = validateFiles(state?.files, extension, errors, state);
+    const isValid = validateFiles(state?.files, extension, errors, dispatch);
     if (!(path == "merge-pdf" && state?.files.length == 1)) {
       if (state?.errorCode == "ERR_EMPTY_FILE" && state?.files.length > 0) {
-        state?.resetErrorMessage();
+        dispatch(resetErrorMessage());
       }
       if (
         isValid ||
@@ -67,7 +70,7 @@ const DisplayFile = ({
           state?.errorCode == "ERR_EMPTY_FILE")
       ) {
         // the cause of the problem
-        state?.resetErrorMessage();
+        dispatch(resetErrorMessage());
       }
     }
     // const max_files = 2;
@@ -76,7 +79,7 @@ const DisplayFile = ({
     // }
     let isSubscribed = true;
     const tooltipSizes = state!.files.map((file: File) =>
-      getFileDetailsTooltipContent(file, pages, page, lang, state, errors)
+      getFileDetailsTooltipContent(file, pages, page, lang, dispatch, errors)
     );
     Promise.all(tooltipSizes).then((sizes) => {
       setToolTipSizes(sizes);
@@ -89,7 +92,7 @@ const DisplayFile = ({
         if (extension && extension === ".pdf") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
           const pdfPromises = state!.files.map(async (file: File) => {
-            const imageUrl = await getFirstPageAsImage(file, state, errors);
+            const imageUrl = await getFirstPageAsImage(file, dispatch, errors);
             newImageUrls.push({ file, imageUrl });
           });
 
@@ -224,7 +227,6 @@ const DisplayFile = ({
         <Files
           errors={errors}
           extension={extension}
-          store={state}
           imageUrls={imageUrls}
           setImageUrls={setImageUrls}
           setToolTipSizes={setToolTipSizes}
