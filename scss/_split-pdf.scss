@@ -99,9 +99,6 @@
         }
         .merge-input {
           @include extend("py-4 align-items-baseline");
-          > * {
-            // @include extend("debug");
-          }
           label {
             @include extend("lead");
           }
