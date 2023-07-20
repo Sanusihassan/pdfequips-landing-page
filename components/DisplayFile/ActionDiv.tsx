@@ -38,8 +38,13 @@ import type { errors as _ } from "../../content";
 import { ToolStoreContext } from "../../src/ToolStoreContext";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { ToolState, setErrorCode, setErrorMessage, setFiles } from "../../src/store";
-
+import {
+  ToolState,
+  setErrorCode,
+  setErrorMessage,
+  setFiles,
+} from "../../src/store";
+import { useFileStore } from "../../src/file-store";
 
 export type ActionProps = {
   index: number;
@@ -72,14 +77,14 @@ export const ActionDiv = ({
   errors,
 }: ActionProps) => {
   const state = useSelector((state: { tool: ToolState }) => state.tool);
+  // the files:
+  const { files, setFiles } = useFileStore.getState();
   const dispatch = useDispatch();
-  const handleClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    if (state!.files.length <= 1) {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (files.length <= 1) {
       dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
       dispatch(setErrorCode("NO_FILES_SELECTED"));
-    } else if (state!.files.length <= 2 && path === "merge-pdf") {
+    } else if (files.length <= 2 && path === "merge-pdf") {
       dispatch(setErrorMessage(errors.ERR_UPLOAD_COUNT.message));
       dispatch(setErrorCode("ERR_UPLOAD_COUNT"));
     }
@@ -87,11 +92,9 @@ export const ActionDiv = ({
     const newImageUrls = [...imageUrls];
     newImageUrls.splice(index, 1);
     //  const newFiles = store.files.filter((file) => file.name !== item.file.name);
-    const newFiles = state!.files.filter(
-      (file) => file.name !== item.file.name
-    );
-    dispatch(setFiles(newFiles));
-    console.log(state?.files.length);
+    const newFiles = files.filter((file) => file.name !== item.file.name);
+    setFiles(newFiles);
+
     setImageUrls(newImageUrls);
   };
   const item = imageUrls[index];

@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import store, { ToolState } from "../../src/store";
 
-
 type FileProps = {
   errors: _;
   extension: string;
@@ -34,11 +33,10 @@ const Files = ({
   setImageUrls,
   toolTipSizes,
 }: FileProps) => {
-  const store = useSelector((state: { tool: ToolState }) => state.tool);
-  const dispatch = useDispatch();
+  // const store = useSelector((state: { tool: ToolState }) => state.tool);
   useEffect(() => {
-    
-  }, [store?.errorMessage]);
+    console.log(imageUrls);
+  })
   const router = useRouter();
   const handleDragEnd = (result: any) => {
     if (!result.destination) {

@@ -18,6 +18,7 @@ import Files from "./DisplayFile/Files";
 import { ToolStoreContext } from "../src/ToolStoreContext";
 import { useSelector, useDispatch } from "react-redux";
 import { ToolState, resetErrorMessage } from "../src/store";
+import { useFileStore } from "../src/file-store";
 type propTypes = {
   extension: string;
   pages: string;
@@ -48,7 +49,7 @@ const DisplayFile = ({
   const [showSpinner, setShowSpinner] = useState(true);
   const [toolTipSizes, setToolTipSizes] = useState<string[]>([]);
   // actual files
-
+  const { files, setFiles } = useFileStore.getState();
   const state = useSelector((state: { tool: ToolState }) => state.tool);
   const dispatch = useDispatch();
   // router
@@ -58,15 +59,15 @@ const DisplayFile = ({
   useEffect(() => {
     // Argument of type 'File[] | undefined' is not assignable to parameter of type 'File[] | FileList'.
     // Type 'undefined' is not assignable to type 'File[] | FileList'.
-    const isValid = validateFiles(state?.files, extension, errors, dispatch);
-    if (!(path == "merge-pdf" && state?.files.length == 1)) {
-      if (state?.errorCode == "ERR_EMPTY_FILE" && state?.files.length > 0) {
+    const isValid = validateFiles(files, extension, errors, dispatch);
+    if (!(path == "merge-pdf" && files.length == 1)) {
+      if (state?.errorCode == "ERR_EMPTY_FILE" && files.length > 0) {
         dispatch(resetErrorMessage());
       }
       if (
         isValid ||
         (state &&
-          state?.files.length > 0 &&
+          files.length > 0 &&
           state?.errorCode == "ERR_EMPTY_FILE")
       ) {
         // the cause of the problem
@@ -74,11 +75,11 @@ const DisplayFile = ({
       }
     }
     // const max_files = 2;
-    // if (state && state?.files.length > max_files) {
+    // if (state && files.length > max_files) {
     //   state?.setErrorMessage(errors.MAX_FILES_EXCEEDED.message);
     // }
     let isSubscribed = true;
-    const tooltipSizes = state!.files.map((file: File) =>
+    const tooltipSizes = files.map((file: File) =>
       getFileDetailsTooltipContent(file, pages, page, lang, dispatch, errors)
     );
     Promise.all(tooltipSizes).then((sizes) => {
@@ -91,7 +92,7 @@ const DisplayFile = ({
 
         if (extension && extension === ".pdf") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
-          const pdfPromises = state!.files.map(async (file: File) => {
+          const pdfPromises = files.map(async (file: File) => {
             const imageUrl = await getFirstPageAsImage(file, dispatch, errors);
             newImageUrls.push({ file, imageUrl });
           });
@@ -102,7 +103,7 @@ const DisplayFile = ({
           }
         } else if (extension && extension !== ".jpg") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
-          state?.files.forEach((file: File) => {
+          files.forEach((file: File) => {
             let imageUrl = !file.size
               ? "/images/corrupted.png"
               : getPlaceHoderImageUrl(extension);
@@ -114,7 +115,7 @@ const DisplayFile = ({
           }
         } else if (extension && extension === ".jpg") {
           const newImageUrls: { file: File; imageUrl: string }[] = [];
-          state?.files.forEach((file: File) => {
+          files.forEach((file: File) => {
             const reader = new FileReader();
             reader.onload = function (event: ProgressEvent<FileReader>) {
               const imageUrl = (event.target as FileReader).result as string;

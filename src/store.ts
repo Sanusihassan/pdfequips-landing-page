@@ -1,6 +1,7 @@
-
-// npm install statement for all dependencies for this code:
-// @ts-ignore
+/**
+ * i've changed my state management to use redux but redux dosn't allow storing non serializable objects like File
+ * can i use another state management tool along with redux only for storing the files array, it should be lightweight by the way.
+ */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ToolState {

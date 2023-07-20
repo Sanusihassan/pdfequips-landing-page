@@ -1,15 +1,23 @@
 import type { AppContext, AppProps } from "next/app";
 
 import "../index.scss";
-// @ts-ignore
-
-import { ToolStoreContext } from "../src/ToolStoreContext";
-
-
-import { Provider } from "react-redux";
+// redux store
+import { Provider as ReduxProvider } from "react-redux";
 // @ts-ignore
 import { configureStore } from "@reduxjs/toolkit";
 import toolReducer from "../src/store";
+
+// zustand store
+import { createStore } from "zustand";
+interface FileStore {
+  files: File[];
+  setFiles: (files: File[]) => void;
+}
+
+export const useFileStore = createStore<FileStore>((set) => ({
+  files: [],
+  setFiles: (files) => set({ files }),
+}));
 
 const store = configureStore({
   reducer: {
@@ -17,12 +25,11 @@ const store = configureStore({
   },
 });
 
-
 function MyApp({ Component, pageProps, lang }: AppProps & { lang: string }) {
   return (
-    <Provider store={store}>
-      <Component {...pageProps} lang={lang} />
-    </Provider>
+    <ReduxProvider store={store}>
+      <Component useFileStore={useFileStore} {...pageProps} lang={lang} />
+    </ReduxProvider>
   );
 }
 MyApp.getInitialProps = async ({

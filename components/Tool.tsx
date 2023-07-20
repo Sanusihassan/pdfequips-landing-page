@@ -25,6 +25,7 @@ import Web2PDF from "./Web2PDF";
 import Markdown2PDF from "./Markdown2PDF";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { useFileStore } from "../src/file-store";
 
 export type errorType = {
   response: {
@@ -64,6 +65,8 @@ const Tool: React.FC<ToolProps> = ({
   web2pdftool,
 }) => {
   const state = useSelector((state: { tool: ToolState }) => state.tool);
+  // the files:
+  const { files, setFiles } = useFileStore.getState();
   const dispatch = useDispatch();
   // const dispatch = useDispatch();
   const [userClickedOnFileUploader, setUserClickedOnFileUploader] =
@@ -83,7 +86,7 @@ const Tool: React.FC<ToolProps> = ({
   // const [endpoint, setEndpoint] = useState("");
   // drag and drop input handling
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    // dispatch(setFiles(acceptedFiles));
+    setFiles(acceptedFiles);
     handleHideTool();
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -110,12 +113,12 @@ const Tool: React.FC<ToolProps> = ({
 
       // a = Array.from(fileInputElement.files as unknown as FileList);
       // change these to mobx syntax
-      if (state!.files.length === 0) {
+      if (files.length === 0) {
         dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
         dispatch(setErrorCode("NO_FILES_SELECTED"));
       } else if (
         state!.errorCode == "EMPTY_FILE" &&
-        state!.files.length > 0 &&
+        files.length > 0 &&
         path != "merge-pdf"
       ) {
         clearInterval(t);
@@ -130,7 +133,7 @@ const Tool: React.FC<ToolProps> = ({
     const preventDefault = (event: DragEvent) => {
       event.preventDefault();
     };
-    console.log(state.files)
+    
     dispatch(setEndpoint(path));
     document.addEventListener("dragover", preventDefault);
     document.addEventListener("click", (e) => e.preventDefault());
@@ -139,7 +142,7 @@ const Tool: React.FC<ToolProps> = ({
     }
     if (
       state!.errorCode == "ERR_EMPTY_FILE" &&
-      state!.files.length > 0 &&
+      files.length > 0 &&
       path != "merge-pdf"
     ) {
       dispatch(resetErrorMessage());
@@ -187,7 +190,7 @@ const Tool: React.FC<ToolProps> = ({
                 e.stopPropagation();
               }}
               onSubmit={(e) =>
-                handleUpload(e, fileInput, downloadBtn, state, errors)
+                handleUpload(e, downloadBtn, dispatch, state, errors)
               }
               method="POST"
               encType="multipart/form-data"
@@ -231,14 +234,14 @@ const Tool: React.FC<ToolProps> = ({
                     setUserClickedOnFileUploader(true);
                   }}
                   onChange={(e) => {
-                    handleChange(e, dispatch, data.type, errors);
+                    handleChange(e, dispatch,setFiles, data.type, errors);
                     dispatch(setRerender());
 
-                    if (path == "merge-pdf" && state!.files.length == 1) {
+                    if (path == "merge-pdf" && files.length == 1) {
                       dispatch(setErrorMessage(errors.ERR_UPLOAD_COUNT.message))
                       dispatch(setErrorCode("ERR_UPLOAD_COUNT"));
                     } else if (
-                      (state!.files && state!.files.length > 0) ||
+                      (files && files.length > 0) ||
                       (state && state.files.length > 0 && path != "merge-pdf")
                     ) {
                       dispatch(resetErrorMessage());

@@ -3,17 +3,18 @@ import { Dispatch, RefObject } from "react";
 import type { ToolData, errorType } from "../../components/Tool";
 import { downloadConvertedFile } from "../downloadFile";
 import type { errors as _ } from "../../content";
-import { ToolStore } from "../store";
+import { AnyAction } from "@reduxjs/toolkit";
+import { ToolState, resetErrorMessage, setErrorMessage, setIsSubmitted } from "../store";
 // this is the handleUpload function that is calling the download function maybe the issue is here
 export const handleUpload = async (
   e: React.FormEvent<HTMLFormElement>,
-  fileInput: RefObject<HTMLInputElement>,
   downloadBtn: RefObject<HTMLAnchorElement>,
-  state: ToolStore | undefined,
+  dispatch: Dispatch<AnyAction>,
+  state: ToolState,
   errors: _
 ) => {
   e.preventDefault();
-  state?.setIsSubmitted(true);
+  dispatch(setIsSubmitted(true));
 
   if (!state!.files) return;
 
@@ -107,12 +108,12 @@ export const handleUpload = async (
     if (response.status !== 200) {
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
-      state?.resetErrorMessage();
-      state?.setIsSubmitted(false);
+      dispatch(resetErrorMessage());
+      dispatch(setIsSubmitted(false));
     }
   } catch (error) {
     if ((error as { code: string }).code === "ERR_NETWORK") {
-      state?.setErrorMessage(errors.ERR_NETWORK.message);
+      dispatch(setErrorMessage(errors.ERR_NETWORK.message));
       return;
     }
 
@@ -128,8 +129,8 @@ export const handleUpload = async (
     //   dispatch(setIsSubmitted(false));
     // });
 
-    state?.setIsSubmitted(false);
+    dispatch(setIsSubmitted(false));
   } finally {
-    state?.setIsSubmitted(false);
+    dispatch(setIsSubmitted(false));
   }
 };

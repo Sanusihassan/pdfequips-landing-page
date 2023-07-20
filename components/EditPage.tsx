@@ -11,6 +11,7 @@ import { CogIcon } from "@heroicons/react/outline";
 import { ToolStoreContext } from "../src/ToolStoreContext";
 import { useDispatch, useSelector } from "react-redux";
 import { ToolState, resetErrorMessage, setIsSubmitted } from "../src/store";
+import { useFileStore } from "../src/file-store";
 
 type editPageProps = {
   extension: string;
@@ -38,14 +39,15 @@ const EditPage = ({
   const state = useSelector((state: { tool: ToolState }) => state.tool);
   const dispatch = useDispatch();
   // actual files;
+  const { files, setFiles } = useFileStore.getState();
   useEffect(() => {
-    if (isOnline && !(k == "merge-pdf" && state?.files.length == 1)) {
+    if (isOnline && !(k == "merge-pdf" && files.length == 1)) {
       dispatch(resetErrorMessage());
     }
     if (
       state?.errorCode == "ERR_EMPTY_FILE" &&
-      state?.files.length > 0 &&
-      !(k == "merge-pdf" && state?.files.length == 1)
+      files.length > 0 &&
+      !(k == "merge-pdf" && files.length == 1)
     ) {
       dispatch(resetErrorMessage());
     }

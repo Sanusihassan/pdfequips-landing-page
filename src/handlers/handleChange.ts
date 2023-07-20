@@ -8,11 +8,12 @@ import { hideTool, resetErrorMessage, setFiles } from "../store";
 export const handleChange = (
   e: React.ChangeEvent<HTMLInputElement>,
   dispatch: Dispatch<AnyAction>,
+  setFiles: (files: FileList | File[]) => void,
   extension: string,
   errors: typeof _
 ) => {
   const _files = (e.target?.files as FileList) || null;
-  dispatch(setFiles(_files));
+  setFiles(_files);
   const isValid = validateFiles(_files, extension, errors, dispatch);
   dispatch(hideTool());
   if (isValid) {
