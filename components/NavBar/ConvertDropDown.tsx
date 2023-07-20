@@ -167,14 +167,14 @@ const ConvertPDFDropdown = ({
                 <DocumentAddIcon className="h-5 w-5 inline-block mr-2" />
               </a>
             </Link>
-            {/* <Link href={`${langPath}pdf-to-text`}>
+            <Link href={`${langPath}pdf-to-text`}>
               <a onClick={handleClick} className="dropdown-item">
                 {" "}
                 <bdi>{nav_content.pdf_to_text}</bdi>{" "}
                 <DocumentTextIcon className="h-5 w-5 inline-block mr-2 text" />
               </a>
             </Link>
-            <Link href={`${langPath}pdf-to-html`}>
+            {/* <Link href={`${langPath}pdf-to-html`}>
               <a onClick={handleClick} className="dropdown-item">
                 {" "}
                 <bdi>{nav_content.pdf_to_html}</bdi>{" "}

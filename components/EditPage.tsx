@@ -60,6 +60,7 @@ const EditPage = ({
       <button
         className={`submit-btn btn btn-lg text-white position-relative overflow-hidden ${k} grid-footer`}
         onClick={() => {
+          console.log("clicked");
           state?.setIsSubmitted(true);
           setShowOptions(false);
           if (submitBtn.current) {

@@ -25,7 +25,7 @@ export const handleUpload = async (
   // @ts-ignore
   if (process.env.NODE_ENV === "development") {
     // url = `http://127.0.0.1:5000/${state.endpoint}`;
-    url = `https://5000-planetcreat-pdfequipsap-6i47x1zgnkc.ws-eu101.gitpod.io/${state?.endpoint}`;
+    url = `https://5000-planetcreat-pdfequipsap-te4zoi6qkr3.ws-eu101.gitpod.io/${state?.endpoint}`;
   } else {
     url = `/${state?.endpoint}`;
   }
@@ -78,6 +78,10 @@ export const handleUpload = async (
           "application/vnd.openxmlformats-officedocument.presentationml.presentation",
         outputFileName: `${originalFileName}.pptx`,
       },
+    "text/plain": {
+      outputFileMimeType: "text/plain",
+      outputFileName: `${originalFileName}.txt`,
+    },
   };
 
   try {

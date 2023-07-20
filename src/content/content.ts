@@ -197,6 +197,7 @@ export const edit_page = {
     pdf_to_word: "PDF to WORD options",
     pdf_to_excel: "PDF to EXCEL options",
     pdf_to_pdf_a: "PDF to PDF/A options",
+    pdf_to_text: "PDF to text options"
   },
   loader_text: "please wait...",
   // translate the values of this object to french.
@@ -214,6 +215,7 @@ export const edit_page = {
     pdf_to_word: "Convert to Word",
     pdf_to_excel: "Convert to Excel",
     pdf_to_pdf_a: "Convert to PDF/A",
+    pdf_to_text: "Convert to Text",
   },
   pages: "pages",
   page: "page",

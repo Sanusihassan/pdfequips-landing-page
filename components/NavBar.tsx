@@ -93,11 +93,11 @@ const NavBar = ({
               <bdi>{nav_content.merge_pdf}</bdi>
             </a>
           </Link>
-          <Link className="dropdown-item" href={`${langPath}split-pdf`}>
+          {/* <Link className="dropdown-item" href={`${langPath}split-pdf`}>
             <a onClick={handleClick} className="dropdown-item">
               <bdi>{nav_content.split_pdf}</bdi>
             </a>
-          </Link>
+          </Link> */}
           <Link className="dropdown-item" href={`${langPath}compress-pdf`}>
             <a onClick={handleClick} className="dropdown-item">
               <bdi>{nav_content.compress_pdf}</bdi>

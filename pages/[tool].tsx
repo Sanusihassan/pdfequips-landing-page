@@ -58,16 +58,31 @@ export default ({ item }: { item: data_type }) => {
         <link rel="icon" href="/logo.png" />
       </Head>
       <NavBar nav_content={nav_content} lang="" />
-      <Tool
-        tools={tools}
-        data={item}
-        lang=""
-        errors={errors}
-        edit_page={edit_page}
-        pages={edit_page.pages}
-        page={edit_page.page}
-        web2pdftool={web2pdftool}
-      />
+      {path == "/split-pdf" ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <h2 className="display-4 text-center">{appology_message.title}</h2>
+          <p className="text-center">{appology_message.reason}</p>
+        </div>
+      ) : (
+        <Tool
+          tools={tools}
+          data={item}
+          lang=""
+          errors={errors}
+          edit_page={edit_page}
+          pages={edit_page.pages}
+          page={edit_page.page}
+          web2pdftool={web2pdftool}
+        />
+      )}
     </>
   );
 };
