@@ -1,6 +1,5 @@
 @import "~cssmolecule";
 @import "~custom-bs";
-// @include reboot;
 // @include type;
 @include images;
 @include containers;
@@ -33,8 +32,9 @@
 
 // Helpers
 @include helpers;
-
-
+%debug {
+  outline: 1px solid;
+}
 
 @import "./scss/placeholders";
 @include list-group;

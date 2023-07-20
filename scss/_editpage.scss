@@ -26,7 +26,7 @@
   }
 
   .edit-area {
-    flex: 0 0 75%;
+    flex: 0 0 69%;
     @media (max-width: 600px) {
       flex: 0 0 100%;
     }
@@ -57,9 +57,10 @@
     }
   }
   .options {
+    outline: 1px solid;
     height: 100%;
     height: 100vh;
-    flex: 0 0 25%;
+    flex: 1 0 25%;
     display: grid;
     height: 100vh;
     grid-template-rows: 7% 85% 13%;
@@ -127,7 +128,6 @@
           animation: pulse 2s infinite;
         }
       }
-
       width: 100%;
     }
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSelectedOption } from "../../../../src/hooks/handleOptionClick";
 // import { PlusIcon } from '@heroicons/react/outline';
 
@@ -8,6 +8,8 @@ import {
   PlusIcon,
 } from "@heroicons/react/solid";
 import { Row, Col } from "react-bootstrap";
+import { ToolStoreContext } from "../../../../src/ToolStoreContext";
+import { calculatePages } from "../../../../src/utils";
 
 export const RangeSplit = () => {
   const [ranges, setRanges] = useState<{ from: number; to: number }[]>([
@@ -59,18 +61,31 @@ export const RangeSplit = () => {
             <div className="col">
               <div className="card">
                 <div className="card-body">
-                  <div className="row align-items-center">
-                    <div className="col">
-                      {/* do the same but for from */}
+                  <div className="row flex-nowrap justify-content-between align-items-center range-input-wrapper">
+                    <div className="row flex-nowrap input-group">
+                      <span className="input-group-text" id="basic-addon1">
+                        From
+                      </span>
                       <input
                         type="number"
                         className="form-control"
                         value={range.from}
-                        onChange={(e) => setRanges(ranges.map(r => r.to === range.to ? { ...r, from: parseInt(e.target.value, 10) } : r))}
+                        onChange={(e) =>
+                          setRanges(
+                            ranges.map((r) =>
+                              r.to === range.to
+                                ? { ...r, from: parseInt(e.target.value, 10) }
+                                : r
+                            )
+                          )
+                        }
                         placeholder="From"
                       />
                     </div>
-                    <div className="col">
+                    <div className="row flex-nowrap input-group">
+                      <span className="input-group-text" id="basic-addon1">
+                        To
+                      </span>
                       <input
                         type="number"
                         className="form-control"
@@ -87,7 +102,7 @@ export const RangeSplit = () => {
                         placeholder="To"
                       />
                     </div>
-                    <div className="col-auto">
+                    <div className="position-absolute delete-button">
                       <button
                         className="btn btn-link text-danger"
                         onClick={() => handleDeleteRangeClick(i)}
@@ -101,7 +116,7 @@ export const RangeSplit = () => {
             </div>
           </div>
         ))}
-        <div className="row justify-content-center">
+        <div className="row justify-content-center add-btn">
           <button
             className="col-6 btn btn-dark row align-items-center"
             onClick={handleAddRangeClick}
@@ -114,26 +129,46 @@ export const RangeSplit = () => {
     );
   };
 
-  const FixedRange = () => (
-    <>
-      <Row>
-        <label>split in page range of: </label>
-        <Col>
-          <input
-            type="number"
-            className="form-control"
-            // value={to}
-            // onChange={(e) => setTo(e.target.value)}
-            placeholder="To"
-          />
-        </Col>
-        <div className="alert alert-info">
-          <InformationCircleIcon className="w-5 h-5" /> this pdf will be split
-          in files of 3 pages "x PDF" will be created.
-        </div>
-      </Row>
-    </>
-  );
+  const FixedRange = () => {
+    const [pages, setPages] = useState(1);
+    // let pagesCount = 0;
+    const [pageCount, setPageCount] = useState(0);
+    const state = useContext(ToolStoreContext);
+    const getPageCount = async () => {
+      if (state?.files) {
+        setPageCount(await calculatePages(state.files[0]));
+      }
+    };
+    useEffect(() => {
+      getPageCount();
+    }, []);
+    return (
+      <>
+        <Row className="fixed-range">
+          <div className="input">
+            <label className="col-7 label">split in page range of: </label>
+            <input
+              type="number"
+              className="form-control"
+              value={pages}
+              onChange={(e) => setPages(parseInt(e.target.value))}
+              placeholder="To"
+            />
+          </div>
+          {/* i already have pdfjs-dist installed, i want a way to calculate the number of the pdf files would be created and insert that info in the "x PDF" part */}
+          <div className="alert alert-info">
+            <InformationCircleIcon className="w-5 h-5" /> This PDF will be split
+            in files of {pages} pages{" "}
+            <strong>
+              {pages !== 0 ? pageCount / pages : parseInt(`${pageCount}`)}{" "}
+              PDF
+            </strong>{" "}
+            will be created.
+          </div>
+        </Row>
+      </>
+    );
+  };
 
   return (
     <div className="split-category range-split">
