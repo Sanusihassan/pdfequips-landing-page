@@ -4,29 +4,35 @@ import type { ToolData, errorType } from "../../components/Tool";
 import { downloadConvertedFile } from "../downloadFile";
 import type { errors as _ } from "../../content";
 import { AnyAction } from "@reduxjs/toolkit";
-import { ToolState, resetErrorMessage, setErrorMessage, setIsSubmitted } from "../store";
+import {
+  ToolState,
+  resetErrorMessage,
+  setErrorMessage,
+  setIsSubmitted,
+} from "../store";
 // this is the handleUpload function that is calling the download function maybe the issue is here
 export const handleUpload = async (
   e: React.FormEvent<HTMLFormElement>,
   downloadBtn: RefObject<HTMLAnchorElement>,
   dispatch: Dispatch<AnyAction>,
   state: ToolState,
+  files: File[],
   errors: _
 ) => {
   e.preventDefault();
   dispatch(setIsSubmitted(true));
 
-  if (!state!.files) return;
+  if (!files) return;
 
   const formData = new FormData();
-  for (let i = 0; i < state!.files.length; i++) {
-    formData.append("files", state!.files[i]);
+  for (let i = 0; i < files.length; i++) {
+    formData.append("files", files[i]);
   }
   let url;
   // @ts-ignore
   if (process.env.NODE_ENV === "development") {
     // url = `http://127.0.0.1:5000/${state.endpoint}`;
-    url = `https://5000-planetcreat-pdfequipsap-te4zoi6qkr3.ws-eu101.gitpod.io/${state?.endpoint}`;
+    url = `https://5000-planetcreat-pdfequipsap-te4zoi6qkr3.ws-eu102.gitpod.io/${state?.endpoint}`;
   } else {
     url = `/${state?.endpoint}`;
   }
@@ -45,7 +51,7 @@ export const handleUpload = async (
   } = {
     "application/zip": {
       outputFileMimeType: "application/zip",
-      outputFileName: "PDFEquips.zip",
+      outputFileName: `PDFEquips-${state.endpoint}.zip`,
     },
     "application/pdf": {
       outputFileMimeType: "application/pdf",

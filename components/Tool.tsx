@@ -190,7 +190,7 @@ const Tool: React.FC<ToolProps> = ({
                 e.stopPropagation();
               }}
               onSubmit={(e) =>
-                handleUpload(e, downloadBtn, dispatch, state, errors)
+                handleUpload(e, downloadBtn, dispatch, state, files, errors)
               }
               method="POST"
               encType="multipart/form-data"
