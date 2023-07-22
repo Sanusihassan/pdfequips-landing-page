@@ -19,5 +19,4 @@ export const handleChange = (
   if (isValid) {
     dispatch(resetErrorMessage());
   }
-  document.documentElement.click();
 };

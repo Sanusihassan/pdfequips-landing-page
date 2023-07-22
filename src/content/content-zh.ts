@@ -175,7 +175,7 @@ export const tool: _tool = {
   },
 };
 
-export const edit_page = {
+export const edit_page: _edit_page = {
   edit_page_titles: {
     merge_pdf: "合并PDF选项",
     split_pdf: "拆分PDF选项",
@@ -190,6 +190,7 @@ export const edit_page = {
     pdf_to_word: "PDF转WORD选项",
     pdf_to_excel: "PDF转EXCEL选项",
     pdf_to_pdf_a: "PDF转PDF/A选项",
+    pdf_to_text: "PDF 转文本选项",
   },
   loader_text: "请稍等...",
   action_buttons: {
@@ -206,6 +207,7 @@ export const edit_page = {
     pdf_to_word: "转换为Word",
     pdf_to_excel: "转换为Excel",
     pdf_to_pdf_a: "转换为PDF/A",
+    pdf_to_text: "转换为文本",
   },
   pages: "页",
   page: "页",
@@ -231,19 +233,19 @@ export const edit_page = {
     "使用拖放改变PDF文件合并的顺序。单击并   按住一个文件,将其移动到所需位置,然后释放鼠标按钮。   PDF文件从上到下合并。要删除文件,请单击文件顶部的删除   图标。要旋转页面,请单击页面缩略图顶部的旋转图标,然后选择所需的旋转角度。文件处于   所需的顺序和方向,单击“合并”按钮将它们合并为一个PDF文件。",
 };
 
-export const web2pdftool = {
+export const web2pdftool: _web2pdftool = {
   placeholder: "例如：https://pdfequips.com",
   submit_btn: "转换",
 };
 
-export const tools = {
+export const tools: _tools = {
   select: "选择",
   or_drop: "或将文件拖放到此处",
   files: "文件",
   drop_files: "在此处拖放文件",
 };
 
-export const footer = {
+export const footer: _footer = {
   brand: "PDFEquips",
   terms: "条款",
   conditions: "条件",

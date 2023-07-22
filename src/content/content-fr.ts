@@ -176,18 +176,18 @@ export const tool: _tool = {
   },
 };
 
-export const web2pdftool = {
+export const web2pdftool: _web2pdftool = {
   placeholder: "Exemple: https://pdfequips.com",
   submit_btn: "Convertir",
 };
 
-export const tools = {
+export const tools: _tools = {
   select: "Sélectionner",
   or_drop: "ou déposer des fichiers ici",
   files: "fichiers",
   drop_files: "Déposez les fichiers ici",
 };
-export const edit_page = {
+export const edit_page: _edit_page = {
   edit_page_titles: {
     merge_pdf: "Options de fusion de PDF",
     split_pdf: "Options de séparation de PDF",
@@ -202,6 +202,7 @@ export const edit_page = {
     pdf_to_word: "Options de conversion de PDF en WORD",
     pdf_to_excel: "Options de conversion de PDF en EXCEL",
     pdf_to_pdf_a: "Options de conversion de PDF en PDF/A",
+    pdf_to_text: "Options de PDF à texte",
   },
   loader_text: "Veuillez patienter...",
   action_buttons: {
@@ -218,6 +219,7 @@ export const edit_page = {
     pdf_to_word: "Convertir en Word",
     pdf_to_excel: "Convertir en Excel",
     pdf_to_pdf_a: "Convertir en PDF/A",
+    pdf_to_text: "Convertir en texte",
   },
   pages: "pages",
   page: "page",
@@ -243,7 +245,7 @@ export const edit_page = {
   merge_pdf: `Utilisez le glisser-déposer pour changer l'ordre des fichiers PDF pour la fusion. Cliquez et maintenez un fichier, déplacez-le à l'emplacement souhaité et relâchez le bouton de la souris.
   Les fichiers PDF sont fusionnés de haut en bas. Pour supprimer un fichier, cliquez sur l'icône de suppression en haut du fichier. Pour faire pivoter une page, cliquez sur l'icône de rotation en haut de la vignette de la page et sélectionnez l'angle de rotation souhaité. Une fois que les fichiers sont dans l'ordre et l'orientation souhaités, cliquez sur le bouton "Fusionner" pour les combiner en un seul fichier PDF.`,
 };
-export const footer = {
+export const footer: _footer = {
   brand: "PDFEquips",
   terms: "conditions",
   conditions: "conditions d'utilisation",

@@ -203,6 +203,7 @@ export const edit_page: _edit_page = {
     pdf_to_word: "خيارات تحويل ملف PDF إلى WORD",
     pdf_to_excel: "خيارات تحويل ملف PDF إلى EXCEL",
     pdf_to_pdf_a: "خيارات تحويل ملف PDF إلى PDF/A",
+    pdf_to_text: "خيارات تحويل PDF إلى نص",
   },
   loader_text: "يرجى الانتظار...",
   action_buttons: {
@@ -219,6 +220,7 @@ export const edit_page: _edit_page = {
     pdf_to_word: "تحويل إلى Word",
     pdf_to_excel: "تحويل إلى Excel",
     pdf_to_pdf_a: "تحويل إلى PDF/A",
+    pdf_to_text: "تحويل إلى نص",
   },
   pages: "صفحة",
   page: "صفحة واحدة",

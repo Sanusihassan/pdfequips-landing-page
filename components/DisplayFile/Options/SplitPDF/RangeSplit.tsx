@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useSelectedOption } from "../../../../src/hooks/handleOptionClick";
 // import { PlusIcon } from '@heroicons/react/outline';
+import { useFileStore } from "../../../../src/file-store";
 
 import {
   TrashIcon,
@@ -8,7 +9,6 @@ import {
   PlusIcon,
 } from "@heroicons/react/solid";
 import { Row, Col } from "react-bootstrap";
-import { ToolStoreContext } from "../../../../src/ToolStoreContext";
 import { calculatePages } from "../../../../src/utils";
 
 export const RangeSplit = () => {
@@ -133,10 +133,10 @@ export const RangeSplit = () => {
     const [pages, setPages] = useState(1);
     // let pagesCount = 0;
     const [pageCount, setPageCount] = useState(0);
-    const state = useContext(ToolStoreContext);
+    const { files, setFiles } = useFileStore.getState();
     const getPageCount = async () => {
-      if (state?.files) {
-        setPageCount(await calculatePages(state.files[0]));
+      if (files) {
+        setPageCount(await calculatePages(files[0]));
       }
     };
     useEffect(() => {
@@ -160,8 +160,7 @@ export const RangeSplit = () => {
             <InformationCircleIcon className="w-5 h-5" /> This PDF will be split
             in files of {pages} pages{" "}
             <strong>
-              {pages !== 0 ? pageCount / pages : parseInt(`${pageCount}`)}{" "}
-              PDF
+              {pages !== 0 ? pageCount / pages : parseInt(`${pageCount}`)} PDF
             </strong>{" "}
             will be created.
           </div>

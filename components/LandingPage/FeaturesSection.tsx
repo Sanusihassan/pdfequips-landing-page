@@ -4,7 +4,8 @@ import Link from "next/link";
 import {
   DocumentDuplicateIcon,
   PresentationChartBarIcon,
-  ScissorsIcon,
+  // ScissorsIcon,
+  DocumentTextIcon,
 } from "@heroicons/react/outline";
 import CompressIcon from "../icons/compressIcon";
 import type { tool } from "../../content";
@@ -27,12 +28,19 @@ export const FeaturesSection = ({
       color: tool.Merge_PDF.color as string,
       icon: DocumentDuplicateIcon,
     },
+    // {
+    //   title: tool.Split_PDF.title,
+    //   description: tool.Split_PDF.description,
+    //   to: `${langPath}${tool.Split_PDF.to}`,
+    //   color: tool.Split_PDF.color as string,
+    //   icon: ScissorsIcon,
+    // },
     {
-      title: tool.Split_PDF.title,
-      description: tool.Split_PDF.description,
-      to: `${langPath}${tool.Split_PDF.to}`,
-      color: tool.Split_PDF.color as string,
-      icon: ScissorsIcon,
+      title: tool.PDF_to_Text.title,
+      description: tool.PDF_to_Text.description,
+      to: `${langPath}${tool.PDF_to_Text.to}`,
+      color: tool.PDF_to_Text.color as string,
+      icon: DocumentTextIcon,
     },
     {
       title: tool.Compress_PDF.title,

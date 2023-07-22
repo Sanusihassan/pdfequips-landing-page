@@ -177,7 +177,7 @@ export const tool: _tool = {
     to: "/pdf-to-markdown",
   },
 };
-export const edit_page = {
+export const edit_page: _edit_page = {
   edit_page_titles: {
     merge_pdf: "PDF फ्यूज़न विकल्प",
     split_pdf: "PDF विभाजन विकल्प",
@@ -192,6 +192,7 @@ export const edit_page = {
     pdf_to_word: "PDF से WORD विकल्प",
     pdf_to_excel: "PDF से EXCEL विकल्प",
     pdf_to_pdf_a: "PDF से PDF/A विकल्प",
+    pdf_to_text: "पीडीएफ से टेक्स्ट विकल्प",
   },
   loader_text: "कृपया प्रतीक्षा करें...",
   action_buttons: {
@@ -208,6 +209,7 @@ export const edit_page = {
     pdf_to_word: "वर्ड में रूपांतरित करें",
     pdf_to_excel: "एक्सेल में रूपांतरित करें",
     pdf_to_pdf_a: "पीडीएफ ए के लिए रूपांतरित करें",
+    pdf_to_text: "टेक्स्ट में कनवर्ट करें",
   },
   pages: "पृष्ठों",
   page: "पृष्ठ",
@@ -234,26 +236,26 @@ export const edit_page = {
     "मिलाने के लिए पीडीएफ फ़ाइलों के क्रम बदलने के लिए ड्रैग एंड ड्रॉप का उपयोग करें। एक फ़ाइल पर क्लिक और   होल्ड करें, इसे इच्छित स्थान पर ले जाएँ और माउस बटन को छोड़ दें।   पीडीएफ फ़ाइलें ऊपर से नीचे तक मिलाई जाती हैं। फ़ाइल को हटाने के लिए, फ़ाइल के ऊपर हटाने वाले आइकन पर क्लिक करें। पृष्ठ को घुमाने के लिए, पृष्ठ थंबनेल के ऊपर घुमाने वाले आइकन पर क्लिक करें   और चयनित घुमाने का कोण चुनें। एक बार जब फाइल इच्छित क्रम और अभिविन्यास में हो जाती हैं, तो उन्हें एक सिंगल पीडीएफ फ़ाइल में जोड़ने के लिए 'मर्ज' बटन पर क्लिक करें।",
 };
 
-export const web2pdftool = {
+export const web2pdftool: _web2pdftool = {
   placeholder: "उदाहरण: https://pdfequips.com",
   submit_btn: "रूपांतरित करें",
 };
 
-export const tools = {
+export const tools: _tools = {
   select: "चुनें",
   or_drop: "या फ़ाइलें यहां छोड़ें",
   files: "फाइलें",
   drop_files: "फ़ाइलें यहाँ खींचें",
 };
 
-export const footer = {
+export const footer: _footer = {
   brand: "PDFEquips",
   terms: "शर्तें",
   conditions: "उपयोग की शर्तें",
   privacy_policy: "गोपनीयता नीति",
 };
 
-export const errors = {
+export const errors: _errors = {
   EMPTY_FILE: {
     message: "फ़ाइल खाली है। कृपया एक मान्य फ़ाइल चुनें।",
     code: "ERR_EMPTY_FILE",

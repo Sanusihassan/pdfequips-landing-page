@@ -15,7 +15,7 @@ import { validateFiles } from "../src/utils";
 
 import type { errors as _, edit_page } from "../content";
 import Files from "./DisplayFile/Files";
-import { ToolStoreContext } from "../src/ToolStoreContext";
+// import { ToolStoreContext } from "../src/ToolStoreContext";
 import { useSelector, useDispatch } from "react-redux";
 import { ToolState, resetErrorMessage } from "../src/store";
 import { useFileStore } from "../src/file-store";
@@ -66,9 +66,7 @@ const DisplayFile = ({
       }
       if (
         isValid ||
-        (state &&
-          files.length > 0 &&
-          state?.errorCode == "ERR_EMPTY_FILE")
+        (state && files.length > 0 && state?.errorCode == "ERR_EMPTY_FILE")
       ) {
         // the cause of the problem
         dispatch(resetErrorMessage());

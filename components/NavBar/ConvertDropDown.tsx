@@ -16,15 +16,20 @@ import { NavDropdown } from "react-bootstrap";
 import type { nav_content } from "../../content";
 import MarkdownIcon from "../icons/Markdown";
 
+import { useDispatch, useSelector } from "react-redux";
+import { setLang, setPath, ToolState } from "../../src/store";
+
 const ConvertPDFDropdown = ({
   langPath,
   handleClick,
   nav_content,
 }: {
   langPath: string;
-  handleClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+  handleClick: () => void;
   nav_content: nav_content;
 }) => {
+  const state = useSelector((state: { tool: ToolState }) => state.tool);
+  const dispatch = useDispatch();
   return (
     <>
       <NavDropdown
@@ -39,7 +44,13 @@ const ConvertPDFDropdown = ({
               <bdi>{nav_content.convert_to_pdf}</bdi>{" "}
             </h6>
             <Link href={`${langPath}jpg-to-pdf`}>
-              <a onClick={handleClick} className="dropdown-item">
+              <a
+                onClick={() => {
+                  handleClick();
+                  dispatch(setPath("jpg-to-pdf"));
+                }}
+                className="dropdown-item"
+              >
                 <PhotographIcon
                   style={{
                     color: "#f1c40f",
@@ -50,7 +61,13 @@ const ConvertPDFDropdown = ({
               </a>
             </Link>
             <Link href={`${langPath}word-to-pdf`}>
-              <a onClick={handleClick} className="dropdown-item">
+              <a
+                onClick={() => {
+                  handleClick();
+                  dispatch(setPath("word-to-pdf"));
+                }}
+                className="dropdown-item"
+              >
                 <DocumentIcon
                   style={{
                     color: "#1B5EBE",
@@ -64,7 +81,13 @@ const ConvertPDFDropdown = ({
               className="dropdown-item"
               href={`${langPath}powerpoint-to-pdf`}
             >
-              <a onClick={handleClick} className="dropdown-item">
+              <a
+                onClick={() => {
+                  handleClick();
+                  dispatch(setPath("powerpoint-to-pdf"));
+                }}
+                className="dropdown-item"
+              >
                 <PresentationChartBarIcon
                   style={{
                     color: "#C13B1B",
@@ -75,7 +98,13 @@ const ConvertPDFDropdown = ({
               </a>
             </Link>
             <Link className="dropdown-item" href={`${langPath}excel-to-pdf`}>
-              <a onClick={handleClick} className="dropdown-item">
+              <a
+                onClick={() => {
+                  handleClick();
+                  dispatch(setPath("excel-to-pdf"));
+                }}
+                className="dropdown-item"
+              >
                 <TableIcon
                   style={{
                     color: "#10793F",
@@ -86,7 +115,13 @@ const ConvertPDFDropdown = ({
               </a>
             </Link>
             <Link className="dropdown-item" href={`${langPath}html-to-pdf`}>
-              <a onClick={handleClick} className="dropdown-item">
+              <a
+                onClick={() => {
+                  handleClick();
+                  dispatch(setPath("html-to-pdf"));
+                }}
+                className="dropdown-item"
+              >
                 <CodeIcon className="h-5 w-5 inline-block mr-2 html" />{" "}
                 <bdi>{nav_content.html_to_pdf}</bdi>{" "}
               </a>
@@ -110,7 +145,13 @@ const ConvertPDFDropdown = ({
               <bdi>{nav_content.convert_from_pdf}</bdi>{" "}
             </h6>
             <Link className="dropdown-item" href={`${langPath}pdf-to-jpg`}>
-              <a onClick={handleClick} className="dropdown-item">
+              <a
+                onClick={() => {
+                  handleClick();
+                  dispatch(setPath("pdf-to-jpg"));
+                }}
+                className="dropdown-item"
+              >
                 {" "}
                 <bdi>{nav_content.pdf_to_jpg}</bdi>{" "}
                 <PhotographIcon
@@ -122,7 +163,13 @@ const ConvertPDFDropdown = ({
               </a>
             </Link>
             <Link className="dropdown-item" href={`${langPath}pdf-to-word`}>
-              <a onClick={handleClick} className="dropdown-item">
+              <a
+                onClick={() => {
+                  handleClick();
+                  dispatch(setPath("pdf-to-word"));
+                }}
+                className="dropdown-item"
+              >
                 {" "}
                 <bdi>{nav_content.pdf_to_word}</bdi>{" "}
                 <DocumentIcon
@@ -137,7 +184,13 @@ const ConvertPDFDropdown = ({
               className="dropdown-item"
               href={`${langPath}pdf-to-powerpoint`}
             >
-              <a onClick={handleClick} className="dropdown-item">
+              <a
+                onClick={() => {
+                  handleClick();
+                  dispatch(setPath("pdf-to-powerpoint"));
+                }}
+                className="dropdown-item"
+              >
                 {" "}
                 <bdi>{nav_content.pdf_to_powerpoint}</bdi>{" "}
                 <PresentationChartBarIcon
@@ -149,7 +202,13 @@ const ConvertPDFDropdown = ({
               </a>
             </Link>
             <Link className="dropdown-item" href={`${langPath}pdf-to-excel`}>
-              <a onClick={handleClick} className="dropdown-item">
+              <a
+                onClick={() => {
+                  handleClick();
+                  dispatch(setPath("pdf-to-excel"));
+                }}
+                className="dropdown-item"
+              >
                 {" "}
                 <bdi>{nav_content.pdf_to_excel}</bdi>{" "}
                 <TableIcon
@@ -161,14 +220,26 @@ const ConvertPDFDropdown = ({
               </a>
             </Link>
             <Link href={`${langPath}pdf-to-pdf-a`}>
-              <a onClick={handleClick} className="dropdown-item">
+              <a
+                onClick={() => {
+                  handleClick();
+                  dispatch(setPath("pdf-to-pdf-a"));
+                }}
+                className="dropdown-item"
+              >
                 {" "}
                 <bdi>{nav_content.pdf_to_pdf_a}</bdi>{" "}
                 <DocumentAddIcon className="h-5 w-5 inline-block mr-2" />
               </a>
             </Link>
             <Link href={`${langPath}pdf-to-text`}>
-              <a onClick={handleClick} className="dropdown-item">
+              <a
+                onClick={() => {
+                  handleClick();
+                  dispatch(setPath("pdf-to-text"));
+                }}
+                className="dropdown-item"
+              >
                 {" "}
                 <bdi>{nav_content.pdf_to_text}</bdi>{" "}
                 <DocumentTextIcon className="h-5 w-5 inline-block mr-2 text" />

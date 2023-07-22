@@ -8,7 +8,7 @@ import ErrorElement from "./ErrorElement";
 import type { errors as _ } from "../content";
 import { Spinner } from "react-bootstrap";
 import { CogIcon } from "@heroicons/react/outline";
-import { ToolStoreContext } from "../src/ToolStoreContext";
+// import { ToolStoreContext } from "../src/ToolStoreContext";
 import { useDispatch, useSelector } from "react-redux";
 import { ToolState, resetErrorMessage, setIsSubmitted } from "../src/store";
 import { useFileStore } from "../src/file-store";

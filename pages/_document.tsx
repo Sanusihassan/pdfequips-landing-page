@@ -11,6 +11,7 @@ import Document, {
 import { isrtllang } from "../src/utils";
 
 const MyDocument = ({ isRtl, lang }: { isRtl: boolean; lang: string }) => {
+  console.log(lang);
   return (
     <Html lang={lang.length > 0 ? lang : "en"} dir={isRtl ? "rtl" : "ltr"}>
       <Head>
@@ -37,7 +38,6 @@ const MyDocument = ({ isRtl, lang }: { isRtl: boolean; lang: string }) => {
         <meta name="twitter:title" content="PDFEquips" />
         <meta name="twitter:description" content="The Complete PDF Solution" />
         <meta name="twitter:image" content="https://pdfequips.com/logo.png" /> */}
-
       </Head>
       <body>
         <Main />
@@ -51,7 +51,9 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const initialProps = await Document.getInitialProps(ctx);
   const isRtl = isrtllang(ctx.asPath || "");
   const path = ctx.asPath || "";
-  const lang = path.split("/")[1] || "";
+  const lang = ["ar", "fr", "zh", "hi", "es"].includes(path.split("/")[1])
+    ? path.split("/")[1]
+    : path.split("/")[0];
 
   return {
     ...initialProps,

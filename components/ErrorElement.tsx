@@ -1,6 +1,6 @@
 import { ExclamationCircleIcon } from "@heroicons/react/solid";
 import { useContext, useEffect } from "react";
-import { ToolStoreContext } from "../src/ToolStoreContext";
+// import { ToolStoreContext } from "../src/ToolStoreContext";
 import { useSelector, useDispatch } from "react-redux";
 import { ToolState } from "../src/store";
 

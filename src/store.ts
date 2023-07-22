@@ -1,8 +1,6 @@
-/**
- * i've changed my state management to use redux but redux dosn't allow storing non serializable objects like File
- * can i use another state management tool along with redux only for storing the files array, it should be lightweight by the way.
- */
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { applyMiddleware, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createStore } from "redux";
+import thunkMiddleware from "redux-thunk";
 
 export interface ToolState {
   showTool: boolean;
@@ -13,7 +11,9 @@ export interface ToolState {
   compressPdf: string | number;
   errorCode: string | null;
   endpoint: string;
-  files: File[]
+  files: File[];
+  lang: string;
+  path: string;
 }
 
 const initialState: ToolState = {
@@ -25,7 +25,9 @@ const initialState: ToolState = {
   errorCode: null,
   endpoint: "",
   rerender: false,
-  files: []
+  files: [],
+  lang: "",
+  path: "",
 };
 
 const toolSlice = createSlice({
@@ -34,6 +36,12 @@ const toolSlice = createSlice({
   reducers: {
     showTool(state: ToolState) {
       state.showTool = true;
+    },
+    setLang(state: ToolState, action: PayloadAction<string>) {
+      state.lang = action.payload;
+    },
+    setPath(state: ToolState, action: PayloadAction<string>) {
+      state.path = action.payload;
     },
     setRerender(state: ToolState) {
       state.rerender = !state.rerender;
@@ -63,13 +71,13 @@ const toolSlice = createSlice({
     setIsSubmitted(state: ToolState, action: PayloadAction<boolean>) {
       state.isSubmitted = action.payload;
     },
-    setFiles(state: ToolState, action: PayloadAction< FileList | File[]>) {
+    setFiles(state: ToolState, action: PayloadAction<FileList | File[]>) {
       if (state.files instanceof FileList) {
         state.files = Array.from(state.files);
       } else {
         state.files = state.files;
       }
-    }
+    },
   },
 });
 
@@ -83,7 +91,17 @@ export const {
   setIsSubmitted,
   setEndpoint,
   setRerender,
-  setFiles
+  setFiles,
+  setLang,
+  setPath,
 } = toolSlice.actions;
+
+export const getServerStore = () => {
+  const store = createStore(
+    toolSlice.reducer,
+    applyMiddleware(thunkMiddleware)
+  );
+  return store;
+};
 
 export default toolSlice.reducer;

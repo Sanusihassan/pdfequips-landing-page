@@ -179,12 +179,12 @@ export const tool: _tool = {
   },
 };
 
-export const web2pdftool = {
+export const web2pdftool: _web2pdftool = {
   placeholder: "Ejemplo: https://pdfequips.com",
   submit_btn: "Convertir",
 };
 
-export const edit_page = {
+export const edit_page: _edit_page = {
   edit_page_titles: {
     merge_pdf: "Opciones para fusionar PDF",
     split_pdf: "Opciones para dividir PDF",
@@ -199,6 +199,7 @@ export const edit_page = {
     pdf_to_word: "Opciones para convertir PDF a WORD",
     pdf_to_excel: "Opciones para convertir PDF a EXCEL",
     pdf_to_pdf_a: "Opciones para convertir PDF a PDF/A",
+    pdf_to_text: "Opciones de PDF a texto",
   },
   loader_text: "Por favor espera...",
   action_buttons: {
@@ -215,6 +216,7 @@ export const edit_page = {
     pdf_to_word: "Convertir a Word",
     pdf_to_excel: "Convertir a Excel",
     pdf_to_pdf_a: "Convertir a PDF/A",
+    pdf_to_text: "Convertir a texto",
   },
   pages: "paginas",
   page: "página",
@@ -241,14 +243,14 @@ export const edit_page = {
     "Usa arrastrar y soltar para cambiar el orden de los archivos PDF para combinarlos. Haz clic y   mantén presionado un archivo, muévelo a la ubicación deseada y suelta el botón del mouse.   Los archivos PDF se fusionan de arriba hacia abajo. Para eliminar un archivo, haz clic en el icono de eliminar   encima del archivo. Para rotar una página, haz clic en el icono de rotación encima de   la miniatura de página y selecciona el ángulo de rotación deseado. Una vez que los archivos estén   en el orden y orientación deseado, haz clic en el botón 'Combinar' para unirlos   en un solo archivo PDF.",
 };
 
-export const tools = {
+export const tools: _tools = {
   select: "Seleccionar",
   or_drop: "o soltar archivos aquí",
   files: "archivos",
   drop_files: "Arrastra los archivos aquí",
 };
 
-export const footer = {
+export const footer: _footer = {
   brand: "PDFEquips",
   terms: "términos",
   conditions: "condiciones",

@@ -7,8 +7,12 @@ import { useRouter } from "next/router";
 import ConvertPDFDropdown from "./NavBar/ConvertDropDown";
 import LanguageDropdown from "./NavBar/LanguageDropDown";
 import { useContext, useEffect } from "react";
-import { ToolStoreContext } from "../src/ToolStoreContext";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
 import { useFileStore } from "../src/file-store";
+import { showTool, ToolState, resetErrorMessage } from "../src/store";
+
 /**
  * this code works fine for the all pages but the home page where there are no sub routes but the /lang route
  * and it's setting the path variable to undefined
@@ -21,18 +25,17 @@ const NavBar = ({
   nav_content: nav_content;
   lang: string;
 }) => {
-  const state = useContext(ToolStoreContext);
+  const state = useSelector((state: { tool: ToolState }) => state.tool);
+  const dispatch = useDispatch();
+
   const router = useRouter();
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
   const { files, setFiles } = useFileStore.getState();
-  function handleClick(
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ): void {
-    // dispatch(setEndpoint(path));
+  function handleClick(): void {
     if (files.length > 0) {
-      state?.setShowTool(true);
+      dispatch(showTool());
     }
-    state?.resetErrorMessage();
+    dispatch(resetErrorMessage());
   }
   let langPath = lang.length > 0 ? `/${lang}/` : "/";
   return (
