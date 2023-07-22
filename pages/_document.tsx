@@ -1,6 +1,3 @@
-/**
- * this is my _document.tsx file
- */
 import Document, {
   Html,
   Head,
@@ -8,12 +5,15 @@ import Document, {
   NextScript,
   DocumentContext,
 } from "next/document";
-import { isrtllang } from "../src/utils";
+// import { isrtllang } from "../src/utils";
 
-const MyDocument = ({ isRtl, lang }: { isRtl: boolean; lang: string }) => {
-  console.log(lang);
+const MyDocument = ({ lang }: { lang: string }) => {
+  // let isRtl = isrtllang(lang);
   return (
-    <Html lang={lang.length > 0 ? lang : "en"} dir={isRtl ? "rtl" : "ltr"}>
+    <Html
+      lang={lang.length > 0 ? lang : "en"}
+      dir={lang == "ar" ? "rtl" : "ltr"}
+    >
       <Head>
         <title>PDFEquips</title>
         <meta name="description" content="The Complete PDF Solution" />
@@ -49,15 +49,21 @@ const MyDocument = ({ isRtl, lang }: { isRtl: boolean; lang: string }) => {
 
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const initialProps = await Document.getInitialProps(ctx);
-  const isRtl = isrtllang(ctx.asPath || "");
-  const path = ctx.asPath || "";
-  const lang = ["ar", "fr", "zh", "hi", "es"].includes(path.split("/")[1])
-    ? path.split("/")[1]
-    : path.split("/")[0];
-
+  const path = ctx.asPath;
+  let lang = "en"; // default language
+  if (path && path.startsWith("/ar")) {
+    lang = "ar";
+  } else if (path && path.startsWith("/es")) {
+    lang = "es";
+  } else if (path && path.startsWith("/fr")) {
+    lang = "fr";
+  } else if (path && path.startsWith("/hi")) {
+    lang = "hi";
+  } else if (path && path.startsWith("/zh")) {
+    lang = "zh";
+  }
   return {
     ...initialProps,
-    isRtl,
     lang,
   };
 };

@@ -38,12 +38,7 @@ import type { errors as _ } from "../../content";
 // import { ToolStoreContext } from "../../src/ToolStoreContext";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  ToolState,
-  setErrorCode,
-  setErrorMessage,
-  setFiles,
-} from "../../src/store";
+import { ToolState, setErrorCode, setErrorMessage } from "../../src/store";
 import { useFileStore } from "../../src/file-store";
 
 export type ActionProps = {

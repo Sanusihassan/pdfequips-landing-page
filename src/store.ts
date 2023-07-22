@@ -11,8 +11,6 @@ export interface ToolState {
   compressPdf: string | number;
   errorCode: string | null;
   endpoint: string;
-  files: File[];
-  lang: string;
   path: string;
 }
 
@@ -25,8 +23,6 @@ const initialState: ToolState = {
   errorCode: null,
   endpoint: "",
   rerender: false,
-  files: [],
-  lang: "",
   path: "",
 };
 
@@ -37,9 +33,7 @@ const toolSlice = createSlice({
     showTool(state: ToolState) {
       state.showTool = true;
     },
-    setLang(state: ToolState, action: PayloadAction<string>) {
-      state.lang = action.payload;
-    },
+
     setPath(state: ToolState, action: PayloadAction<string>) {
       state.path = action.payload;
     },
@@ -71,13 +65,6 @@ const toolSlice = createSlice({
     setIsSubmitted(state: ToolState, action: PayloadAction<boolean>) {
       state.isSubmitted = action.payload;
     },
-    setFiles(state: ToolState, action: PayloadAction<FileList | File[]>) {
-      if (state.files instanceof FileList) {
-        state.files = Array.from(state.files);
-      } else {
-        state.files = state.files;
-      }
-    },
   },
 });
 
@@ -91,8 +78,6 @@ export const {
   setIsSubmitted,
   setEndpoint,
   setRerender,
-  setFiles,
-  setLang,
   setPath,
 } = toolSlice.actions;
 
@@ -103,5 +88,4 @@ export const getServerStore = () => {
   );
   return store;
 };
-
 export default toolSlice.reducer;

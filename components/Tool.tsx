@@ -14,7 +14,6 @@ import store, {
   setRerender,
 } from "../src/store";
 
-
 import { useRouter } from "next/router";
 import type { edit_page, tools, web2pdftool } from "../content";
 import { handleUpload } from "../src/handlers/handleUpload";
@@ -133,7 +132,7 @@ const Tool: React.FC<ToolProps> = ({
     const preventDefault = (event: DragEvent) => {
       event.preventDefault();
     };
-    
+
     dispatch(setEndpoint(path));
     document.addEventListener("dragover", preventDefault);
     document.addEventListener("click", (e) => e.preventDefault());
@@ -234,15 +233,17 @@ const Tool: React.FC<ToolProps> = ({
                     setUserClickedOnFileUploader(true);
                   }}
                   onChange={(e) => {
-                    handleChange(e, dispatch,setFiles, data.type, errors);
+                    handleChange(e, dispatch, setFiles, data.type, errors);
                     dispatch(setRerender());
 
                     if (path == "merge-pdf" && files.length == 1) {
-                      dispatch(setErrorMessage(errors.ERR_UPLOAD_COUNT.message))
+                      dispatch(
+                        setErrorMessage(errors.ERR_UPLOAD_COUNT.message)
+                      );
                       dispatch(setErrorCode("ERR_UPLOAD_COUNT"));
                     } else if (
                       (files && files.length > 0) ||
-                      (state && state.files.length > 0 && path != "merge-pdf")
+                      (state && files.length > 0 && path != "merge-pdf")
                     ) {
                       dispatch(resetErrorMessage());
                     }

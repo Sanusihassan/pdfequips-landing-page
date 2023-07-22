@@ -17,7 +17,7 @@ import type { nav_content } from "../../content";
 import MarkdownIcon from "../icons/Markdown";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setLang, setPath, ToolState } from "../../src/store";
+import { setPath, ToolState } from "../../src/store";
 
 const ConvertPDFDropdown = ({
   langPath,

@@ -13,6 +13,7 @@
     "@heroicons/react": "^1.0.6",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
+    "js-cookie": "^3.0.5",
     "mobx": "^6.9.1",
     "mobx-react-lite": "^4.0.3",
     "monaco-editor": "^0.38.0",
@@ -33,6 +34,7 @@
     "zustand": "^4.3.9"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.3",
     "@types/node": "^20.4.2",
     "@types/pdfjs-dist": "^2.10.378",
     "@types/react": "^18.2.0",

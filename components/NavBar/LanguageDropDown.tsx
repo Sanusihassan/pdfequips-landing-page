@@ -1,31 +1,23 @@
-import { useRouter } from "next/router";
-import Link from "next/link";
+// import Link from "next/link";
 import { Dropdown } from "react-bootstrap";
 import LanguageIcon from "../icons/LanguageIcon";
-import { useDispatch, useSelector } from "react-redux";
-import { setLang, ToolState } from "../../src/store";
+import { useSelector } from "react-redux";
+import { ToolState } from "../../src/store";
+import Cookies from "js-cookie";
+import { setLanguage } from "../../src/language";
 
 function LanguageDropdown() {
-  // const router = useRouter();
-  // const segments = router.asPath.split("/");
-  // const languageCodes = ["ar", "fr", "zh", "hi", "es"];
-  // let languageCodeIndex = segments.findIndex((segment) => {
-  //   return languageCodes.includes(segment);
-  // });
-  // // let path;
-
-  // if (segments.length === 2) {
-  //   path = "";
-  // } else {
-  //   path =
-  //     languageCodeIndex !== -1
-  //       ? segments[languageCodeIndex + 1]
-  //       : segments[segments.length - 1];
-  // }
-
-  // let route = path.length > 0 ? `/${path}` : "";
   const state = useSelector((state: { tool: ToolState }) => state.tool);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
+  const setLangToken = (language: string) => {
+    setLanguage(language);
+  };
+
+  const clearLangToken = () => {
+    Cookies.set("languageToken", "");
+  };
+
   return (
     <li className="dropdown-item">
       <Dropdown className="lang-dropdown dropdown-wrapper">
@@ -33,62 +25,66 @@ function LanguageDropdown() {
           <LanguageIcon />
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Link
+          {/* <Link href={`/${state.path}`} passHref> */}
+          <a
             href={`/${state.path}`}
-            onClick={() => dispatch(setLang(""))}
-            passHref
+            onClick={clearLangToken}
+            className="dropdown-item"
+            rel="noopener"
           >
-            <a className="dropdown-item" rel="noopener">
-              English
-            </a>
-          </Link>
-          <Link
+            English
+          </a>
+          {/* </Link> */}
+          {/* <Link href={`/ar/${state.path}`} passHref> */}
+          <a
             href={`/ar/${state.path}`}
-            onClick={() => dispatch(setLang("ar"))}
-            passHref
+            onClick={() => setLangToken("ar")}
+            className="dropdown-item"
+            rel="noopener"
           >
-            <a className="dropdown-item" rel="noopener">
-              العربية
-            </a>
-          </Link>
-
-          <Link
+            العربية
+          </a>
+          {/* </Link> */}
+          {/* <Link href={`/fr/${state.path}`} passHref> */}
+          <a
             href={`/fr/${state.path}`}
-            onClick={() => dispatch(setLang("fr"))}
-            passHref
+            onClick={() => setLangToken("fr")}
+            className="dropdown-item"
+            rel="noopener"
           >
-            <a className="dropdown-item" rel="noopener">
-              française
-            </a>
-          </Link>
-
-          <Link
+            française
+          </a>
+          {/* </Link> */}
+          {/* <Link href={`/zh/${state.path}`} passHref> */}
+          <a
             href={`/zh/${state.path}`}
-            onClick={() => dispatch(setLang("zh"))}
-            passHref
+            onClick={() => setLangToken("zh")}
+            className="dropdown-item"
+            rel="noopener"
           >
-            <a className="dropdown-item" rel="noopener">
-              普通话
-            </a>
-          </Link>
-          <Link
+            普通话
+          </a>
+          {/* </Link> */}
+          {/* <Link href={`/hi/${state.path}`} passHref> */}
+          <a
             href={`/hi/${state.path}`}
-            onClick={() => dispatch(setLang("hi"))}
-            passHref
+            onClick={() => setLangToken("hi")}
+            className="dropdown-item"
+            rel="noopener"
           >
-            <a className="dropdown-item" rel="noopener">
-              हिन्दी
-            </a>
-          </Link>
-          <Link
+            हिन्दी
+          </a>
+          {/* </Link> */}
+          {/* <Link href={`/es/${state.path}`} passHref> */}
+          <a
             href={`/es/${state.path}`}
-            onClick={() => dispatch(setLang("es"))}
-            passHref
+            onClick={() => setLangToken("es")}
+            className="dropdown-item"
+            rel="noopener"
           >
-            <a className="dropdown-item" rel="noopener">
-              español
-            </a>
-          </Link>
+            español
+          </a>
+          {/* </Link> */}
         </Dropdown.Menu>
       </Dropdown>
     </li>

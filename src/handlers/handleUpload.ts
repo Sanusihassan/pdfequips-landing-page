@@ -41,10 +41,7 @@ export const handleUpload = async (
     return;
   }
   formData.append("compress_amount", String(state?.compressPdf));
-  const originalFileName = state?.files[0]?.name
-    ?.split(".")
-    .slice(0, -1)
-    .join(".");
+  const originalFileName = files[0]?.name?.split(".").slice(0, -1).join(".");
 
   const mimeTypeLookupTable: {
     [key: string]: { outputFileMimeType: string; outputFileName: string };
