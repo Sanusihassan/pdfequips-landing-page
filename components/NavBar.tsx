@@ -6,12 +6,11 @@ import type { nav_content } from "../content";
 import { useRouter } from "next/router";
 import ConvertPDFDropdown from "./NavBar/ConvertDropDown";
 import LanguageDropdown from "./NavBar/LanguageDropDown";
-import { useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import { useFileStore } from "../src/file-store";
-import { showTool, ToolState, resetErrorMessage } from "../src/store";
+import { showTool, ToolState, resetErrorMessage, setPath } from "../src/store";
 
 /**
  * this code works fine for the all pages but the home page where there are no sub routes but the /lang route
@@ -32,8 +31,24 @@ const NavBar = ({
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
   const { files, setFiles } = useFileStore.getState();
   function handleClick(): void {
+    // set path
+    // dispatch(setPath(path));
+    console.log(state.path);
     if (files.length > 0) {
       dispatch(showTool());
+    }
+    if (
+      !state.path.startsWith("pdf-") ||
+      !["merge-pdf", "compress-pdf"].includes(state.path)
+    ) {
+      console.log("removing files...");
+      setFiles([]);
+    } else {
+      console.log(files[0].name);
+      const allPdf = files.every((file) => file.name.endsWith(".pdf"));
+      if (!allPdf) {
+        setFiles([]);
+      }
     }
     dispatch(resetErrorMessage());
   }
@@ -46,11 +61,14 @@ const NavBar = ({
     >
       <Link href={`/${lang}`}>
         <a
-          onClick={handleClick}
+          onClick={(e) => {
+            handleClick();
+          }}
           className="text-decoration-none text-dark text-nowrap navbar-brand d-flex flex-row justify-content-between align-items-center"
           style={{
             fontSize: "0.95em",
             lineHeight: 2,
+            direction: "ltr",
           }}
         >
           <img
@@ -80,7 +98,13 @@ const NavBar = ({
       <Navbar.Collapse id="main-nav">
         <Nav className="align-items-center">
           <Link href={`${langPath}merge-pdf`}>
-            <a onClick={handleClick} className="dropdown-item">
+            <a
+              onClick={(e) => {
+                dispatch(setPath("merge-pdf"));
+                handleClick();
+              }}
+              className="dropdown-item"
+            >
               <bdi>{nav_content.merge_pdf}</bdi>
             </a>
           </Link>
@@ -90,7 +114,13 @@ const NavBar = ({
             </a>
           </Link> */}
           <Link className="dropdown-item" href={`${langPath}compress-pdf`}>
-            <a onClick={handleClick} className="dropdown-item">
+            <a
+              onClick={(e) => {
+                dispatch(setPath("compress-pdf"));
+                handleClick();
+              }}
+              className="dropdown-item"
+            >
               <bdi>{nav_content.compress_pdf}</bdi>
             </a>
           </Link>

@@ -9,6 +9,9 @@ import {
 } from "@heroicons/react/outline";
 import CompressIcon from "../icons/compressIcon";
 import type { tool } from "../../content";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { setPath } from "../../src/store";
 
 export const FeaturesSection = ({
   tool,
@@ -20,6 +23,9 @@ export const FeaturesSection = ({
   let langPath = lang ? `/${lang}` : "";
   const languages = ["ar", "fr", "zh", "hi", "es"];
   const regex = new RegExp(`\\/(${languages.join("|")})|\\/+`, "g");
+  const router = useRouter();
+  let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
+  const dispatch = useDispatch();
   const featureCards = [
     {
       title: tool.Merge_PDF.title,
@@ -68,7 +74,12 @@ export const FeaturesSection = ({
                 href={card.to}
                 className={`text-decoration-none text-dark ${card.to}`}
               >
-                <a className="text-decoration-none text-muted text-reset">
+                <a
+                  className="text-decoration-none text-muted text-reset"
+                  onClick={() => {
+                    return dispatch(setPath(path));
+                  }}
+                >
                   <Card
                     className={`feature-card border-0 ${card.to.replace(
                       regex,

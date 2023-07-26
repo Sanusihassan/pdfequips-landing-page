@@ -31,12 +31,11 @@ export const handleUpload = async (
   let url;
   // @ts-ignore
   if (process.env.NODE_ENV === "development") {
-    // url = `http://127.0.0.1:5000/${state.endpoint}`;
-    url = `https://5000-planetcreat-pdfequipsap-te4zoi6qkr3.ws-eu102.gitpod.io/${state?.endpoint}`;
+    url = `http://127.0.0.1:5000/${state.path}`;
+    // url = `https://5000-planetcreat-pdfequipsap-te4zoi6qkr3.ws-eu102.gitpod.io/${state.path}`;
   } else {
-    url = `/${state?.endpoint}`;
+    url = `http://127.0.0.1:5000/${state.path}`;
   }
-  console.log("endpoint is => ", state?.endpoint);
   if (state?.errorMessage) {
     return;
   }
@@ -48,7 +47,7 @@ export const handleUpload = async (
   } = {
     "application/zip": {
       outputFileMimeType: "application/zip",
-      outputFileName: `PDFEquips-${state.endpoint}.zip`,
+      outputFileName: `PDFEquips-${state.path}.zip`,
     },
     "application/pdf": {
       outputFileMimeType: "application/pdf",

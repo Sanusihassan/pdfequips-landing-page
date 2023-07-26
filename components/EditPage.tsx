@@ -10,12 +10,17 @@ import { Spinner } from "react-bootstrap";
 import { CogIcon } from "@heroicons/react/outline";
 // import { ToolStoreContext } from "../src/ToolStoreContext";
 import { useDispatch, useSelector } from "react-redux";
-import { ToolState, resetErrorMessage, setIsSubmitted } from "../src/store";
+import {
+  ToolState,
+  resetErrorMessage,
+  setIsSubmitted,
+  setPath,
+} from "../src/store";
 import { useFileStore } from "../src/file-store";
+import AddMoreButton from "./EditArea/AddMoreButton";
 
 type editPageProps = {
   extension: string;
-  submitBtn: RefObject<HTMLButtonElement>;
   edit_page: edit_page;
   pages: string;
   page: string;
@@ -23,9 +28,9 @@ type editPageProps = {
   errors: _;
 };
 // the error message is inside the editPage component
+// calculate image height;
 const EditPage = ({
   extension,
-  submitBtn,
   edit_page,
   pages,
   page,
@@ -39,40 +44,27 @@ const EditPage = ({
   const state = useSelector((state: { tool: ToolState }) => state.tool);
   const dispatch = useDispatch();
   // actual files;
-  const { files, setFiles } = useFileStore.getState();
+  const { files, setFiles, fileInput, submitBtn } = useFileStore.getState();
   useEffect(() => {
-    if (isOnline && !(k == "merge-pdf" && files.length == 1)) {
+    if (state.errorCode == "ERR_NO_FILES_SELECTED" && files.length > 0) {
       dispatch(resetErrorMessage());
     }
-    if (
-      state?.errorCode == "ERR_EMPTY_FILE" &&
-      files.length > 0 &&
-      !(k == "merge-pdf" && files.length == 1)
-    ) {
-      dispatch(resetErrorMessage());
+    if (state.path !== k) {
+      dispatch(setPath(k));
     }
-
-    window.addEventListener("online", handleOnlineStatus);
-    window.addEventListener("offline", handleOfflineStatus);
-
-    return () => {
-      window.removeEventListener("online", handleOnlineStatus);
-      window.removeEventListener("offline", handleOfflineStatus);
-    };
-  }, []);
+  }, [files, state.rerender, state.errorCode]);
   function SubmitBtn({ k }: { k: string }): JSX.Element {
     return (
       <button
         className={`submit-btn btn btn-lg text-white position-relative overflow-hidden ${k} grid-footer`}
         onClick={() => {
-          console.log("clicked");
           dispatch(setIsSubmitted(true));
           setShowOptions(false);
-          if (submitBtn.current) {
-            submitBtn.current.click();
+          if (submitBtn) {
+            submitBtn?.current?.click();
           }
         }}
-        disabled={state!.errorMessage.length > 0}
+        // disabled={state!.errorMessage.length > 0}
       >
         <bdi>
           {
@@ -97,7 +89,7 @@ const EditPage = ({
   let k = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
   return (
     <aside className={`edit-page ${state?.showTool ? "d-none" : ""}`}>
-      <section className="edit-area">
+      <section className="edit-area position-relative">
         <DisplayFile
           extension={extension}
           pages={pages}
@@ -108,6 +100,16 @@ const EditPage = ({
         />
         {/* {state?.showErrorMessage ? <ErrorElement state={state} /> : null} */}
         <ErrorElement />
+        <AddMoreButton
+          onClick={() => {
+            if (fileInput) {
+              fileInput?.current?.click();
+            }
+          }}
+          lang={lang}
+          path={state.path}
+          text={edit_page.add_more_button}
+        />
         {/* when clicking on this  */}
         <button
           className="gear-button btn btn-light"

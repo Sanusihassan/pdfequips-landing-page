@@ -7,36 +7,30 @@ import { isDraggableExtension } from "../../src/utils";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import store, { ToolState } from "../../src/store";
+import { useFileStore } from "../../src/file-store";
 
 type FileProps = {
   errors: _;
   extension: string;
-  imageUrls: {
-    file: File;
-    imageUrl: string;
-  }[];
-  setImageUrls: Dispatch<
-    SetStateAction<
-      {
-        file: File;
-        imageUrl: string;
-      }[]
-    >
-  >;
   toolTipSizes: string[];
   setToolTipSizes: Dispatch<SetStateAction<string[]>>;
+  loader_text: string;
+  showSpinner: boolean;
+  fileDetailProps: [string, string, string];
 };
 const Files = ({
   errors,
   extension,
-  imageUrls,
-  setImageUrls,
   toolTipSizes,
+  loader_text,
+  showSpinner,
+  fileDetailProps,
 }: FileProps) => {
   // const store = useSelector((state: { tool: ToolState }) => state.tool);
-  useEffect(() => {
-    console.log(imageUrls);
-  })
+  const { files, imageUrls, setImageUrls } = useFileStore.getState();
+
+  useEffect(() => {}, [files]);
+
   const router = useRouter();
   const handleDragEnd = (result: any) => {
     if (!result.destination) {
@@ -61,7 +55,8 @@ const Files = ({
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {imageUrls.map(({ file, imageUrl }, index) => (
+              {/* this is what cause the error instead of imageUrls i want to use the files array it's a File[] */}
+              {files.map((file, index) => (
                 <Draggable
                   key={file.name}
                   draggableId={file.name}
@@ -84,13 +79,13 @@ const Files = ({
                         (() => {
                           return (
                             <ImageCard
-                              imageUrls={imageUrls}
                               index={index}
                               provided={provided}
-                              setImageUrls={setImageUrls}
-                              toolTipSizes={toolTipSizes}
                               extension={extension}
                               errors={errors}
+                              fileDetailProps={fileDetailProps}
+                              file={file}
+                              loader_text={loader_text}
                             />
                           );
                         })()
@@ -98,15 +93,13 @@ const Files = ({
                         <FileCard
                           extension={extension}
                           file={file}
-                          imageUrl={imageUrl}
-                          imageUrls={imageUrls}
                           index={index}
                           isDraggable={isDraggableExtension(extension, router)}
                           provided={provided}
-                          setImageUrls={setImageUrls}
                           snapshot={snapshot}
-                          toolTipSizes={toolTipSizes}
                           errors={errors}
+                          loader_text={loader_text}
+                          fileDetailProps={fileDetailProps}
                         />
                       )}
                     </div>

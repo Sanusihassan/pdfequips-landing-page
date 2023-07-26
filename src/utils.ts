@@ -10,7 +10,7 @@ import { Dispatch, useEffect, useMemo, useState } from "react";
 // @ts-ignore
 import { AnyAction } from "@reduxjs/toolkit";
 import type { errors as _ } from "../content";
-import { setErrorCode, setErrorMessage } from "./store";
+import { setErrorCode, setErrorMessage, ToolState } from "./store";
 GlobalWorkerOptions.workerSrc = "/pdf.worker.js";
 
 export function useLoadedImage(src: string): HTMLImageElement | null {
@@ -47,7 +47,7 @@ function emptyPDFHandler(dispatch: Dispatch<AnyAction>, errors: _) {
   dispatch(setErrorCode("ERR_EMPTY_FILE"));
   return DEFAULT_PDF_IMAGE;
 }
-
+// i don't know why but when i pass any other file type except images or pdfs this function will cause the application to crash by entering an infinite loop
 export const getFileDetailsTooltipContent = async (
   file: File,
   pages: string,
@@ -56,11 +56,7 @@ export const getFileDetailsTooltipContent = async (
   dispatch: Dispatch<AnyAction>,
   errors: _
 ): Promise<string> => {
-  // here in this code instead of bite for the unit, use kb or mb instead depending on the size
   const sizeInBytes = file.size;
-  // const sizeInKB = sizeInBytes / 1024;
-  // const sizeInMB = sizeInKB / 1024;
-
   let size: string = "";
   let isoCode = lang === "fr" ? "fr-FR" : lang == "" ? "en" : lang;
   size = new Intl.NumberFormat(isoCode, {
@@ -70,16 +66,17 @@ export const getFileDetailsTooltipContent = async (
     unitDisplay: "narrow",
   }).format(sizeInBytes);
   let tooltipContent = size;
-  if (!file.size) {
+  if (file.size === 0) {
     emptyPDFHandler(dispatch, errors);
+    throw Error("ERROR: FILE_SIZE_ZERO");
   } else {
-    // i'm getting this errors:
-    //   6:39:22.589
-    // Error {
-    //   stack: 'Error: Setting up fake worker failed: "Cannot read properties of undefined (reading \'WorkerMessageHandler\')".\n' +
-    //     '    at eval (webpack-internal:///./node_modules/pdfjs-dist/build/pdf.js:1899:36)',
-    //   message: 'Setting up fake worker failed: "Cannot read properties of undefined (reading \'WorkerMessageHandler\')".'
-    // }
+    if (
+      file.type !== "image/png" &&
+      file.type !== "image/jpeg" &&
+      file.type !== "application/pdf"
+    ) {
+      return tooltipContent;
+    }
     try {
       if (file.type === "image/jpeg" || file.type === "image/png") {
         const image = new Image();
@@ -187,7 +184,8 @@ export const validateFiles = (
   _files: FileList | File[],
   extension: string,
   errors: _,
-  dispatch: Dispatch<AnyAction>
+  dispatch: Dispatch<AnyAction>,
+  state: ToolState
 ) => {
   const files = Array.from(_files); // convert FileList to File[] array
 
@@ -201,6 +199,17 @@ export const validateFiles = (
     "application/vnd.ms-powerpoint",
     "application/vnd.ms-excel",
   ];
+  // validation for merge-pdf page & empty files
+  if (state.path == "merge-pdf" && files.length <= 1) {
+    dispatch(setErrorMessage(errors.ERR_UPLOAD_COUNT.message));
+    dispatch(setErrorCode("ERR_UPLOAD_COUNT"));
+    return false;
+  }
+  if (files.length == 0 && (state.click || state.focus)) {
+    dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
+    dispatch(setErrorCode("ERR_NO_FILES_SELECTED"));
+    return false;
+  }
   const fileSizeLimit = 50 * 1024 * 1024; // 50 MB
   for (let i = 0; i < files.length; i++) {
     const file = files[i] || null;
@@ -226,19 +235,12 @@ export const validateFiles = (
       return false;
     } else if (!file.type) {
       // handle NOT_SUPPORTED_TYPE error
-      console.log(file);
       dispatch(setErrorMessage(errors.NOT_SUPPORTED_TYPE.message));
       return false;
     } else if (
       !allowedMimeTypes.includes(file.type) ||
       !types.includes(file_extension.toLowerCase())
     ) {
-      console.log(
-        "file => ",
-        types,
-        file_extension.toLowerCase(),
-        types.includes(file_extension.toLowerCase())
-      );
       const errorMessage =
         errors.NOT_SUPPORTED_TYPE.types[
           extension as keyof typeof errors.NOT_SUPPORTED_TYPE.types

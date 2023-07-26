@@ -46,8 +46,8 @@ const ConvertPDFDropdown = ({
             <Link href={`${langPath}jpg-to-pdf`}>
               <a
                 onClick={() => {
-                  handleClick();
                   dispatch(setPath("jpg-to-pdf"));
+                  handleClick();
                 }}
                 className="dropdown-item"
               >
@@ -63,8 +63,8 @@ const ConvertPDFDropdown = ({
             <Link href={`${langPath}word-to-pdf`}>
               <a
                 onClick={() => {
-                  handleClick();
                   dispatch(setPath("word-to-pdf"));
+                  handleClick();
                 }}
                 className="dropdown-item"
               >
@@ -83,8 +83,8 @@ const ConvertPDFDropdown = ({
             >
               <a
                 onClick={() => {
-                  handleClick();
                   dispatch(setPath("powerpoint-to-pdf"));
+                  handleClick();
                 }}
                 className="dropdown-item"
               >
@@ -100,8 +100,8 @@ const ConvertPDFDropdown = ({
             <Link className="dropdown-item" href={`${langPath}excel-to-pdf`}>
               <a
                 onClick={() => {
-                  handleClick();
                   dispatch(setPath("excel-to-pdf"));
+                  handleClick();
                 }}
                 className="dropdown-item"
               >
@@ -117,8 +117,8 @@ const ConvertPDFDropdown = ({
             <Link className="dropdown-item" href={`${langPath}html-to-pdf`}>
               <a
                 onClick={() => {
-                  handleClick();
                   dispatch(setPath("html-to-pdf"));
+                  handleClick();
                 }}
                 className="dropdown-item"
               >
@@ -147,8 +147,8 @@ const ConvertPDFDropdown = ({
             <Link className="dropdown-item" href={`${langPath}pdf-to-jpg`}>
               <a
                 onClick={() => {
-                  handleClick();
                   dispatch(setPath("pdf-to-jpg"));
+                  handleClick();
                 }}
                 className="dropdown-item"
               >
@@ -165,8 +165,8 @@ const ConvertPDFDropdown = ({
             <Link className="dropdown-item" href={`${langPath}pdf-to-word`}>
               <a
                 onClick={() => {
-                  handleClick();
                   dispatch(setPath("pdf-to-word"));
+                  handleClick();
                 }}
                 className="dropdown-item"
               >
@@ -186,8 +186,8 @@ const ConvertPDFDropdown = ({
             >
               <a
                 onClick={() => {
-                  handleClick();
                   dispatch(setPath("pdf-to-powerpoint"));
+                  handleClick();
                 }}
                 className="dropdown-item"
               >
@@ -204,8 +204,8 @@ const ConvertPDFDropdown = ({
             <Link className="dropdown-item" href={`${langPath}pdf-to-excel`}>
               <a
                 onClick={() => {
-                  handleClick();
                   dispatch(setPath("pdf-to-excel"));
+                  handleClick();
                 }}
                 className="dropdown-item"
               >
@@ -235,8 +235,8 @@ const ConvertPDFDropdown = ({
             <Link href={`${langPath}pdf-to-text`}>
               <a
                 onClick={() => {
-                  handleClick();
                   dispatch(setPath("pdf-to-text"));
+                  handleClick();
                 }}
                 className="dropdown-item"
               >

@@ -193,6 +193,7 @@ export const edit_page: _edit_page = {
     pdf_to_text: "PDF 转文本选项",
   },
   loader_text: "请稍等...",
+  add_more_button: "添加更多文件",
   action_buttons: {
     merge_pdf: "合并PDF",
     split_pdf: "拆分PDF",

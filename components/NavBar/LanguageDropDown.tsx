@@ -7,15 +7,23 @@ import Cookies from "js-cookie";
 import { setLanguage } from "../../src/language";
 
 function LanguageDropdown() {
-  const state = useSelector((state: { tool: ToolState }) => state.tool);
+  const state: ToolState = useSelector(
+    (state: { tool: ToolState }) => state.tool
+  );
   // const dispatch = useDispatch();
-
-  const setLangToken = (language: string) => {
+  // Argument of type 'MouseEvent<HTMLAnchorElement, MouseEvent>' is not assignable to parameter of type 'MouseEvent<HTMLAnchorElement, MouseEvent<Element, MouseEvent>>'.ts(2345)
+  const setLangToken = (
+    language: string,
+    // @ts-ignore
+    e: React.MouseEvent<HTMLAnchorElement>
+  ) => {
     setLanguage(language);
+    window.location.href = (e.target as HTMLAnchorElement).href;
   };
 
-  const clearLangToken = () => {
+  const clearLangToken = (e: React.MouseEvent<HTMLAnchorElement>) => {
     Cookies.set("languageToken", "");
+    window.location.href = (e.target as HTMLAnchorElement).href;
   };
 
   return (
@@ -28,9 +36,10 @@ function LanguageDropdown() {
           {/* <Link href={`/${state.path}`} passHref> */}
           <a
             href={`/${state.path}`}
-            onClick={clearLangToken}
+            onClick={(e) => clearLangToken(e)}
             className="dropdown-item"
             rel="noopener"
+            target="_self"
           >
             English
           </a>
@@ -38,9 +47,10 @@ function LanguageDropdown() {
           {/* <Link href={`/ar/${state.path}`} passHref> */}
           <a
             href={`/ar/${state.path}`}
-            onClick={() => setLangToken("ar")}
+            onClick={(e) => setLangToken("ar", e)}
             className="dropdown-item"
             rel="noopener"
+            target="_self"
           >
             العربية
           </a>
@@ -48,9 +58,10 @@ function LanguageDropdown() {
           {/* <Link href={`/fr/${state.path}`} passHref> */}
           <a
             href={`/fr/${state.path}`}
-            onClick={() => setLangToken("fr")}
+            onClick={(e) => setLangToken("fr", e)}
             className="dropdown-item"
             rel="noopener"
+            target="_self"
           >
             française
           </a>
@@ -58,9 +69,10 @@ function LanguageDropdown() {
           {/* <Link href={`/zh/${state.path}`} passHref> */}
           <a
             href={`/zh/${state.path}`}
-            onClick={() => setLangToken("zh")}
+            onClick={(e) => setLangToken("zh", e)}
             className="dropdown-item"
             rel="noopener"
+            target="_self"
           >
             普通话
           </a>
@@ -68,9 +80,10 @@ function LanguageDropdown() {
           {/* <Link href={`/hi/${state.path}`} passHref> */}
           <a
             href={`/hi/${state.path}`}
-            onClick={() => setLangToken("hi")}
+            onClick={(e) => setLangToken("hi", e)}
             className="dropdown-item"
             rel="noopener"
+            target="_self"
           >
             हिन्दी
           </a>
@@ -78,9 +91,10 @@ function LanguageDropdown() {
           {/* <Link href={`/es/${state.path}`} passHref> */}
           <a
             href={`/es/${state.path}`}
-            onClick={() => setLangToken("es")}
+            onClick={(e) => setLangToken("es", e)}
             className="dropdown-item"
             rel="noopener"
+            target="_self"
           >
             español
           </a>

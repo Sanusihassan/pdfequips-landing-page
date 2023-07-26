@@ -1,62 +1,18 @@
 import { RefreshIcon, TrashIcon } from "@heroicons/react/solid";
 import { useRotatedImage, validateFiles } from "../../src/utils";
 import { Dispatch, SetStateAction, useCallback, useContext } from "react";
-
-// this is my actiondiv.tsx i'm able to change the state here
-// and if the user clicks on the delete button it deletes a file from the files array on my store
-// and i'm setting the error message when the user deletes all the files or left one file on merge-pdf route
-// this is all working fine, but the changes are not reflected on the ErrorElement.tsx component:
-/**
- * const ErrorElement = () => {
-  const state = useContext(ToolStoreContext);
-  useEffect(() => {
-    console.log("showErrorMessage", state?.showErrorMessage);
-  }, []);
-  return (
-    <>
-      <div
-        className="error-element alert alert-danger text-center mt-3"
-        role="alert"
-        style={{ display: state?.showErrorMessage ? "block" : "none" }}
-      >
-        <ExclamationCircleIcon
-          className="w-5 h-5 hide-on-ltr"
-          viewBox="0 0 22 22"
-        />{" "}
-        <bdi className="d-inline-flex">{state?.errorMessage}</bdi>{" "}
-        <ExclamationCircleIcon
-          className="w-5 h-5 hide-on-rtl"
-          viewBox="0 0 22 22"
-        />
-      </div>
-    </>
-  );
-};
-
- */
 import type { errors as _ } from "../../content";
 // import { ToolStoreContext } from "../../src/ToolStoreContext";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { ToolState, setErrorCode, setErrorMessage } from "../../src/store";
+import { ToolState, setRerender } from "../../src/store";
 import { useFileStore } from "../../src/file-store";
 
 export type ActionProps = {
   index: number;
-  imageUrls: {
-    file: File;
-    imageUrl: string;
-  }[];
-  setImageUrls: Dispatch<
-    SetStateAction<
-      {
-        file: File;
-        imageUrl: string;
-      }[]
-    >
-  >;
   extension: string;
   errors: _;
+  fileName: string;
 };
 
 /**
@@ -66,44 +22,31 @@ export type ActionProps = {
 
 export const ActionDiv = ({
   index,
-  imageUrls,
-  setImageUrls,
   extension,
   errors,
+  fileName,
 }: ActionProps) => {
   const state = useSelector((state: { tool: ToolState }) => state.tool);
   // the files:
   const { files, setFiles } = useFileStore.getState();
   const dispatch = useDispatch();
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (files.length <= 1) {
-      dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
-      dispatch(setErrorCode("NO_FILES_SELECTED"));
-    } else if (files.length <= 2 && path === "merge-pdf") {
-      dispatch(setErrorMessage(errors.ERR_UPLOAD_COUNT.message));
-      dispatch(setErrorCode("ERR_UPLOAD_COUNT"));
-    }
-    console.log(state?.showErrorMessage, state?.errorMessage);
-    const newImageUrls = [...imageUrls];
-    newImageUrls.splice(index, 1);
+    dispatch(setRerender(!state.rerender));
     //  const newFiles = store.files.filter((file) => file.name !== item.file.name);
-    const newFiles = files.filter((file) => file.name !== item.file.name);
+    const newFiles = files.filter((file) => file.name !== fileName);
     setFiles(newFiles);
-
-    setImageUrls(newImageUrls);
   };
-  const item = imageUrls[index];
-  const rotatedImageUrl = useRotatedImage(item.imageUrl);
+  // const rotatedImageUrl = useRotatedImage(item.imageUrl);
   // router and tool path
   const router = useRouter();
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
-  const handleRotateImage = useCallback(() => {
-    if (rotatedImageUrl) {
-      const newImageUrls = [...imageUrls];
-      newImageUrls[index].imageUrl = rotatedImageUrl;
-      setImageUrls(newImageUrls);
-    }
-  }, [index, imageUrls, setImageUrls, rotatedImageUrl]);
+  // const handleRotateImage = useCallback(() => {
+  //   if (rotatedImageUrl) {
+  //     const newImageUrls = [...imageUrls];
+  //     newImageUrls[index].imageUrl = rotatedImageUrl;
+  //     setImageUrls(newImageUrls);
+  //   }
+  // }, [index, imageUrls, setImageUrls, rotatedImageUrl]);
 
   return (
     <div

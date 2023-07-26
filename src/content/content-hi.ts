@@ -195,6 +195,7 @@ export const edit_page: _edit_page = {
     pdf_to_text: "पीडीएफ से टेक्स्ट विकल्प",
   },
   loader_text: "कृपया प्रतीक्षा करें...",
+  add_more_button: "अधिक फ़ाइलें जोड़ें",
   action_buttons: {
     merge_pdf: "पीडीएफ विलय करें",
     split_pdf: "पीडीएफ विभाजित करें",

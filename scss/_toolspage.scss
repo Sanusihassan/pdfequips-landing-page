@@ -35,9 +35,15 @@
   .submit-btn {
     font-size: 2em;
     cursor: pointer;
+  }
+  .upload-btn,
+  .submit-btn,
+  .btn {
     @include generateColorClasses($color-map);
   }
-
+  // .btn {
+  //   @include generateColorClasses($color-map);
+  // }
   // input[type="file"]
   .file-input {
     width: 100%;
@@ -70,7 +76,7 @@
     height: 100%;
     resize: none;
   }
-  
+
   .editor-loader {
     position: absolute;
     width: 100%;
@@ -86,5 +92,3 @@
     padding: 15px;
   }
 }
-
-

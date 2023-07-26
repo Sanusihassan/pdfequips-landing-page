@@ -205,6 +205,7 @@ export const edit_page: _edit_page = {
     pdf_to_text: "Options de PDF à texte",
   },
   loader_text: "Veuillez patienter...",
+  add_more_button: "Ajouter plus de fichiers",
   action_buttons: {
     merge_pdf: "Fusionner PDF",
     split_pdf: "Diviser PDF",

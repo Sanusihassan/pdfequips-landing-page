@@ -1,30 +1,19 @@
-// i think this file is very crowded, i want to extract logics, and components to other files
-// what should i extract from it...
+// this is a very crowded tsx component, how can i simplify it further by separating the logics / parts to other components
 import { useCallback, useEffect, useRef, useState, useContext } from "react";
 import { useDropzone } from "react-dropzone";
 
 import EditPage from "./EditPage";
-import store, {
-  ToolState,
-  hideTool,
-  resetErrorMessage,
-  setErrorMessage,
-  setErrorCode,
-  setEndpoint,
-  setRerender,
-} from "../src/store";
+import { ToolState, hideTool, setPath } from "../src/store";
 
 import { useRouter } from "next/router";
 import type { edit_page, tools, web2pdftool } from "../content";
-import { handleUpload } from "../src/handlers/handleUpload";
-import { handleChange } from "../src/handlers/handleChange";
 import type { errors as _ } from "../content";
 import ErrorElement from "./ErrorElement";
 import Web2PDF from "./Web2PDF";
-import Markdown2PDF from "./Markdown2PDF";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useFileStore } from "../src/file-store";
+import { FileInputForm } from "./Tool/FileInputForm";
 
 export type errorType = {
   response: {
@@ -52,7 +41,7 @@ type ToolProps = {
   page: string;
   web2pdftool: web2pdftool;
 };
-// the editpage is inside this tool component
+
 const Tool: React.FC<ToolProps> = ({
   data,
   tools,
@@ -65,21 +54,21 @@ const Tool: React.FC<ToolProps> = ({
 }) => {
   const state = useSelector((state: { tool: ToolState }) => state.tool);
   // the files:
-  const { files, setFiles } = useFileStore.getState();
+  const { files, setFiles, fileInput } = useFileStore.getState();
   const dispatch = useDispatch();
   // const dispatch = useDispatch();
-  const [userClickedOnFileUploader, setUserClickedOnFileUploader] =
-    useState(false);
-
-  const fileInput = useRef<HTMLInputElement>(null);
-  const submitBtn = useRef<HTMLButtonElement>(null);
-  const downloadBtn = useRef<HTMLAnchorElement>(null);
   const router = useRouter();
   // i want mobx version of this
   const handleHideTool = () => {
     dispatch(dispatch(hideTool()));
   };
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
+  useEffect(() => {
+    // set the path if it has not been set yet
+    if (state.path == "") {
+      dispatch(setPath(path));
+    }
+  }, []);
 
   // endpoint
   // const [endpoint, setEndpoint] = useState("");
@@ -88,7 +77,7 @@ const Tool: React.FC<ToolProps> = ({
     setFiles(acceptedFiles);
     handleHideTool();
   }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, isDragActive } = useDropzone({ onDrop });
 
   // file input change handler
   let showTool = state!.showTool && state!.errorMessage?.length > 0;
@@ -101,59 +90,6 @@ const Tool: React.FC<ToolProps> = ({
     ".jpg": ".jpg, .jpeg",
     ".html": ".html, .htm",
   };
-  // @ts-ignore
-  let t: NodeJS.Timer;
-  // actual files;
-
-  // const fileInputElement = fileInput.current;
-  function focusHandler() {
-    t = setInterval(() => {
-      // let a: File[] = [];
-
-      // a = Array.from(fileInputElement.files as unknown as FileList);
-      // change these to mobx syntax
-      if (files.length === 0) {
-        dispatch(setErrorMessage(errors.NO_FILES_SELECTED.message));
-        dispatch(setErrorCode("NO_FILES_SELECTED"));
-      } else if (
-        state!.errorCode == "EMPTY_FILE" &&
-        files.length > 0 &&
-        path != "merge-pdf"
-      ) {
-        clearInterval(t);
-        dispatch(resetErrorMessage());
-        if (typeof window !== "undefined") {
-          window.removeEventListener("focus", focusHandler);
-        }
-      }
-    }, 3000);
-  }
-  useEffect(() => {
-    const preventDefault = (event: DragEvent) => {
-      event.preventDefault();
-    };
-
-    dispatch(setEndpoint(path));
-    document.addEventListener("dragover", preventDefault);
-    document.addEventListener("click", (e) => e.preventDefault());
-    if (userClickedOnFileUploader && typeof window !== "undefined") {
-      window.addEventListener("focus", focusHandler);
-    }
-    if (
-      state!.errorCode == "ERR_EMPTY_FILE" &&
-      files.length > 0 &&
-      path != "merge-pdf"
-    ) {
-      dispatch(resetErrorMessage());
-    }
-    return () => {
-      clearInterval(t);
-      document.removeEventListener("dragover", preventDefault);
-      if (typeof window !== "undefined") {
-        window.removeEventListener("focus", focusHandler);
-      }
-    };
-  }, [userClickedOnFileUploader, state!.rerender]);
 
   return (
     <>
@@ -161,7 +97,7 @@ const Tool: React.FC<ToolProps> = ({
         <Web2PDF content={data} web2pdftool={web2pdftool} />
       ) : path === "markdown-to-pdf" ? (
         // <Markdown2PDF />
-        <div>soon...</div>
+        <div>sorry this feature not available right now...</div>
       ) : (
         <div
           className="tools-page container-fluid position-relative"
@@ -184,92 +120,19 @@ const Tool: React.FC<ToolProps> = ({
             <p className="lead">
               <bdi>{data.description}</bdi>
             </p>
-            <form
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-              onSubmit={(e) =>
-                handleUpload(e, downloadBtn, dispatch, state, files, errors)
-              }
-              method="POST"
-              encType="multipart/form-data"
-            >
-              <div
-                className={`upload-btn btn btn-lg text-white position-relative overflow-hidden ${path}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-                role="button"
-              >
-                {lang == "ar" ? (
-                  <bdi>
-                    {tools.select} {tools.files}
-                    <span className="text-uppercase">
-                      {data.type.replace(".", "")}
-                    </span>{" "}
-                  </bdi>
-                ) : (
-                  <bdi>
-                    {tools.select}{" "}
-                    <span className="text-uppercase">
-                      {data.type.replace(".", "")}
-                    </span>{" "}
-                    {tools.files}
-                  </bdi>
-                )}
-                <input
-                  type="file"
-                  name="files"
-                  accept={
-                    acceptedFileTypes[
-                      data.type as keyof typeof acceptedFileTypes
-                    ]
-                  }
-                  multiple={path !== "split-pdf"}
-                  ref={fileInput}
-                  className="position-absolute file-input"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setUserClickedOnFileUploader(true);
-                  }}
-                  onChange={(e) => {
-                    handleChange(e, dispatch, setFiles, data.type, errors);
-                    dispatch(setRerender());
-
-                    if (path == "merge-pdf" && files.length == 1) {
-                      dispatch(
-                        setErrorMessage(errors.ERR_UPLOAD_COUNT.message)
-                      );
-                      dispatch(setErrorCode("ERR_UPLOAD_COUNT"));
-                    } else if (
-                      (files && files.length > 0) ||
-                      (state && files.length > 0 && path != "merge-pdf")
-                    ) {
-                      dispatch(resetErrorMessage());
-                    }
-                    console.log(state!.showErrorMessage);
-                  }}
-                />
-              </div>
-              <a
-                href=""
-                className="d-none"
-                ref={downloadBtn}
-                download="__output.pdf"
-              ></a>
-              {/* <div className="my-4">
-          </div> */}
-              <button type="submit" ref={submitBtn} className="d-none">
-                submit
-              </button>
-            </form>
+            <FileInputForm
+              lang={lang}
+              data={data}
+              errors={errors}
+              tools={tools}
+              acceptedFileTypes={acceptedFileTypes}
+            />
             <p>{tools.or_drop}</p>
             <ErrorElement />
           </div>
           {/* ) : ( */}
           <EditPage
             extension={data.type}
-            submitBtn={submitBtn}
             edit_page={edit_page}
             pages={pages}
             page={page}

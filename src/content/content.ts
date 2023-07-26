@@ -197,9 +197,10 @@ export const edit_page = {
     pdf_to_word: "PDF to WORD options",
     pdf_to_excel: "PDF to EXCEL options",
     pdf_to_pdf_a: "PDF to PDF/A options",
-    pdf_to_text: "PDF to text options"
+    pdf_to_text: "PDF to text options",
   },
   loader_text: "please wait...",
+  add_more_button: "Add more files",
   // translate the values of this object to french.
   action_buttons: {
     merge_pdf: "Merge PDF",

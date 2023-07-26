@@ -1,17 +1,16 @@
 import { applyMiddleware, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createStore } from "redux";
-import thunkMiddleware from "redux-thunk";
 
 export interface ToolState {
   showTool: boolean;
   isSubmitted: boolean;
-  rerender: boolean;
   errorMessage: string;
   showErrorMessage: boolean;
   compressPdf: string | number;
   errorCode: string | null;
-  endpoint: string;
   path: string;
+  click: boolean;
+  focus: boolean;
+  rerender: boolean;
 }
 
 const initialState: ToolState = {
@@ -21,9 +20,10 @@ const initialState: ToolState = {
   isSubmitted: false,
   compressPdf: "recommended",
   errorCode: null,
-  endpoint: "",
-  rerender: false,
   path: "",
+  click: false,
+  focus: false,
+  rerender: false,
 };
 
 const toolSlice = createSlice({
@@ -33,18 +33,20 @@ const toolSlice = createSlice({
     showTool(state: ToolState) {
       state.showTool = true;
     },
-
+    setClick(state: ToolState, action: PayloadAction<boolean>) {
+      state.click = action.payload;
+    },
+    setFocus(state: ToolState, action: PayloadAction<boolean>) {
+      state.focus = action.payload;
+    },
+    setRerender(state: ToolState, action: PayloadAction<boolean>) {
+      state.rerender = action.payload;
+    },
     setPath(state: ToolState, action: PayloadAction<string>) {
       state.path = action.payload;
     },
-    setRerender(state: ToolState) {
-      state.rerender = !state.rerender;
-    },
     hideTool(state: ToolState) {
       state.showTool = false;
-    },
-    setEndpoint(state: ToolState, action: PayloadAction<string>) {
-      state.endpoint = action.payload;
     },
     setErrorMessage(state: ToolState, action: PayloadAction<string>) {
       state.errorMessage = action.payload;
@@ -76,16 +78,10 @@ export const {
   setCompressPdf,
   setErrorCode,
   setIsSubmitted,
-  setEndpoint,
-  setRerender,
   setPath,
+  setClick,
+  setFocus,
+  setRerender,
 } = toolSlice.actions;
 
-export const getServerStore = () => {
-  const store = createStore(
-    toolSlice.reducer,
-    applyMiddleware(thunkMiddleware)
-  );
-  return store;
-};
 export default toolSlice.reducer;
