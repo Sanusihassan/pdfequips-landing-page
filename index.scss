@@ -36,6 +36,7 @@
   outline: 1px solid;
 }
 
+@import "./scss/minxins";
 @import "./scss/placeholders";
 @include list-group;
 @include api;

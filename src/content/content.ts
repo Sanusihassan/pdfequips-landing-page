@@ -1,10 +1,4 @@
-/**
- * provide translation Spanish translation for each object of the following:
- * i want full code, the same code i gave you but Spanish version.
- * just translate the string values not the object keys
- */
 export const nav_content = {
-  // ignore this
   brand: "Equips",
   merge_pdf: "Merge PDF",
   split_pdf: "Split PDF",
@@ -36,7 +30,7 @@ export const landing_page = {
         Every Tool You Need, All in One Place.`,
   },
 };
-// translate this to Spanish just translate the string values not the object keys
+
 export const tool = {
   Merge_PDF: {
     title: "Merge PDF",
@@ -253,6 +247,168 @@ export const tools = {
   files: "files",
   drop_files: "Drag files here",
 };
+
+export const downloadFile = {
+  titles: {
+    "merge-pdf": ["PDF files have been merged!", "PDF file has been merged!"],
+    "split-pdf": ["PDF file has been split!"],
+    "compress-pdf": [
+      "PDF files have been compressed!",
+      "PDF file has been compressed!",
+    ],
+    "pdf-to-powerpoint": [
+      "PDF files have been converted to PowerPoint!",
+      "PDF file has been converted to PowerPoint!",
+    ],
+    "jpg-to-pdf": [
+      "JPG files have been converted to PDF!",
+      "JPG file has been converted to PDF!",
+    ],
+    "word-to-pdf": [
+      "Word files have been converted to PDF!",
+      "Word file has been converted to PDF!",
+    ],
+    "powerpoint-to-pdf": [
+      "PowerPoint files have been converted to PDF!",
+      "PowerPoint file has been converted to PDF!",
+    ],
+    "excel-to-pdf": [
+      "Excel files have been converted to PDF!",
+      "Excel file has been converted to PDF!",
+    ],
+    "html-to-pdf": [
+      "HTML files have been converted to PDF!",
+      "HTML file has been converted to PDF!",
+    ],
+    "pdf-to-jpg": [
+      "PDF files have been converted to JPG!",
+      "PDF file has been converted to JPG!",
+    ],
+    "pdf-to-word": [
+      "PDF files have been converted to Word!",
+      "PDF file has been converted to Word!",
+    ],
+    "pdf-to-excel": [
+      "PDF files have been converted to Excel!",
+      "PDF file has been converted to Excel!",
+    ],
+    "pdf-to-pdf-a": [
+      "PDF files have been converted to PDF/A!",
+      "PDF file has been converted to PDF/A!",
+    ],
+    "web-to-pdf": [
+      "Websites have been converted to PDF!",
+      "Website has been converted to PDF!",
+    ],
+    "pdf-to-text": [
+      "PDF files have been converted to Text!",
+      "PDF file has been converted to Text!",
+    ],
+    "markdown-to-pdf": [
+      "Markdown files have been converted to PDF!",
+      "Markdown file has been converted to PDF!",
+    ],
+    "pdf-to-html": [
+      "PDF files have been converted to HTML!",
+      "PDF file has been converted to HTML!",
+    ],
+    "pdf-to-markdown": [
+      "PDF files have been converted to Markdown!",
+      "PDF file has been converted to Markdown!",
+    ],
+  },
+
+  btnText: {
+    "merge-pdf": ["Download Merged PDF files", "Download Merged PDF file"],
+    "split-pdf": ["Download Split PDF files", "Download Split PDF file"],
+    "compress-pdf": [
+      "Download Compressed PDF files",
+      "Download Compressed PDF file",
+    ],
+    "pdf-to-powerpoint": [
+      "Download Converted PowerPoint files",
+      "Download Converted PowerPoint file",
+    ],
+    "jpg-to-pdf": [
+      "Download Converted PDF files",
+      "Download Converted PDF file",
+    ],
+    "word-to-pdf": [
+      "Download Converted PDF files",
+      "Download Converted PDF file",
+    ],
+    "powerpoint-to-pdf": [
+      "Download Converted PDF files",
+      "Download Converted PDF file",
+    ],
+    "excel-to-pdf": [
+      "Download Converted PDF files",
+      "Download Converted PDF file",
+    ],
+    "html-to-pdf": [
+      "Download Converted PDF files",
+      "Download Converted PDF file",
+    ],
+    "pdf-to-jpg": [
+      "Download Converted JPG files",
+      "Download Converted JPG file",
+    ],
+    "pdf-to-word": [
+      "Download Converted Word files",
+      "Download Converted Word file",
+    ],
+    "pdf-to-excel": [
+      "Download Converted Excel files",
+      "Download Converted Excel file",
+    ],
+    "pdf-to-pdf-a": [
+      "Download Converted PDF/A files",
+      "Download Converted PDF/A file",
+    ],
+    "web-to-pdf": [
+      "Download Converted PDF files",
+      "Download Converted PDF file",
+    ],
+    "pdf-to-text": [
+      "Download Converted Text files",
+      "Download Converted Text file",
+    ],
+    "markdown-to-pdf": [
+      "Download Converted PDF files",
+      "Download Converted PDF file",
+    ],
+    "pdf-to-html": [
+      "Download Converted HTML files",
+      "Download Converted HTML file",
+    ],
+    "pdf-to-markdown": [
+      "Download Converted Markdown files",
+      "Download Converted Markdown file",
+    ],
+  },
+
+  backto: {
+    "merge-pdf": "Back To Merge PDF",
+    "split-pdf": "Back To Split PDF",
+    "compress-pdf": "Back To Compress PDF",
+    "pdf-to-powerpoint": "Back To PDF to Powerpoint",
+    "jpg-to-pdf": "Back To JPG to PDF",
+    "word-to-pdf": "Back To Word to PDF",
+    "powerpoint-to-pdf": "Back To Powerpoint to PDF",
+    "excel-to-pdf": "Back To Excel to PDF",
+    "html-to-pdf": "Back To HTML to PDF",
+    "pdf-to-jpg": "Back To PDF to JPG",
+    "pdf-to-word": "Back To PDF to Word",
+    "pdf-to-excel": "Back To PDF to Excel",
+    "pdf-to-pdf-a": "Back To PDF to PDF-A",
+    "web-to-pdf": "Back To Web to PDF",
+    "pdf-to-text": "Back To PDF to Text",
+    "markdown-to-pdf": "Back To Markdown to PDF",
+    "pdf-to-html": "Back To PDF to HTML",
+    "pdf-to-markdown": "Back To PDF to Markdown",
+  },
+};
+
 /**
  * provide translation Spanish translation for each object of the following:
  * i want full code, the same code i gave you but Spanish version.

@@ -10,6 +10,7 @@ import {
   tool,
   tools,
   web2pdftool,
+  downloadFile,
 } from "../src/content/content";
 
 type data_type = {
@@ -81,6 +82,7 @@ export default ({ item }: { item: data_type }) => {
           pages={edit_page.pages}
           page={edit_page.page}
           web2pdftool={web2pdftool}
+          downloadFile={downloadFile}
         />
       )}
     </>

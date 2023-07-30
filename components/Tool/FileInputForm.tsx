@@ -99,7 +99,7 @@ export const FileInputForm: React.FC<FileInputFormProps> = ({
           accept={
             acceptedFileTypes[data.type as keyof typeof acceptedFileTypes]
           }
-          multiple={state.path !== "split-pdf"}
+          multiple={state.path !== "split-pdf" && state.path !== "pdf-to-pdf-a"}
           ref={fileInput}
           className="position-absolute file-input"
           onClick={(e) => {

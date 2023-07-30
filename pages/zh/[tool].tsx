@@ -12,6 +12,7 @@ import {
   tool,
   tools,
   web2pdftool,
+  downloadFile,
 } from "../../src/content/content-zh";
 import { useEffect } from "react";
 import { errors } from "../../src/content/content-zh";
@@ -83,6 +84,7 @@ export default ({ item, lang }: { item: data_type; lang: string }) => {
           pages={edit_page.pages}
           page={edit_page.page}
           web2pdftool={web2pdftool}
+          downloadFile={downloadFile}
         />
       )}
     </>
@@ -107,5 +109,5 @@ export const routes = {
   "/web-to-pdf": { item: tool["Web_to_PDF"] },
   "/pdf-to-text": { item: tool["PDF_to_Text"] },
   "/pdf-to-html": { item: tool["PDF_to_HTML"] },
-  "/pdf-to-markdown": {item: tool["PDF_to_Markdown"]},
+  "/pdf-to-markdown": { item: tool["PDF_to_Markdown"] },
 };

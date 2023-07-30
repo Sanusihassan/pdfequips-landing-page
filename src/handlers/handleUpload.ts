@@ -9,6 +9,7 @@ import {
   resetErrorMessage,
   setErrorMessage,
   setIsSubmitted,
+  setShowDownloadBtn,
 } from "../store";
 // this is the handleUpload function that is calling the download function maybe the issue is here
 export const handleUpload = async (
@@ -36,9 +37,9 @@ export const handleUpload = async (
   } else {
     url = `http://127.0.0.1:5000/${state.path}`;
   }
-  if (state?.errorMessage) {
-    return;
-  }
+  // if (state?.errorMessage) {
+  //   return;
+  // }
   formData.append("compress_amount", String(state?.compressPdf));
   const originalFileName = files[0]?.name?.split(".").slice(0, -1).join(".");
 
@@ -100,6 +101,7 @@ export const handleUpload = async (
     const { outputFileMimeType, outputFileName } = mimeTypeData;
     console.log("response type => ", mimeType);
     console.log(JSON.stringify(response));
+    dispatch(setShowDownloadBtn(true));
     downloadConvertedFile(
       response,
       outputFileMimeType,

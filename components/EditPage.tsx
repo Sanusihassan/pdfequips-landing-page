@@ -88,7 +88,11 @@ const EditPage = ({
   const router = useRouter();
   let k = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
   return (
-    <aside className={`edit-page ${state?.showTool ? "d-none" : ""}`}>
+    <aside
+      className={`edit-page ${
+        state?.showTool || state.showDownloadBtn ? "d-none" : ""
+      }`}
+    >
       <section className="edit-area position-relative">
         <DisplayFile
           extension={extension}

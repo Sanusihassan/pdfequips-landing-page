@@ -11,6 +11,7 @@ import {
   tool,
   tools,
   web2pdftool,
+  downloadFile,
 } from "../../src/content/content-ar";
 import { useEffect } from "react";
 type _t = keyof typeof tool;
@@ -89,6 +90,7 @@ export default ({ item, lang }: { item: data_type; lang: string }) => {
           pages={edit_page.pages}
           page={edit_page.page}
           web2pdftool={web2pdftool}
+          downloadFile={downloadFile}
         />
       )}
     </>

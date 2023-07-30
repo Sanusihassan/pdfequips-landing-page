@@ -10,7 +10,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import { useFileStore } from "../src/file-store";
-import { showTool, ToolState, resetErrorMessage, setPath } from "../src/store";
+import {
+  showTool,
+  ToolState,
+  resetErrorMessage,
+  setPath,
+  setShowDownloadBtn,
+} from "../src/store";
 
 /**
  * this code works fine for the all pages but the home page where there are no sub routes but the /lang route
@@ -31,9 +37,6 @@ const NavBar = ({
   let path = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
   const { files, setFiles } = useFileStore.getState();
   function handleClick(): void {
-    // set path
-    // dispatch(setPath(path));
-    console.log(state.path);
     if (files.length > 0) {
       dispatch(showTool());
     }
@@ -41,15 +44,15 @@ const NavBar = ({
       !state.path.startsWith("pdf-") ||
       !["merge-pdf", "compress-pdf"].includes(state.path)
     ) {
-      console.log("removing files...");
       setFiles([]);
     } else {
-      console.log(files[0].name);
       const allPdf = files.every((file) => file.name.endsWith(".pdf"));
       if (!allPdf) {
         setFiles([]);
       }
     }
+    // hide downloadFile component each time a tool link is clicked
+    dispatch(setShowDownloadBtn(false));
     dispatch(resetErrorMessage());
   }
   let langPath = lang.length > 0 ? `/${lang}/` : "/";
@@ -70,6 +73,7 @@ const NavBar = ({
             lineHeight: 2,
             direction: "ltr",
           }}
+          translate="no"
         >
           <img
             src="/logo.png"

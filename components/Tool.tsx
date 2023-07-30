@@ -3,10 +3,10 @@ import { useCallback, useEffect, useRef, useState, useContext } from "react";
 import { useDropzone } from "react-dropzone";
 
 import EditPage from "./EditPage";
-import { ToolState, hideTool, setPath } from "../src/store";
+import { ToolState, hideTool, setPath, setShowDownloadBtn } from "../src/store";
 
 import { useRouter } from "next/router";
-import type { edit_page, tools, web2pdftool } from "../content";
+import type { edit_page, tools, web2pdftool, downloadFile } from "../content";
 import type { errors as _ } from "../content";
 import ErrorElement from "./ErrorElement";
 import Web2PDF from "./Web2PDF";
@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useFileStore } from "../src/file-store";
 import { FileInputForm } from "./Tool/FileInputForm";
+import DownloadFile from "./DownloadFile";
 
 export type errorType = {
   response: {
@@ -40,6 +41,7 @@ type ToolProps = {
   pages: string;
   page: string;
   web2pdftool: web2pdftool;
+  downloadFile: downloadFile;
 };
 
 const Tool: React.FC<ToolProps> = ({
@@ -51,6 +53,7 @@ const Tool: React.FC<ToolProps> = ({
   pages,
   page,
   web2pdftool,
+  downloadFile,
 }) => {
   const state = useSelector((state: { tool: ToolState }) => state.tool);
   // the files:
@@ -68,6 +71,7 @@ const Tool: React.FC<ToolProps> = ({
     if (state.path == "") {
       dispatch(setPath(path));
     }
+    dispatch(setShowDownloadBtn(false));
   }, []);
 
   // endpoint
@@ -139,6 +143,7 @@ const Tool: React.FC<ToolProps> = ({
             lang={lang}
             errors={errors}
           />
+          <DownloadFile lang={lang} downloadFile={downloadFile} />
           {/* )} */}
         </div>
       )}

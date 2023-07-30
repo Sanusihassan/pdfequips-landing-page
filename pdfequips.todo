@@ -1,16 +1,6 @@
-switch to mobx from redux. fixed
-fix the consistancy of the pdf file in each route issue.
 add pdf split feature.
 
-remove state.endpoint from state done.
-
-fix download issues (in progress...)
-
-solve height problem with ImageCard done
-
-handle set path correctly done.
-
 add the download button after the file is beign downloaded &
- ask the user if they want to download it again.
+ ask the user if they want to download it again. (ADD DOWNLOAD PAGE). DONE!
 
 pdf to pptx is not deleting the files after conversion.

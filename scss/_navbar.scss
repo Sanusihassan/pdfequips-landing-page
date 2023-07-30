@@ -1,4 +1,3 @@
-
 .navbar {
   .convert-dropdown {
     * {
@@ -6,17 +5,16 @@
     }
     [aria-labelledby="basic-nav-dropdown"] {
       .converter-title {
-        [lang=ar] & {
+        [lang="ar"] & {
           padding-right: 1.5rem;
         }
-        :not([lang=ar]) & {
+        :not([lang="ar"]) & {
           padding-left: 1.5rem;
         }
       }
-      
     }
   }
-  
+
   .lang-dropdown {
     $val: calc(100% - 60px);
 
@@ -30,7 +28,12 @@
     @media (max-width: 600px) {
       margin: 0;
     }
-    margin-left: $val;
+    @include lg {
+      margin-left: $val;
+    }
+    @include xl {
+      margin-left: $val;
+    }
   }
   .dropdown-wrapper {
     > {

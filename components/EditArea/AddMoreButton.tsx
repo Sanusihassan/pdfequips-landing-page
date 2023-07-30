@@ -22,6 +22,7 @@ const AddMoreButton: React.FC<AddMoreButtonProps> = ({
       data-tooltip-id="add-more-tooltip"
       data-tooltip-place={lang == "ar" ? "right" : "left"}
       onClick={onClick}
+      style={lang == "ar" ? { order: 1 } : {}}
     >
       <div className="icon-container">
         <PlusIcon className="icon" />

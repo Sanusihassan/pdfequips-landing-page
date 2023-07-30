@@ -6,28 +6,29 @@ import type {
   edit_page as _edit_page,
   footer as _footer,
   errors as _errors,
+  downloadFile as _downloadFile,
 } from "../../content";
 
 export const nav_content: nav_content_type = {
   brand: "Equips",
-  merge_pdf: "combinar pdf",
-  split_pdf: "dividir pdf",
-  compress_pdf: "comprimir pdf",
-  convert_pdf: "convertir pdf",
-  convert_to_pdf: "convertir a pdf",
-  jpg_to_pdf: "jpg a pdf",
-  word_to_pdf: "word a pdf",
-  powerpoint_to_pdf: "powerpoint a pdf",
+  merge_pdf: "Combinar PDF",
+  split_pdf: "Dividir PDF",
+  compress_pdf: "Comprimir PDF",
+  convert_pdf: "Convertir PDF",
+  convert_to_pdf: "Convertir a PDF",
+  jpg_to_pdf: "JPG a PDF",
+  word_to_pdf: "Word a PDF",
+  powerpoint_to_pdf: "Powerpoint a PDF",
   web_to_pdf: "Web a PDF",
   markdown_to_pdf: "Markdown a PDF",
-  excel_to_pdf: "excel a pdf",
-  html_to_pdf: "html a pdf",
-  convert_from_pdf: "convertir desde pdf",
-  pdf_to_jpg: "pdf a jpg",
-  pdf_to_word: "pdf a word",
-  pdf_to_powerpoint: "pdf a powerpoint",
-  pdf_to_excel: "pdf a excel",
-  pdf_to_pdf_a: "pdf a pdf/A",
+  excel_to_pdf: "Excel a PDF",
+  html_to_pdf: "HTML a PDF",
+  convert_from_pdf: "Convertir desde PDF",
+  pdf_to_jpg: "PDF a JPG",
+  pdf_to_word: "PDF a Word",
+  pdf_to_powerpoint: "PDF a Powerpoint",
+  pdf_to_excel: "PDF a Excel",
+  pdf_to_pdf_a: "PDF a PDF/A",
   pdf_to_text: "PDF a texto",
   pdf_to_html: "PDF a HTML",
   pdf_to_markdown: "PDF a Markdown",
@@ -249,6 +250,174 @@ export const tools: _tools = {
   or_drop: "o soltar archivos aquí",
   files: "archivos",
   drop_files: "Arrastra los archivos aquí",
+};
+
+export const downloadFile: _downloadFile = {
+  titles: {
+    "merge-pdf": [
+      "¡Combinación de archivos PDF exitosa!",
+      "¡Combinación de archivo PDF exitosa!",
+    ],
+    "split-pdf": ["¡División de archivo PDF exitosa!"],
+    "compress-pdf": [
+      "¡Compresión de archivos PDF exitosa!",
+      "¡Compresión de archivo PDF exitosa!",
+    ],
+    "pdf-to-powerpoint": [
+      "¡Conversión de archivos PDF a PowerPoint exitosa!",
+      "¡Conversión de archivo PDF a PowerPoint exitosa!",
+    ],
+    "jpg-to-pdf": [
+      "¡Conversión de archivos JPG a PDF exitosa!",
+      "¡Conversión de archivo JPG a PDF exitosa!",
+    ],
+    "word-to-pdf": [
+      "¡Conversión de archivos Word a PDF exitosa!",
+      "¡Conversión de archivo Word a PDF exitosa!",
+    ],
+    "powerpoint-to-pdf": [
+      "¡Conversión de archivos PowerPoint a PDF exitosa!",
+      "¡Conversión de archivo PowerPoint a PDF exitosa!",
+    ],
+    "excel-to-pdf": [
+      "¡Conversión de archivos Excel a PDF exitosa!",
+      "¡Conversión de archivo Excel a PDF exitosa!",
+    ],
+    "html-to-pdf": [
+      "¡Conversión de archivos HTML a PDF exitosa!",
+      "¡Conversión de archivo HTML a PDF exitosa!",
+    ],
+    "pdf-to-jpg": [
+      "¡Conversión de archivos PDF a JPG exitosa!",
+      "¡Conversión de archivo PDF a JPG exitosa!",
+    ],
+    "pdf-to-word": [
+      "¡Conversión de archivos PDF a Word exitosa!",
+      "¡Conversión de archivo PDF a Word exitosa!",
+    ],
+    "pdf-to-excel": [
+      "¡Conversión de archivos PDF a Excel exitosa!",
+      "¡Conversión de archivo PDF a Excel exitosa!",
+    ],
+    "pdf-to-pdf-a": [
+      "¡Conversión de archivos PDF a PDF/A exitosa!",
+      "¡Conversión de archivo PDF a PDF/A exitosa!",
+    ],
+    "web-to-pdf": [
+      "¡Conversión de sitios web a archivos PDF exitosa!",
+      "¡Conversión de sitio web a archivo PDF exitosa!",
+    ],
+    "pdf-to-text": [
+      "¡Conversión de archivos PDF a texto exitosa!",
+      "¡Conversión de archivo PDF a texto exitosa!",
+    ],
+    "markdown-to-pdf": [
+      "¡Conversión de archivos Markdown a PDF exitosa!",
+      "¡Conversión de archivo Markdown a PDF exitosa!",
+    ],
+    "pdf-to-html": [
+      "¡Conversión de archivos PDF a HTML exitosa!",
+      "¡Conversión de archivo PDF a HTML exitosa!",
+    ],
+    "pdf-to-markdown": [
+      "¡Conversión de archivos PDF a Markdown exitosa!",
+      "¡Conversión de archivo PDF a Markdown exitosa!",
+    ],
+  },
+  btnText: {
+    "merge-pdf": [
+      "Descargar archivos PDF combinados",
+      "Descargar archivo PDF combinado",
+    ],
+    "split-pdf": [
+      "Descargar archivos PDF divididos",
+      "Descargar archivo PDF dividido",
+    ],
+    "compress-pdf": [
+      "Descargar archivos PDF comprimidos",
+      "Descargar archivo PDF comprimido",
+    ],
+    "pdf-to-powerpoint": [
+      "Descargar archivos PowerPoint convertidos",
+      "Descargar archivo PowerPoint convertido",
+    ],
+    "jpg-to-pdf": [
+      "Descargar archivos PDF convertidos",
+      "Descargar archivo PDF convertido",
+    ],
+    "word-to-pdf": [
+      "Descargar archivos PDF convertidos",
+      "Descargar archivo PDF convertido",
+    ],
+    "powerpoint-to-pdf": [
+      "Descargar archivos PDF convertidos",
+      "Descargar archivo PDF convertido",
+    ],
+    "excel-to-pdf": [
+      "Descargar archivos PDF convertidos",
+      "Descargar archivo PDF convertido",
+    ],
+    "html-to-pdf": [
+      "Descargar archivos PDF convertidos",
+      "Descargar archivo PDF convertido",
+    ],
+    "pdf-to-jpg": [
+      "Descargar archivos JPG convertidos",
+      "Descargar archivo JPG convertido",
+    ],
+    "pdf-to-word": [
+      "Descargar archivos Word convertidos",
+      "Descargar archivo Word convertido",
+    ],
+    "pdf-to-excel": [
+      "Descargar archivos Excel convertidos",
+      "Descargar archivo Excel convertido",
+    ],
+    "pdf-to-pdf-a": [
+      "Descargar archivos PDF/A convertidos",
+      "Descargar archivo PDF/A convertido",
+    ],
+    "web-to-pdf": [
+      "Descargar archivos PDF convertidos",
+      "Descargar archivo PDF convertido",
+    ],
+    "pdf-to-text": [
+      "Descargar archivos de texto extraídos",
+      "Descargar archivo de texto extraído",
+    ],
+    "markdown-to-pdf": [
+      "Descargar archivos PDF convertidos",
+      "Descargar archivo PDF convertido",
+    ],
+    "pdf-to-html": [
+      "Descargar archivos HTML convertidos",
+      "Descargar archivo HTML convertido",
+    ],
+    "pdf-to-markdown": [
+      "Descargar archivos Markdown convertidos",
+      "Descargar archivo Markdown convertido",
+    ],
+  },
+  backto: {
+    "merge-pdf": "Volver a unir PDF",
+    "split-pdf": "Volver a dividir PDF",
+    "compress-pdf": "Volver a comprimir PDF",
+    "pdf-to-powerpoint": "Volver a PDF a PowerPoint",
+    "jpg-to-pdf": "Volver a JPG a PDF",
+    "word-to-pdf": "Volver a Word a PDF",
+    "powerpoint-to-pdf": "Volver a PowerPoint a PDF",
+    "excel-to-pdf": "Volver a Excel a PDF",
+    "html-to-pdf": "Volver a HTML a PDF",
+    "pdf-to-jpg": "Volver a PDF a JPG",
+    "pdf-to-word": "Volver a PDF a Word",
+    "pdf-to-excel": "Volver a PDF a Excel",
+    "pdf-to-pdf-a": "Volver a PDF a PDF-A",
+    "web-to-pdf": "Volver a Web a PDF",
+    "pdf-to-text": "Volver a PDF a Texto",
+    "markdown-to-pdf": "Volver a Markdown a PDF",
+    "pdf-to-html": "Volver a PDF a HTML",
+    "pdf-to-markdown": "Volver a PDF a Markdown",
+  },
 };
 
 export const footer: _footer = {

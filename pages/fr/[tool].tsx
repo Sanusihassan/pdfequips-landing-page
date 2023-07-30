@@ -12,6 +12,7 @@ import {
   tool,
   tools,
   web2pdftool,
+  downloadFile,
 } from "../../src/content/content-fr";
 import { useEffect } from "react";
 import { errors } from "../../src/content/content-fr";
@@ -86,6 +87,7 @@ export default ({ item, lang }: { item: data_type; lang: string }) => {
           pages={edit_page.pages}
           page={edit_page.page}
           web2pdftool={web2pdftool}
+          downloadFile={downloadFile}
         />
       )}
     </>

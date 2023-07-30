@@ -11,6 +11,7 @@ export interface ToolState {
   click: boolean;
   focus: boolean;
   rerender: boolean;
+  showDownloadBtn: boolean;
 }
 
 const initialState: ToolState = {
@@ -24,6 +25,7 @@ const initialState: ToolState = {
   click: false,
   focus: false,
   rerender: false,
+  showDownloadBtn: false,
 };
 
 const toolSlice = createSlice({
@@ -38,6 +40,9 @@ const toolSlice = createSlice({
     },
     setFocus(state: ToolState, action: PayloadAction<boolean>) {
       state.focus = action.payload;
+    },
+    setShowDownloadBtn(state: ToolState, action: PayloadAction<boolean>) {
+      state.showDownloadBtn = action.payload;
     },
     setRerender(state: ToolState, action: PayloadAction<boolean>) {
       state.rerender = action.payload;
@@ -82,6 +87,7 @@ export const {
   setClick,
   setFocus,
   setRerender,
+  setShowDownloadBtn,
 } = toolSlice.actions;
 
 export default toolSlice.reducer;

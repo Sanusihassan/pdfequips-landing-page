@@ -6,9 +6,9 @@ import type {
   edit_page as _edit_page,
   footer as _footer,
   errors as _errors,
+  downloadFile as _downloadFile,
 } from "../../content";
 
-//
 export const nav_content: nav_content_type = {
   brand: "Equips",
   merge_pdf: "دمج PDF",
@@ -188,6 +188,112 @@ export const tools: _tools = {
   files: "ملفات",
   drop_files: "قم بوضع الملفات هنا",
 };
+
+export const downloadFile: _downloadFile = {
+  titles: {
+    "merge-pdf": ["تم دمج ملفات ال PDF!", "تم دمج ملف ال PDF!"],
+    "split-pdf": ["تم تقسيم ملف ال PDF!"],
+    "compress-pdf": ["تم ضغط ملفات ال PDF!", "تم ضغط ملف ال PDF!"],
+    "pdf-to-powerpoint": [
+      "تم تحويل ملفات PDF إلى PowerPoint!",
+      "تم تحويل ملف PDF إلى PowerPoint!",
+    ],
+    "jpg-to-pdf": ["تم تحويل ملفات JPG إلى PDF!", "تم تحويل ملف JPG إلى PDF!"],
+    "word-to-pdf": [
+      "تم تحويل ملفات Word إلى PDF!",
+      "تم تحويل ملف Word إلى PDF!",
+    ],
+    "powerpoint-to-pdf": [
+      "تم تحويل ملفات PowerPoint إلى PDF!",
+      "تم تحويل ملف PowerPoint إلى PDF!",
+    ],
+    "excel-to-pdf": [
+      "تم تحويل ملفات Excel إلى PDF!",
+      "تم تحويل ملف Excel إلى PDF!",
+    ],
+    "html-to-pdf": [
+      "تم تحويل ملفات HTML إلى PDF!",
+      "تم تحويل ملف HTML إلى PDF!",
+    ],
+    "pdf-to-jpg": ["تم تحويل ملفات PDF إلى JPG!", "تم تحويل ملف PDF إلى JPG!"],
+    "pdf-to-word": [
+      "تم تحويل ملفات PDF إلى Word!",
+      "تم تحويل ملف PDF إلى Word!",
+    ],
+    "pdf-to-excel": [
+      "تم تحويل ملفات PDF إلى Excel!",
+      "تم تحويل ملف PDF إلى Excel!",
+    ],
+    "pdf-to-pdf-a": [
+      "تم تحويل ملفات PDF إلى PDF/A!",
+      "تم تحويل ملف PDF إلى PDF/A!",
+    ],
+    "web-to-pdf": [
+      "تم تحويل المواقع إلى ملفات PDF!",
+      "تم تحويل الموقع إلى ملف PDF!",
+    ],
+    "pdf-to-text": ["تم تحويل ملفات PDF إلى نص!", "تم تحويل ملف PDF إلى نص!"],
+    "markdown-to-pdf": [
+      "تم تحويل ملفات Markdown إلى PDF!",
+      "تم تحويل ملف Markdown إلى PDF!",
+    ],
+    "pdf-to-html": [
+      "تم تحويل ملفات PDF إلى HTML!",
+      "تم تحويل ملف PDF إلى HTML!",
+    ],
+    "pdf-to-markdown": [
+      "تم تحويل ملفات PDF إلى Markdown!",
+      "تم تحويل ملف PDF إلى Markdown!",
+    ],
+  },
+  btnText: {
+    "merge-pdf": ["تحميل ملفات PDF المدموجة", "تحميل ملف PDF مدموج"],
+    "split-pdf": ["تحميل ملفات PDF المقسمة", "تحميل ملف PDF مقسم"],
+    "compress-pdf": ["تحميل ملفات PDF المضغوطة", "تحميل ملف PDF مضغوط"],
+    "pdf-to-powerpoint": [
+      "تحميل ملفات PowerPoint المحولة",
+      "تحميل ملف PowerPoint المحول",
+    ],
+    "jpg-to-pdf": ["تحميل ملفات PDF المحولة", "تحميل ملف PDF المحول"],
+    "word-to-pdf": ["تحميل ملفات PDF المحولة", "تحميل ملف PDF المحول"],
+    "powerpoint-to-pdf": ["تحميل ملفات PDF المحولة", "تحميل ملف PDF المحول"],
+    "excel-to-pdf": ["تحميل ملفات PDF المحولة", "تحميل ملف PDF المحول"],
+    "html-to-pdf": ["تحميل ملفات PDF المحولة", "تحميل ملف PDF المحول"],
+    "pdf-to-jpg": ["تحميل ملفات JPG المحولة", "تحميل ملف JPG المحول"],
+    "pdf-to-word": ["تحميل ملفات Word المحولة", "تحميل ملف Word المحول"],
+    "pdf-to-excel": ["تحميل ملفات Excel المحولة", "تحميل ملف Excel المحول"],
+    "pdf-to-pdf-a": ["تحميل ملفات PDF/A المحولة", "تحميل ملف PDF/A المحول"],
+    "web-to-pdf": ["تحميل ملفات PDF المحولة", "تحميل ملف PDF المحول"],
+    "pdf-to-text": ["تحميل ملفات النص المحولة", "تحميل ملف النص المحول"],
+    "markdown-to-pdf": ["تحميل ملفات PDF المحولة", "تحميل ملف PDF المحول"],
+    "pdf-to-html": ["تحميل ملفات HTML المحولة", "تحميل ملف HTML المحول"],
+    "pdf-to-markdown": [
+      "تحميل ملفات Markdown المحولة",
+      "تحميل ملف Markdown المحول",
+    ],
+  },
+  backto: {
+    "merge-pdf": "العودة إلى دمج ملفات PDF",
+    "split-pdf": "العودة إلى تقسيم ملفات PDF",
+    "compress-pdf": "العودة إلى ضغط ملفات PDF",
+    "pdf-to-powerpoint": "العودة إلى PDF إلى باوربوينت",
+    "jpg-to-pdf": "العودة إلى JPG إلى PDF",
+    "word-to-pdf": "العودة إلى Word إلى PDF",
+    "powerpoint-to-pdf": "العودة إلى باوربوينت إلى PDF",
+    "excel-to-pdf": "العودة إلى Excel إلى PDF",
+    "html-to-pdf": "العودة إلى HTML إلى PDF",
+    "pdf-to-jpg": "العودة إلى PDF إلى JPG",
+    "pdf-to-word": "العودة إلى PDF إلى Word",
+    "pdf-to-excel": "العودة إلى PDF إلى Excel",
+    "pdf-to-pdf-a": "العودة إلى PDF إلى PDF-A",
+    "web-to-pdf": "العودة إلى Web إلى PDF",
+    "pdf-to-text": "العودة إلى PDF إلى النص",
+    "markdown-to-pdf": "العودة إلى Markdown إلى PDF",
+    "pdf-to-html": "العودة إلى PDF إلى HTML",
+    "pdf-to-markdown": "العودة إلى PDF إلى Markdown",
+  },
+};
+
 export const edit_page: _edit_page = {
   edit_page_titles: {
     merge_pdf: "خيارات دمج ملف PDF",
