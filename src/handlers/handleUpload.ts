@@ -35,11 +35,11 @@ export const handleUpload = async (
     url = `http://127.0.0.1:5000/${state.path}`;
     // url = `https://5000-planetcreat-pdfequipsap-te4zoi6qkr3.ws-eu102.gitpod.io/${state.path}`;
   } else {
-    url = `http://127.0.0.1:5000/${state.path}`;
+    url = `/${state.path}`;
   }
-  // if (state?.errorMessage) {
-  //   return;
-  // }
+  if (state?.errorMessage) {
+    return;
+  }
   formData.append("compress_amount", String(state?.compressPdf));
   const originalFileName = files[0]?.name?.split(".").slice(0, -1).join(".");
 

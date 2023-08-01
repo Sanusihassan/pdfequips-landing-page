@@ -104,14 +104,14 @@ def get_routes_handler(app):
     @app.route('/<path:path>', methods=['GET'])
     def serve_static(path):
         try:
-            return render_template(f'/out/{path}.html')
+            return render_template(f'./{path}.html')
         except TemplateNotFound:
             return "404 Not Found", 404
 
     @app.route('/_next/<path:path>', methods=['GET'])
     def serve_static_files(path):
         try:
-            return send_from_directory("/out/_next", path)
+            return send_from_directory("./_next", path)
         except TemplateNotFound:
             return "404 Not Found", 404
 
@@ -149,14 +149,14 @@ def get_routes_handler(app):
     @app.route('/<path:path>', methods=['GET'])
     def serve_static(path):
         try:
-            return render_template(f'/out/{path}.html')
+            return render_template(f'./{path}.html')
         except TemplateNotFound:
             return "404 Not Found", 404
 
     @app.route('/_next/<path:path>', methods=['GET'])
     def serve_static_files(path):
         try:
-            return send_from_directory("/out/_next", path)
+            return send_from_directory("./_next", path)
         except TemplateNotFound:
             return "404 Not Found", 404
         
@@ -586,29 +586,28 @@ and i want the following to be taken into consideration for navigation:
 
 the default directory to be served is the out directory because it's an ssg next.js app, so:
 
-/ should be mapped to /out/
-and the /out/ part should not appear on the url.
+and i've uploaded the static files to htdocs > pdfequips.com folder.
 
-/marge-pdf -> /out/merge-pdf.html
-/split-pdf -> /out/split-pdf.html
-/compress-pdf -> /out/compress-pdf.html
-/jpg-to-pdf -> /out/jpg-to-pdf.html
-/word-to-pdf -> /out/word-to-pdf.html
-/powerpoint-to-pdf -> /out/powerpoint-to-pdf.html
-/excel-to-pdf -> /out/excel-to-pdf.html
-/html-to-pdf -> /out/html-to-pdf.html
-/pdf-to-jpg -> /out/pdf-to-jpg.html
-/pdf-to-word -> /out/pdf-to-word.html
-/pdf-to-powerpoint -> /out/pdf-to-powerpoint.html
-/pdf-to-excel -> /out/pdf-to-excel.html
-/pdf-to-pdf-a -> /out/pdf-to-pdf-a.html
+/marge-pdf -> ./merge-pdf.html
+/split-pdf -> ./split-pdf.html
+/compress-pdf -> ./compress-pdf.html
+/jpg-to-pdf -> ./jpg-to-pdf.html
+/word-to-pdf -> ./word-to-pdf.html
+/powerpoint-to-pdf -> ./powerpoint-to-pdf.html
+/excel-to-pdf -> ./excel-to-pdf.html
+/html-to-pdf -> ./html-to-pdf.html
+/pdf-to-jpg -> ./pdf-to-jpg.html
+/pdf-to-word -> ./pdf-to-word.html
+/pdf-to-powerpoint -> ./pdf-to-powerpoint.html
+/pdf-to-excel -> ./pdf-to-excel.html
+/pdf-to-pdf-a -> ./pdf-to-pdf-a.html
 
-anything /_next related should be served as /out/_next/<route>
+anything /_next related should be served as ./_next/<route>
 
 static fiels in ['logo.png', 'pdf.worker.js']
-should be served as /out/<file>
+should be served as ./<file>
 
-anything /images/ related should be served as /out/images/<file>
+anything /images/ related should be served as ./images/<file>
 
 i also have sub routes for 5 supported languages, and they are
 /ar -> for arabic

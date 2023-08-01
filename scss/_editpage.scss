@@ -44,7 +44,7 @@
       @include extend("w-100 placeholder-glow h-100 position-absolute");
       .inner-loader {
         @include extend(
-          "placeholder bg-dark col-12 fh position-absolute w-100 d-flex justify-content-center align-items-center"
+          "placeholder col-12 fh position-absolute w-100 d-flex justify-content-center align-items-center"
         );
       }
     }
