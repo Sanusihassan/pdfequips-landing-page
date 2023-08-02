@@ -17,9 +17,15 @@
 
   .lang-dropdown {
     $val: calc(100% - 60px);
-
-    [lang="ar"] & {
-      margin-right: $val;
+    @include lg {
+      [lang="ar"] & {
+        margin-right: $val;
+      }
+    }
+    @include lg {
+      [lang="ar"] & {
+        margin-right: $val;
+      }
     }
 
     [lang="fr"] {
