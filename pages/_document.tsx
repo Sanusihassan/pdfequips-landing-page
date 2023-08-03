@@ -31,7 +31,7 @@ const MyDocument = ({ lang }: { lang: string }) => {
         <meta property="og:description" content="The Complete PDF Solution" />
         <meta
           property="og:image"
-          content="https://pdfequips.com/pdfequips.svg"
+          content="https://pdfequips.com/pdfequips.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -40,7 +40,7 @@ const MyDocument = ({ lang }: { lang: string }) => {
         <meta name="twitter:creator" content="@pdfequips" />
         <meta name="twitter:title" content="PDFEquips" />
         <meta name="twitter:description" content="The Complete PDF Solution" />
-        <meta name="twitter:image" content="https://pdfequips.com/pdfequips.svg" /> */}
+        <meta name="twitter:image" content="https://pdfequips.com/pdfequips.png" /> */}
       </Head>
       <body>
         <Main />
