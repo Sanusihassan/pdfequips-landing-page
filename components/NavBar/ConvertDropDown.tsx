@@ -43,89 +43,96 @@ const ConvertPDFDropdown = ({
               {" "}
               <bdi>{nav_content.convert_to_pdf}</bdi>{" "}
             </h6>
-            <Link href={`${langPath}jpg-to-pdf`}>
-              <a
-                onClick={() => {
-                  dispatch(setPath("jpg-to-pdf"));
-                  handleClick();
-                }}
-                className="dropdown-item"
-              >
-                <PhotographIcon
-                  style={{
-                    color: "#f1c40f",
-                  }}
-                  className="h-5 w-5 inline-block mr-2"
-                />{" "}
-                <bdi>{nav_content.jpg_to_pdf}</bdi>{" "}
-              </a>
-            </Link>
-            <Link href={`${langPath}word-to-pdf`}>
-              <a
-                onClick={() => {
-                  dispatch(setPath("word-to-pdf"));
-                  handleClick();
-                }}
-                className="dropdown-item"
-              >
-                <DocumentIcon
-                  style={{
-                    color: "#1B5EBE",
-                  }}
-                  className="h-5 w-5 inline-block mr-2"
-                />{" "}
-                <bdi>{nav_content.word_to_pdf}</bdi>{" "}
-              </a>
-            </Link>
-            <Link
+
+            <a
+              href={`${langPath}jpg-to-pdf`}
+              onClick={() => {
+                dispatch(setPath("jpg-to-pdf"));
+                handleClick();
+              }}
               className="dropdown-item"
-              href={`${langPath}powerpoint-to-pdf`}
             >
-              <a
-                onClick={() => {
-                  dispatch(setPath("powerpoint-to-pdf"));
-                  handleClick();
+              <PhotographIcon
+                style={{
+                  color: "#f1c40f",
                 }}
-                className="dropdown-item"
-              >
-                <PresentationChartBarIcon
-                  style={{
-                    color: "#C13B1B",
-                  }}
-                  className="h-5 w-5 inline-block mr-2"
-                />{" "}
-                <bdi>{nav_content.powerpoint_to_pdf}</bdi>{" "}
-              </a>
-            </Link>
-            <Link className="dropdown-item" href={`${langPath}excel-to-pdf`}>
-              <a
-                onClick={() => {
-                  dispatch(setPath("excel-to-pdf"));
-                  handleClick();
+                className="h-5 w-5 inline-block mr-2"
+              />{" "}
+              <bdi>{nav_content.jpg_to_pdf}</bdi>{" "}
+            </a>
+
+            {/* <Link
+             > */}
+            <a
+              href={`${langPath}word-to-pdf`}
+              onClick={() => {
+                dispatch(setPath("word-to-pdf"));
+                handleClick();
+              }}
+              className="dropdown-item"
+            >
+              <DocumentIcon
+                style={{
+                  color: "#1B5EBE",
                 }}
-                className="dropdown-item"
-              >
-                <TableIcon
-                  style={{
-                    color: "#10793F",
-                  }}
-                  className="h-5 w-5 inline-block mr-2"
-                />{" "}
-                <bdi>{nav_content.excel_to_pdf}</bdi>{" "}
-              </a>
-            </Link>
-            <Link className="dropdown-item" href={`${langPath}html-to-pdf`}>
-              <a
-                onClick={() => {
-                  dispatch(setPath("html-to-pdf"));
-                  handleClick();
+                className="h-5 w-5 inline-block mr-2"
+              />{" "}
+              <bdi>{nav_content.word_to_pdf}</bdi>{" "}
+            </a>
+            {/* </Link> */}
+            {/* <Link
+              className="dropdown-item"
+              > */}
+            <a
+              href={`${langPath}powerpoint-to-pdf`}
+              onClick={() => {
+                dispatch(setPath("powerpoint-to-pdf"));
+                handleClick();
+              }}
+              className="dropdown-item"
+            >
+              <PresentationChartBarIcon
+                style={{
+                  color: "#C13B1B",
                 }}
-                className="dropdown-item"
-              >
-                <CodeIcon className="h-5 w-5 inline-block mr-2 html" />{" "}
-                <bdi>{nav_content.html_to_pdf}</bdi>{" "}
-              </a>
-            </Link>
+                className="h-5 w-5 inline-block mr-2"
+              />{" "}
+              <bdi>{nav_content.powerpoint_to_pdf}</bdi>{" "}
+            </a>
+            {/* </Link> */}
+            {/* <Link className="dropdown-item" 
+            > */}
+            <a
+              href={`${langPath}excel-to-pdf`}
+              onClick={() => {
+                dispatch(setPath("excel-to-pdf"));
+                handleClick();
+              }}
+              className="dropdown-item"
+            >
+              <TableIcon
+                style={{
+                  color: "#10793F",
+                }}
+                className="h-5 w-5 inline-block mr-2"
+              />{" "}
+              <bdi>{nav_content.excel_to_pdf}</bdi>{" "}
+            </a>
+            {/* </Link> */}
+            {/* <Link className="dropdown-item"
+             > */}
+            <a
+              href={`${langPath}html-to-pdf`}
+              onClick={() => {
+                dispatch(setPath("html-to-pdf"));
+                handleClick();
+              }}
+              className="dropdown-item"
+            >
+              <CodeIcon className="h-5 w-5 inline-block mr-2 html" />{" "}
+              <bdi>{nav_content.html_to_pdf}</bdi>{" "}
+            </a>
+            {/* </Link> */}
             {/* <Link className="dropdown-item" href={`${langPath}web-to-pdf`}>
               <a onClick={handleClick} className="dropdown-item">
                 <GlobeIcon className="h-5 w-5 inline-block mr-2 web" />{" "}
@@ -144,107 +151,116 @@ const ConvertPDFDropdown = ({
               {" "}
               <bdi>{nav_content.convert_from_pdf}</bdi>{" "}
             </h6>
-            <Link className="dropdown-item" href={`${langPath}pdf-to-jpg`}>
-              <a
-                onClick={() => {
-                  dispatch(setPath("pdf-to-jpg"));
-                  handleClick();
-                }}
-                className="dropdown-item"
-              >
-                {" "}
-                <bdi>{nav_content.pdf_to_jpg}</bdi>{" "}
-                <PhotographIcon
-                  style={{
-                    color: "#f1c40f",
-                  }}
-                  className="h-5 w-5 inline-block mr-2"
-                />
-              </a>
-            </Link>
-            <Link className="dropdown-item" href={`${langPath}pdf-to-word`}>
-              <a
-                onClick={() => {
-                  dispatch(setPath("pdf-to-word"));
-                  handleClick();
-                }}
-                className="dropdown-item"
-              >
-                {" "}
-                <bdi>{nav_content.pdf_to_word}</bdi>{" "}
-                <DocumentIcon
-                  style={{
-                    color: "#1B5EBE",
-                  }}
-                  className="h-5 w-5 inline-block mr-2"
-                />
-              </a>
-            </Link>
-            <Link
+            {/* <Link className="dropdown-item"> */}
+            <a
+              href={`${langPath}pdf-to-jpg`}
+              onClick={() => {
+                dispatch(setPath("pdf-to-jpg"));
+                handleClick();
+              }}
               className="dropdown-item"
-              href={`${langPath}pdf-to-powerpoint`}
             >
-              <a
-                onClick={() => {
-                  dispatch(setPath("pdf-to-powerpoint"));
-                  handleClick();
+              {" "}
+              <bdi>{nav_content.pdf_to_jpg}</bdi>{" "}
+              <PhotographIcon
+                style={{
+                  color: "#f1c40f",
                 }}
-                className="dropdown-item"
-              >
-                {" "}
-                <bdi>{nav_content.pdf_to_powerpoint}</bdi>{" "}
-                <PresentationChartBarIcon
-                  style={{
-                    color: "#C13B1B",
-                  }}
-                  className="h-5 w-5 inline-block mr-2"
-                />
-              </a>
-            </Link>
-            <Link className="dropdown-item" href={`${langPath}pdf-to-excel`}>
-              <a
-                onClick={() => {
-                  dispatch(setPath("pdf-to-excel"));
-                  handleClick();
+                className="h-5 w-5 inline-block mr-2"
+              />
+            </a>
+            {/* </Link> */}
+            {/* <Link className="dropdown-item"
+             > */}
+            <a
+              href={`${langPath}pdf-to-word`}
+              onClick={() => {
+                dispatch(setPath("pdf-to-word"));
+                handleClick();
+              }}
+              className="dropdown-item"
+            >
+              {" "}
+              <bdi>{nav_content.pdf_to_word}</bdi>{" "}
+              <DocumentIcon
+                style={{
+                  color: "#1B5EBE",
                 }}
-                className="dropdown-item"
-              >
-                {" "}
-                <bdi>{nav_content.pdf_to_excel}</bdi>{" "}
-                <TableIcon
-                  style={{
-                    color: "#10793F",
-                  }}
-                  className="h-5 w-5 inline-block mr-2"
-                />
-              </a>
-            </Link>
-            <Link href={`${langPath}pdf-to-pdf-a`}>
-              <a
-                onClick={() => {
-                  handleClick();
-                  dispatch(setPath("pdf-to-pdf-a"));
+                className="h-5 w-5 inline-block mr-2"
+              />
+            </a>
+            {/* </Link> */}
+            {/* <Link
+              className="dropdown-item"
+              > */}
+            <a
+              href={`${langPath}pdf-to-powerpoint`}
+              onClick={() => {
+                dispatch(setPath("pdf-to-powerpoint"));
+                handleClick();
+              }}
+              className="dropdown-item"
+            >
+              {" "}
+              <bdi>{nav_content.pdf_to_powerpoint}</bdi>{" "}
+              <PresentationChartBarIcon
+                style={{
+                  color: "#C13B1B",
                 }}
-                className="dropdown-item"
-              >
-                {" "}
-                <bdi>{nav_content.pdf_to_pdf_a}</bdi>{" "}
-                <DocumentAddIcon className="h-5 w-5 inline-block mr-2" />
-              </a>
-            </Link>
-            <Link href={`${langPath}pdf-to-text`}>
-              <a
-                onClick={() => {
-                  dispatch(setPath("pdf-to-text"));
-                  handleClick();
+                className="h-5 w-5 inline-block mr-2"
+              />
+            </a>
+            {/* </Link> */}
+            {/* <Link className="dropdown-item" 
+            > */}
+            <a
+              href={`${langPath}pdf-to-excel`}
+              onClick={() => {
+                dispatch(setPath("pdf-to-excel"));
+                handleClick();
+              }}
+              className="dropdown-item"
+            >
+              {" "}
+              <bdi>{nav_content.pdf_to_excel}</bdi>{" "}
+              <TableIcon
+                style={{
+                  color: "#10793F",
                 }}
-                className="dropdown-item"
-              >
-                {" "}
-                <bdi>{nav_content.pdf_to_text}</bdi>{" "}
-                <DocumentTextIcon className="h-5 w-5 inline-block mr-2 text" />
-              </a>
-            </Link>
+                className="h-5 w-5 inline-block mr-2"
+              />
+            </a>
+            {/* </Link> */}
+            {/* <Link 
+            > */}
+            <a
+              href={`${langPath}pdf-to-pdf-a`}
+              onClick={() => {
+                handleClick();
+                dispatch(setPath("pdf-to-pdf-a"));
+              }}
+              className="dropdown-item"
+            >
+              {" "}
+              <bdi>{nav_content.pdf_to_pdf_a}</bdi>{" "}
+              <DocumentAddIcon className="h-5 w-5 inline-block mr-2" />
+            </a>
+            {/* </Link> */}
+            {/* <Link
+             > */}
+            <a
+              href={`${langPath}pdf-to-text`}
+              onClick={() => {
+                dispatch(setPath("pdf-to-text"));
+                handleClick();
+              }}
+              className="dropdown-item"
+            >
+              {" "}
+              <bdi>{nav_content.pdf_to_text}</bdi>{" "}
+              <DocumentTextIcon className="h-5 w-5 inline-block mr-2 text" />
+            </a>
+            {/* </Link> */}
             {/* <Link href={`${langPath}pdf-to-html`}>
               <a onClick={handleClick} className="dropdown-item">
                 {" "}

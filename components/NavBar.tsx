@@ -101,33 +101,37 @@ const NavBar = ({
       <Navbar.Toggle aria-controls="main-nav" />
       <Navbar.Collapse id="main-nav">
         <Nav className="align-items-center">
-          <Link href={`${langPath}merge-pdf`}>
-            <a
-              onClick={(e) => {
-                dispatch(setPath("merge-pdf"));
-                handleClick();
-              }}
-              className="dropdown-item"
-            >
-              <bdi>{nav_content.merge_pdf}</bdi>
-            </a>
-          </Link>
+          {/* <Link 
+          > */}
+          <a
+            href={`${langPath}merge-pdf`}
+            onClick={(e) => {
+              dispatch(setPath("merge-pdf"));
+              handleClick();
+            }}
+            className="dropdown-item"
+          >
+            <bdi>{nav_content.merge_pdf}</bdi>
+          </a>
+          {/* </Link> */}
           {/* <Link className="dropdown-item" href={`${langPath}split-pdf`}>
             <a onClick={handleClick} className="dropdown-item">
               <bdi>{nav_content.split_pdf}</bdi>
             </a>
           </Link> */}
-          <Link className="dropdown-item" href={`${langPath}compress-pdf`}>
-            <a
-              onClick={(e) => {
-                dispatch(setPath("compress-pdf"));
-                handleClick();
-              }}
-              className="dropdown-item"
-            >
-              <bdi>{nav_content.compress_pdf}</bdi>
-            </a>
-          </Link>
+          {/* <Link className="dropdown-item"
+           > */}
+          <a
+            href={`${langPath}compress-pdf`}
+            onClick={(e) => {
+              dispatch(setPath("compress-pdf"));
+              handleClick();
+            }}
+            className="dropdown-item"
+          >
+            <bdi>{nav_content.compress_pdf}</bdi>
+          </a>
+          {/* </Link> */}
           <ConvertPDFDropdown
             handleClick={handleClick}
             langPath={langPath}

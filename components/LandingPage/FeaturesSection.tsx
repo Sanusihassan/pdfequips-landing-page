@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import Link from "next/link";
+// import Link from "next/link";
 import {
   DocumentDuplicateIcon,
   PresentationChartBarIcon,
@@ -70,11 +70,9 @@ export const FeaturesSection = ({
         <Row>
           {featureCards.map((card, index) => (
             <Col key={index} md={3} sm={6} className="column">
-              <Link
-                href={card.to}
-                className={`text-decoration-none text-dark ${card.to}`}
-              >
+              <div className={`text-decoration-none text-dark ${card.to}`}>
                 <a
+                  href={card.to}
                   className="text-decoration-none text-muted text-reset"
                   onClick={() => {
                     return dispatch(setPath(path));
@@ -108,7 +106,7 @@ export const FeaturesSection = ({
                     </Card.Body>
                   </Card>
                 </a>
-              </Link>
+              </div>
             </Col>
           ))}
         </Row>
