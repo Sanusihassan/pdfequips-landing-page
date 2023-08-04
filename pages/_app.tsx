@@ -1,5 +1,5 @@
 import type { AppContext, AppProps } from "next/app";
-
+import Head from "next/head";
 import "../index.scss";
 // redux store
 import { Provider as ReduxProvider } from "react-redux";
@@ -27,9 +27,28 @@ const store = configureStore({
 
 function MyApp({ Component, pageProps, lang }: AppProps & { lang: string }) {
   return (
-    <ReduxProvider store={store}>
-      <Component useFileStore={useFileStore} {...pageProps} lang={lang} />
-    </ReduxProvider>
+    <>
+      <Head>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=G-NY5F91MF0B`}
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+  
+      gtag('config', 'G-NY5F91MF0B');
+    `,
+          }}
+        ></script>
+      </Head>
+      <ReduxProvider store={store}>
+        <Component useFileStore={useFileStore} {...pageProps} lang={lang} />
+      </ReduxProvider>
+    </>
   );
 }
 MyApp.getInitialProps = async ({
