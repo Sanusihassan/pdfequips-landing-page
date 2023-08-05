@@ -35,7 +35,7 @@ export const handleUpload = async (
     url = `http://127.0.0.1:5000/${state.path}`;
     // url = `https://5000-planetcreat-pdfequipsap-te4zoi6qkr3.ws-eu102.gitpod.io/${state.path}`;
   } else {
-    url = `/${state.path}`;
+    url = `/api/${state.path}`;
   }
   if (state?.errorMessage) {
     return;
