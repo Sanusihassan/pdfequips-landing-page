@@ -15,13 +15,7 @@ const MyDocument = ({ lang }: { lang: string }) => {
       dir={lang == "ar" ? "rtl" : "ltr"}
     >
       <Head>
-        <title>PDFEquips</title>
-        <meta name="description" content="The Complete PDF Solution" />
         <link rel="icon" href="/logo.png" />
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#FC271C" />
         <link rel="apple-touch-icon" href="/logo.png" />
@@ -35,12 +29,15 @@ const MyDocument = ({ lang }: { lang: string }) => {
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        {/* <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@pdfequips" />
         <meta name="twitter:creator" content="@pdfequips" />
         <meta name="twitter:title" content="PDFEquips" />
         <meta name="twitter:description" content="The Complete PDF Solution" />
-        <meta name="twitter:image" content="https://pdfequips.com/pdfequips.png" /> */}
+        <meta
+          name="twitter:image"
+          content="https://pdfequips.com/pdfequips.png"
+        />
       </Head>
       <body>
         <Main />
