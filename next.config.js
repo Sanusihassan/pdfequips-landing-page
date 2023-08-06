@@ -125,7 +125,14 @@ module.exports = {
     }
 
     // Add your additional webpack configuration here if needed
-
+    if (!isServer) {
+      config.optimization.splitChunks = {
+        cacheGroups: {
+          default: false,
+        },
+      };
+    }
     return config;
   },
 };
+

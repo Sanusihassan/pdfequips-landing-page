@@ -35,9 +35,9 @@ export const nav_content: nav_content_type = {
 };
 export const landing_page = {
   hero: {
-    title: "La solution PDF complète",
+    title: "Améliorez votre productivité avec notre solution PDF complète",
     description:
-      "Passez à la vitesse supérieure avec vos flux de travail PDF - PDFEquips fournit tous les outils dont vous avez besoin, regroupés en un seul endroit.",
+      "Faites passer vos flux de travail PDF au niveau supérieur - Débloquez de nouvelles possibilités avec notre boîte à outils complète.",
   },
 };
 

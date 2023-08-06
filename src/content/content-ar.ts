@@ -36,9 +36,8 @@ export const nav_content: nav_content_type = {
 
 export const landing_page = {
   hero: {
-    title: "الحل الشامل لملفات ال PDF",
-    description: `خذ عمليات ال PDF الخاصة بك إلى المستوى التالي - يوفر PDFEquips
-          كل الأدوات التي تحتاجها في مكان واحد.`,
+    title: "عزز إنتاجيتك من خلال حل ال PDF الشامل الخاص بنا",
+    description: `ارتقِ بسير عمل PDF إلى المستوى التالي - أطلق العنان لإمكانيات جديدة باستخدام مجموعة الأدوات الشاملة الخاصة بنا.`,
   },
 };
 

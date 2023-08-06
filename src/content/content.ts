@@ -24,10 +24,9 @@ export const nav_content = {
 };
 export const landing_page = {
   hero: {
-    title: "The Complete PDF Solution",
+    title: "Enhance Your Productivity with our Comprehensive PDF Solution",
     // translate this to Spanish but ignore the PDFequips part
-    description: `Take Your PDF Workflows to the Next Level - PDFEquips Provides
-        Every Tool You Need, All in One Place.`,
+    description: `Take Your PDF Workflows to the Next Level - Unlock New Possibilities with Our Comprehensive Toolkit.`,
   },
 };
 

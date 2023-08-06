@@ -36,9 +36,9 @@ export const nav_content: nav_content_type = {
 
 export const landing_page = {
   hero: {
-    title: "La solución completa para PDF",
+    title: "Mejore su productividad con nuestra solución integral de PDF",
     description:
-      "Lleva tus flujos de trabajo de PDF al siguiente nivel - PDFEquips proporciona todas las herramientas que necesitas, en un solo lugar.",
+      "Lleve sus flujos de trabajo PDF al siguiente nivel: desbloquee nuevas posibilidades con nuestro completo kit de herramientas.",
   },
 };
 

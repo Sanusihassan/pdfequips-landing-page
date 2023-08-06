@@ -35,9 +35,9 @@ export const nav_content: _nav_content = {
 
 export const landing_page = {
   hero: {
-    title: "完整的PDF解决方案",
+    title: "利用我们全面的 PDF 解决方案提高您的工作效率",
     description:
-      "将您的PDF工作流程提升到一个新的水平 - PDFEquips为您提供所需的所有工具，集成在一个地方。",
+      "将您的 PDF 工作流程提升到新的水平 - 使用我们的综合工具包解锁新的可能性。",
   },
 };
 
