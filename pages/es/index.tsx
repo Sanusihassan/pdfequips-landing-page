@@ -15,7 +15,10 @@ const Home = ({ lang }: { lang: string }) => {
     <div>
       <Head>
         <title>PDFEquips: su fuente de herramientas PDF de calidad</title>
-        <meta name="description" content="The Complete PDF Solution" />
+        <meta
+          name="description"
+          content="Descubra la solución PDF completa: potentes herramientas para gestionar documentos con facilidad."
+        />
         <link rel="icon" href="/logo.png" />
         <link
           rel="stylesheet"

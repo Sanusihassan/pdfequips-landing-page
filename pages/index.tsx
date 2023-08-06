@@ -16,7 +16,10 @@ const Home = ({ lang }: { lang: string }) => {
     <div>
       <Head>
         <title>PDFEquips - Your Source for Quality PDF Tools</title>
-        <meta name="description" content="The Complete PDF Solution" />
+        <meta
+          name="description"
+          content="Discover the Complete PDF Solution: Powerful Tools for Easy Document Management."
+        />
         <link rel="icon" href="/logo.png" />
         <link
           rel="stylesheet"

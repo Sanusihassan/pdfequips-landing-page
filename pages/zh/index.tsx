@@ -15,7 +15,10 @@ const Home = ({ lang }: { lang: string }) => {
     <div>
       <Head>
         <title>PDFEquips - 您优质 PDF 工具的来源</title>
-        <meta name="description" content="The Complete PDF Solution" />
+        <meta
+          name="description"
+          content="探索完整的 PDF 解决方案：轻松管理文档的强大工具。"
+        />
         <link rel="icon" href="/logo.png" />
         <link
           rel="stylesheet"
