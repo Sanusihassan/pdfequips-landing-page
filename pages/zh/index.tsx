@@ -14,7 +14,7 @@ const Home = ({ lang }: { lang: string }) => {
   return (
     <div>
       <Head>
-        <title>PDFEquips</title>
+        <title>PDFEquips - 您优质 PDF 工具的来源</title>
         <meta name="description" content="The Complete PDF Solution" />
         <link rel="icon" href="/logo.png" />
         <link

@@ -14,7 +14,9 @@ const Home = ({ lang }: { lang: string }) => {
   return (
     <div>
       <Head>
-        <title>PDFEquips</title>
+        <title>
+          पीडीएफइक्विप्स - गुणवत्तापूर्ण पीडीएफ टूल्स के लिए आपका स्रोत
+        </title>
         <meta name="description" content="The Complete PDF Solution" />
         <link rel="icon" href="/logo.png" />
         <link
