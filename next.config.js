@@ -106,33 +106,75 @@ const nextConfig = {
 //   },
 // });
 
+const path = require("path");
+// this is my current next.config.js file
+// module.exports = {
+//   sassOptions: {
+//     includePaths: [path.join(__dirname, 'node_modules')],
+//   },
+//   webpack: (config, { isServer }) => {
+//     // Disable chunk splitting for non-server bundles
+//     if (!isServer) {
+//       config.optimization.splitChunks = {
+//         cacheGroups: {
+//           default: false,
+//         },
+//       };
+//     }
 
+//     // Add your additional webpack configuration here if needed
+//     if (!isServer) {
+//       config.optimization.splitChunks = {
+//         cacheGroups: {
+//           default: false,
+//         },
+//       };
+//     }
+//     return config;
+//   },
+// };
 
-const path = require('path');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   sassOptions: {
-    includePaths: [path.join(__dirname, 'node_modules')],
+    includePaths: [path.join(__dirname, "node_modules")],
   },
+  output: "standalone",
   webpack: (config, { isServer }) => {
-    // Disable chunk splitting for non-server bundles
+    // Only run this configuration on the client side
     if (!isServer) {
       config.optimization.splitChunks = {
         cacheGroups: {
           default: false,
+          vendors: false,
+          // vendor chunk
+          vendor: {
+            // sync + async chunks
+            chunks: "all",
+            // import file path containing node_modules
+            test: /node_modules/,
+            // name of the chunk
+            name: "vendor",
+          },
         },
       };
+    }
+
+    // Minify JavaScript
+    if (process.env.NODE_ENV === "production") {
+      config.optimization.minimize = true;
+      config.optimization.minimizer.push(
+        new TerserPlugin({
+          terserOptions: {
+            // Add any necessary terser options here
+          },
+        })
+      );
     }
 
     // Add your additional webpack configuration here if needed
-    if (!isServer) {
-      config.optimization.splitChunks = {
-        cacheGroups: {
-          default: false,
-        },
-      };
-    }
+
     return config;
   },
 };
-

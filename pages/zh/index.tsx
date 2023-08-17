@@ -15,20 +15,22 @@ const Home = ({ lang }: { lang: string }) => {
     <div>
       <Head>
         <title>PDFEquips - 您优质 PDF 工具的来源</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="探索完整的 PDF 解决方案：轻松管理文档的强大工具。"
+          content="探索完整的 PDF 解决方案：轻松管理文档的强大工具。JPG 为 PDF、WORD 为 PDF、POWERPOINT 为 PDF、EXCEL 为 PDF、HTML 为 PDF"
         />
         <link rel="icon" href="/logo.png" />
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        ></link>
+        <meta
+          name="keywords"
+          content="PDF 工具，转换为 PDF、JPG 为 PDF、WORD 为 PDF、POWERPOINT 为 PDF、EXCEL 为 PDF、HTML 为 PDF、从 PDF 转换、PDF 为 JPG、PDF 为 WORD、PDF 为 POWERPOINT、PDF 为 EXCEL、PDF 为 PDF/A、PDF 到文本、合并 PDF、压缩 PDF。"
+        />
+        <meta http-equiv="Content-Language" content="zh" />
       </Head>
 
       <NavBar nav_content={nav_content} lang={lang} />
       <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
-      <Footer footer={footer} />
+      <Footer footer={footer} lang={lang} nav_content={nav_content} />
     </div>
   );
 };

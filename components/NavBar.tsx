@@ -104,7 +104,7 @@ const NavBar = ({
           {/* <Link 
           > */}
           <a
-            href={`${langPath}merge-pdf`}
+            href={`https://www.pdfequips.com${langPath}merge-pdf`}
             onClick={(e) => {
               dispatch(setPath("merge-pdf"));
               handleClick();
@@ -122,7 +122,7 @@ const NavBar = ({
           {/* <Link className="dropdown-item"
            > */}
           <a
-            href={`${langPath}compress-pdf`}
+            href={`https://www.pdfequips.com${langPath}compress-pdf`}
             onClick={(e) => {
               dispatch(setPath("compress-pdf"));
               handleClick();

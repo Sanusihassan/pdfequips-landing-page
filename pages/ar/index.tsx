@@ -15,20 +15,22 @@ const Home = ({ lang }: { lang: string }) => {
     <div>
       <Head>
         <title>PDFEquips - مصدرك لأدوات PDF عالية الجودة</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="اكتشف الحل الكامل لل PDF: أدوات قوية لإدارة المستندات بسهولة."
+          content="اكتشف الحل الكامل لل PDF: أدوات قوية لإدارة المستندات بسهولة. التحويل إلى PDF ، JPG إلى PDF ، WORD إلى PDF ، POWERPOINT إلى PDF ، EXCEL إلى PDF ، HTML إلى PDF"
         />
         <link rel="icon" href="/logo.png" />
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        ></link>
+        <meta
+          name="keywords"
+          content="أدوات PDF ، التحويل إلى PDF ، JPG إلى PDF ، WORD إلى PDF ، POWERPOINT إلى PDF ، EXCEL إلى PDF ، HTML إلى PDF ، التحويل من PDF ، PDF إلى JPG ، PDF إلى WORD ، PDF إلى POWERPOINT ، PDF إلى EXCEL ، PDF إلى PDF / A ، PDF إلى نص ، دمج PDF ، ضغط PDF. "
+        />
+        <meta http-equiv="Content-Language" content="ar" />
       </Head>
 
       <NavBar nav_content={nav_content} lang={lang} />
       <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
-      <Footer footer={footer} />
+      <Footer footer={footer} lang={lang} nav_content={nav_content} />
     </div>
   );
 };

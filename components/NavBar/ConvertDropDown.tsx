@@ -45,7 +45,7 @@ const ConvertPDFDropdown = ({
             </h6>
 
             <a
-              href={`${langPath}jpg-to-pdf`}
+              href={`https://www.pdfequips.com${langPath}jpg-to-pdf`}
               onClick={() => {
                 dispatch(setPath("jpg-to-pdf"));
                 handleClick();
@@ -64,7 +64,7 @@ const ConvertPDFDropdown = ({
             {/* <Link
              > */}
             <a
-              href={`${langPath}word-to-pdf`}
+              href={`https://www.pdfequips.com${langPath}word-to-pdf`}
               onClick={() => {
                 dispatch(setPath("word-to-pdf"));
                 handleClick();
@@ -84,7 +84,7 @@ const ConvertPDFDropdown = ({
               className="dropdown-item"
               > */}
             <a
-              href={`${langPath}powerpoint-to-pdf`}
+              href={`https://www.pdfequips.com${langPath}powerpoint-to-pdf`}
               onClick={() => {
                 dispatch(setPath("powerpoint-to-pdf"));
                 handleClick();
@@ -103,7 +103,7 @@ const ConvertPDFDropdown = ({
             {/* <Link className="dropdown-item" 
             > */}
             <a
-              href={`${langPath}excel-to-pdf`}
+              href={`https://www.pdfequips.com${langPath}excel-to-pdf`}
               onClick={() => {
                 dispatch(setPath("excel-to-pdf"));
                 handleClick();
@@ -122,7 +122,7 @@ const ConvertPDFDropdown = ({
             {/* <Link className="dropdown-item"
              > */}
             <a
-              href={`${langPath}html-to-pdf`}
+              href={`https://www.pdfequips.com${langPath}html-to-pdf`}
               onClick={() => {
                 dispatch(setPath("html-to-pdf"));
                 handleClick();
@@ -133,13 +133,13 @@ const ConvertPDFDropdown = ({
               <bdi>{nav_content.html_to_pdf}</bdi>{" "}
             </a>
             {/* </Link> */}
-            {/* <Link className="dropdown-item" href={`${langPath}web-to-pdf`}>
+            {/* <Link className="dropdown-item" href={`https://www.pdfequips.com${langPath}web-to-pdf`}>
               <a onClick={handleClick} className="dropdown-item">
                 <GlobeIcon className="h-5 w-5 inline-block mr-2 web" />{" "}
                 <bdi>{nav_content.web_to_pdf}</bdi>{" "}
               </a>
             </Link> */}
-            {/* <Link className="dropdown-item" href={`${langPath}markdown-to-pdf`}>
+            {/* <Link className="dropdown-item" href={`https://www.pdfequips.com${langPath}markdown-to-pdf`}>
               <a onClick={handleClick} className="dropdown-item">
                 <MarkdownIcon className="h-5 w-5 inline-block mr-2 web" />{" "}
                 <bdi>{nav_content.markdown_to_pdf}</bdi>{" "}
@@ -153,7 +153,7 @@ const ConvertPDFDropdown = ({
             </h6>
             {/* <Link className="dropdown-item"> */}
             <a
-              href={`${langPath}pdf-to-jpg`}
+              href={`https://www.pdfequips.com${langPath}pdf-to-jpg`}
               onClick={() => {
                 dispatch(setPath("pdf-to-jpg"));
                 handleClick();
@@ -173,7 +173,7 @@ const ConvertPDFDropdown = ({
             {/* <Link className="dropdown-item"
              > */}
             <a
-              href={`${langPath}pdf-to-word`}
+              href={`https://www.pdfequips.com${langPath}pdf-to-word`}
               onClick={() => {
                 dispatch(setPath("pdf-to-word"));
                 handleClick();
@@ -194,7 +194,7 @@ const ConvertPDFDropdown = ({
               className="dropdown-item"
               > */}
             <a
-              href={`${langPath}pdf-to-powerpoint`}
+              href={`https://www.pdfequips.com${langPath}pdf-to-powerpoint`}
               onClick={() => {
                 dispatch(setPath("pdf-to-powerpoint"));
                 handleClick();
@@ -214,7 +214,7 @@ const ConvertPDFDropdown = ({
             {/* <Link className="dropdown-item" 
             > */}
             <a
-              href={`${langPath}pdf-to-excel`}
+              href={`https://www.pdfequips.com${langPath}pdf-to-excel`}
               onClick={() => {
                 dispatch(setPath("pdf-to-excel"));
                 handleClick();
@@ -234,7 +234,7 @@ const ConvertPDFDropdown = ({
             {/* <Link 
             > */}
             <a
-              href={`${langPath}pdf-to-pdf-a`}
+              href={`https://www.pdfequips.com${langPath}pdf-to-pdf-a`}
               onClick={() => {
                 handleClick();
                 dispatch(setPath("pdf-to-pdf-a"));
@@ -249,7 +249,7 @@ const ConvertPDFDropdown = ({
             {/* <Link
              > */}
             <a
-              href={`${langPath}pdf-to-text`}
+              href={`https://www.pdfequips.com${langPath}pdf-to-text`}
               onClick={() => {
                 dispatch(setPath("pdf-to-text"));
                 handleClick();
@@ -261,14 +261,14 @@ const ConvertPDFDropdown = ({
               <DocumentTextIcon className="h-5 w-5 inline-block mr-2 text" />
             </a>
             {/* </Link> */}
-            {/* <Link href={`${langPath}pdf-to-html`}>
+            {/* <Link href={`https://www.pdfequips.com${langPath}pdf-to-html`}>
               <a onClick={handleClick} className="dropdown-item">
                 {" "}
                 <bdi>{nav_content.pdf_to_html}</bdi>{" "}
                 <CodeIcon className="h-5 w-5 inline-block mr-2 html" />
               </a>
             </Link>
-            <Link href={`${langPath}pdf-to-markdown`}>
+            <Link href={`https://www.pdfequips.com${langPath}pdf-to-markdown`}>
               <a onClick={handleClick} className="dropdown-item">
                 {" "}
                 <bdi>{nav_content.pdf_to_markdown}</bdi>{" "}

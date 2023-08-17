@@ -66,10 +66,6 @@ export default ({ item, lang }: { item: data_type; lang: string }) => {
         <meta name="description" content={item.description} />
         <link rel="icon" href="/logo.png" />
         {/* needed for styles */}
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        />
       </Head>
       <NavBar lang={lang} nav_content={nav_content} />
       {path == "/ar/split-pdf" ? (

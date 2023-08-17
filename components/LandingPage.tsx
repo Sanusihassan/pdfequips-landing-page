@@ -17,9 +17,6 @@ const HeroSection = ({
               <bdi>{landing_page.hero.title}</bdi>
             </h1>
             <p className="hero-description lead text-white">
-              <span style={{ display: "none" }}>
-                Get everything you need to work with PDFs, all in one place.
-              </span>
               <bdi>{landing_page.hero.description}</bdi>
             </p>
           </div>

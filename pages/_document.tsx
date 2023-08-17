@@ -16,16 +16,16 @@ const MyDocument = ({ lang }: { lang: string }) => {
     >
       <Head>
         <link rel="icon" href="/logo.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#FC271C" />
         <link rel="apple-touch-icon" href="/logo.png" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://pdfequips.com/" />
+        <meta property="og:url" content="https://www.pdfequips.com/" />
         <meta property="og:title" content="PDFEquips" />
         <meta property="og:description" content="The Complete PDF Solution" />
+        <base href="https://www.pdfequips.com/" />
         <meta
           property="og:image"
-          content="https://pdfequips.com/pdfequips.png"
+          content="https://www.pdfequips.com/pdfequips.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -36,7 +36,11 @@ const MyDocument = ({ lang }: { lang: string }) => {
         <meta name="twitter:description" content="The Complete PDF Solution" />
         <meta
           name="twitter:image"
-          content="https://pdfequips.com/pdfequips.png"
+          content="https://www.pdfequips.com/pdfequips.png"
+        />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         />
       </Head>
       <body>

@@ -15,7 +15,7 @@ function SplitPDF() {
     setSelectedOption
   );
   return (
-    <div className="split-pdf grid-body">
+    <div className="split-pdf-tool grid-body">
       <Row className="m-0 option-row">
         <Col xs={6}>
           <div

@@ -43,6 +43,7 @@
     "cssmolecule": "^1.0.1",
     "custom-bs": "^1.3.0",
     "sass": "^1.64.2",
+    "terser-webpack-plugin": "^5.3.9",
     "typescript": "5.1.6"
   }
 }

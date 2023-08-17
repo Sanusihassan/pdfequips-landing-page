@@ -17,20 +17,22 @@ const Home = ({ lang }: { lang: string }) => {
         <title>
           पीडीएफइक्विप्स - गुणवत्तापूर्ण पीडीएफ टूल्स के लिए आपका स्रोत
         </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="संपूर्ण पीडीएफ समाधान खोजें: दस्तावेज़ों को आसानी से प्रबंधित करने के लिए शक्तिशाली उपकरण।"
+          content="संपूर्ण पीडीएफ समाधान खोजें: दस्तावेज़ों को आसानी से प्रबंधित करने के लिए शक्तिशाली उपकरण। जेपीजी से पीडीएफ, वर्ड से पीडीएफ, पावरपॉइंट से पीडीएफ, एक्सेल से पीडीएफ, एचटीएमएल से पीडीएफ"
         />
         <link rel="icon" href="/logo.png" />
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        ></link>
+        <meta
+          name="keywords"
+          content="पीडीएफ उपकरण, पीडीएफ में कनवर्ट करें, जेपीजी से पीडीएफ, वर्ड से पीडीएफ, पावरपॉइंट से पीडीएफ, एक्सेल से पीडीएफ, एचटीएमएल से पीडीएफ, पीडीएफ से कनवर्ट करें, पीडीएफ से जेपीजी, पीडीएफ से वर्ड, पीडीएफ से पावरपॉइंट, पीडीएफ से एक्सेल, पीडीएफ से पीडीएफ/ए, पीडीएफ से टेक्स्ट, पीडीएफ को मर्ज करें, पीडीएफ को कंप्रेस करें।"
+        />
+        <meta http-equiv="Content-Language" content="hi" />
       </Head>
 
       <NavBar nav_content={nav_content} lang={lang} />
       <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
-      <Footer footer={footer} />
+      <Footer footer={footer} lang={lang} nav_content={nav_content} />
     </div>
   );
 };
