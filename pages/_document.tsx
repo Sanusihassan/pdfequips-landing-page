@@ -42,6 +42,11 @@ const MyDocument = ({ lang }: { lang: string }) => {
           rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7391414384206267"
+          crossOrigin="anonymous"
+        ></script>
       </Head>
       <body>
         <Main />

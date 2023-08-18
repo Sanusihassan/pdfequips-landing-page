@@ -28,7 +28,7 @@ const store = configureStore({
 function MyApp({ Component, pageProps, lang }: AppProps & { lang: string }) {
   return (
     <>
-      {/* <Head>
+      <Head>
         <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=G-NY5F91MF0B`}
@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps, lang }: AppProps & { lang: string }) {
     `,
           }}
         ></script>
-      </Head> */}
+      </Head>
       <ReduxProvider store={store}>
         <Component useFileStore={useFileStore} {...pageProps} lang={lang} />
       </ReduxProvider>
