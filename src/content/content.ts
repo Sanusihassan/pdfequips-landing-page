@@ -52,6 +52,13 @@ export const tool = {
     type: ".pdf",
     to: "/compress-pdf",
   },
+  Translate_PDF: {
+    title: "Translate PDF",
+    description: "Translate the text in a PDF file to another language",
+    color: "#185abc",
+    type: ".pdf",
+    to: "/translate-pdf",
+  },
   PDF_to_Powerpoint: {
     title: "PDF to Powerpoint",
     description: "Convert PDF files to editable Powerpoint presentations",
@@ -170,6 +177,12 @@ export const web2pdftool = {
   placeholder: "Example: https://pdfequips.com",
   submit_btn: "Convert",
 };
+
+export const translate_pdf = {
+  drag_and_drop: "Drag & Drop Files Here",
+  or_choose_file: "Or Choose a file",
+  browse_file: "Browse Your Files"
+}
 /**
  * provide translation Spanish translation for each object of the following:
  * i want full code, the same code i gave you but Spanish version.
@@ -210,6 +223,7 @@ export const edit_page = {
     pdf_to_excel: "Convert to Excel",
     pdf_to_pdf_a: "Convert to PDF/A",
     pdf_to_text: "Convert to Text",
+    translate_pdf: "Translate PDF",
   },
   pages: "pages",
   page: "page",

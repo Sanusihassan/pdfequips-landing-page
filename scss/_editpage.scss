@@ -161,18 +161,7 @@
       margin-bottom: 1rem;
     }
 
-    .submit-btn {
-      @each $key, $color in $color-map {
-        &.#{$key} {
-          $r: red($color);
-          $g: green($color);
-          $b: blue($color);
-          --pulse-animation-color: #{$r}, #{$g}, #{$b};
-          animation: pulse 2s infinite;
-        }
-      }
-      width: 100%;
-    }
+   
 
     .option-title {
       @each $key, $color in $color-map {
@@ -192,4 +181,17 @@
   }
 
   @import "./image-options";
+}
+
+.submit-btn {
+  @each $key, $color in $color-map {
+    &.#{$key} {
+      $r: red($color);
+      $g: green($color);
+      $b: blue($color);
+      --pulse-animation-color: #{$r}, #{$g}, #{$b};
+      animation: pulse 2s infinite;
+    }
+  }
+  width: 100%;
 }

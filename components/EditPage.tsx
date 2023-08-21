@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import DisplayFile from "./DisplayFile";
-import { RefObject, useContext, useEffect, useState } from "react";
+import { Dispatch, RefObject, SetStateAction, useContext, useEffect, useState } from "react";
 
 import Options, { OptionsProps } from "./DisplayFile/Options";
 import type { edit_page } from "../content";
@@ -15,9 +15,11 @@ import {
   resetErrorMessage,
   setIsSubmitted,
   setPath,
+  setShowOptions
 } from "../src/store";
 import { useFileStore } from "../src/file-store";
 import AddMoreButton from "./EditArea/AddMoreButton";
+import { SubmitBtn } from "./EditArea/SubmitBtn";
 
 type editPageProps = {
   extension: string;
@@ -29,6 +31,7 @@ type editPageProps = {
 };
 // the error message is inside the editPage component
 // calculate image height;
+
 const EditPage = ({
   extension,
   edit_page,
@@ -40,7 +43,8 @@ const EditPage = ({
   const [isOnline, setIsOnline] = useState(true);
   const handleOnlineStatus = () => setIsOnline(true);
   const handleOfflineStatus = () => setIsOnline(false);
-  const [showOptions, setShowOptions] = useState(false);
+  // const [showOptions, setShowOptions] = useState(false);
+
   const state = useSelector((state: { tool: ToolState }) => state.tool);
   const dispatch = useDispatch();
   // actual files;
@@ -53,37 +57,6 @@ const EditPage = ({
       dispatch(setPath(k));
     }
   }, [files, state.rerender, state.errorCode]);
-  function SubmitBtn({ k }: { k: string }): JSX.Element {
-    return (
-      <button
-        className={`submit-btn btn btn-lg text-white position-relative overflow-hidden ${k} grid-footer`}
-        onClick={() => {
-          dispatch(setIsSubmitted(true));
-          setShowOptions(false);
-          if (submitBtn) {
-            submitBtn?.current?.click();
-          }
-        }}
-        disabled={state!.errorMessage.length > 0}
-      >
-        <bdi>
-          {
-            edit_page.action_buttons[
-              k.replace(/-/g, "_") as keyof typeof edit_page.action_buttons
-            ]
-          }
-        </bdi>{" "}
-        {state?.isSubmitted ? (
-          <Spinner
-            as="span"
-            animation="grow"
-            role="status"
-            aria-hidden="true"
-          />
-        ) : null}
-      </button>
-    );
-  }
 
   const router = useRouter();
   let k = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
@@ -118,13 +91,13 @@ const EditPage = ({
         <button
           className="gear-button btn btn-light"
           onClick={() => {
-            setShowOptions(!showOptions);
+            dispatch(setShowOptions(!state.showOptions));
           }}
         >
           <CogIcon className="w-6 h-6 me-2 gear-icon" />
         </button>
       </section>
-      <section className={`options${showOptions ? " expanded" : ""}`}>
+      <section className={`options${state.showOptions ? " expanded" : ""}`}>
         <h5 className="text-uppercase grid-header">
           <bdi>
             {
@@ -134,8 +107,8 @@ const EditPage = ({
             }
           </bdi>
         </h5>
-        {/* <Options layout={k as OptionsProps["layout"]} edit_page={edit_page} /> */}
-        <SubmitBtn k={k} />
+        <Options layout={k as OptionsProps["layout"]} edit_page={edit_page} />
+        <SubmitBtn k={k} edit_page={edit_page} />
       </section>
     </aside>
   );

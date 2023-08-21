@@ -11,6 +11,7 @@ import {
   tools,
   web2pdftool,
   downloadFile,
+  translate_pdf,
 } from "../src/content/content";
 
 type data_type = {
@@ -89,6 +90,7 @@ export default ({ item }: { item: data_type }) => {
         page={edit_page.page}
         web2pdftool={web2pdftool}
         downloadFile={downloadFile}
+        translate_pdf={translate_pdf}
       />
     </>
   );
@@ -98,6 +100,7 @@ export default ({ item }: { item: data_type }) => {
 export const routes = {
   "/merge-pdf": { item: tool["Merge_PDF"] },
   "/split-pdf": { item: tool["Split_PDF"] },
+  "/translate-pdf": { item: tool["Translate_PDF"] },
   "/compress-pdf": { item: tool["Compress_PDF"] },
   "/pdf-to-powerpoint": { item: tool["PDF_to_Powerpoint"] },
   "/jpg-to-pdf": { item: tool["JPG_to_PDF"] },

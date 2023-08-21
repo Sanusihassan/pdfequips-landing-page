@@ -12,6 +12,7 @@ export interface ToolState {
   focus: boolean;
   rerender: boolean;
   showDownloadBtn: boolean;
+  showOptions: boolean;
 }
 
 const initialState: ToolState = {
@@ -26,6 +27,7 @@ const initialState: ToolState = {
   focus: false,
   rerender: false,
   showDownloadBtn: false,
+  showOptions: false
 };
 
 const toolSlice = createSlice({
@@ -72,6 +74,9 @@ const toolSlice = createSlice({
     setIsSubmitted(state: ToolState, action: PayloadAction<boolean>) {
       state.isSubmitted = action.payload;
     },
+    setShowOptions(state: ToolState, action: PayloadAction<boolean>) {
+      state.showOptions = action.payload;
+    }
   },
 });
 
@@ -88,6 +93,7 @@ export const {
   setFocus,
   setRerender,
   setShowDownloadBtn,
+  setShowOptions
 } = toolSlice.actions;
 
 export default toolSlice.reducer;

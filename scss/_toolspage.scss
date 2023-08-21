@@ -31,17 +31,6 @@
     height: 100vh;
   }
 
-  .upload-btn,
-  .submit-btn {
-    font-size: 2em;
-    cursor: pointer;
-  }
-  .upload-btn,
-  .submit-btn,
-  .download-btn,
-  .btn {
-    @include generateColorClasses($color-map);
-  }
   // .btn {
   //   @include generateColorClasses($color-map);
   // }
@@ -102,5 +91,49 @@
   .react-markdown-container {
     flex: 0 1 50%;
     padding: 15px;
+  }
+}
+
+.upload-btn,
+.submit-btn {
+  font-size: 2em;
+  cursor: pointer;
+}
+.upload-btn,
+.submit-btn,
+.download-btn,
+.btn {
+  @include generateColorClasses($color-map);
+}
+
+.translate-pdf {
+  .translate-file-selector {
+    height: 50vh;
+    %flex-centered {
+      @include extend("flex justify-content-center align-items-center");
+    }
+    .dropzone {
+      @extend %flex-centered;
+    }
+    .devider {
+      width: 2px;
+      background-color: #dee2e6;
+    }
+    .file-selector {
+      @extend %flex-centered;
+    }
+    .upload-btn {
+      input {
+        opacity: 0;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        @include extend("w-100 h-100");
+        &::-webkit-file-upload-button {
+          @include extend("w-100 h-100 d-block");
+          cursor: pointer;
+        }
+      }
+    }
   }
 }

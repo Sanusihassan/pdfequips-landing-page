@@ -8,3 +8,5 @@ export type errors = typeof import("./src/content/content").errors;
 export type edit_page = typeof import("./src/content/content").edit_page;
 export type web2pdftool = typeof import("./src/content/content").web2pdftool;
 export type downloadFile = typeof import("./src/content/content").downloadFile;
+export type translate_pdf =
+  typeof import("./src/content/content").translate_pdf;

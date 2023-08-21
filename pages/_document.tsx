@@ -22,7 +22,7 @@ const MyDocument = ({ lang }: { lang: string }) => {
         <meta property="og:url" content="https://www.pdfequips.com/" />
         <meta property="og:title" content="PDFEquips" />
         <meta property="og:description" content="The Complete PDF Solution" />
-        <base href="https://www.pdfequips.com/" />
+        {/* <base href="https://www.pdfequips.com/" /> */}
         <meta
           property="og:image"
           content="https://www.pdfequips.com/pdfequips.png"
