@@ -63,6 +63,13 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/compress-pdf",
   },
+  Translate_PDF: {
+    title: "ترجمة PDF",
+    description: "ترجمة النص في ملف PDF إلى لغة أخرى",
+    color: "#185abc",
+    type: ".pdf",
+    to: "/translate-pdf",
+  },
   PDF_to_Powerpoint: {
     title: "PDF إلى PowerPoint",
     description: "تحويل ملفات PDF إلى عروض Powerpoint قابلة للتحرير",
@@ -179,6 +186,12 @@ export const tool: _tool = {
 export const web2pdftool: _web2pdftool = {
   placeholder: "مثال: https://pdfequips.com",
   submit_btn: "تحويل",
+};
+
+export const translate_pdf = {
+  drag_and_drop: "اسحب وأسقط الملفات هنا",
+  or_choose_file: "أو اختر ملفًا",
+  browse_file: "تصفح ملفاتك",
 };
 
 export const tools: _tools = {
@@ -316,6 +329,7 @@ export const edit_page: _edit_page = {
     merge_pdf: "دمج PDF",
     split_pdf: "تقسيم PDF",
     compress_pdf: "ضغط PDF",
+    translate_pdf: "ترجمة PDF",
     pdf_to_powerpoint: "تحويل إلى Powerpoint",
     jpg_to_pdf: "تحويل إلى PDF",
     word_to_pdf: "تحويل إلى PDF",

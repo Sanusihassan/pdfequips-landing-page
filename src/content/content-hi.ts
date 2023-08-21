@@ -63,6 +63,13 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/compress-pdf",
   },
+  Translate_PDF: {
+    title: "PDF अनुवाद करें",
+    description: "एक PDF फ़ाइल में टेक्स्ट को दूसरी भाषा में अनुवाद करें",
+    color: "#185abc",
+    type: ".pdf",
+    to: "/translate-pdf",
+  },
   PDF_to_Powerpoint: {
     title: "PDF से पावरपॉइंट में",
     description: "PDF फ़ाइलों को संपादनीय पावरपॉइंट प्रस्तुतियों में बदलें",
@@ -381,6 +388,7 @@ export const edit_page: _edit_page = {
     pdf_to_excel: "एक्सेल में रूपांतरित करें",
     pdf_to_pdf_a: "पीडीएफ ए के लिए रूपांतरित करें",
     pdf_to_text: "टेक्स्ट में कनवर्ट करें",
+    translate_pdf: "PDF अनुवाद करें",
   },
   pages: "पृष्ठों",
   page: "पृष्ठ",
@@ -410,6 +418,12 @@ export const edit_page: _edit_page = {
 export const web2pdftool: _web2pdftool = {
   placeholder: "उदाहरण: https://pdfequips.com",
   submit_btn: "रूपांतरित करें",
+};
+
+export const translate_pdf = {
+  drag_and_drop: "फ़ाइलों को यहाँ खींचें और छोड़ें",
+  or_choose_file: "या एक फ़ाइल चुनें",
+  browse_file: "अपनी फ़ाइलों को ब्राउज़ करें",
 };
 
 export const tools: _tools = {

@@ -64,6 +64,13 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/compress-pdf",
   },
+  Translate_PDF: {
+    title: "Traducir PDF",
+    description: "Traducir el texto de un archivo PDF a otro idioma",
+    color: "#185abc",
+    type: ".pdf",
+    to: "/translate-pdf",
+  },
   PDF_to_Powerpoint: {
     title: "PDF a Powerpoint",
     description:
@@ -185,6 +192,12 @@ export const web2pdftool: _web2pdftool = {
   submit_btn: "Convertir",
 };
 
+export const translate_pdf = {
+  drag_and_drop: "Arrastre y suelte los archivos aquí",
+  or_choose_file: "O elija un archivo",
+  browse_file: "Examinar sus archivos",
+};
+
 export const edit_page: _edit_page = {
   edit_page_titles: {
     merge_pdf: "Opciones para fusionar PDF",
@@ -219,6 +232,7 @@ export const edit_page: _edit_page = {
     pdf_to_excel: "Convertir a Excel",
     pdf_to_pdf_a: "Convertir a PDF/A",
     pdf_to_text: "Convertir a texto",
+    translate_pdf: "Traducir PDF",
   },
   pages: "paginas",
   page: "página",

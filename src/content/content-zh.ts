@@ -63,6 +63,14 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/compress-pdf",
   },
+  Translate_PDF: {
+    title: "翻译 PDF",
+    description: "将 PDF 文件中的文本翻译成另一种语言",
+    color: "#185abc",
+    type: ".pdf",
+    to: "/translate-pdf",
+  },
+
   PDF_to_Powerpoint: {
     title: "PDF转Powerpoint",
     description: "将PDF文件转换为可编辑的Powerpoint演示文稿",
@@ -288,6 +296,7 @@ export const edit_page: _edit_page = {
     pdf_to_excel: "转换为Excel",
     pdf_to_pdf_a: "转换为PDF/A",
     pdf_to_text: "转换为文本",
+    translate_pdf: "翻译 PDF",
   },
   pages: "页",
   page: "页",
@@ -316,6 +325,12 @@ export const edit_page: _edit_page = {
 export const web2pdftool: _web2pdftool = {
   placeholder: "例如：https://pdfequips.com",
   submit_btn: "转换",
+};
+
+export const translate_pdf = {
+  drag_and_drop: "将文件拖放到这里",
+  or_choose_file: "或选择一个文件",
+  browse_file: "浏览您的文件",
 };
 
 export const tools: _tools = {

@@ -14,14 +14,14 @@ interface TranslatePDFProps {
   edit_page: edit_page;
   k: string;
   data: ToolData;
-  translate_pdf: translate_pdf
+  translate_pdf: translate_pdf;
 }
 
 const TranslatePDF: React.FC<TranslatePDFProps> = ({
   edit_page,
   k,
   data,
-  translate_pdf
+  translate_pdf,
 }) => {
   const [fromLanguage, setFromLanguage] = useState("");
   const [toLanguage, setToLanguage] = useState("");
@@ -65,13 +65,18 @@ const TranslatePDF: React.FC<TranslatePDFProps> = ({
             {/* Render dropdown items for available languages */}
             <Dropdown.Item
               className="w-90"
-              onClick={() => handleFromLanguageChange("en")}
+              onClick={
+                () => {}
+                //  handleFromLanguageChange("en")
+              }
             >
               English
             </Dropdown.Item>
             <Dropdown.Item
               className="w-90"
-              onClick={() => handleFromLanguageChange("en")}
+              onClick={() => {
+                // handleFromLanguageChange("en")
+              }}
             >
               English
             </Dropdown.Item>
@@ -95,10 +100,20 @@ const TranslatePDF: React.FC<TranslatePDFProps> = ({
             }}
           >
             {/* Render dropdown items for available languages */}
-            <Dropdown.Item onClick={() => handleToLanguageChange("fr")}>
+            <Dropdown.Item
+              onClick={
+                () => {}
+                //  handleToLanguageChange("fr")
+              }
+            >
               French
             </Dropdown.Item>
-            <Dropdown.Item onClick={() => handleToLanguageChange("fr")}>
+            <Dropdown.Item
+              onClick={
+                () => {}
+                // handleToLanguageChange("fr")
+              }
+            >
               French
             </Dropdown.Item>
             {/* Add more dropdown items as needed */}
@@ -106,7 +121,10 @@ const TranslatePDF: React.FC<TranslatePDFProps> = ({
         </Dropdown>
       </div>
 
-      <TranslateFileSelector translate_pdf={translate_pdf} onFilesSelected={() => {}} />
+      <TranslateFileSelector
+        translate_pdf={translate_pdf}
+        onFilesSelected={() => {}}
+      />
       <Row className="justify-content-center mt-3 w-25 mx-auto">
         {/* <SubmitBtn edit_page={edit_page} k={k} /> */}
       </Row>
