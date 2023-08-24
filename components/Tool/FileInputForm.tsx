@@ -66,7 +66,7 @@ export const FileInputForm: React.FC<FileInputFormProps> = ({
         e.stopPropagation();
       }}
       onSubmit={(e) =>
-        handleUpload(e, downloadBtn, dispatch, state, files, errors)
+        handleUpload(e, downloadBtn, dispatch, state, files, errors, fileInput)
       }
       method="POST"
       encType="multipart/form-data"

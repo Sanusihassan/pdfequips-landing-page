@@ -11,6 +11,28 @@ import {
   setIsSubmitted,
   setShowDownloadBtn,
 } from "../store";
+
+const compareArrays = (array1: File[], array2: File[]): boolean => {
+  if (array1.length !== array2.length) {
+    return false;
+  }
+
+  for (let i = 0; i < array1.length; i++) {
+    if (array1[i] !== array2[i]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+// Usage
+// if (compareArrays(files, Array.from(fileInput.files))) {
+//   // Serve the user the same files from the previous response
+// } else {
+//   // Proceed with the request to the server
+// }
+
 // this is the handleUpload function that is calling the download function maybe the issue is here
 export const handleUpload = async (
   e: React.FormEvent<HTMLFormElement>,
@@ -18,13 +40,20 @@ export const handleUpload = async (
   dispatch: Dispatch<AnyAction>,
   state: ToolState,
   files: File[],
-  errors: _
+  errors: _,
+  fileInput: React.RefObject<HTMLInputElement>
 ) => {
   e.preventDefault();
   dispatch(setIsSubmitted(true));
 
   if (!files) return;
-
+  if (fileInput.current?.files) {
+    let _files = fileInput?.current?.files;
+    if (compareArrays(files, Array.from(_files))) {
+      downloadBtn.current?.click();
+      return;
+    }
+  }
   const formData = new FormData();
   for (let i = 0; i < files.length; i++) {
     formData.append("files", files[i]);
@@ -35,7 +64,7 @@ export const handleUpload = async (
     url = `http://127.0.0.1:5000/${state.path}`;
     // url = `https://5000-planetcreat-pdfequipsap-te4zoi6qkr3.ws-eu102.gitpod.io/${state.path}`;
   } else {
-    url = `/api/${state.path}`;
+    url = `pdfequips.com/api/${state.path}`;
   }
   if (state?.errorMessage) {
     return;

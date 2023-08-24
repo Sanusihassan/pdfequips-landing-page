@@ -1,6 +1,13 @@
 import { useRouter } from "next/router";
 import DisplayFile from "./DisplayFile";
-import { Dispatch, RefObject, SetStateAction, useContext, useEffect, useState } from "react";
+import {
+  Dispatch,
+  RefObject,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import Options, { OptionsProps } from "./DisplayFile/Options";
 import type { edit_page } from "../content";
@@ -15,7 +22,7 @@ import {
   resetErrorMessage,
   setIsSubmitted,
   setPath,
-  setShowOptions
+  setShowOptions,
 } from "../src/store";
 import { useFileStore } from "../src/file-store";
 import AddMoreButton from "./EditArea/AddMoreButton";
@@ -107,7 +114,7 @@ const EditPage = ({
             }
           </bdi>
         </h5>
-        <Options layout={k as OptionsProps["layout"]} edit_page={edit_page} />
+        {/* <Options layout={k as OptionsProps["layout"]} edit_page={edit_page} /> */}
         <SubmitBtn k={k} edit_page={edit_page} />
       </section>
     </aside>
