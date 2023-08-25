@@ -37,7 +37,7 @@ export const FileInputForm: React.FC<FileInputFormProps> = ({
   const state = useSelector((state: { tool: ToolState }) => state.tool);
   const dispatch = useDispatch();
   // file store
-  const { files, setFiles, setFileInput, setDownloadBtn, setSubmitBtn } =
+  const { files, setFiles, setFileInput, setDownloadBtn, setSubmitBtn, filesLengthOnSubmit, setFilesLengthOnSubmit } =
     useFileStore.getState();
   // refs
   const fileInput = useRef<HTMLInputElement>(null);
@@ -66,7 +66,7 @@ export const FileInputForm: React.FC<FileInputFormProps> = ({
         e.stopPropagation();
       }}
       onSubmit={(e) =>
-        handleUpload(e, downloadBtn, dispatch, state, files, errors, fileInput)
+        handleUpload(e, downloadBtn, dispatch, state, files, errors, filesLengthOnSubmit, setFilesLengthOnSubmit)
       }
       method="POST"
       encType="multipart/form-data"

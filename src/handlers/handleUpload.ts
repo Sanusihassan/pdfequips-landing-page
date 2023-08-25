@@ -4,6 +4,7 @@ import type { ToolData, errorType } from "../../components/Tool";
 import { downloadConvertedFile } from "../downloadFile";
 import type { errors as _ } from "../../content";
 import { AnyAction } from "@reduxjs/toolkit";
+// import { shallow } from "zustand"
 import {
   ToolState,
   resetErrorMessage,
@@ -11,27 +12,6 @@ import {
   setIsSubmitted,
   setShowDownloadBtn,
 } from "../store";
-
-const compareArrays = (array1: File[], array2: File[]): boolean => {
-  if (array1.length !== array2.length) {
-    return false;
-  }
-
-  for (let i = 0; i < array1.length; i++) {
-    if (array1[i] !== array2[i]) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
-// Usage
-// if (compareArrays(files, Array.from(fileInput.files))) {
-//   // Serve the user the same files from the previous response
-// } else {
-//   // Proceed with the request to the server
-// }
 
 // this is the handleUpload function that is calling the download function maybe the issue is here
 export const handleUpload = async (
@@ -41,19 +21,20 @@ export const handleUpload = async (
   state: ToolState,
   files: File[],
   errors: _,
-  fileInput: React.RefObject<HTMLInputElement>
+  filesLengthOnSubmit: number,
+  setFilesLengthOnSubmit: (value: number) => void
 ) => {
   e.preventDefault();
   dispatch(setIsSubmitted(true));
 
   if (!files) return;
-  if (fileInput.current?.files) {
-    let _files = fileInput?.current?.files;
-    if (compareArrays(files, Array.from(_files))) {
-      downloadBtn.current?.click();
-      return;
-    }
+  // subscribe to the files state and get the previous files
+  if (filesLengthOnSubmit == files.length) {
+    dispatch(setShowDownloadBtn(false));
+    dispatch(resetErrorMessage());
+    return;
   }
+
   const formData = new FormData();
   for (let i = 0; i < files.length; i++) {
     formData.append("files", files[i]);
@@ -137,6 +118,7 @@ export const handleUpload = async (
       outputFileName,
       downloadBtn
     );
+    setFilesLengthOnSubmit(files.length);
 
     if (response.status !== 200) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -149,19 +131,6 @@ export const handleUpload = async (
       dispatch(setErrorMessage(errors.ERR_NETWORK.message));
       return;
     }
-
-    // (error as errorType).response?.data?.text().then(function (text) {
-    //   const json = JSON.parse(text);
-    //   console.error(json);
-    //   const errorObj = errors[json.error as keyof _];
-    //   const errorMessage = errorObj
-    //     ? errorObj.message
-    //     : errors.UNKNOWN_ERROR.message;
-    //   dispatch(setErrorMessage(errorMessage)); // dispatch the error message to the ToolState
-    //   dispatch(setErrorCode(json.error)); // dispatch the error code to the ToolState
-    //   dispatch(setIsSubmitted(false));
-    // });
-
     dispatch(setIsSubmitted(false));
   } finally {
     dispatch(setIsSubmitted(false));
