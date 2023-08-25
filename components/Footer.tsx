@@ -46,7 +46,7 @@ const Footer = ({
                 </a>
               </li>
               <li className="mx-3">
-                <a href="#" className="text-muted">
+                <a href="/privacy-policy" className="text-muted">
                   {footer.privacy_policy}
                 </a>
               </li>

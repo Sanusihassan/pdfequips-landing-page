@@ -106,7 +106,6 @@ const nextConfig = {
 //   },
 // });
 
-const path = require("path");
 // this is my current next.config.js file
 // module.exports = {
 //   sassOptions: {
@@ -134,6 +133,7 @@ const path = require("path");
 //   },
 // };
 
+const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {

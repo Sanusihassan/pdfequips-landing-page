@@ -104,6 +104,7 @@ export default ({ item, lang }: { item: data_type; lang: string }) => {
 export const routes = {
   "/merge-pdf": { item: tool["Merge_PDF"] },
   "/split-pdf": { item: tool["Split_PDF"] },
+  "/translate-pdf": { item: tool["Translate_PDF"] },
   "/compress-pdf": { item: tool["Compress_PDF"] },
   "/pdf-to-powerpoint": { item: tool["PDF_to_Powerpoint"] },
   "/jpg-to-pdf": { item: tool["JPG_to_PDF"] },
