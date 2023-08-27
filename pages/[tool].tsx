@@ -65,7 +65,7 @@ export default ({ item }: { item: data_type }) => {
         />
       </Head>
       <NavBar nav_content={nav_content} lang="" />
-      {/* {path == "/split-pdf" ? (
+      {path == "/split-pdf" && "production" === process.env.NODE_ENV ? (
         <div
           style={{
             display: "flex",
@@ -79,19 +79,19 @@ export default ({ item }: { item: data_type }) => {
           <p className="text-center">{appology_message.reason}</p>
         </div>
       ) : (
-        )} */}
-      <Tool
-        tools={tools}
-        data={item}
-        lang=""
-        errors={errors}
-        edit_page={edit_page}
-        pages={edit_page.pages}
-        page={edit_page.page}
-        web2pdftool={web2pdftool}
-        downloadFile={downloadFile}
-        translate_pdf={translate_pdf}
-      />
+        <Tool
+          tools={tools}
+          data={item}
+          lang=""
+          errors={errors}
+          edit_page={edit_page}
+          pages={edit_page.pages}
+          page={edit_page.page}
+          web2pdftool={web2pdftool}
+          downloadFile={downloadFile}
+          translate_pdf={translate_pdf}
+        />
+      )}
     </>
   );
 };

@@ -30,7 +30,7 @@ export const handleUpload = async (
   if (!files) return;
   // subscribe to the files state and get the previous files
   if (filesLengthOnSubmit == files.length) {
-    dispatch(setShowDownloadBtn(false));
+    dispatch(setShowDownloadBtn(true));
     dispatch(resetErrorMessage());
     return;
   }
@@ -45,7 +45,7 @@ export const handleUpload = async (
     url = `http://127.0.0.1:5000/${state.path}`;
     // url = `https://5000-planetcreat-pdfequipsap-te4zoi6qkr3.ws-eu102.gitpod.io/${state.path}`;
   } else {
-    url = `pdfequips.com/api/${state.path}`;
+    url = `/api/${state.path}`;
   }
   if (state?.errorMessage) {
     return;
@@ -109,8 +109,7 @@ export const handleUpload = async (
       outputFileName: "",
     };
     const { outputFileMimeType, outputFileName } = mimeTypeData;
-    console.log("response type => ", mimeType);
-    console.log(JSON.stringify(response));
+
     dispatch(setShowDownloadBtn(true));
     downloadConvertedFile(
       response,
