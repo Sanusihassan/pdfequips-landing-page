@@ -6,7 +6,13 @@ import EditPage from "./EditPage";
 import { ToolState, hideTool, setPath, setShowDownloadBtn } from "../src/store";
 
 import { useRouter } from "next/router";
-import type { edit_page, tools, web2pdftool, downloadFile, translate_pdf } from "../content";
+import type {
+  edit_page,
+  tools,
+  web2pdftool,
+  downloadFile,
+  translate_pdf,
+} from "../content";
 import type { errors as _ } from "../content";
 import ErrorElement from "./ErrorElement";
 import Web2PDF from "./Web2PDF";
@@ -43,7 +49,7 @@ type ToolProps = {
   page: string;
   web2pdftool: web2pdftool;
   downloadFile: downloadFile;
-  translate_pdf: translate_pdf
+  translate_pdf: translate_pdf;
 };
 
 const Tool: React.FC<ToolProps> = ({
@@ -56,7 +62,7 @@ const Tool: React.FC<ToolProps> = ({
   page,
   web2pdftool,
   downloadFile,
-  translate_pdf
+  translate_pdf,
 }) => {
   const state = useSelector((state: { tool: ToolState }) => state.tool);
   // the files:
@@ -106,7 +112,12 @@ const Tool: React.FC<ToolProps> = ({
         // <Markdown2PDF />
         <div>sorry this feature not available right now...</div>
       ) : path === "translate-pdf" ? (
-        <TranslatePDF translate_pdf={translate_pdf} data={data} edit_page={edit_page} k={path}  />
+        <TranslatePDF
+          translate_pdf={translate_pdf}
+          data={data}
+          edit_page={edit_page}
+          k={path}
+        />
       ) : (
         <div
           className="tools-page container-fluid position-relative"
@@ -123,9 +134,9 @@ const Tool: React.FC<ToolProps> = ({
               !showTool ? "" : "d-flex"
             } flex-column tools ${state!.showTool ? "" : "d-none"}`}
           >
-            <h2 className="display-3">
+            <h1 className="display-3">
               <bdi>{data.title}</bdi>
-            </h2>
+            </h1>
             <p className="lead">
               <bdi>{data.description}</bdi>
             </p>

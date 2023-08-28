@@ -39,10 +39,10 @@ const ConvertPDFDropdown = ({
       >
         <div className="d-flex flex-row w-100 flex-wrap drop-down-container">
           <div className="col-12 col-md-6">
-            <h6 className="converter-title">
+            <div className="converter-title h6">
               {" "}
               <bdi>{nav_content.convert_to_pdf}</bdi>{" "}
-            </h6>
+            </div>
 
             <a
               href={`https://www.pdfequips.com${langPath}jpg-to-pdf`}
@@ -147,10 +147,10 @@ const ConvertPDFDropdown = ({
             </Link> */}
           </div>
           <div className="col-12 col-md-6">
-            <h6 className="converter-title">
+            <div className="converter-title h6">
               {" "}
               <bdi>{nav_content.convert_from_pdf}</bdi>{" "}
-            </h6>
+            </div>
             {/* <Link className="dropdown-item"> */}
             <a
               href={`https://www.pdfequips.com${langPath}pdf-to-jpg`}

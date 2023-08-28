@@ -78,7 +78,7 @@ const NavBar = ({
           <img
             src="/logo.png"
             className="img-fluid"
-            alt="pdfequips logo"
+            alt="PDFEquips"
             width="35"
             height="20"
             draggable="false"

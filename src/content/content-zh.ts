@@ -40,6 +40,11 @@ export const landing_page: _landing_page = {
     description:
       "将您的 PDF 工作流程提升到新的水平 - 使用我们的综合工具包解锁新的可能性。",
   },
+  features: {
+    title: "PDFEquips 如何简化您的 PDF 任务",
+    description:
+      "PDFEquips 为您提供了一系列功能，让您轻松处理 PDF 文件。无论您想要合并、分割、压缩、转换、编辑或保护您的 PDF，您都可以用几下点击完成。PDFEquips 快速、可靠、安全。",
+  },
   why_us: {
     title: "您可以信赖的 PDF 解决方案",
     description:

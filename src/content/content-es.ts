@@ -41,6 +41,11 @@ export const landing_page: _landing_page = {
     description:
       "Lleve sus flujos de trabajo PDF al siguiente nivel: desbloquee nuevas posibilidades con nuestro completo kit de herramientas.",
   },
+  features: {
+    title: "Cómo PDFEquips puede simplificar tus tareas PDF",
+    description:
+      "PDFEquips te ofrece una variedad de funciones para manejar tus archivos PDF con facilidad. Ya sea que quieras fusionar, dividir, comprimir, convertir, editar o proteger tus PDF, puedes hacerlo todo con solo unos pocos clics. PDFEquips es rápido, confiable y seguro.",
+  },
   why_us: {
     title: "La solución PDF en la que puedes confiar",
     description:

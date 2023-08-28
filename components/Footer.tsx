@@ -34,7 +34,7 @@ const Footer = ({
       <Container>
         <Row className="mb-5 mb-3">
           <Col>
-            <h5>{nav_content.convert_to_pdf}</h5>
+            <h4>{nav_content.convert_to_pdf}</h4>
             <ul className="list-unstyled list-group">
               <li>
                 <a
@@ -94,7 +94,7 @@ const Footer = ({
             </ul>
           </Col>
           <Col>
-            <h5>{nav_content.convert_from_pdf}</h5>
+            <h4>{nav_content.convert_from_pdf}</h4>
             <ul className="list-unstyled list-group">
               <li>
                 <a
@@ -165,7 +165,7 @@ const Footer = ({
             </ul>
           </Col>
           <Col className="col-12 col-md-auto text-center">
-            <h5>{text}</h5>
+            <h4>{text}</h4>
             <ul className="list-unstyled list-group">
               <li>
                 <a

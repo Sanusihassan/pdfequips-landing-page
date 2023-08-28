@@ -19,9 +19,13 @@ import { setPath } from "../../src/store";
 export const FeaturesSection = ({
   tool,
   lang,
+  title,
+  description,
 }: {
   tool: tool;
   lang: string;
+  title: string;
+  description: string;
 }) => {
   let langPath = lang ? `/${lang}` : "";
   const languages = ["ar", "fr", "zh", "hi", "es"];
@@ -98,6 +102,8 @@ export const FeaturesSection = ({
   return (
     <section className="features-section py-5">
       <Container>
+        <h2 className="display-4 text-center">{title}</h2>{" "}
+        <p className="lead text-center">{description}</p>
         <Row>
           {featureCards.map((card, index) => (
             <Col key={index} md={3} sm={6} className="column">
@@ -128,9 +134,9 @@ export const FeaturesSection = ({
                       <div className="feature-icon-overlay"></div>
                     </div>
                     <Card.Body>
-                      <Card.Title>
+                      <h3 className="card-title h5">
                         <bdi>{card.title}</bdi>
-                      </Card.Title>
+                      </h3>
                       <Card.Text>
                         <bdi>{card.description}</bdi>
                       </Card.Text>

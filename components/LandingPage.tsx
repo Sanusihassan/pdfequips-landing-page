@@ -39,7 +39,12 @@ const LandingPage = ({
   return (
     <section className="landing-page">
       <HeroSection landing_page={landing_page} />
-      <FeaturesSection tool={tool} lang={lang} />
+      <FeaturesSection
+        title={landing_page.features.title}
+        description={landing_page.features.description}
+        tool={tool}
+        lang={lang}
+      />
       <WhyChooseUs
         title={landing_page.why_us.title}
         description={landing_page.why_us.description}

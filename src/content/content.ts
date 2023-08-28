@@ -28,6 +28,14 @@ export const landing_page = {
     // translate this to Spanish but ignore the PDFequips part
     description: `Take Your PDF Workflows to the Next Level - Unlock New Possibilities with Our Comprehensive Toolkit.`,
   },
+  features: {
+    title: "How PDFEquips Can Simplify Your PDF Tasks",
+    description:
+      "PDFEquips offers you a range of features to handle your PDF files with\
+    ease. Whether you want to merge, split, compress, convert, edit, or\
+    protect your PDFs, you can do it all with just a few clicks. PDFEquips\
+    is fast, reliable, and secure.",
+  },
   why_us: {
     title: "The PDF solution you can rely on",
     description:
