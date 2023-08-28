@@ -30,31 +30,9 @@ const Footer = ({
     text = "压缩和合并PDF文件";
   }
   return (
-    <footer className="bg-light text-lg-start py-3 outline-1">
+    <footer className="bg-light text-lg-start py-3 outline-1" id="footer">
       <Container>
-        <Row>
-          <Col md={6}>
-            <p className="text-muted mb-0">
-              {footer.brand} &copy; {new Date().getFullYear()}
-            </p>
-          </Col>
-          <Col md={6}>
-            <ul className="list-unstyled mb-0 d-flex justify-content-end">
-              <li className="mx-3">
-                <a href="#" className="text-muted">
-                  {footer.terms} &amp; {footer.conditions}
-                </a>
-              </li>
-              <li className="mx-3">
-                <a href="/privacy-policy" className="text-muted">
-                  {footer.privacy_policy}
-                </a>
-              </li>
-            </ul>
-          </Col>
-        </Row>
-
-        <Row className="mt-5 mb-3">
+        <Row className="mb-5 mb-3">
           <Col>
             <h5>{nav_content.convert_to_pdf}</h5>
             <ul className="list-unstyled list-group">
@@ -209,6 +187,28 @@ const Footer = ({
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
                   {nav_content.merge_pdf}
+                </a>
+              </li>
+            </ul>
+          </Col>
+        </Row>
+
+        <Row className="border-top py-4">
+          <Col md={6}>
+            <p className="text-muted mb-0">
+              {footer.brand} &copy; {new Date().getFullYear()}
+            </p>
+          </Col>
+          <Col md={6}>
+            <ul className="list-unstyled mb-0 d-flex justify-content-end">
+              <li className="mx-3">
+                <a href="#" className="text-muted">
+                  {footer.terms} &amp; {footer.conditions}
+                </a>
+              </li>
+              <li className="mx-3">
+                <a href="/privacy-policy" className="text-muted">
+                  {footer.privacy_policy}
                 </a>
               </li>
             </ul>

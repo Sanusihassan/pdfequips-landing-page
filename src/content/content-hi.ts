@@ -7,6 +7,7 @@ import type {
   footer as _footer,
   errors as _errors,
   downloadFile as _downloadFile,
+  landing_page as _landing_page,
 } from "../../content";
 
 export const nav_content: nav_content_type = {
@@ -34,11 +35,18 @@ export const nav_content: nav_content_type = {
   pdf_to_html: "पीडीएफ से एचटीएमएल",
   pdf_to_markdown: "PDF से मार्कडाउन तक",
 };
-export const landing_page = {
+export const landing_page: _landing_page = {
   hero: {
     title: "हमारे व्यापक पीडीएफ समाधान के साथ अपनी उत्पादकता बढ़ाएँ",
     description:
       "अपने पीडीएफ वर्कफ़्लो को अगले स्तर पर ले जाएं - हमारे व्यापक टूलकिट के साथ नई संभावनाओं को अनलॉक करें।",
+  },
+  why_us: {
+    title: "PDF समाधान जिस पर आप भरोसा कर सकते हैं",
+    description:
+      "PDFEquips आपका अंतिम वेब ऐप है जो PDF को आसानी से प्रबंधित करता है। आपके डिजिटल दस्तावेजों के साथ कुशलता से काम करने के लिए आपको जरूरत होने वाले सभी\
+    सुविधाओं का आनंद लें\
+    अपने डेटा को सुरक्षित और सुरक्षा में रखते हुए।",
   },
 };
 export const tool: _tool = {

@@ -7,6 +7,7 @@ import type {
   footer as _footer,
   errors as _errors,
   downloadFile as _downloadFile,
+  landing_page as _landing_page,
 } from "../../content";
 
 export const nav_content: nav_content_type = {
@@ -34,11 +35,18 @@ export const nav_content: nav_content_type = {
   pdf_to_markdown: "PDF a Markdown",
 };
 
-export const landing_page = {
+export const landing_page: _landing_page = {
   hero: {
     title: "Mejore su productividad con nuestra solución integral de PDF",
     description:
       "Lleve sus flujos de trabajo PDF al siguiente nivel: desbloquee nuevas posibilidades con nuestro completo kit de herramientas.",
+  },
+  why_us: {
+    title: "La solución PDF en la que puedes confiar",
+    description:
+      "PDFEquips es tu aplicación web definitiva para gestionar PDF con facilidad. Disfruta de todas\
+    las funciones que necesitas para trabajar eficazmente con tus documentos digitales\
+    mientras mantienes tus datos seguros y protegidos.",
   },
 };
 

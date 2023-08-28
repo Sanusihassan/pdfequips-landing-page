@@ -28,6 +28,13 @@ export const landing_page = {
     // translate this to Spanish but ignore the PDFequips part
     description: `Take Your PDF Workflows to the Next Level - Unlock New Possibilities with Our Comprehensive Toolkit.`,
   },
+  why_us: {
+    title: "The PDF solution you can rely on",
+    description:
+      "PDFEquips is your ultimate web app for managing PDF with ease. Enjoy all\
+    the features you need to work effectively with your digital documents\
+    while keeping your data safe and secure.",
+  },
 };
 
 export const tool = {
@@ -181,8 +188,8 @@ export const web2pdftool = {
 export const translate_pdf = {
   drag_and_drop: "Drag & Drop Files Here",
   or_choose_file: "Or Choose a file",
-  browse_file: "Browse Your Files"
-}
+  browse_file: "Browse Your Files",
+};
 /**
  * provide translation Spanish translation for each object of the following:
  * i want full code, the same code i gave you but Spanish version.

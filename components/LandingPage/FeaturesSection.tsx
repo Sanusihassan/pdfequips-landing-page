@@ -6,6 +6,9 @@ import {
   PresentationChartBarIcon,
   // ScissorsIcon,
   DocumentTextIcon,
+  TableIcon,
+  DocumentIcon,
+  PhotographIcon,
 } from "@heroicons/react/outline";
 import CompressIcon from "../icons/compressIcon";
 import type { tool } from "../../content";
@@ -61,6 +64,34 @@ export const FeaturesSection = ({
       to: `${langPath}${tool.PDF_to_Powerpoint.to}`,
       color: tool.PDF_to_Powerpoint.color as string,
       icon: PresentationChartBarIcon,
+    },
+    {
+      title: tool.PDF_to_EXCEL.title,
+      description: tool.PDF_to_EXCEL.description as string,
+      to: `${langPath}${tool.PDF_to_EXCEL.to}`,
+      color: tool.PDF_to_EXCEL.color as string,
+      icon: TableIcon,
+    },
+    {
+      title: tool.WORD_to_PDF.title,
+      description: tool.WORD_to_PDF.description as string,
+      to: `${langPath}${tool.WORD_to_PDF.to}`,
+      color: tool.WORD_to_PDF.color as string,
+      icon: DocumentIcon,
+    },
+    {
+      title: tool.POWERPOINT_to_PDF.title,
+      description: tool.POWERPOINT_to_PDF.description as string,
+      to: `${langPath}${tool.POWERPOINT_to_PDF.to}`,
+      color: tool.POWERPOINT_to_PDF.color as string,
+      icon: PresentationChartBarIcon,
+    },
+    {
+      title: tool.JPG_to_PDF.title,
+      description: tool.JPG_to_PDF.description as string,
+      to: `${langPath}${tool.JPG_to_PDF.to}`,
+      color: tool.JPG_to_PDF.color as string,
+      icon: PhotographIcon,
     },
   ];
 

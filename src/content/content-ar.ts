@@ -7,6 +7,7 @@ import type {
   footer as _footer,
   errors as _errors,
   downloadFile as _downloadFile,
+  landing_page as _landing_page,
 } from "../../content";
 
 export const nav_content: nav_content_type = {
@@ -34,11 +35,14 @@ export const nav_content: nav_content_type = {
   pdf_to_markdown: "PDF إلى Markdown",
 };
 
-export const landing_page = {
+export const landing_page: _landing_page = {
   hero: {
     title: "عزز إنتاجيتك من خلال حل ال PDF الشامل الخاص بنا",
     description: `ارتقِ بسير عمل PDF إلى المستوى التالي - أطلق العنان لإمكانيات جديدة باستخدام مجموعة الأدوات الشاملة الخاصة بنا.`,
   },
+  why_us: { title: "الحل الأمثل لملفات PDF", description: "PDFEquips هو تطبيق الويب الأمثل لإدارة ملفات PDF بسهولة. استمتع بجميع\
+    الميزات التي تحتاجها للعمل بفعالية مع مستنداتك الرقمية\
+    مع الحفاظ على أمان وخصوصية بياناتك.", }
 };
 
 export const tool: _tool = {

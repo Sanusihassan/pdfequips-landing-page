@@ -7,6 +7,7 @@ import type {
   footer as _footer,
   errors as _errors,
   downloadFile as _downloadFile,
+  landing_page as _landing_page,
 } from "../../content";
 export const nav_content: _nav_content = {
   brand: "Equips",
@@ -33,11 +34,18 @@ export const nav_content: _nav_content = {
   pdf_to_markdown: "PDF 到 Markdown",
 };
 
-export const landing_page = {
+export const landing_page: _landing_page = {
   hero: {
     title: "利用我们全面的 PDF 解决方案提高您的工作效率",
     description:
       "将您的 PDF 工作流程提升到新的水平 - 使用我们的综合工具包解锁新的可能性。",
+  },
+  why_us: {
+    title: "您可以信赖的 PDF 解决方案",
+    description:
+      "PDFEquips 是您管理 PDF 的终极网络应用程序。享受所有\
+    您需要高效处理数字文档的功能\
+    同时保证您的数据安全和隐私。",
   },
 };
 

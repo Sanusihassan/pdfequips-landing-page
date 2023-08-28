@@ -1,13 +1,5 @@
-const HeroSection = ({
-  landing_page,
-}: {
-  landing_page: {
-    hero: {
-      title: string;
-      description: string;
-    };
-  };
-}) => {
+import type { landing_page } from "../content";
+const HeroSection = ({ landing_page }: { landing_page: landing_page }) => {
   return (
     <section className="hero-section bg-gradient">
       <div className="container">
@@ -30,6 +22,7 @@ import type { tool } from "../content";
 // import { useTranslation } from "react-i18next";
 
 import { FeaturesSection } from "./LandingPage/FeaturesSection";
+import { WhyChooseUs } from "./LandingPage/WhyChooseUS";
 // import { Link } from "react-router-dom";
 
 // export default HeroSection;
@@ -39,12 +32,7 @@ const LandingPage = ({
   tool,
   lang,
 }: {
-  landing_page: {
-    hero: {
-      title: string;
-      description: string;
-    };
-  };
+  landing_page: landing_page;
   tool: tool;
   lang: string;
 }) => {
@@ -52,6 +40,10 @@ const LandingPage = ({
     <section className="landing-page">
       <HeroSection landing_page={landing_page} />
       <FeaturesSection tool={tool} lang={lang} />
+      <WhyChooseUs
+        title={landing_page.why_us.title}
+        description={landing_page.why_us.description}
+      />
     </section>
   );
 };
