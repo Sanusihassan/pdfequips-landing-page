@@ -9,6 +9,7 @@ import {
   TableIcon,
   DocumentIcon,
   PhotographIcon,
+  CodeIcon,
 } from "@heroicons/react/outline";
 import CompressIcon from "../icons/compressIcon";
 import type { tool } from "../../content";
@@ -96,6 +97,13 @@ export const FeaturesSection = ({
       to: `${langPath}${tool.JPG_to_PDF.to}`,
       color: tool.JPG_to_PDF.color as string,
       icon: PhotographIcon,
+    },
+    {
+      title: tool.HTML_to_PDF.title,
+      description: tool.HTML_to_PDF.description as string,
+      to: `${langPath}${tool.HTML_to_PDF.to}`,
+      color: tool.HTML_to_PDF.color as string,
+      icon: CodeIcon,
     },
   ];
 
