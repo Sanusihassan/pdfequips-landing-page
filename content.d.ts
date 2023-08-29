@@ -10,3 +10,7 @@ export type web2pdftool = typeof import("./src/content/content").web2pdftool;
 export type downloadFile = typeof import("./src/content/content").downloadFile;
 export type translate_pdf =
   typeof import("./src/content/content").translate_pdf;
+
+
+export type ContinueIn = typeof import("./src/content/content").ContinueIn;
+export type ChangeTo = typeof import("./src/content/content").ChangeTo;

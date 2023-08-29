@@ -43,8 +43,27 @@ export const landing_page = {
     the features you need to work effectively with your digital documents\
     while keeping your data safe and secure.",
   },
+  // alert: {
+  //   title: "How about viewing PDFEquips in English?",
+  //   dontShowAgain: "Do not show this again",
+  // },
 };
-
+export const ContinueIn = {
+  en: "Continue in English",
+  ar: "الاستمرار باللغة العربية",
+  es: "Continuar en Español",
+  fr: "Continuer en français",
+  hi: "हिंदी में जारी रखें",
+  zh: "继续中文",
+};
+export const ChangeTo = {
+  en: "Change To English",
+  ar: "التغيير إلى اللغة العربية",
+  es: "Cambiar al Español",
+  fr: "Passer au Français",
+  hi: "हिंदी में बदलें",
+  zh: "改为中文",
+};
 export const tool = {
   Merge_PDF: {
     title: "Merge PDF",

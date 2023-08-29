@@ -60,7 +60,7 @@ $color-map: (
   "pdf-to-pdf-a": #000000,
   "pdf-to-html": rgb(228, 77, 38),
   "pdf-to-markdown": #000000,
-  "translate-pdf": #185abc
+  "translate-pdf": #185abc,
 );
 
 // html,
@@ -161,7 +161,8 @@ a.dropdown-item {
 
 /* features section */
 
-.features-section, .why-us {
+.features-section,
+.why-us {
   background-color: #f8f9fa;
 }
 .features-section .row {
@@ -283,3 +284,31 @@ a.dropdown-item {
 @import "./scss/editpage";
 @import "./scss/display-file";
 @import "./scss/navbar";
+
+footer {
+  .copyright-row {
+    @include xs {
+      margin-bottom: 1em;
+      justify-content: space-between;
+      .copyright-text,
+      .lang-dropdown {
+        flex: 0 1 49%;
+      }
+      .copyright-text {
+        :not(:lang(ar)) & {
+          text-align: right;
+        }
+      }
+    }
+  }
+  .terms-row {
+    @include xs {
+      justify-content: space-between !important;
+    }
+  }
+}
+
+
+.language-alert {
+  
+}

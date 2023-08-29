@@ -52,6 +52,10 @@ export const landing_page: _landing_page = {
     الميزات التي تحتاجها للعمل بفعالية مع مستنداتك الرقمية\
     مع الحفاظ على أمان وخصوصية بياناتك.",
   },
+  // alert: {
+  //   title: "ما رأيك في مشاهدة PDFEquips باللغة الإنجليزية؟",
+  //   dontShowAgain: "لا تظهر هذا مرة أخرى",
+  // },
 };
 
 export const tool: _tool = {

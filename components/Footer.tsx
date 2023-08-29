@@ -6,6 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import type { footer, nav_content } from "../content";
 import { useSelector } from "react-redux";
 import type { ToolState } from "../src/store";
+import LanguageDropdown from "./NavBar/LanguageDropDown";
 
 const Footer = ({
   footer,
@@ -194,13 +195,21 @@ const Footer = ({
         </Row>
 
         <Row className="border-top py-4">
-          <Col md={6}>
-            <p className="text-muted mb-0">
+          {/* <Col>
+          </Col> */}
+          <Col
+            className="copyright-row row align-items-center flex-nowrap mb-xs-3"
+            md={6}
+          >
+            <ul className="lang-dropdown list-unstyled m-0">
+              <LanguageDropdown />
+            </ul>
+            <p className="copyright-text col text-muted mb-0 py-0">
               {footer.brand} &copy; {new Date().getFullYear()}
             </p>
           </Col>
           <Col md={6}>
-            <ul className="list-unstyled mb-0 d-flex justify-content-end">
+            <ul className="terms-row list-unstyled mb-0 d-flex justify-content-end">
               <li className="mx-3">
                 <a href="#" className="text-muted">
                   {footer.terms} &amp; {footer.conditions}
