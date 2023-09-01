@@ -121,6 +121,16 @@ const NavBar = ({
           </Link> */}
           {/* <Link className="dropdown-item"
            > */}
+           <a
+            href={`https://www.pdfequips.com${langPath}read-edit-pdf`}
+            onClick={(e) => {
+              dispatch(setPath("compress-pdf"));
+              handleClick();
+            }}
+            className="dropdown-item"
+          >
+            <bdi>{nav_content.read_edit_pdf}</bdi>
+          </a>
           <a
             href={`https://www.pdfequips.com${langPath}compress-pdf`}
             onClick={(e) => {

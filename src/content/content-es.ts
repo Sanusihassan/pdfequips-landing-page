@@ -17,6 +17,7 @@ export const nav_content: nav_content_type = {
   compress_pdf: "Comprimir PDF",
   convert_pdf: "Convertir PDF",
   convert_to_pdf: "Convertir a PDF",
+  read_edit_pdf: "Leer y editar PDF",
   jpg_to_pdf: "JPG a PDF",
   word_to_pdf: "Word a PDF",
   powerpoint_to_pdf: "Powerpoint a PDF",

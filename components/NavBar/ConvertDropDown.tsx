@@ -8,16 +8,20 @@ import {
   TableIcon,
   CodeIcon,
   DocumentAddIcon,
-  GlobeIcon,
+  // GlobeIcon,
   DocumentTextIcon,
 } from "@heroicons/react/outline";
-import Link from "next/link";
+// import Link from "next/link";
 import { NavDropdown } from "react-bootstrap";
 import type { nav_content } from "../../content";
-import MarkdownIcon from "../icons/Markdown";
+// import MarkdownIcon from "../icons/Markdown";
 
-import { useDispatch, useSelector } from "react-redux";
-import { setPath, ToolState } from "../../src/store";
+import { useDispatch,
+  //  useSelector 
+  } from "react-redux";
+import { setPath, 
+  // ToolState 
+} from "../../src/store";
 
 const ConvertPDFDropdown = ({
   langPath,
@@ -28,7 +32,7 @@ const ConvertPDFDropdown = ({
   handleClick: () => void;
   nav_content: nav_content;
 }) => {
-  const state = useSelector((state: { tool: ToolState }) => state.tool);
+  // const state = useSelector((state: { tool: ToolState }) => state.tool);
   const dispatch = useDispatch();
   return (
     <>

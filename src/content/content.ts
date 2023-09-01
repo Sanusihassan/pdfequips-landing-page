@@ -13,6 +13,7 @@ export const nav_content = {
   web_to_pdf: "Web to PDF",
   markdown_to_pdf: "Markdown to PDF",
   convert_from_pdf: "Convert from PDF",
+  read_edit_pdf: "Read & Edit PDF",
   pdf_to_jpg: "PDF to JPG",
   pdf_to_word: "PDF to WORD",
   pdf_to_powerpoint: "PDF to POWERPOINT",

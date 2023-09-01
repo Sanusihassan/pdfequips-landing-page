@@ -114,7 +114,9 @@ const EditPage = ({
             }
           </bdi>
         </h5>
-        {/* <Options layout={k as OptionsProps["layout"]} edit_page={edit_page} /> */}
+        {process.env.NODE_ENV == "development" ? (
+          <Options layout={k as OptionsProps["layout"]} edit_page={edit_page} />
+        ) : null}
         <SubmitBtn k={k} edit_page={edit_page} />
       </section>
     </aside>

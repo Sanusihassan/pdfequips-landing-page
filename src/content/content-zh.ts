@@ -24,6 +24,7 @@ export const nav_content: _nav_content = {
   html_to_pdf: "HTML转PDF",
   web_to_pdf: "网页转 PDF",
   convert_from_pdf: "从PDF转换",
+  read_edit_pdf: "阅读和编辑 PDF",
   pdf_to_jpg: "PDF转JPG",
   pdf_to_word: "PDF转Word",
   pdf_to_powerpoint: "PDF转PowerPoint",

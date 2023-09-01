@@ -24,6 +24,7 @@ export const nav_content: nav_content_type = {
   html_to_pdf: "HTML إلى PDF",
   markdown_to_pdf: "Markdown إلى PDF",
   convert_from_pdf: "تحويل من PDF",
+  read_edit_pdf: "قراءة وتحرير PDF",
   web_to_pdf: "من الويب إلى PDF",
   pdf_to_jpg: "PDF إلى JPG",
   pdf_to_word: "PDF إلى Word",

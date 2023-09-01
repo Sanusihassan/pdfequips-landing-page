@@ -18,6 +18,7 @@ export const nav_content: nav_content_type = {
   compress_pdf: "पीडीएफ संपीड़ित करें",
   convert_pdf: "पीडीएफ परिवर्तित करें",
   convert_to_pdf: "पीडीएफ में परिवर्तित करें",
+  read_edit_pdf: "पीडीएफ पढ़ें और संपादित करें",
   jpg_to_pdf: "जेपीजी से पीडीएफ",
   word_to_pdf: "शब्द से पीडीएफ",
   markdown_to_pdf: "पीडीएफ में मार्कडाउन करें",
