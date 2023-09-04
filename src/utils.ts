@@ -214,7 +214,7 @@ export const validateFiles = (
   for (let i = 0; i < files.length; i++) {
     const file = files[i] || null;
     extension = extension.replace(".", "").toUpperCase();
-    let file_extension = file.name.split(".")[1]?.toUpperCase() || "";
+    let file_extension = file.name.split(".").pop()?.toUpperCase() || "";
     // this contains all types and some special types that might potentially be of than one extension
     const types = [
       "ppt",
