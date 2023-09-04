@@ -63,13 +63,6 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/merge-pdf",
   },
-  Split_PDF: {
-    title: "पीडीएफ विभाजित करें",
-    description: "एक पीडीएफ फ़ाइल को कई दस्तावेजों में विभाजित करें",
-    color: "var(--orange)",
-    type: ".pdf",
-    to: "/split-pdf",
-  },
   Compress_PDF: {
     title: "पीडीएफ कम्प्रेस करें",
     description: "गुणवत्ता को बनाए रखते हुए एक पीडीएफ फ़ाइल का आकार कम करें",

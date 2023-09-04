@@ -1,4 +1,3 @@
-"use client";
 import Head from "next/head";
 import NavBar from "../components/NavBar";
 import Tool from "../components/Tool";
@@ -65,33 +64,18 @@ export default ({ item }: { item: data_type }) => {
         />
       </Head>
       <NavBar nav_content={nav_content} lang="" />
-      {path == "/split-pdf" && "production" === process.env.NODE_ENV ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center",
-            height: "100vh",
-          }}
-        >
-          <h2 className="display-4 text-center">{appology_message.title}</h2>
-          <p className="text-center">{appology_message.reason}</p>
-        </div>
-      ) : (
-        <Tool
-          tools={tools}
-          data={item}
-          lang=""
-          errors={errors}
-          edit_page={edit_page}
-          pages={edit_page.pages}
-          page={edit_page.page}
-          web2pdftool={web2pdftool}
-          downloadFile={downloadFile}
-          translate_pdf={translate_pdf}
-        />
-      )}
+      <Tool
+        tools={tools}
+        data={item}
+        lang=""
+        errors={errors}
+        edit_page={edit_page}
+        pages={edit_page.pages}
+        page={edit_page.page}
+        web2pdftool={web2pdftool}
+        downloadFile={downloadFile}
+        translate_pdf={translate_pdf}
+      />
     </>
   );
 };
@@ -99,7 +83,6 @@ export default ({ item }: { item: data_type }) => {
 // export default ToolPage;
 export const routes = {
   "/merge-pdf": { item: tool["Merge_PDF"] },
-  "/split-pdf": { item: tool["Split_PDF"] },
   "/translate-pdf": { item: tool["Translate_PDF"] },
   "/compress-pdf": { item: tool["Compress_PDF"] },
   "/pdf-to-powerpoint": { item: tool["PDF_to_Powerpoint"] },

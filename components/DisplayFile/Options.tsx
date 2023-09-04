@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import PDFToJPG from "./Options/PDFtoJPG";
 import { CompressPDF } from "./Options/CompressPDF";
 import type { edit_page as _ } from "../../content";
-import { SplitPDF } from "./Options/SplitPDF";
-
 export interface OptionsProps {
   layout?: string;
   edit_page: _;
@@ -41,10 +39,6 @@ const Options = ({ layout, edit_page }: OptionsProps) => {
       componentToRender = (
         <CompressPDF c={c} options={edit_page["compress_pdf"]} />
       );
-      break;
-    case "split-pdf":
-      // Implementation of SplitPDF logic goes here
-      componentToRender = <SplitPDF />
       break;
     case "merge-pdf":
       componentToRender = <MergePdf merge_pdf={edit_page["merge_pdf"]} />;

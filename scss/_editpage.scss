@@ -161,8 +161,6 @@
       margin-bottom: 1rem;
     }
 
-   
-
     .option-title {
       @each $key, $color in $color-map {
         &.#{$key} {
@@ -177,7 +175,6 @@
         @extend %active-list-item;
       }
     }
-    @import "./split-pdf";
   }
 
   @import "./image-options";

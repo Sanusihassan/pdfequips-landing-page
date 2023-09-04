@@ -63,13 +63,7 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/merge-pdf",
   },
-  Split_PDF: {
-    title: "拆分PDF",
-    description: "将一个PDF文件分割成多个文档",
-    color: "var(--orange)",
-    type: ".pdf",
-    to: "/split-pdf",
-  },
+
   Compress_PDF: {
     title: "压缩PDF",
     description: "在保持质量的同时减小PDF文件的大小",

@@ -96,7 +96,7 @@ const Tool: React.FC<ToolProps> = ({
   let showTool = state!.showTool && state!.errorMessage?.length > 0;
   // accepted file types
   const acceptedFileTypes = {
-    ".pdf": ".pdf, .PDF",
+    ".pdf": ".pdf",
     ".pptx": ".pptx, .ppt",
     ".docx": ".docx, .doc",
     ".xlsx": ".xlsx, .xls",

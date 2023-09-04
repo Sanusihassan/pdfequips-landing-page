@@ -67,13 +67,6 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/merge-pdf",
   },
-  Split_PDF: {
-    title: "تقسيم PDF",
-    description: "تقسيم ملف PDF إلى عدة مستندات",
-    color: "var(--orange)",
-    type: ".pdf",
-    to: "/split-pdf",
-  },
   Compress_PDF: {
     title: "ضغط PDF",
     description: "تقليل حجم ملف PDF مع الحفاظ على الجودة",
