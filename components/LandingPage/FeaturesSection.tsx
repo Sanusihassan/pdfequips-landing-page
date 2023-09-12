@@ -10,12 +10,14 @@ import {
   DocumentIcon,
   PhotographIcon,
   CodeIcon,
+  LockOpenIcon,
 } from "@heroicons/react/outline";
 import CompressIcon from "../icons/compressIcon";
 import type { tool } from "../../content";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setPath } from "../../src/store";
+import { LockClosedIcon } from "@heroicons/react/solid";
 
 export const FeaturesSection = ({
   tool,
@@ -98,6 +100,23 @@ export const FeaturesSection = ({
       color: tool.JPG_to_PDF.color as string,
       icon: PhotographIcon,
     },
+
+    {
+      title: tool.Lock_PDF.title,
+      description: tool.Lock_PDF.description as string,
+      to: `${langPath}${tool.Lock_PDF.to}`,
+      color: tool.Lock_PDF.color as string,
+      icon: LockClosedIcon,
+    },
+    {
+      title: tool.Unlock_PDF.title,
+      description: tool.Unlock_PDF.description as string,
+      to: `${langPath}${tool.Unlock_PDF.to}`,
+      color: tool.Unlock_PDF.color as string,
+      icon: LockOpenIcon,
+    },
+
+
     {
       title: tool.HTML_to_PDF.title,
       description: tool.HTML_to_PDF.description as string,

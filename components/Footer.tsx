@@ -39,9 +39,8 @@ const Footer = ({
             <ul className="list-unstyled list-group">
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }jpg-to-pdf
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }jpg-to-pdf
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -50,9 +49,8 @@ const Footer = ({
               </li>
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }word-to-pdf
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }word-to-pdf
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -61,9 +59,8 @@ const Footer = ({
               </li>
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }powerpoint-to-pdf
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }powerpoint-to-pdf
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -72,9 +69,8 @@ const Footer = ({
               </li>
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }excel-to-pdf
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }excel-to-pdf
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -83,9 +79,8 @@ const Footer = ({
               </li>
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }html-to-pdf
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }html-to-pdf
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -99,9 +94,8 @@ const Footer = ({
             <ul className="list-unstyled list-group">
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }pdf-to-jpg
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }pdf-to-jpg
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -110,9 +104,8 @@ const Footer = ({
               </li>
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }pdf-to-word
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }pdf-to-word
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -121,9 +114,8 @@ const Footer = ({
               </li>
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }pdf-to-powerpoint
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }pdf-to-powerpoint
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -132,9 +124,8 @@ const Footer = ({
               </li>
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }pdf-to-excel
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }pdf-to-excel
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -143,9 +134,8 @@ const Footer = ({
               </li>
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }pdf-to-pdf-a
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }pdf-to-pdf-a
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -154,9 +144,8 @@ const Footer = ({
               </li>
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }pdf-to-text
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }pdf-to-text
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -170,9 +159,8 @@ const Footer = ({
             <ul className="list-unstyled list-group">
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }compress-pdf
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }compress-pdf
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -181,9 +169,8 @@ const Footer = ({
               </li>
               <li>
                 <a
-                  href={`https://www.pdfequips.com/${
-                    lang == "" ? "" : lang + "/"
-                  }merge-pdf
+                  href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
+                    }merge-pdf
                   `}
                   className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
                 >
@@ -210,11 +197,11 @@ const Footer = ({
           </Col>
           <Col md={6}>
             <ul className="terms-row list-unstyled mb-0 d-flex justify-content-end">
-              <li className="mx-3">
+              {/* <li className="mx-3">
                 <a href="#" className="text-muted">
                   {footer.terms} &amp; {footer.conditions}
                 </a>
-              </li>
+              </li> */}
               <li className="mx-3">
                 <a href="/privacy-policy" className="text-muted">
                   {footer.privacy_policy}

@@ -74,6 +74,23 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/compress-pdf",
   },
+  Lock_PDF: {
+    title: "قفل PDF",
+    description:
+      "قم بتأمين ملف PDF الخاص بك بكلمة مرور لمنع الوصول غير المصرح به.",
+    color: "#2980b9",
+    type: ".pdf",
+    to: "/lock-pdf",
+  },
+
+  Unlock_PDF: {
+    title: "إلغاء قفل ملفات ال PDF",
+    description:
+      "قم بإزالة حماية كلمة المرور من ملف PDF الخاص بك بسهولة باستخدام أداتنا سهلة الاستخدام.",
+    color: "#3498db",
+    type: ".pdf",
+    to: "/unlock-pdf",
+  },
   Translate_PDF: {
     title: "ترجمة PDF",
     description: "ترجمة النص في ملف PDF إلى لغة أخرى",

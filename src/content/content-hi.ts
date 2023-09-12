@@ -77,6 +77,23 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/translate-pdf",
   },
+  Lock_PDF: {
+    title: "PDF लॉक करें",
+    description:
+      "अनधिकृत पहुंच को रोकने के लिए अपनी पीडीएफ फाइल को पासवर्ड से सुरक्षित करें।",
+    color: "#2980b9",
+    type: ".pdf",
+    to: "/lock-pdf",
+  },
+
+  Unlock_PDF: {
+    title: "PDF अनलॉक करें",
+    description:
+      "हमारे उपयोगकर्ता-अनुकूल टूल से आसानी से अपनी पीडीएफ फाइल से पासवर्ड सुरक्षा हटाएं।",
+    color: "#3498db",
+    type: ".pdf",
+    to: "/unlock-pdf",
+  },
   PDF_to_Powerpoint: {
     title: "PDF से पावरपॉइंट में",
     description: "PDF फ़ाइलों को संपादनीय पावरपॉइंट प्रस्तुतियों में बदलें",

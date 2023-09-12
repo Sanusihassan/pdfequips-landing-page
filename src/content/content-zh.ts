@@ -78,6 +78,23 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/translate-pdf",
   },
+  Lock_PDF: {
+    title: "锁定 PDF",
+    description:
+      "使用密码保护您的 PDF 文件，以防止未经授权的访问。",
+    color: "#2980b9",
+    type: ".pdf",
+    to: "/lock-pdf",
+  },
+
+  Unlock_PDF: {
+    title: "解锁 PDF",
+    description:
+      "使用我们的用户友好工具轻松地从您的 PDF 文件中移除密码保护。",
+    color: "#3498db",
+    type: ".pdf",
+    to: "/unlock-pdf",
+  },
 
   PDF_to_Powerpoint: {
     title: "PDF转Powerpoint",

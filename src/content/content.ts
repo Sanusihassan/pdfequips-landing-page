@@ -80,6 +80,23 @@ export const tool = {
     type: ".pdf",
     to: "/compress-pdf",
   },
+  Lock_PDF: {
+    title: "Lock PDF",
+    description:
+      "Secure your PDF file with a password to prevent unauthorized access. ",
+    color: "#2980b9",
+    type: ".pdf",
+    to: "/lock-pdf",
+  },
+
+  Unlock_PDF: {
+    title: "Unlock PDF",
+    description:
+      "Easily remove password protection from your PDF file with our user-friendly tool. ",
+    color: "#3498db",
+    type: ".pdf",
+    to: "/unlock-pdf",
+  },
   Translate_PDF: {
     title: "Translate PDF",
     description: "Translate the text in a PDF file to another language",

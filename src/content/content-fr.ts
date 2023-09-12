@@ -78,6 +78,23 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/translate-pdf",
   },
+  Lock_PDF: {
+    title: "Verrouiller PDF",
+    description:
+      "Sécurisez votre fichier PDF avec un mot de passe pour empêcher l'accès non autorisé.",
+    color: "#2980b9",
+    type: ".pdf",
+    to: "/lock-pdf",
+  },
+
+  Unlock_PDF: {
+    title: "Déverrouiller PDF",
+    description:
+      "Supprimez facilement la protection par mot de passe de votre fichier PDF avec notre outil convivial.",
+    color: "#3498db",
+    type: ".pdf",
+    to: "/unlock-pdf",
+  },
   PDF_to_Powerpoint: {
     title: "PDF vers Powerpoint",
     description:
