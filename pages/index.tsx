@@ -27,6 +27,11 @@ const Home = ({ lang }: { lang: string }) => {
           content="PDF tools, Convert to PDF, JPG to PDF, WORD to PDF, POWERPOINT to PDF, EXCEL to PDF, HTML to PDF, Convert from PDF, PDF to JPG, PDF to WORD, PDF to POWERPOINT, PDF to EXCEL, PDF to PDF/A, PDF to text, Merge PDF, Compress PDF."
         />
         <meta httpEquiv="Content-Language" content="en" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7391414384206267"
+          crossOrigin="anonymous"
+        ></script>
       </Head>
 
       {/* <main className={styles.main}>

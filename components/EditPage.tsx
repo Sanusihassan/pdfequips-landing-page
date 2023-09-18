@@ -69,9 +69,8 @@ const EditPage = ({
   let k = router.asPath.replace(/^\/[a-z]{2}\//, "").replace(/^\//, "");
   return (
     <aside
-      className={`edit-page ${
-        state?.showTool || state.showDownloadBtn ? "d-none" : ""
-      }`}
+      className={`edit-page ${state?.showTool || state.showDownloadBtn ? "d-none" : ""
+        }`}
     >
       <section className="edit-area position-relative">
         <DisplayFile
@@ -104,12 +103,12 @@ const EditPage = ({
           <CogIcon className="w-6 h-6 me-2 gear-icon" />
         </button>
       </section>
-      <section className={`options${state.showOptions ? " expanded" : ""}`}>
+      <section className={`options bg-white ${state.showOptions ? " expanded" : ""}`}>
         <h5 className="text-uppercase grid-header">
           <bdi>
             {
               edit_page.edit_page_titles[
-                k.replace(/-/g, "_") as keyof typeof edit_page.edit_page_titles
+              k.replace(/-/g, "_") as keyof typeof edit_page.edit_page_titles
               ]
             }
           </bdi>

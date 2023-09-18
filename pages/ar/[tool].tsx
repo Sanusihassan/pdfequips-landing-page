@@ -1,5 +1,3 @@
-// import data from "../src/data";
-
 import Head from "next/head";
 import NavBar from "../../components/NavBar";
 import Tool from "../../components/Tool";
@@ -14,8 +12,7 @@ import {
   downloadFile,
   translate_pdf,
 } from "../../src/content/content-ar";
-import { useEffect } from "react";
-type _t = keyof typeof tool;
+
 
 type data_type = {
   title: string;

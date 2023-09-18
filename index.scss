@@ -73,6 +73,13 @@ $color-map: (
 //   height: 100%;
 // }
 
+body {
+  @include ar-wrapper {
+    text-align: right !important;
+  }
+}
+
+
 .tools-page {
   min-height: fit-content;
 }
@@ -108,14 +115,6 @@ a.dropdown-item {
 }
 
 .html {
-  /* background: -webkit-linear-gradient(
-    to right,
-    rgb(228, 77, 38),
-    rgb(241, 101, 41)
-  );
-  background: linear-gradient(to right, rgb(228, 77, 38), rgb(241, 101, 41));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; */
   color: rgb(228, 77, 38);
 }
 

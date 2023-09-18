@@ -28,6 +28,11 @@ const Home = ({ lang }: { lang: string }) => {
           content="पीडीएफ उपकरण, पीडीएफ में कनवर्ट करें, जेपीजी से पीडीएफ, वर्ड से पीडीएफ, पावरपॉइंट से पीडीएफ, एक्सेल से पीडीएफ, एचटीएमएल से पीडीएफ, पीडीएफ से कनवर्ट करें, पीडीएफ से जेपीजी, पीडीएफ से वर्ड, पीडीएफ से पावरपॉइंट, पीडीएफ से एक्सेल, पीडीएफ से पीडीएफ/ए, पीडीएफ से टेक्स्ट, पीडीएफ को मर्ज करें, पीडीएफ को कंप्रेस करें।"
         />
         <meta http-equiv="Content-Language" content="hi" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7391414384206267"
+          crossOrigin="anonymous"
+        ></script>
       </Head>
 
       <NavBar nav_content={nav_content} lang={lang} />
