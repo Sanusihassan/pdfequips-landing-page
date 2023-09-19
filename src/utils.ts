@@ -1,17 +1,14 @@
 // this is my code:
 import { NextRouter } from "next/router";
-// @ts-ignore
-import { getDocument } from "pdfjs-dist";
-// @ts-ignore
-import { PDFDocumentProxy, PageViewport, RenderTask } from "pdfjs-dist";
-// @ts-ignore
-import { GlobalWorkerOptions } from "pdfjs-dist";
 import { Dispatch, useEffect, useMemo, useState } from "react";
-// @ts-ignore
 import { AnyAction } from "@reduxjs/toolkit";
 import type { errors as _ } from "../content";
 import { setErrorCode, setErrorMessage, ToolState } from "./store";
-GlobalWorkerOptions.workerSrc = "/pdf.worker.js";
+import { getDocument } from "pdfjs-dist";
+import { PDFDocumentProxy, PageViewport, RenderTask } from "pdfjs-dist";
+const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
+import { GlobalWorkerOptions } from "pdfjs-dist";
+GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 export function useLoadedImage(src: string): HTMLImageElement | null {
   const [loadedImage, setLoadedImage] = useState<HTMLImageElement | null>(null);
@@ -92,9 +89,8 @@ export const getFileDetailsTooltipContent = async (
         const pdf = await getDocument(url).promise;
 
         const pageCount = pdf.numPages || 0;
-        tooltipContent += ` - ${
-          lang === "ar" && pageCount === 1 ? "" : pageCount + " "
-        }${pageCount > 1 ? pages : page}`;
+        tooltipContent += ` - ${lang === "ar" && pageCount === 1 ? "" : pageCount + " "
+          }${pageCount > 1 ? pages : page}`;
         URL.revokeObjectURL(url);
         if (!file.size) {
           emptyPDFHandler(dispatch, errors);
@@ -243,7 +239,7 @@ export const validateFiles = (
     ) {
       const errorMessage =
         errors.NOT_SUPPORTED_TYPE.types[
-          extension as keyof typeof errors.NOT_SUPPORTED_TYPE.types
+        extension as keyof typeof errors.NOT_SUPPORTED_TYPE.types
         ] || errors.NOT_SUPPORTED_TYPE.message;
       dispatch(setErrorMessage(errorMessage));
       return false;

@@ -160,6 +160,7 @@ module.exports = {
         },
       };
     }
+    
 
     // Minify JavaScript
     if (process.env.NODE_ENV === "production") {
@@ -172,6 +173,8 @@ module.exports = {
         })
       );
     }
+    // enable top level await
+    config.experiments = { ...config.experiments, topLevelAwait: true };
 
     // Add your additional webpack configuration here if needed
 
