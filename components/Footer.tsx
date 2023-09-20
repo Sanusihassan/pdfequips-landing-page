@@ -31,7 +31,7 @@ const Footer = ({
     text = "压缩和合并PDF文件";
   }
   return (
-    <footer className="bg-light text-lg-start py-3 outline-1" id="footer">
+    <footer className="text-lg-start py-3 outline-1" id="footer">
       <Container>
         <Row className="mb-5 mb-3">
           <Col>
@@ -42,7 +42,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }jpg-to-pdf
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action border-0 px-2 py-2"
                 >
                   {nav_content.jpg_to_pdf}
                 </a>
@@ -52,7 +52,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }word-to-pdf
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action border-0 px-2 py-2"
                 >
                   {nav_content.word_to_pdf}
                 </a>
@@ -62,7 +62,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }powerpoint-to-pdf
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action border-0 px-2 py-2"
                 >
                   {nav_content.powerpoint_to_pdf}
                 </a>
@@ -72,7 +72,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }excel-to-pdf
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action border-0 px-2 py-2"
                 >
                   {nav_content.excel_to_pdf}
                 </a>
@@ -82,7 +82,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }html-to-pdf
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action  border-0 px-2 py-2"
                 >
                   {nav_content.html_to_pdf}
                 </a>
@@ -97,7 +97,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }pdf-to-jpg
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action  border-0 px-2 py-2"
                 >
                   {nav_content.pdf_to_jpg}
                 </a>
@@ -107,7 +107,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }pdf-to-word
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action  border-0 px-2 py-2"
                 >
                   {nav_content.pdf_to_word}
                 </a>
@@ -117,7 +117,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }pdf-to-powerpoint
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action  border-0 px-2 py-2"
                 >
                   {nav_content.pdf_to_powerpoint}
                 </a>
@@ -127,7 +127,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }pdf-to-excel
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action  border-0 px-2 py-2"
                 >
                   {nav_content.pdf_to_excel}
                 </a>
@@ -137,7 +137,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }pdf-to-pdf-a
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action  border-0 px-2 py-2"
                 >
                   {nav_content.pdf_to_pdf_a}
                 </a>
@@ -147,7 +147,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }pdf-to-text
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action  border-0 px-2 py-2"
                 >
                   {nav_content.pdf_to_text}
                 </a>
@@ -162,7 +162,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }compress-pdf
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action  border-0 px-2 py-2"
                 >
                   {nav_content.compress_pdf}
                 </a>
@@ -172,7 +172,7 @@ const Footer = ({
                   href={`https://www.pdfequips.com/${lang == "" ? "" : lang + "/"
                     }merge-pdf
                   `}
-                  className="list-group-item list-group-item-action bg-light border-0 px-2 py-2"
+                  className="list-group-item list-group-item-action  border-0 px-2 py-2"
                 >
                   {nav_content.merge_pdf}
                 </a>

@@ -9,7 +9,7 @@ import LanguageDropdown from "./NavBar/LanguageDropDown";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
-import { useFileStore } from "../src/file-store";
+// import { useFileStore } from "../src/file-store";
 import {
   showTool,
   ToolState,
@@ -17,6 +17,7 @@ import {
   setPath,
   setShowDownloadBtn,
 } from "../src/store";
+import { useFileStore } from "../src/file-store";
 
 /**
  * this code works fine for the all pages but the home page where there are no sub routes but the /lang route
@@ -121,7 +122,7 @@ const NavBar = ({
           </Link> */}
           {/* <Link className="dropdown-item"
            > */}
-           <a
+          <a
             href={`https://www.pdfequips.com${langPath}read-edit-pdf`}
             onClick={(e) => {
               dispatch(setPath("compress-pdf"));

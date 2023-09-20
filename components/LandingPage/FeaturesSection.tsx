@@ -131,9 +131,9 @@ export const FeaturesSection = ({
       <Container>
         <h2 className="display-4 text-center">{title}</h2>{" "}
         <p className="lead text-center">{description}</p>
-        <Row>
+        <div className="features">
           {featureCards.map((card, index) => (
-            <Col key={index} md={3} sm={6} className="column">
+            <div key={index} className="feature">
               <div className={`text-decoration-none text-dark ${card.to}`}>
                 <a
                   href={card.to}
@@ -171,9 +171,9 @@ export const FeaturesSection = ({
                   </Card>
                 </a>
               </div>
-            </Col>
+            </div>
           ))}
-        </Row>
+        </div>
       </Container>
     </section>
   );

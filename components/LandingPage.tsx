@@ -19,15 +19,9 @@ const HeroSection = ({ landing_page }: { landing_page: landing_page }) => {
 };
 
 import type { tool } from "../content";
-import { ChangeTo, ContinueIn } from "../src/content/content";
-// import { useTranslation } from "react-i18next";
-
 import { FeaturesSection } from "./LandingPage/FeaturesSection";
 import { WhyChooseUs } from "./LandingPage/WhyChooseUS";
-// import LanguageAlert from "./LanguageAlert";
-// import { Link } from "react-router-dom";
 
-// export default HeroSection;
 
 const LandingPage = ({
   landing_page,
@@ -51,12 +45,6 @@ const LandingPage = ({
         title={landing_page.why_us.title}
         description={landing_page.why_us.description}
       />
-      {/* <LanguageAlert
-        lang={lang}
-        alert={landing_page.alert}
-        ContinueIn={ContinueIn}
-        ChangeTo={ChangeTo}
-      /> */}
     </section>
   );
 };
