@@ -1,5 +1,4 @@
 import type {
-  nav_content as nav_content_type,
   tool as _tool,
   web2pdftool as _web2pdftool,
   tools as _tools,
@@ -9,32 +8,6 @@ import type {
   downloadFile as _downloadFile,
   landing_page as _landing_page,
 } from "../../content";
-
-export const nav_content: nav_content_type = {
-  brand: "Equips",
-  merge_pdf: "دمج PDF",
-  split_pdf: "تقسيم PDF",
-  compress_pdf: "ضغط PDF",
-  convert_pdf: "تحويل PDF",
-  convert_to_pdf: "تحويل إلى PDF",
-  jpg_to_pdf: "JPG إلى PDF",
-  word_to_pdf: "Word إلى PDF",
-  powerpoint_to_pdf: "PowerPoint إلى PDF",
-  excel_to_pdf: "Excel إلى PDF",
-  html_to_pdf: "HTML إلى PDF",
-  markdown_to_pdf: "Markdown إلى PDF",
-  convert_from_pdf: "تحويل من PDF",
-  read_edit_pdf: "قراءة وتحرير PDF",
-  web_to_pdf: "من الويب إلى PDF",
-  pdf_to_jpg: "PDF إلى JPG",
-  pdf_to_word: "PDF إلى Word",
-  pdf_to_powerpoint: "PDF إلى PowerPoint",
-  pdf_to_excel: "PDF إلى Excel",
-  pdf_to_pdf_a: "PDF إلى PDF/A",
-  pdf_to_text: "PDF إلى نص",
-  pdf_to_html: "PDF إلى HTML",
-  pdf_to_markdown: "PDF إلى Markdown",
-};
 
 export const landing_page: _landing_page = {
   hero: {

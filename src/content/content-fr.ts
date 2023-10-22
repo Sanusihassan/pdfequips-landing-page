@@ -1,5 +1,4 @@
 import type {
-  nav_content as nav_content_type,
   tool as _tool,
   web2pdftool as _web2pdftool,
   tools as _tools,
@@ -10,31 +9,6 @@ import type {
   landing_page as _landing_page,
 } from "../../content";
 
-export const nav_content: nav_content_type = {
-  brand: "Equips",
-  merge_pdf: "Fusionner des PDF",
-  split_pdf: "Diviser des PDF",
-  compress_pdf: "Compresser des PDF",
-  convert_pdf: "Convertir des PDF",
-  convert_to_pdf: "Convertir en PDF",
-  read_edit_pdf: "Lire et modifier un PDF",
-  jpg_to_pdf: "JPG en PDF",
-  word_to_pdf: "WORD en PDF",
-  powerpoint_to_pdf: "POWERPOINT en PDF",
-  excel_to_pdf: "EXCEL en PDF",
-  html_to_pdf: "HTML en PDF",
-  web_to_pdf: "Web vers PDF",
-  markdown_to_pdf: "Markdown en PDF",
-  convert_from_pdf: "Convertir à partir de PDF",
-  pdf_to_jpg: "PDF en JPG",
-  pdf_to_word: "PDF en WORD",
-  pdf_to_powerpoint: "PDF en POWERPOINT",
-  pdf_to_excel: "PDF en EXCEL",
-  pdf_to_pdf_a: "PDF en PDF/A",
-  pdf_to_text: "PDF en texte",
-  pdf_to_html: "PDF vers HTML",
-  pdf_to_markdown: "PDF à Markdown",
-};
 export const landing_page: _landing_page = {
   hero: {
     title: "Améliorez votre productivité avec notre solution PDF complète",

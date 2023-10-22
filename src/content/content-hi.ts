@@ -1,5 +1,4 @@
 import type {
-  nav_content as nav_content_type,
   tool as _tool,
   web2pdftool as _web2pdftool,
   tools as _tools,
@@ -10,32 +9,6 @@ import type {
   landing_page as _landing_page,
 } from "../../content";
 
-export const nav_content: nav_content_type = {
-  // इसे अनदेखा करें
-  brand: "Equips",
-  merge_pdf: "पीडीएफ विलय करें",
-  split_pdf: "पीडीएफ विभाजित करें",
-  compress_pdf: "पीडीएफ संपीड़ित करें",
-  convert_pdf: "पीडीएफ परिवर्तित करें",
-  convert_to_pdf: "पीडीएफ में परिवर्तित करें",
-  read_edit_pdf: "पीडीएफ पढ़ें और संपादित करें",
-  jpg_to_pdf: "जेपीजी से पीडीएफ",
-  word_to_pdf: "शब्द से पीडीएफ",
-  markdown_to_pdf: "पीडीएफ में मार्कडाउन करें",
-  powerpoint_to_pdf: "पावरपॉइंट से पीडीएफ",
-  excel_to_pdf: "एक्सेल से पीडीएफ",
-  html_to_pdf: "एचटीएमएल से पीडीएफ",
-  web_to_pdf: "वेब से पीडीएफ",
-  convert_from_pdf: "पीडीएफ से परिवर्तित करें",
-  pdf_to_jpg: "पीडीएफ से जेपीजी",
-  pdf_to_word: "पीडीएफ से शब्द",
-  pdf_to_powerpoint: "पीडीएफ से पावरपॉइंट",
-  pdf_to_excel: "पीडीएफ से एक्सेल",
-  pdf_to_pdf_a: "पीडीएफ से पीडीएफ/ए",
-  pdf_to_text: "पाठ के लिए पीडीएफ",
-  pdf_to_html: "पीडीएफ से एचटीएमएल",
-  pdf_to_markdown: "PDF से मार्कडाउन तक",
-};
 export const landing_page: _landing_page = {
   hero: {
     title: "हमारे व्यापक पीडीएफ समाधान के साथ अपनी उत्पादकता बढ़ाएँ",

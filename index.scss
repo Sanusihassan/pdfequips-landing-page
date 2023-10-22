@@ -79,7 +79,6 @@ body {
   }
 }
 
-
 .tools-page {
   min-height: fit-content;
 }
@@ -136,31 +135,25 @@ a.dropdown-item {
   }
 }
 
-@import "./scss/navbar";
+@import "/components/NavBar/scss/navbar";
 
 /* landing page layout */
 
-
 @import "./scss/landing-page";
 
-
 /* hero section styles */
-
 
 /* features section */
 
 /* tools page */
 
-
 .dropdown-item {
-
   &.active,
   &:active {
     background-color: initial !important;
     color: #212529 !important;
   }
 }
-
 
 footer {
   .copyright-row {

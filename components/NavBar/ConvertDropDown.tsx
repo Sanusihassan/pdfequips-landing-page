@@ -13,26 +13,29 @@ import {
 } from "@heroicons/react/outline";
 // import Link from "next/link";
 import { NavDropdown } from "react-bootstrap";
-import type { nav_content } from "../../content";
+import type { nav_content } from "./navbar";
 // import MarkdownIcon from "../icons/Markdown";
 
-import { useDispatch,
-  //  useSelector 
-  } from "react-redux";
-import { setPath, 
-  // ToolState 
+import {
+  useDispatch,
+  //  useSelector
+} from "react-redux";
+import {
+  setPath,
+  // ToolState
 } from "../../src/store";
+import { getNavContent } from "./getNavContent";
 
 const ConvertPDFDropdown = ({
   langPath,
   handleClick,
-  nav_content,
+  lang,
 }: {
   langPath: string;
   handleClick: () => void;
-  nav_content: nav_content;
+  lang: string;
 }) => {
-  // const state = useSelector((state: { tool: ToolState }) => state.tool);
+  const nav_content = getNavContent(lang);
   const dispatch = useDispatch();
   return (
     <>

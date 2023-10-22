@@ -2,14 +2,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 // import Image from "next/image";
 import LandingPage from "../components/LandingPage";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/NavBar/NavBar";
 import Footer from "../components/Footer";
-import {
-  footer,
-  landing_page,
-  nav_content,
-  tool,
-} from "../src/content/content";
+import { footer, landing_page, tool } from "../src/content/content";
 
 const Home = ({ lang }: { lang: string }) => {
   return (
@@ -36,9 +31,9 @@ const Home = ({ lang }: { lang: string }) => {
 
       {/* <main className={styles.main}>
       </main> */}
-      <NavBar nav_content={nav_content} lang={lang} />
+      <NavBar lang={lang} />
       <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
-      <Footer footer={footer} lang={lang} nav_content={nav_content} />
+      <Footer footer={footer} lang={lang} />
     </div>
   );
 };
