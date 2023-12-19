@@ -1,7 +1,7 @@
 import Head from "next/head";
 // import Image from "next/image";
 import LandingPage from "../../components/LandingPage";
-import NavBar from "../../components/NavBar/NavBar";
+import NavBar from "pdfequips-navbar/NavBar";
 import Footer from "../../components/Footer";
 import { footer, landing_page, tool } from "../../src/content/content-hi";
 
@@ -30,7 +30,7 @@ const Home = ({ lang }: { lang: string }) => {
         ></script>
       </Head>
 
-      <NavBar lang={lang} />
+      <NavBar path="" />
       <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
       <Footer footer={footer} lang={lang} />
     </div>

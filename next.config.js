@@ -132,11 +132,14 @@ const nextConfig = {
 //     return config;
 //   },
 // };
-
+// this is my next.js config file:
+/**
+ * and i'm getting these errors:
+ */
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
-
-module.exports = {
+const withTM = require("next-transpile-modules")(["pdfequips-navbar"]);
+module.exports = withTM({
   sassOptions: {
     includePaths: [path.join(__dirname, "node_modules")],
   },
@@ -160,7 +163,6 @@ module.exports = {
         },
       };
     }
-    
 
     // Minify JavaScript
     if (process.env.NODE_ENV === "production") {
@@ -180,4 +182,4 @@ module.exports = {
 
     return config;
   },
-};
+});
