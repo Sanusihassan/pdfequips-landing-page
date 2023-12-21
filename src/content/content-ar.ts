@@ -47,6 +47,7 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/compress-pdf",
   },
+
   Lock_PDF: {
     title: "قفل PDF",
     description:
@@ -181,6 +182,43 @@ export const tool: _tool = {
     color: "#FF4136",
     type: ".pdf",
     to: "/pdf-to-markdown",
+  },
+  Add_Watermark: {
+    title: "إضافة علامة مائية",
+    description: "قم بتراكب الصورة أو النص في ملف PDF بنمط وموضع مخصصين.",
+    color: "#e55039",
+    type: ".pdf",
+    to: "/add-watermark",
+  },
+  Number_PDF: {
+    title: "رقّم PDF",
+    description:
+      "أضف أرقام الصفحات إلى مستند PDF الخاص بك بأنماط وخيارات مختلفة",
+    color: "#e55039",
+    type: ".pdf",
+    to: "/number-pdf",
+  },
+  Ocr_PDF: {
+    title: "تحويل PDF إلى نص قابل للبحث",
+    description:
+      "قم بتحويل ملفات PDF إلى ملفات تفاعلية وقابلة للبحث مع التعرف الدقيق على النص واختياره.",
+    color: "#006266",
+    type: ".pdf",
+    to: "/ocr-pdf",
+  },
+  Rotate_PDF: {
+    title: "تدوير ملف PDF",
+    description: "قم بتدوير صفحات PDF بسهولة لتحسين القراءة والعرض.",
+    color: "#10ac84",
+    type: ".pdf",
+    to: "/rotate-pdf",
+  },
+  Split_PDF: {
+    title: "تقسيم PDF",
+    description: "تقسيم ملف PDF إلى عدة مستندات",
+    color: "var(--orange)",
+    type: ".pdf",
+    to: "/split-pdf",
   },
 };
 

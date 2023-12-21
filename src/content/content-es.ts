@@ -182,6 +182,45 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/pdf-to-markdown",
   },
+  Add_Watermark: {
+    title: "Agregar marca de agua",
+    description:
+      "Superponer imagen o texto en un PDF con estilo y posición personalizados.",
+    color: "#e55039",
+    type: ".pdf",
+    to: "/add-watermark",
+  },
+  Number_PDF: {
+    title: "Numerar PDF",
+    description:
+      "Añade números de página a tu documento PDF con diferentes estilos y opciones",
+    color: "#e55039",
+    type: ".pdf",
+    to: "/number-pdf",
+  },
+  Ocr_PDF: {
+    title: "OCR PDF",
+    description:
+      "Convierte PDF estáticos en documentos interactivos y buscables con reconocimiento de texto preciso.",
+    color: "#006266",
+    type: ".pdf",
+    to: "/ocr-pdf",
+  },
+  Rotate_PDF: {
+    title: "Rotar PDF",
+    description:
+      "Gire páginas PDF fácilmente para una mejor legibilidad y presentación.",
+    color: "#10ac84",
+    type: ".pdf",
+    to: "/rotate-pdf",
+  },
+  Split_PDF: {
+    title: "Dividir PDF",
+    description: "Divide un archivo PDF en varios documentos",
+    color: "var(--orange)",
+    type: ".pdf",
+    to: "/split-pdf",
+  },
 };
 
 export const web2pdftool: _web2pdftool = {

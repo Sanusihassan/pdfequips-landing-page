@@ -151,7 +151,7 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-pdf-a",
   },
-  // give me another object like this but for markdown to pdf
+
   Web_to_PDF: {
     title: "Web to PDF",
     description: "Convert web pages to PDF documents",
@@ -191,6 +191,47 @@ export const tool = {
     type: ".pdf",
     to: "/pdf-to-markdown",
   },
+
+  Split_PDF: {
+    title: "Split PDF",
+    description: "Divide one PDF file into multiple documents",
+    color: "var(--orange)",
+    type: ".pdf",
+    to: "/split-pdf",
+  },
+
+  Add_Watermark: {
+    title: "Add Watermark",
+    description: "Overlay image or text on PDF with custom style and position.",
+    color: "#e55039",
+    type: ".pdf",
+    to: "/add-watermark",
+  },
+  Rotate_PDF: {
+    title: "Rotate PDF",
+    description:
+      "Rotate PDF pages effortlessly for better readability and presentation.",
+    color: "#10ac84",
+    type: ".pdf",
+    to: "/rotate-pdf",
+  },
+  Ocr_PDF: {
+    title: "OCR PDF",
+    description:
+      "Turn PDFs into interactive, searchable files with accurate text recognition and selection.",
+    color: "#006266",
+    type: ".pdf",
+    to: "/ocr-pdf",
+  },
+  Number_PDF: {
+    title: "Number PDF",
+    description:
+      "Add page numbers to your PDF document with different styles and options",
+    color: "#e55039",
+    type: ".pdf",
+    to: "/number-pdf",
+  },
+  
 };
 // translate the values of this object to french
 export const web2pdftool = {

@@ -1,46 +1,12 @@
-@import "~cssmolecule";
-@import "~custom-bs";
-// @include type;
-@include images;
-@include containers;
-@include grid;
-@include tables;
-@include forms;
-@include buttons;
-@include transitions;
-@include dropdown;
-@include button-group;
-@include nav;
-@include navbar;
-@include card;
-@include accordion;
-@include breadcrumb;
-@include pagination;
-@include badge;
-@include alert;
-@include progress;
-@include list-group;
-@include close;
-@include toasts;
-@include modal;
-@include tooltip;
-@include popover;
-@include carousel;
-@include spinners;
-@include offcanvas;
-@include placeholders;
-
-// Helpers
-@include helpers;
-
+@import "pdfequips-navbar/scss/_navbar.scss";
 %debug {
   outline: 1px solid;
 }
-
+a {
+  text-decoration: none;
+}
 @import "./scss/minxins";
 @import "./scss/placeholders";
-@include list-group;
-@include api;
 
 $pdf-color: #fc271c;
 $color-map: (
@@ -64,6 +30,10 @@ $color-map: (
   "translate-pdf": #185abc,
   "lock-pdf": #2980b9,
   "unlock-pdf": #3498db,
+  "ocr-pdf": #006266,
+  "add-watermark": #e55039,
+  "rotate-pdf": #10ac84,
+  "number-pdf": #b71540,
 );
 
 // html,
@@ -77,6 +47,7 @@ body {
   @include ar-wrapper {
     text-align: right !important;
   }
+  font-family: "Raleway", sans-serif;
 }
 
 .tools-page {

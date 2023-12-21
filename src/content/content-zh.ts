@@ -9,7 +9,6 @@ import type {
   landing_page as _landing_page,
 } from "../../content";
 
-
 export const landing_page: _landing_page = {
   hero: {
     title: "利用我们全面的 PDF 解决方案提高您的工作效率",
@@ -55,8 +54,7 @@ export const tool: _tool = {
   },
   Lock_PDF: {
     title: "锁定 PDF",
-    description:
-      "使用密码保护您的 PDF 文件，以防止未经授权的访问。",
+    description: "使用密码保护您的 PDF 文件，以防止未经授权的访问。",
     color: "#2980b9",
     type: ".pdf",
     to: "/lock-pdf",
@@ -64,8 +62,7 @@ export const tool: _tool = {
 
   Unlock_PDF: {
     title: "解锁 PDF",
-    description:
-      "使用我们的用户友好工具轻松地从您的 PDF 文件中移除密码保护。",
+    description: "使用我们的用户友好工具轻松地从您的 PDF 文件中移除密码保护。",
     color: "#3498db",
     type: ".pdf",
     to: "/unlock-pdf",
@@ -181,6 +178,42 @@ export const tool: _tool = {
     color: "#FF4136",
     type: ".pdf",
     to: "/pdf-to-markdown",
+  },
+  Add_Watermark: {
+    title: "添加水印",
+    description: "使用自定义样式和位置在 PDF 上叠加图像或文本。",
+    color: "#e55039",
+    type: ".pdf",
+    to: "/add-watermark",
+  },
+  Number_PDF: {
+    title: "给PDF编号",
+    description: "使用不同的样式和选项为您的PDF文档添加页码",
+    color: "#e55039",
+    type: ".pdf",
+    to: "/number-pdf",
+  },
+  Ocr_PDF: {
+    title: "OCR PDF",
+    description:
+      "将静态PDF转换为具有精确文本识别和选择功能的交互式可搜索文档。",
+    color: "#006266",
+    type: ".pdf",
+    to: "/ocr-pdf",
+  },
+  Rotate_PDF: {
+    title: "旋转PDF",
+    description: "轻松旋转 PDF 页面，提升阅读性和展示效果。",
+    color: "#10ac84",
+    type: ".pdf",
+    to: "/rotate-pdf",
+  },
+  Split_PDF: {
+    title: "拆分PDF",
+    description: "将一个PDF文件分割成多个文档",
+    color: "var(--orange)",
+    type: ".pdf",
+    to: "/split-pdf",
   },
 };
 

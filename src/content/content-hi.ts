@@ -181,6 +181,45 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/pdf-to-markdown",
   },
+  Add_Watermark: {
+    title: "वॉटरमार्क जोड़ें",
+    description:
+      "पीडीएफ पर छवि या पाठ को विशेष शैली और स्थिति के साथ ओवरले करें।",
+    color: "#e55039",
+    type: ".pdf",
+    to: "/add-watermark",
+  },
+  Number_PDF: {
+    title: "PDF संख्या दें",
+    description:
+      "अलग-अलग शैलियों और विकल्पों के साथ अपने PDF दस्तावेज़ में पृष्ठ संख्याएँ जोड़ें",
+    color: "#e55039",
+    type: ".pdf",
+    to: "/number-pdf",
+  },
+  Ocr_PDF: {
+    title: "OCR PDF",
+    description:
+      "सटीक पाठ पहचान और चयन के साथ पीडीएफ को इंटरैक्टिव, खोजने योग्य फ़ाइलों में बदलें।",
+    color: "#006266",
+    type: ".pdf",
+    to: "/ocr-pdf",
+  },
+  Rotate_PDF: {
+    title: "PDF को घुमाएं",
+    description:
+      "बेहतर पठनीयता और प्रस्तुति के लिए PDF पेज को आसानी से घुमाएं।",
+    color: "#10ac84",
+    type: ".pdf",
+    to: "/rotate-pdf",
+  },
+  Split_PDF: {
+    title: "पीडीएफ विभाजित करें",
+    description: "एक पीडीएफ फ़ाइल को कई दस्तावेजों में विभाजित करें",
+    color: "var(--orange)",
+    type: ".pdf",
+    to: "/split-pdf",
+  },
 };
 
 export const downloadFile: _downloadFile = {
