@@ -4,16 +4,10 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import type { footer, nav_content } from "../content";
-import LanguageDropdown from "./NavBar/LanguageDropDown";
+import LanguageDropdown from "pdfequips-navbar/components/LanguageDropdown";
 import { getNavContent } from "./NavBar/getNavContent";
 
-const Footer = ({
-  footer,
-  lang,
-}: {
-  footer: footer;
-  lang: string;
-}) => {
+const Footer = ({ footer, lang }: { footer: footer; lang: string }) => {
   let text = "Compress & Merge PDF";
   const nav_content = getNavContent(lang);
 
@@ -199,9 +193,11 @@ const Footer = ({
             className="copyright-row row align-items-center flex-nowrap mb-xs-3"
             md={6}
           >
-            <ul className="lang-dropdown list-unstyled m-0">
-              <LanguageDropdown />
-            </ul>
+            {/* <ul className="lang-dropdown list-unstyled m-0"> */}
+            <nav className="navbar lang-dropdown m-0 no-shadow">
+              <LanguageDropdown id="custom-lang-dropdown" />
+            </nav>
+            {/* </ul> */}
             <p className="copyright-text col text-muted mb-0 py-0">
               {footer.brand} &copy; {new Date().getFullYear()}
             </p>

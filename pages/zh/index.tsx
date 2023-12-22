@@ -34,7 +34,7 @@ const Home = ({ lang }: { lang: string }) => {
         <meta name="google-adsense-account" content="ca-pub-7391414384206267" />
       </Head>
 
-      <NavBar path="" />
+      <NavBar path="" lang="zh" />
       <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
       <Footer footer={footer} lang={lang}  />
     </div>

@@ -128,6 +128,24 @@ a.dropdown-item {
 
 footer {
   .copyright-row {
+    .lang-dropdown {
+      flex: 0 1 59%;
+      background-color: transparent !important;
+      #custom-lang-dropdown {
+        width: 100%;
+        .dropdown-wrapper {
+          width: 55%;
+          @include xs {
+            width: 100%;
+          }
+        }
+        margin: 0 !important;
+        .drop-down-container {
+          left: unset !important;
+          right: unset !important;
+        }
+      }
+    }
     @include xs {
       margin-bottom: 1em;
       justify-content: space-between;
@@ -143,6 +161,11 @@ footer {
         }
       }
     }
+  }
+
+  .dropdown-wrapper.drop-down-container {
+    top: unset !important;
+    bottom: 42px;
   }
 
   .terms-row {

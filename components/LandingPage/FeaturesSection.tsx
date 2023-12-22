@@ -13,7 +13,7 @@ import {
   LockOpenIcon,
   RefreshIcon,
   DocumentAddIcon,
-  GlobeIcon
+  GlobeIcon,
 } from "@heroicons/react/outline";
 import CompressIcon from "../icons/compressIcon";
 import type { tool } from "../../content";
@@ -195,7 +195,10 @@ export const FeaturesSection = ({
             <div key={index} className="feature">
               <div className={`text-decoration-none text-dark ${card.to}`}>
                 <a
-                  href={card.to}
+                  href={
+                    // "https://3000-sanusihassan-pdfequips-x5kvhyduops.ws-eu107.gitpod.io/" +
+                    card.to
+                  }
                   className="text-decoration-none text-muted text-reset"
                   onClick={() => {
                     return dispatch(setPath(path));

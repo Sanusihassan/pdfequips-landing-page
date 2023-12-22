@@ -28,7 +28,7 @@ const Home = ({ lang }: { lang: string }) => {
         ></script>
       </Head>
 
-      <NavBar path="" />
+      <NavBar path="" lang="fr" />
       <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
       <Footer footer={footer} lang={lang} />
     </div>
