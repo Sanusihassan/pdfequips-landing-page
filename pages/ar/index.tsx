@@ -6,14 +6,35 @@ import Footer from "../../components/Footer";
 import { footer, landing_page, tool } from "../../src/content/content-ar";
 
 const Home = ({ lang }: { lang: string }) => {
+  const allToolTitles = Object.values(tool).map((t) => t.title);
+  const allTitlesCombined = allToolTitles.join(". ");
+  const websiteSchema = {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    name: "PDFEquips",
+    url: "https://www.pdfequips.com/ar",
+    description: `اكتشف الحل الكامل لـ PDF: ${allTitlesCombined}. سهولة وسرعة وأمان في التحرير عبر الإنترنت.`,
+    sameAs: [
+      "https://www.facebook.com/PDFEquips",
+      "https://twitter.com/PDFEquips",
+      "https://www.linkedin.com/company/pdfequips",
+    ],
+  };
+
   return (
-    <div>
+    <>
       <Head>
         <title>PDFEquips - مصدرك لأدوات PDF عالية الجودة</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content="اكتشف الحل الكامل لل PDF: أدوات قوية لإدارة المستندات بسهولة. التحويل إلى PDF ، JPG إلى PDF ، WORD إلى PDF ، POWERPOINT إلى PDF ، EXCEL إلى PDF ، HTML إلى PDF"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
         />
         <link rel="icon" href="/logo.png" />
         <meta
@@ -31,7 +52,7 @@ const Home = ({ lang }: { lang: string }) => {
       <NavBar path="" lang="ar" />
       <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
       <Footer footer={footer} lang={lang} />
-    </div>
+    </>
   );
 };
 

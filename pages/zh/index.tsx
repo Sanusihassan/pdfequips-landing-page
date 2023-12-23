@@ -1,13 +1,27 @@
 import Head from "next/head";
-// import Image from "next/image";
 import LandingPage from "../../components/LandingPage";
 import NavBar from "pdfequips-navbar/NavBar";
 import Footer from "../../components/Footer";
 import { footer, landing_page, tool } from "../../src/content/content-zh";
 
 const Home = ({ lang }: { lang: string }) => {
+  const allToolTitles = Object.values(tool).map((t) => t.title);
+  const allTitlesCombined = allToolTitles.join(". ");
+
+  const websiteSchema = {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    name: "PDFEquips",
+    url: "https://www.pdfequips.com/zh",
+    description: `探索完整的 PDF 解决方案：${allTitlesCombined}。轻松管理文档的强大工具。`,
+    sameAs: [
+      "https://www.facebook.com/PDFEquips",
+      "https://twitter.com/PDFEquips",
+      "https://www.linkedin.com/company/pdfequips",
+    ],
+  };
   return (
-    <div>
+    <>
       <Head>
         <title>PDFEquips - 您优质 PDF 工具的来源</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,6 +36,12 @@ const Home = ({ lang }: { lang: string }) => {
         />
         <meta httpEquiv="Content-Language" content="zh" />
         <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7391414384206267"
           crossOrigin="anonymous"
@@ -32,7 +52,7 @@ const Home = ({ lang }: { lang: string }) => {
       <NavBar path="" lang="zh" />
       <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
       <Footer footer={footer} lang={lang} />
-    </div>
+    </>
   );
 };
 

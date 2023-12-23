@@ -1,19 +1,38 @@
 import Head from "next/head";
-// import Image from "next/image";
 import LandingPage from "../../components/LandingPage";
 import NavBar from "pdfequips-navbar/NavBar";
 import Footer from "../../components/Footer";
 import { footer, landing_page, tool } from "../../src/content/content-es";
 
 const Home = ({ lang }: { lang: string }) => {
+  const allToolTitiles = Object.values(tool).map((t) => t.title);
+  const allTitilesCombined = allToolTitiles.join(". ");
+  const websiteSchema = {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    name: "PDFEquips",
+    url: "https://www.pdfequips.com/es",
+    description: `Descubra la solución PDF completa: ${allTitilesCombined}. Herramientas poderosas para la gestión de documentos con facilidad.`,
+    sameAs: [
+      "https://www.facebook.com/PDFEquips",
+      "https://twitter.com/PDFEquips",
+      "https://www.linkedin.com/company/pdfequips",
+    ],
+  };
   return (
-    <div>
+    <>
       <Head>
         <title>PDFEquips: su fuente de herramientas PDF de calidad</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content="Descubra la solución PDF completa: potentes herramientas para gestionar documentos con facilidad. JPG a PDF, WORD a PDF, POWERPOINT a PDF, EXCEL a PDF, HTML a PDF"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
         />
         <link rel="icon" href="/logo.png" />
         <meta
@@ -31,7 +50,7 @@ const Home = ({ lang }: { lang: string }) => {
       <NavBar path="" lang="es" />
       <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
       <Footer footer={footer} lang={lang} />
-    </div>
+    </>
   );
 };
 
