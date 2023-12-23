@@ -220,6 +220,14 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/split-pdf",
   },
+  Organize_PDF: {
+    title: "تنظيم ملف PDF",
+    description:
+      "إعادة ترتيب صفحات مستند PDF بسهولة لتناسب الترتيب أو التسلسل المفضل لديك.",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/organize-pdf",
+  },
 };
 
 export const web2pdftool: _web2pdftool = {

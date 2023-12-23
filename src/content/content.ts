@@ -231,7 +231,14 @@ export const tool = {
     type: ".pdf",
     to: "/number-pdf",
   },
-  
+  Organize_PDF: {
+    title: "Organize PDF",
+    description:
+      "Effortlessly rearrange the pages in your PDF document to suit your preferred order or sequence.",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/organize-pdf",
+  },
 };
 // translate the values of this object to french
 export const web2pdftool = {

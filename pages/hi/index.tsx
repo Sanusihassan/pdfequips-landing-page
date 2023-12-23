@@ -22,7 +22,7 @@ const Home = ({ lang }: { lang: string }) => {
           name="keywords"
           content="पीडीएफ उपकरण, पीडीएफ में कनवर्ट करें, जेपीजी से पीडीएफ, वर्ड से पीडीएफ, पावरपॉइंट से पीडीएफ, एक्सेल से पीडीएफ, एचटीएमएल से पीडीएफ, पीडीएफ से कनवर्ट करें, पीडीएफ से जेपीजी, पीडीएफ से वर्ड, पीडीएफ से पावरपॉइंट, पीडीएफ से एक्सेल, पीडीएफ से पीडीएफ/ए, पीडीएफ से टेक्स्ट, पीडीएफ को मर्ज करें, पीडीएफ को कंप्रेस करें।"
         />
-        <meta http-equiv="Content-Language" content="hi" />
+        <meta httpEquiv="Content-Language" content="hi" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7391414384206267"

@@ -3,12 +3,7 @@ import Head from "next/head";
 import LandingPage from "../../components/LandingPage";
 import NavBar from "pdfequips-navbar/NavBar";
 import Footer from "../../components/Footer";
-import {
-  footer,
-  landing_page,
-
-  tool,
-} from "../../src/content/content-zh";
+import { footer, landing_page, tool } from "../../src/content/content-zh";
 
 const Home = ({ lang }: { lang: string }) => {
   return (
@@ -25,7 +20,7 @@ const Home = ({ lang }: { lang: string }) => {
           name="keywords"
           content="PDF 工具，转换为 PDF、JPG 为 PDF、WORD 为 PDF、POWERPOINT 为 PDF、EXCEL 为 PDF、HTML 为 PDF、从 PDF 转换、PDF 为 JPG、PDF 为 WORD、PDF 为 POWERPOINT、PDF 为 EXCEL、PDF 为 PDF/A、PDF 到文本、合并 PDF、压缩 PDF。"
         />
-        <meta http-equiv="Content-Language" content="zh" />
+        <meta httpEquiv="Content-Language" content="zh" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7391414384206267"
@@ -36,7 +31,7 @@ const Home = ({ lang }: { lang: string }) => {
 
       <NavBar path="" lang="zh" />
       <LandingPage landing_page={landing_page} tool={tool} lang={lang} />
-      <Footer footer={footer} lang={lang}  />
+      <Footer footer={footer} lang={lang} />
     </div>
   );
 };

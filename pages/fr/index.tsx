@@ -20,7 +20,7 @@ const Home = ({ lang }: { lang: string }) => {
           name="keywords"
           content="Outils PDF, Convertir en PDF, JPG en PDF, WORD en PDF, POWERPOINT en PDF, EXCEL en PDF, HTML en PDF, Convertir de PDF, PDF en JPG, PDF en WORD, PDF en POWERPOINT, PDF en EXCEL, PDF en PDF/A, PDF en texte, fusionner PDF, compresser PDF."
         />
-        <meta http-equiv="Content-Language" content="fr" />
+        <meta httpEquiv="Content-Language" content="fr" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7391414384206267"

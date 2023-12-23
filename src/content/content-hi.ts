@@ -220,6 +220,14 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/split-pdf",
   },
+  Organize_PDF: {
+    title: "पीडीएफ संगठित करें",
+    description:
+      "अपने पसंदीदा क्रम या क्रम के अनुसार अपने पीडीएफ दस्तावेज़ की पृष्ठों को आसानी से व्यवस्थित करें।",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/organize-pdf",
+  },
 };
 
 export const downloadFile: _downloadFile = {

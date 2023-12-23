@@ -215,6 +215,13 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/split-pdf",
   },
+  Organize_PDF: {
+    title: "整理 PDF",
+    description: "轻松重新排列 PDF 文档中的页面，以符合您的首选顺序或顺序。",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/organize-pdf",
+  },
 };
 
 export const downloadFile: _downloadFile = {

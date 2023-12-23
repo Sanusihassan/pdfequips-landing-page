@@ -196,7 +196,7 @@ export const tool: _tool = {
   Ocr_PDF: {
     title: "OCR PDF",
     description:
-    "Rendez les PDF interactifs et recherchables avec une reconnaissance précise du texte.",
+      "Rendez les PDF interactifs et recherchables avec une reconnaissance précise du texte.",
     color: "#006266",
     type: ".pdf",
     to: "/ocr-pdf",
@@ -216,6 +216,15 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/split-pdf",
   },
+  Organize_PDF: {
+    title: "Organiser PDF",
+    description:
+      "Réorganisez facilement les pages de votre document PDF selon votre ordre ou séquence préférés.",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/organize-pdf",
+  },
+  
 };
 
 export const web2pdftool: _web2pdftool = {

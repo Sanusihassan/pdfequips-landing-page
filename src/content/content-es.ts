@@ -221,6 +221,14 @@ export const tool: _tool = {
     type: ".pdf",
     to: "/split-pdf",
   },
+  Organize_PDF: {
+    title: "Organizar PDF",
+    description:
+      "Reordena fácilmente las páginas de tu documento PDF según tu orden o secuencia preferidos.",
+    color: "#6c5ce7",
+    type: ".pdf",
+    to: "/organize-pdf",
+  },
 };
 
 export const web2pdftool: _web2pdftool = {

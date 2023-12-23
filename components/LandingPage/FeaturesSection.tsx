@@ -24,6 +24,7 @@ import { LockClosedIcon } from "@heroicons/react/solid";
 import StampIcon from "../icons/StampIcon";
 import OcrIcon from "./OcrIcon";
 import NumbersIcon from "pdfequips-navbar/icons/Numbers";
+import OrganizePDFIcon from "../icons/OrganizePDF";
 
 export const FeaturesSection = ({
   tool,
@@ -149,11 +150,11 @@ export const FeaturesSection = ({
       icon: LockOpenIcon,
     },
     {
-      title: tool.HTML_to_PDF.title,
-      description: tool.HTML_to_PDF.description as string,
-      to: `${langPath}${tool.HTML_to_PDF.to}`,
-      color: tool.HTML_to_PDF.color as string,
-      icon: CodeIcon,
+      title: tool.Organize_PDF.title,
+      description: tool.Organize_PDF.description as string,
+      to: `${langPath}${tool.Organize_PDF.to}`,
+      color: tool.Organize_PDF.color as string,
+      icon: OrganizePDFIcon,
     },
     {
       title: tool.Number_PDF.title,
@@ -218,7 +219,8 @@ export const FeaturesSection = ({
                             [card.icon === CompressIcon ||
                             card.icon === StampIcon ||
                             card.icon === OcrIcon ||
-                            card.icon === NumbersIcon
+                            card.icon === NumbersIcon ||
+                            card.icon === OrganizePDFIcon
                               ? "fill"
                               : "color"]: card.color,
                           }}
