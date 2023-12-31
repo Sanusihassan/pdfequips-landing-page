@@ -1,4 +1,3 @@
-// this component looks really messy how can i refactore it?
 import React from "react";
 import { Container, Card } from "react-bootstrap";
 import {
@@ -9,11 +8,12 @@ import {
   TableIcon,
   DocumentIcon,
   PhotographIcon,
-  CodeIcon,
   LockOpenIcon,
   RefreshIcon,
   DocumentAddIcon,
   GlobeIcon,
+  TranslateIcon,
+  CodeIcon,
 } from "@heroicons/react/outline";
 import CompressIcon from "../icons/compressIcon";
 import type { tool } from "../../content";
@@ -21,10 +21,11 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setPath } from "../../src/store";
 import { LockClosedIcon } from "@heroicons/react/solid";
-import StampIcon from "../icons/StampIcon";
+import StampIcon from "pdfequips-navbar/icons/StampIcon";
 import OcrIcon from "./OcrIcon";
 import NumbersIcon from "pdfequips-navbar/icons/Numbers";
 import OrganizePDFIcon from "../icons/OrganizePDF";
+import MarkdownIcon from "pdfequips-navbar/icons/Markdown";
 
 export const FeaturesSection = ({
   tool,
@@ -66,11 +67,11 @@ export const FeaturesSection = ({
       icon: CompressIcon,
     },
     {
-      title: tool.PDF_to_WORD.title,
-      description: tool.PDF_to_WORD.description,
-      to: `${langPath}${tool.PDF_to_WORD.to}`,
-      color: tool.PDF_to_WORD.color as string,
-      icon: DocumentIcon,
+      title: tool.Translate_PDF.title,
+      description: tool.Translate_PDF.description,
+      to: `${langPath}${tool.Translate_PDF.to}`,
+      color: tool.Translate_PDF.color as string,
+      icon: TranslateIcon,
     },
     {
       title: tool.PDF_to_Text.title,
@@ -101,6 +102,20 @@ export const FeaturesSection = ({
       icon: DocumentIcon,
     },
     {
+      title: tool.PDF_to_WORD.title,
+      description: tool.PDF_to_WORD.description as string,
+      to: `${langPath}${tool.PDF_to_WORD.to}`,
+      color: tool.PDF_to_WORD.color as string,
+      icon: DocumentIcon,
+    },
+    {
+      title: tool.Ocr_PDF.title,
+      description: tool.Ocr_PDF.description as string,
+      to: `${langPath}${tool.Ocr_PDF.to}`,
+      color: tool.Ocr_PDF.color as string,
+      icon: OcrIcon,
+    },
+    {
       title: tool.POWERPOINT_to_PDF.title,
       description: tool.POWERPOINT_to_PDF.description as string,
       to: `${langPath}${tool.POWERPOINT_to_PDF.to}`,
@@ -129,11 +144,11 @@ export const FeaturesSection = ({
       icon: PhotographIcon,
     },
     {
-      title: tool.JPG_to_PDF.title,
-      description: tool.JPG_to_PDF.description as string,
-      to: `${langPath}${tool.JPG_to_PDF.to}`,
-      color: tool.JPG_to_PDF.color as string,
-      icon: PhotographIcon,
+      title: tool.Markdown_to_PDF.title,
+      description: tool.Markdown_to_PDF.description as string,
+      to: `${langPath}${tool.Markdown_to_PDF.to}`,
+      color: tool.Markdown_to_PDF.color as string,
+      icon: MarkdownIcon,
     },
     {
       title: tool.Lock_PDF.title,
@@ -164,13 +179,6 @@ export const FeaturesSection = ({
       icon: NumbersIcon,
     },
     {
-      title: tool.Ocr_PDF.title,
-      description: tool.Ocr_PDF.description as string,
-      to: `${langPath}${tool.Ocr_PDF.to}`,
-      color: tool.Ocr_PDF.color as string,
-      icon: OcrIcon,
-    },
-    {
       title: tool.PDF_to_PDF_A.title,
       description: tool.PDF_to_PDF_A.description as string,
       to: `${langPath}${tool.PDF_to_PDF_A.to}`,
@@ -183,6 +191,27 @@ export const FeaturesSection = ({
       to: `${langPath}${tool.Web_to_PDF.to}`,
       color: tool.Web_to_PDF.color as string,
       icon: GlobeIcon,
+    },
+    {
+      title: tool.PDF_to_HTML.title,
+      description: tool.PDF_to_HTML.description as string,
+      to: `${langPath}${tool.PDF_to_HTML.to}`,
+      color: tool.PDF_to_HTML.color as string,
+      icon: CodeIcon,
+    },
+    {
+      title: tool.JPG_to_PDF.title,
+      description: tool.JPG_to_PDF.description as string,
+      to: `${langPath}${tool.JPG_to_PDF.to}`,
+      color: tool.JPG_to_PDF.color as string,
+      icon: PhotographIcon,
+    },
+    {
+      title: tool.Markdown_to_PDF.title,
+      description: tool.Markdown_to_PDF.description as string,
+      to: `${langPath}${tool.Markdown_to_PDF.to}`,
+      color: tool.Markdown_to_PDF.color as string,
+      icon: MarkdownIcon,
     },
   ];
 
